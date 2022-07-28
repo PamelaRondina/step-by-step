@@ -2,7 +2,7 @@
 
 Já pensou em ter o seu perfil do GitHub personalizado? Exatamente como você quer?!
 
-Neste passo a passo, você vai aprender como incluir um cabeçalho, incluir ícones para informar quais linguagens e software está estudando ou tem experiência, informar curiosidades sobre você, como conseguiremos te encontrar. E também, informar as estatísticas do seu perfil, quais as linguagens que você mais utiliza e sua sequência de contribuições.
+Neste passo a passo, você vai aprender como incluir um cabeçalho, incluir ícones para informar quais linguagens e softwares está estudando ou tem experiência, informar curiosidades sobre você, como conseguiremos te encontrar. E também, informar as estatísticas do seu perfil, quais as linguagens que você mais utiliza e sua sequência de contribuições.
 
 ## Vamos lá! 😀
 
