@@ -15,8 +15,8 @@ Neste passo a passo, você vai aprender como incluir um cabeçalho, incluir íco
 - [x]	Clicar em *Add a README file*
 - [x] Clicar em *Create*
 
-![criando READM profile_edit_0](https://user-images.githubusercontent.com/108991648/181630753-24c87e7a-e5d1-4418-b119-a4a14482b78f.gif)
-![image](https://user-images.githubusercontent.com/108991648/181147581-282dc9b3-e7f8-47e2-afd4-1eef36dea7df.png)
+![create profile_edit_0](https://user-images.githubusercontent.com/108991648/181649995-a1581997-127b-474c-b70d-33cdf4f13e58.gif)
+
 
 - [x] Clicar no primeiro nome para retornar a página inicial do seu perfil.
 
