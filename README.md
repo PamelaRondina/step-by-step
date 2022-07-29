@@ -1,4 +1,4 @@
-# Passo a passo do seu perfil do GitHub 
+# Passo a passo: Editar o Perfil do GitHub. 
 
 Já pensou em ter o seu perfil do GitHub personalizado? Exatamente como você quer?!
 
