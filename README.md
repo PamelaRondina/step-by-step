@@ -353,7 +353,6 @@ Para dúvidas, sugestões, dicas ou comentários:
 <a href="pamela.rondina@gmail.com"><img src="https://img.icons8.com/60/000000/gmail.png" alt="email"/></a>
 <a href="https://www.linkedin.com/in/pamelarondina/"><img src="https://img.icons8.com/60/000000/linkedin.png" alt="linkedin"/></a>
 <a href="https://www.instagram.com/pamela.rondina"><img src="https://img.icons8.com/60/000000/instagram-new.png" alt="instagram"/></a>   
-<a href="https://open.spotify.com/user/pamela.rondina"><img src="https://img.icons8.com/60/000000/spotify--v1.png" alt="spotify"/></a>
    
 ## Obrigada por ler! ![image](https://user-images.githubusercontent.com/108991648/181627985-c5ae0db5-24ac-4c70-a09e-a17862f70681.png)![image](https://user-images.githubusercontent.com/108991648/181628127-69e6eeb9-4f19-43d3-9461-46ee7e87b02c.png)
 ___________________
