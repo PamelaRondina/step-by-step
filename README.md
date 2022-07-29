@@ -6,7 +6,7 @@ Neste passo a passo, você vai aprender como incluir um cabeçalho, incluir íco
 
 ## Vamos lá! 😀
 
--	No seu perfil:
+No seu perfil:
 
 - [x] Clicar em *Repositories*
 - [x] Clicar em *New*
