@@ -66,31 +66,33 @@ Comandos: Html | Descrição
 :-|:-
 !+enter| Estrutura básica do Html
 < > | São tags
-< / > | Fechar uma tag
+& lt; | <
+& gt; | >
+&lt;/&gt; | Fechar uma tag
 href = | Atributo
-< meta charset = "UTF-8"> | Utilizar no navegador para acentuação
+&lt;meta charset = "UTF-8"&gt; | Utilizar no navegador para acentuação
 Ctrl+S | Salvar
 Ctrl+R | Atualizar Página
 Ctrl+O | Abrir arquivo no navegador
 F12 + Console | Para localizar um problema no código
 **TAGS** | **NÃO possui fechamento**
-< a > | Âncora
-< br > | Pular linha
-< b > | Negrito
-< hr > | Linha horizontal
-< big > | Aumenta o tamanho da letra
-< h1 align="center" > | Título 1 + centralizado
-< !--"texto"--> | Comentário
+&lt;a&gt; | Âncora
+&lt;br&gt; | Pular linha
+&lt;b&gt;  | Negrito
+&lt;hr&gt;  | Linha horizontal
+&lt;big&gt;  | Aumenta o tamanho da letra
+&lt;h1 align="center"&gt; | Título 1 + centralizado
+&lt;!--"texto"--&gt; | Comentário
 lorem | Transformará em um texto para referência
 **TAGS < / >** | **POSSUI fechamento**
-< h1 > | Título
-< header > | Cabeçalho
-< section > | seções
-< ul > | Lista não ordenada (com pontinhos)
-< ol > | Lista ordenada (com números )
-< li > | Dentro da Lista são os elementos
-< p > | Parágrafo
-< strong > | texto em negrito, introduzir valor R$10.00
-< span > | tag genérica, não faz quebra de linha
-< div > | tag genérica, executa quebra de linha
+&lt;h1&gt;  | Título
+&lt;header&gt;  | Cabeçalho
+&lt;section&gt; | seções
+&lt;ul&gt;| Lista não ordenada (com pontinhos)
+&lt;ol&gt;  | Lista ordenada (com números )
+&lt;li&gt;  | Dentro da Lista são os elementos
+&lt;p&gt; | Parágrafo
+&lt;strong&gt;  | texto em negrito, introduzir valor R$10.00
+&lt;span&gt;  | tag genérica, não faz quebra de linha
+&lt;div&gt;  | tag genérica, executa quebra de linha
 
