@@ -11,6 +11,11 @@ Markup | Marcação do texto "tags"
 Sintaxe | `<p>conteúdo</p>`
 Atributos | href
 
+> i) Html, ii) CSS, e iii) JavaScript 
+ i) conteúdo, ii) estilo, e iii) interatividade
+ 
+
+
 **Sintaxe de uma tag <>** 
 
 Em html utilizamos tags `<>`
@@ -31,16 +36,17 @@ Adicionam informações e configurações à uma tag, neste caso, adicionar um l
 ```
 ____________________
 
-Vamos abrir um `novo_arquivo.html` e `! + enter`, o próprio editor incluirá a estrutura básica de um html
+Vamos abrir um `novo_arquivo.html` e `! + enter`, o próprio editor incluirá a estrutura básica de um html, dentro do código estão alguns comentários:
 
-- [x] Dentro do código estão alguns comentários
-- [x] Vamos indentar para ter uma melhor visualização do código: selecionar de `<head>` até `</body>` e dar um TAB
-- [x] Na parte `head` podemos incluir informações que não aparecerão na página
+- [x] O código é separado por duas áreas: head (cabeça) e body (corpo);
+- [x] Vamos indentar para ter uma melhor visualização do código: selecionar de `<head>` até `</body>` e dar um TAB;
+- [x] Na parte `head` podemos incluir informações que não aparecerão na página, é a parte de configuração;
+- [x] na parte `body` vamos incluir os conteúdos dos sites
 - [x] Abaixo de `<body>` incluímos o `<h1>título</h1>` 
 
 ```html
 <!DOCTYPE html>
-<html lang="pt-br"> <!-- alterar para pt-br (portugês brasileiro) 
+<html lang="pt-br"> <!-- idioma que o site, alterar para pt-br (portugês brasileiro) 
 <meta http-equiv="X-UA-Compatible" content="IE=edge"> DELETAR-->
 <head>
     <meta charset="UTF-8"> <!-- Serve para não ter erro em acentuações e caracteres especiais -->
@@ -53,7 +59,7 @@ Vamos abrir um `novo_arquivo.html` e `! + enter`, o próprio editor incluirá a 
 </html>
 ```
 
-___________
+<hr>
 
 
 Comandos: Html | Descrição
@@ -61,30 +67,30 @@ Comandos: Html | Descrição
 !+enter| Estrutura básica do Html
 < > | São tags
 < / > | Fechar uma tag
+href = | Atributo
+< meta charset = "UTF-8"> | Utilizar no navegador para acentuação
+Ctrl+S | Salvar
+Ctrl+R | Atualizar Página
+Ctrl+O | Abrir arquivo no navegador
+F12 + Console | Para localizar um problema no código
+**TAGS** | **NÃO possui fechamento**
 < a > | Âncora
 < br > | Pular linha
-< h1 > | Título
 < b > | Negrito
-< hr > | Risco 
+< hr > | Linha horizontal
 < big > | Aumenta o tamanho da letra
 < h1 align="center" > | Título 1 + centralizado
 < !--"texto"--> | Comentário
+lorem | Transformará em um texto para referência
+**TAGS < / >** | **POSSUI fechamento**
+< h1 > | Título
 < header > | Cabeçalho
 < section > | seções
 < ul > | Lista não ordenada (com pontinhos)
 < ol > | Lista ordenada (com números )
 < li > | Dentro da Lista são os elementos
 < p > | Parágrafo
-lorem | Transformará em um texto para referência
 < strong > | texto em negrito, introduzir valor R$10.00
 < span > | tag genérica, não faz quebra de linha
 < div > | tag genérica, executa quebra de linha
------- |  -------
-href = | Atributo
------- |  -------
-Ctrl+S | Salvar
-Ctrl+R | Atualizar Página
-Ctrl+O | Abrir arquivo no navegador
-F12 + Console | Para localizar um problema no código
------- |  -------
-< meta charset = "UTF-8"> | Utilizar no navegador para acentuação
+
