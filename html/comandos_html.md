@@ -14,8 +14,6 @@ Atributos | href
 > i) Html, ii) CSS, e iii) JavaScript 
  i) conteúdo, ii) estilo, e iii) interatividade
  
-
-
 **Sintaxe de uma tag <>** 
 
 Em html utilizamos tags `<>`
@@ -62,12 +60,10 @@ Vamos abrir um `novo_arquivo.html` e `! + enter`, o próprio editor incluirá a 
 <hr>
 
 
-Comandos: Html | Descrição
+Comandos: HTML | Descrição
 :-|:-
 !+enter| Estrutura básica do Html
 < > | São tags
-& lt; | <
-& gt; | >
 &lt;/&gt; | Fechar uma tag
 href = | Atributo
 &lt;meta charset = "UTF-8"&gt; | Utilizar no navegador para acentuação
@@ -95,4 +91,10 @@ lorem | Transformará em um texto para referência
 &lt;strong&gt;  | texto em negrito, introduzir valor R$10.00
 &lt;span&gt;  | tag genérica, não faz quebra de linha
 &lt;div&gt;  | tag genérica, executa quebra de linha
-
+**HTML Entities** | **Símbolos**
+W3School | [Link](https://www.w3schools.com/charsets/ref_utf_symbols.asp)
+& lt; | < menor que
+& gt; | > maior que
+&reg; | &reg; marca registrada
+&copy; | &copy; copyright
+&empty; | &empty; vazio
