@@ -75,11 +75,13 @@ var | variável
 alert("texto") | Cria um *pop up* de alerta
 prompt("texto") | Pop up para o usuário inserir um resultado, retorna o resultado como string
 parseInt("texto")| Converte uma string para número
+parseFloat("Texto")| Converte uma string em casas decimais
 if("texto") { "texto" } | Se 
 else | Se não
 while | Enquanto / repetição
 for | Laço de Repetição
 ++ | variável + 1
+break | Quebra um looping (while)
 Math.round() | arredondar o resultado
 Math.random() | Número aleatório
 console.log() | Resultado aparece no console do Browser
