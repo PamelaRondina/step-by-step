@@ -63,34 +63,36 @@ Vamos abrir um `novo_arquivo.html` e `! + enter`, o próprio editor incluirá a 
 Comandos: HTML | Descrição
 :-|:-
 !+enter| Estrutura básica do Html
-< > | São tags
-&lt;/&gt; | Fechar uma tag
-href = | Atributo
-&lt;meta charset = "UTF-8"&gt; | Utilizar no navegador para acentuação
-Ctrl+S | Salvar
-Ctrl+R | Atualizar Página
-Ctrl+O | Abrir arquivo no navegador
-F12 + Console | Para localizar um problema no código
+< > | são tags
+&lt;/&gt; | fechar uma tag
+href = | atributo
+&lt;meta charset = "UTF-8"&gt; | utilizar no navegador para acentuação
+lorem | utilizada na seção parágrafo, cria um texto aleatório
+Ctrl+S | salvar
+Ctrl+R | atualizar Página
+Ctrl+O | abrir arquivo no navegador
+F12 + Console | para localizar um problema no código
 **TAGS** | **NÃO possui fechamento**
-&lt;a&gt; | Âncora
-&lt;br&gt; | Pular linha
-&lt;b&gt;  | Negrito
-&lt;hr&gt;  | Linha horizontal
-&lt;big&gt;  | Aumenta o tamanho da letra
-&lt;h1 align="center"&gt; | Título 1 + centralizado
-&lt;!--"texto"--&gt; | Comentário
-lorem | Transformará em um texto para referência
+&lt;a&gt; | âncora
+&lt;br&gt; | pular linha
+&lt;b&gt;  | negrito
+&lt;hr&gt;  | linha horizontal
+&lt;big&gt;  | aumenta o tamanho da letra
+&lt;h1 align="center"&gt; | título 1 + centralizado
+&lt;!--"texto"--&gt; | comentário
+&lt;input/&gt;| cria uma lacuna de preenchimento
 **TAGS < / >** | **POSSUI fechamento**
-&lt;h1&gt;  | Título
-&lt;header&gt;  | Cabeçalho
+&lt;h1&gt;  | título
+&lt;header&gt;  | cabeçalho
 &lt;section&gt; | seções
-&lt;ul&gt;| Lista não ordenada (com pontinhos)
-&lt;ol&gt;  | Lista ordenada (com números )
-&lt;li&gt;  | Dentro da Lista são os elementos
-&lt;p&gt; | Parágrafo
+&lt;ul&gt;| lista não ordenada (com pontinhos)
+&lt;ol&gt;  | lista ordenada (com números )
+&lt;li&gt;  | dentro da Lista são os elementos
+&lt;p&gt; | parágrafo
 &lt;strong&gt;  | texto em negrito, introduzir valor R$10.00
 &lt;span&gt;  | tag genérica, não faz quebra de linha
 &lt;div&gt;  | tag genérica, executa quebra de linha
+&lt;button&gt;| cria uma botão, texto entre as tags não precisa de **" "**
 **HTML Entities** | **Símbolos**
 W3School | [Link](https://www.w3schools.com/charsets/ref_utf_symbols.asp)
 & lt; | < menor que

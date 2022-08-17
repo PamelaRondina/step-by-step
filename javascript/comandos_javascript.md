@@ -82,6 +82,11 @@ while | Enquanto / repetição
 for | Laço de Repetição
 ++ | variável + 1
 break | Quebra um looping (while)
+document.write()| imprime na tela 
+document.querySelector| puxa as informações do HTML, necessário incluir nos **(" ")**
+input.value | compara com a lacuna criada
+input.focus();| O cursor do mouse foca na lacuna criada pelo input/
+button.onclick()| compara ao clicar no botão criado
 Math.round() | arredondar o resultado
 Math.random() | Número aleatório
 console.log() | Resultado aparece no console do Browser
