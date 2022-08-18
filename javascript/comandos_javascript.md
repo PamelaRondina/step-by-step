@@ -57,6 +57,15 @@ while( i < 10) {
 Uma linguagem de programação.
 ```
 
+**Array**
+
+São listas
+
+```javascript
+var segredos = [´1, 3, 4, 7, 9];
+```
+
+
 
 
 <hr>
@@ -82,6 +91,8 @@ while | Enquanto / repetição
 for | Laço de Repetição
 ++ | variável + 1
 break | Quebra um looping (while)
+array | conjusta da lista
+**nomedaarray**.length|retorna a quantidade que uma array possui
 document.write()| imprime na tela 
 document.querySelector| puxa as informações do HTML, necessário incluir nos **(" ")**
 input.value | compara com a lacuna criada
