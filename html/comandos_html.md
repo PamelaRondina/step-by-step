@@ -95,8 +95,8 @@ F12 + Console | para localizar um problema no código
 &lt;button&gt;| cria uma botão, texto entre as tags não precisa de **" "**
 **HTML Entities** | **Símbolos**
 W3School | [Link](https://www.w3schools.com/charsets/ref_utf_symbols.asp)
-& lt; | < menor que
-& gt; | > maior que
-&reg; | &reg; marca registrada
-&copy; | &copy; copyright
-&empty; | &empty; vazio
+& lt; | < menor que, less than
+& gt; | > maior que, greater than
+& reg; | &reg; marca registrada
+& copy; | &copy; copyright
+& empty; | &empty; vazio
