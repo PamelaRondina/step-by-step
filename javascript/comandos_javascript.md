@@ -92,7 +92,8 @@ for | Laço de Repetição
 ++ | variável + 1
 break | Quebra um looping (while)
 array | conjusta da lista
-**nomedaarray**.length|retorna a quantidade que uma array possui
+**nomedaarray**.length|retorna a quantidade de elementos que uma array possui
+**nomedaarray**.push(**itemnono**)|Para empurrar um novo item para uma array já criada
 document.write()| imprime na tela 
 document.querySelector| puxa as informações do HTML, necessário incluir nos **(" ")**
 input.value | compara com a lacuna criada
