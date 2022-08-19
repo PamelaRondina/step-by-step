@@ -93,10 +93,11 @@ F12 + Console | para localizar um problema no código
 &lt;span&gt;  | tag genérica, não faz quebra de linha
 &lt;div&gt;  | tag genérica, executa quebra de linha
 &lt;button&gt;| cria uma botão, texto entre as tags não precisa de **" "**
+`&#x1F970;` | inserir emoji 
 **HTML Entities** | **Símbolos**
 W3School | [Link](https://www.w3schools.com/charsets/ref_utf_symbols.asp)
-& lt; | < menor que, less than
-& gt; | > maior que, greater than
-& reg; | &reg; marca registrada
-& copy; | &copy; copyright
-& empty; | &empty; vazio
+`&lt;` | < menor que, less than
+`&gt;` | > maior que, greater than
+`&reg;` | &reg; marca registrada
+`&copy;` | &copy; copyright
+`&empty;` | &empty; vazio
