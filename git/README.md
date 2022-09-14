@@ -1,13 +1,10 @@
-### O que é GIT?
-
-Limpar o terminal
-- **clear**
-
-Visualizar diretórios de onde estou:
-- **ls**
+### GIT
 
 Comandos | Git
 :-:|:-
+clear | limpar o terminal
 ls | Visualizar local ou arquivos
-cd | Abrir diretório
+cd | Change directory - Mudar de diretório
+mkdir | Make directory - abrir 
+touch | criar arquivo  
 
