@@ -11,7 +11,7 @@ Markup | Marcação do texto "tags"
 Sintaxe | `<p>conteúdo</p>`
 Atributos | href
 
-> i) Html, ii) CSS, e iii) JavaScript 
+> i) Html, ii) CSS, e iii) JavaScript <br>
  i) conteúdo, ii) estilo, e iii) interatividade
  
 **Sintaxe de uma tag <>** 
@@ -25,7 +25,7 @@ Em html utilizamos tags `<>`
 - [x] `<p>` para abrir uma tag de um parágrafo
 - [x] `</p>` para fechar a tag 
 
-**Atribuos**
+**Atributos**
 
 Adicionam informações e configurações à uma tag, neste caso, adicionar um link.
 
@@ -37,7 +37,7 @@ ____________________
 Vamos abrir um `novo_arquivo.html` e `! + enter`, o próprio editor incluirá a estrutura básica de um html, dentro do código estão alguns comentários:
 
 - [x] O código é separado por duas áreas: head (cabeça) e body (corpo);
-- [x] Vamos indentar para ter uma melhor visualização do código: selecionar de `<head>` até `</body>` e dar um TAB;
+- [x] Vamos identar para ter uma melhor visualização do código: selecionar de `<head>` até `</body>` e dar um TAB;
 - [x] Na parte `head` podemos incluir informações que não aparecerão na página, é a parte de configuração;
 - [x] na parte `body` vamos incluir os conteúdos dos sites
 - [x] Abaixo de `<body>` incluímos o `<h1>título</h1>` 
@@ -72,7 +72,11 @@ Ctrl+S | salvar
 Ctrl+R | atualizar Página
 Ctrl+O | abrir arquivo no navegador
 F12 + Console | para localizar um problema no código
+
+<br>
+
 **TAGS** | **NÃO possui fechamento**
+:-|:-
 &lt;a&gt; | âncora
 &lt;br&gt; | pular linha
 &lt;b&gt;  | negrito
@@ -81,7 +85,11 @@ F12 + Console | para localizar um problema no código
 &lt;h1 align="center"&gt; | título 1 + centralizado
 &lt;!--"texto"--&gt; | comentário
 &lt;input/&gt;| cria uma lacuna de preenchimento
+
+<br>
+
 **TAGS < / >** | **POSSUI fechamento**
+:-|:-
 &lt;h1&gt;  | título
 &lt;header&gt;  | cabeçalho
 &lt;section&gt; | seções
@@ -94,7 +102,11 @@ F12 + Console | para localizar um problema no código
 &lt;div&gt;  | tag genérica, executa quebra de linha
 &lt;button&gt;| cria uma botão, texto entre as tags não precisa de **" "**
 `&#x1F970;` | inserir emoji 
+
+<br>
+
 **HTML Entities** | **Símbolos**
+:-|:-
 W3School | [Link](https://www.w3schools.com/charsets/ref_utf_symbols.asp)
 `&lt;` | < menor que, less than
 `&gt;` | > maior que, greater than
