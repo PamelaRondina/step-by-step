@@ -13,7 +13,8 @@ Atributos | href
 
 > i) Html, ii) CSS, e iii) JavaScript <br>
  i) conteúdo, ii) estilo, e iii) interatividade
- 
+ __________
+
 **Sintaxe de uma tag <>** 
 
 Em html utilizamos tags `<>`
@@ -24,27 +25,32 @@ Em html utilizamos tags `<>`
 
 - [x] `<p>` para abrir uma tag de um parágrafo
 - [x] `</p>` para fechar a tag 
+_______
 
 **Atributos**
 
 Adicionam informações e configurações à uma tag, neste caso, adicionar um link.
 
 ```html
-<a href="#">link</a>
+<a href="www.site.com.br">link</a> <!--Link externo-->
+
+<a href="arquivo.html">link</a> <!--Link interno-->
 ```
 ____________________
+
+**Estrutura básica de Html [!+Enter]**
 
 Vamos abrir um `novo_arquivo.html` e `! + enter`, o próprio editor incluirá a estrutura básica de um html, dentro do código estão alguns comentários:
 
 - [x] O código é separado por duas áreas: head (cabeça) e body (corpo);
 - [x] Vamos identar para ter uma melhor visualização do código: selecionar de `<head>` até `</body>` e dar um TAB;
 - [x] Na parte `head` podemos incluir informações que não aparecerão na página, é a parte de configuração;
-- [x] na parte `body` vamos incluir os conteúdos dos sites
+- [x] na parte `body` vamos incluir os conteúdos dos sites, todos os elementos que serão visíveis.
 - [x] Abaixo de `<body>` incluímos o `<h1>título</h1>` 
 
 ```html
 <!DOCTYPE html>
-<html lang="pt-br"> <!-- idioma que o site, alterar para pt-br (portugês brasileiro) 
+<html lang="pt-br"> <!-- idioma que o site, alterar para pt-br (português brasileiro) 
 <meta http-equiv="X-UA-Compatible" content="IE=edge"> DELETAR-->
 <head>
     <meta charset="UTF-8"> <!-- Serve para não ter erro em acentuações e caracteres especiais -->
@@ -90,7 +96,7 @@ F12 + Console | para localizar um problema no código
 
 **TAGS < / >** | **POSSUI fechamento**
 :-|:-
-&lt;h1&gt;  | título
+&lt;h1&gt;  | título, de 1 até 6
 &lt;header&gt;  | cabeçalho
 &lt;section&gt; | seções
 &lt;ul&gt;| lista não ordenada (com pontinhos)
