@@ -65,6 +65,18 @@ Vamos abrir um `novo_arquivo.html` e `! + enter`, o próprio editor incluirá a 
 
 <hr>
 
+**Head**
+
+Configuração que não aparecem no navegador.
+
+&lt;script &gt;
+
+
+
+
+
+<hr>
+
 
 Comandos: HTML | Descrição
 :-|:-
