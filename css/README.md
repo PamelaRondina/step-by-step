@@ -4,7 +4,26 @@
 
 Tecnologia que serve para apresentar o visual para o cliente, dando estilos para o Html
 
-#### Princípios que nos ajudarão a codar em CSS!
+<hr>
+
+**Configurações CSS**
+
+As configurações para CSS são feitas através de seletores:
+
+ - `p` = seletor
+ - `font-family: Arial` = declaração
+ - `color:` = propriedade. Sempre deve ter o seu valor e separado por ( **:** )
+ - `blue` = valor
+```css
+    p {
+        font-family: Arial;
+        font-size: 12pt;
+        color: blue;    }
+```
+
+> Note que: ao final de cada linha finalizamos com ( **;** ).
+    
+<hr>
 
 **Declaration - Declaração**
 
@@ -21,10 +40,14 @@ body {
     background: red;
 }
 ```
+
+<hr>
+
 **Comentários**
 
 Em CSS para inserir um comentário: `/*texto*/` 
 
+<hr>
 
 **Cascata**
 
@@ -62,5 +85,8 @@ element {
 
 > Não inciar com numeral ou caracteres especiais os nomes de *id*, *class* e *element* ( _ é aceito)
 
+<hr>
 
-
+Comandos: CSS | Descrição
+:-|:-
+/* comentário */ | Comentário

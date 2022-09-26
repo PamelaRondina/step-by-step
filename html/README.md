@@ -12,7 +12,7 @@ Sintaxe | `<p>conteúdo</p>`
 Atributos | href
 
 > i) Html, ii) CSS, e iii) JavaScript <br>
- i) conteúdo, ii) estilo, e iii) interatividade
+ i) conteúdo, ii) estilo/design, e iii) interatividade
  __________
 
 **Sintaxe de uma tag <>** 
@@ -25,11 +25,19 @@ Em html utilizamos tags `<>`
 
 - [x] `<p>` para abrir uma tag de um parágrafo
 - [x] `</p>` para fechar a tag 
+
+>Para sabermos se uma tag está obsoleta podemos consultar o site, [item Obsolete Features](https://html.spec.whatwg.org/multipage/)
 _______
 
 **Atributos**
 
 Adicionam informações e configurações à uma tag, neste caso, adicionar um link.
+
+- `<a` abertura de tah
+- `href` parâmetro
+- `site ou arquivo` valor
+- `link` conteúdo
+- `</a>` fechamento de tag
 
 ```html
 <a href="www.site.com.br">link</a> <!--Link externo-->
@@ -65,18 +73,27 @@ Vamos abrir um `novo_arquivo.html` e `! + enter`, o próprio editor incluirá a 
 
 <hr>
 
-**Head**
+**Inclusão de imagem**
 
-Configuração que não aparecem no navegador.
+- De diretório local
+```html
+<img src="logo-html150.png" alt="imagem HTML5">
+```
 
-&lt;script &gt;
-
-
-
-
+- De uma url
 
 <hr>
 
+**Inclusão de emoji**
+
+[Site Emoji](https://www.emojipedia.org/openmoji/) 
+
+- [x] Escolha um emoji e vá até a seção "Codepoints" próximo do fim da página;
+- [x] Note o código, por exemplo, `U+1F970`
+- [x] Para incluir em HTML para alterar o `U+` por `&#x`, passando para `&#x1F970`
+
+
+<hr>
 
 Comandos: HTML | Descrição
 :-|:-
@@ -119,7 +136,7 @@ F12 + Console | para localizar um problema no código
 &lt;span&gt;  | tag genérica, não faz quebra de linha
 &lt;div&gt;  | tag genérica, executa quebra de linha
 &lt;button&gt;| cria uma botão, texto entre as tags não precisa de **" "**
-`&#x1F970;` | inserir emoji 
+`&#x1F604;` | inserir emoji
 
 <br>
 
@@ -131,3 +148,6 @@ W3School | [Link](https://www.w3schools.com/charsets/ref_utf_symbols.asp)
 `&reg;` | &reg; marca registrada
 `&copy;` | &copy; copyright
 `&empty;` | &empty; vazio
+
+
+
