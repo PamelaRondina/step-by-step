@@ -80,7 +80,7 @@ Vamos abrir um `novo_arquivo.html` e `! + enter`, o próprio editor incluirá a 
 <img src="logo-html150.png" alt="imagem HTML5">
 ```
 
-- De uma url
+- De uma url ***********
 
 <hr>
 
@@ -92,6 +92,28 @@ Vamos abrir um `novo_arquivo.html` e `! + enter`, o próprio editor incluirá a 
 - [x] Note o código, por exemplo, `U+1F970`
 - [x] Para incluir em HTML para alterar o `U+` por `&#x`, passando para `&#x1F970`
 
+<hr>
+
+**Inclusão de ícones**
+
+[Site Boxicons](https://boxicons.com/usage)
+
+Em head, incluir `<link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>`
+
+<hr>
+
+## Passo a passo
+
+- [x] ! + Enter
+- [x] Identar de `<head>` até `</body>` 
+- [x] Deletar `<meta http-equiv="X-UA-Compatible" content="IE=edge">`
+- [x] Alterar o título
+- [x] Em head, adicionar arquivo CSS `<link rel="stylesheet" href="style.css">` - 
+- [x] Em body, adicionar arquivo JavaScript `<script src="script.js"></script>`
+
+> CTRL + Espaço (abrem os arquivos)
+
+- [x] Em head, incluir link de ícones
 
 <hr>
 

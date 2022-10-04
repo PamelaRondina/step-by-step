@@ -6,7 +6,7 @@ Tecnologia que serve para apresentar o visual para o cliente, dando estilos para
 
 <hr>
 
-**Configurações CSS**
+**Configurações CSS** 
 
 As configurações para CSS são feitas através de seletores:
 
@@ -89,4 +89,7 @@ element {
 
 Comandos: CSS | Descrição
 :-|:-
+* | Início do CSS
 /* comentário */ | Comentário
+.nomeDaClasse | Chamar uma classe 
+
