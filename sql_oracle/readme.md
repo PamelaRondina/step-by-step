@@ -12,3 +12,8 @@
 * SQL - falta de criatividade e estrutura desvantagens do padrão SQL ANSI
 
 * Novos Bancos de dados NoSQL foram criados, este para facilitador a rotina com as redes sociais
+
+![image](https://user-images.githubusercontent.com/108991648/194775988-0e6fb3c7-1200-4b06-bdc8-ccdd186e839c.png)
+![image](https://user-images.githubusercontent.com/108991648/194776037-5522c0ba-3e4b-4c58-9ef0-1320da53777b.png)
+
+
