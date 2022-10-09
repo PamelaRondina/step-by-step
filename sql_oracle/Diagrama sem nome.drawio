@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2022-10-09T19:27:37.410Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36" etag="4wh9RfJ785Lkv0rmzroi" version="20.4.0" type="github">
+<mxfile host="app.diagrams.net" modified="2022-10-09T19:28:40.873Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36" etag="5RYguXjVBEk9VDbIs3Df" version="20.4.0" type="github">
   <diagram id="2lYntNfgOz4Zp2xXQCv-" name="Página-1">
-    <mxGraphModel dx="2286" dy="1537" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" background="none" math="0" shadow="0">
+    <mxGraphModel dx="1953" dy="1407" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" background="none" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -19,8 +19,8 @@
             <mxPoint x="623" y="80" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="KcA9sx5EcOgl9lJ91ylc-6" value="&lt;br&gt;&lt;div style=&quot;text-align: center;&quot;&gt;&lt;b style=&quot;color: rgb(0, 102, 51); font-family: Verdana; background-color: initial;&quot;&gt;Data Definition Language&lt;/b&gt;&lt;/div&gt;&lt;div style=&quot;text-align: center;&quot;&gt;&lt;br&gt;&lt;/div&gt;- Criam os bancos de dados nos servidores,&lt;br&gt;comandos que mexem com a estrutura&lt;br&gt;- Criam tabelas e alteram índices" style="text;html=1;resizable=0;autosize=1;align=left;verticalAlign=middle;points=[];fillColor=default;strokeColor=none;rounded=0;labelBackgroundColor=none;fontFamily=Comic Sans MS;fontSize=15;fontColor=#000000;fillStyle=dots;gradientColor=none;" parent="1" vertex="1">
-          <mxGeometry x="-323" y="-232" width="316" height="120" as="geometry" />
+        <mxCell id="KcA9sx5EcOgl9lJ91ylc-6" value="&lt;br&gt;&lt;div style=&quot;text-align: center;&quot;&gt;&lt;b style=&quot;color: rgb(0, 102, 51); font-family: Verdana; background-color: initial;&quot;&gt;Data Definition Language&lt;/b&gt;&lt;/div&gt;&lt;div style=&quot;text-align: center;&quot;&gt;&lt;br&gt;&lt;/div&gt;- Criam a estrutura da base de dados&amp;nbsp;&lt;br&gt;- Criam os bancos de dados nos servidores,&lt;br&gt;comandos que mexem com a estrutura&lt;br&gt;- Criam tabelas e alteram índices" style="text;html=1;resizable=0;autosize=1;align=left;verticalAlign=middle;points=[];fillColor=default;strokeColor=none;rounded=0;labelBackgroundColor=none;fontFamily=Comic Sans MS;fontSize=15;fontColor=#000000;fillStyle=dots;gradientColor=none;" parent="1" vertex="1">
+          <mxGeometry x="-323" y="-241" width="316" height="138" as="geometry" />
         </mxCell>
         <mxCell id="KcA9sx5EcOgl9lJ91ylc-122" value="" style="edgeStyle=orthogonalEdgeStyle;curved=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#9933FF;exitX=0.25;exitY=1;exitDx=0;exitDy=0;fillColor=#e1d5e7;" parent="1" source="KcA9sx5EcOgl9lJ91ylc-3" target="KcA9sx5EcOgl9lJ91ylc-81" edge="1">
           <mxGeometry relative="1" as="geometry">
@@ -153,12 +153,6 @@
         </mxCell>
         <mxCell id="lpabvSlIWiEK5Iqg3zDG-3" value="&lt;font color=&quot;#3333ff&quot; face=&quot;Lucida Console&quot; style=&quot;font-size: 20px;&quot;&gt;DCL&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;labelBackgroundColor=none;" vertex="1" parent="1">
           <mxGeometry x="-159" y="429" width="120" height="60" as="geometry" />
-        </mxCell>
-        <mxCell id="lpabvSlIWiEK5Iqg3zDG-8" value="" style="endArrow=classic;html=1;rounded=0;fontFamily=Lucida Console;fontSize=20;fontColor=#FF8000;fillColor=#d5e8d4;strokeColor=#82b366;" edge="1" parent="1">
-          <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="-138.27079646017683" y="-252" as="sourcePoint" />
-            <mxPoint x="-138.4513274336282" y="-231.9999999999999" as="targetPoint" />
-          </mxGeometry>
         </mxCell>
         <mxCell id="lpabvSlIWiEK5Iqg3zDG-13" value="&lt;font color=&quot;#3333ff&quot; face=&quot;Lucida Console&quot; style=&quot;font-size: 20px;&quot;&gt;DCL&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;labelBackgroundColor=none;" vertex="1" parent="1">
           <mxGeometry x="639" y="-238" width="120" height="60" as="geometry" />
