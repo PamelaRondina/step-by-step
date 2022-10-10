@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2022-10-10T00:58:47.761Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36" etag="iexwL78-SqE-LPlVy2Wf" version="20.4.0" type="github">
+<mxfile host="app.diagrams.net" modified="2022-10-10T01:14:15.958Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36" etag="L46rBQGJYb9sh5NZg0Xu" version="20.4.0" type="github">
   <diagram id="2lYntNfgOz4Zp2xXQCv-" name="Página-1">
-    <mxGraphModel dx="1420" dy="1367" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" background="none" math="0" shadow="1">
+    <mxGraphModel dx="2600" dy="1845" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" background="none" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -164,19 +164,13 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="lpabvSlIWiEK5Iqg3zDG-17" value="&lt;font style=&quot;font-size: 17px;&quot; color=&quot;#6600cc&quot;&gt;Entidades do Banco de Dados - SQL&lt;/font&gt;" style="text;whiteSpace=wrap;html=1;fontFamily=Comic Sans MS;fontSize=14;fontStyle=1;strokeColor=#9673a6;rounded=1;shadow=1;glass=1;fillColor=#e1d5e7;fillStyle=auto;align=center;" vertex="1" parent="1">
-          <mxGeometry x="990" y="590" width="384" height="36" as="geometry" />
+          <mxGeometry x="986.5" y="655" width="384" height="36" as="geometry" />
         </mxCell>
         <mxCell id="lpabvSlIWiEK5Iqg3zDG-21" value="área de tabelas&lt;br&gt;tabelas associadas a algum assunto" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=15;fontFamily=Verdana;fontColor=#3333FF;" vertex="1" parent="1">
           <mxGeometry x="501" y="598" width="288" height="48" as="geometry" />
         </mxCell>
-        <mxCell id="lpabvSlIWiEK5Iqg3zDG-43" value="&lt;br&gt;&lt;br&gt;&lt;br&gt;Chaves primárias (primary key), não é obrigatória&lt;br&gt;Os dados não se repetirão nestes campos: Ex: CPF de cliente, o cliente ao cadastrar um CPF em duplicidade ocorrerá um erro no sistema&lt;br&gt;tupla compoe um conjunto de colunas&lt;br&gt;&lt;span style=&quot;color: rgb(61, 70, 77); font-family: &amp;quot;Source Serif Pro&amp;quot;, serif; font-size: 18px;&quot;&gt;São entidades que, dentro da tabela, não podem ter os seus valores se repetindo.&lt;br&gt;&lt;br&gt;Chave estrangeira, as tabelas se relacionam.&lt;/span&gt;&lt;br&gt;os campos&amp;nbsp;&lt;br&gt;&lt;br&gt;Ex: Tabela de clientes e tabela de vendas, ao realizar uma venda é obrigatório levar o código de um cliente que exista na tabela de clientes&lt;br&gt;O campo de código do cliente leva uma primaty key, pois o código do cliente não se repete&lt;br&gt;" style="text;html=1;resizable=0;autosize=1;align=left;verticalAlign=middle;points=[];fillColor=none;strokeColor=none;rounded=0;fillStyle=auto;fontFamily=Verdana;fontSize=15;fontColor=#3333FF;" vertex="1" parent="1">
-          <mxGeometry x="169.996666666667" y="1280.0033333333336" width="1074" height="257" as="geometry" />
-        </mxCell>
-        <mxCell id="lpabvSlIWiEK5Iqg3zDG-44" value="Índice" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=15;fontFamily=Verdana;fontColor=#3333FF;" vertex="1" parent="1">
-          <mxGeometry x="421" y="1548" width="64" height="30" as="geometry" />
-        </mxCell>
-        <mxCell id="lpabvSlIWiEK5Iqg3zDG-46" value="- Uma tabela a parte&lt;br&gt;&lt;br&gt;Ex: dentro de uma tabela de clientes o campo cidade, conseguimos identidicar quantos/quais clientes estão em São Paulo." style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;labelBackgroundColor=none;fontFamily=Comic Sans MS;fontSize=16;fontColor=#00B0B0;fillStyle=auto;" vertex="1" parent="1">
-          <mxGeometry x="215" y="1589" width="560" height="64" as="geometry" />
+        <mxCell id="lpabvSlIWiEK5Iqg3zDG-43" value="" style="text;html=1;resizable=0;autosize=1;align=left;verticalAlign=middle;points=[];fillColor=default;strokeColor=none;rounded=0;fillStyle=auto;fontFamily=Verdana;fontSize=15;fontColor=#3333FF;" vertex="1" parent="1">
+          <mxGeometry x="169.996666666667" y="1387.0033333333336" width="50" height="44" as="geometry" />
         </mxCell>
         <mxCell id="lpabvSlIWiEK5Iqg3zDG-54" value="&lt;font color=&quot;#cc0066&quot; face=&quot;Lucida Console&quot; style=&quot;font-size: 20px;&quot;&gt;Trigger&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFCCE6;strokeColor=none;labelBackgroundColor=none;shadow=1;fillStyle=auto;fontSize=15;fontFamily=Verdana;glass=0;" vertex="1" parent="1">
           <mxGeometry x="1321" y="1007" width="404" height="30" as="geometry" />
@@ -271,11 +265,32 @@
         <mxCell id="lpabvSlIWiEK5Iqg3zDG-132" value="Possuem propriedade (texto, número. etc.;) informadas em sua criação" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;shadow=1;glass=0;sketch=0;fillStyle=auto;fontFamily=Comic Sans MS;fontSize=15;fontColor=#FF8000;opacity=80;" vertex="1" parent="1">
           <mxGeometry x="644.5" y="965" width="284" height="64" as="geometry" />
         </mxCell>
-        <mxCell id="lpabvSlIWiEK5Iqg3zDG-134" value="Chave Primária (Primary Key)" style="swimlane;rounded=1;shadow=1;glass=0;sketch=0;fillStyle=auto;strokeColor=#82b366;fontFamily=Comic Sans MS;fontSize=15;fillColor=#d5e8d4;opacity=80;html=0;startSize=50;arcSize=37;" vertex="1" parent="1">
-          <mxGeometry x="475" y="1080" width="391" height="200" as="geometry" />
+        <mxCell id="lpabvSlIWiEK5Iqg3zDG-134" value="Chave Primária (Primary Key)" style="swimlane;rounded=1;shadow=1;glass=0;sketch=0;fillStyle=auto;strokeColor=#82b366;fontFamily=Comic Sans MS;fontSize=17;fillColor=#d5e8d4;opacity=80;html=0;startSize=50;arcSize=37;" vertex="1" parent="1">
+          <mxGeometry x="446" y="1077" width="426" height="279" as="geometry" />
         </mxCell>
-        <mxCell id="lpabvSlIWiEK5Iqg3zDG-135" value="Chave Secundária" style="swimlane;rounded=1;shadow=1;glass=0;sketch=0;fillStyle=auto;strokeColor=#82b366;fontFamily=Comic Sans MS;fontSize=15;fillColor=#d5e8d4;opacity=80;html=0;startSize=50;arcSize=50;" vertex="1" parent="1">
-          <mxGeometry x="879" y="1077" width="391" height="200" as="geometry" />
+        <mxCell id="lpabvSlIWiEK5Iqg3zDG-139" value="&lt;font color=&quot;#006633&quot;&gt;- Não são obrigatórias&amp;nbsp;&lt;br&gt;- Os dados não se repetirão nestes campos&lt;br&gt;- Tupla compões um conjunto de colunas&lt;br&gt;- Entidades que, dentro da tabela, não podem ter os seus valores se repetindo&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;labelBackgroundColor=none;fontFamily=Comic Sans MS;fontSize=16;fontColor=#00B0B0;fillStyle=auto;" vertex="1" parent="lpabvSlIWiEK5Iqg3zDG-134">
+          <mxGeometry y="55" width="419" height="105" as="geometry" />
+        </mxCell>
+        <mxCell id="lpabvSlIWiEK5Iqg3zDG-141" value="&lt;span style=&quot;color: rgb(51, 51, 255); font-family: Verdana; text-align: left;&quot;&gt;Ex: CPF de cliente, o cliente ao cadastrar um CPF em duplicidade ocorrerá um erro no sistema&lt;/span&gt;" style="whiteSpace=wrap;html=1;rounded=1;shadow=1;glass=0;sketch=0;fillStyle=auto;strokeColor=#666666;fontFamily=Comic Sans MS;fontSize=15;fontColor=#333333;fillColor=#D4E1F5;opacity=80;" vertex="1" parent="lpabvSlIWiEK5Iqg3zDG-134">
+          <mxGeometry x="17.5" y="172" width="384" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="lpabvSlIWiEK5Iqg3zDG-135" value="Chave Estrangeira" style="swimlane;rounded=1;shadow=1;glass=0;sketch=0;fillStyle=auto;strokeColor=#82b366;fontFamily=Comic Sans MS;fontSize=17;fillColor=#d5e8d4;opacity=80;html=0;startSize=50;arcSize=50;" vertex="1" parent="1">
+          <mxGeometry x="879" y="1077" width="426" height="284" as="geometry" />
+        </mxCell>
+        <mxCell id="lpabvSlIWiEK5Iqg3zDG-140" value="&lt;font color=&quot;#006633&quot;&gt;&lt;br&gt;- As tabelas se relacionam&lt;br&gt;-&amp;nbsp;&lt;span style=&quot;font-family: Verdana; font-size: 15px;&quot;&gt;O campo de código do cliente leva uma primary key, pois o código do cliente não se repete&lt;/span&gt;&lt;br&gt;&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;labelBackgroundColor=none;fontFamily=Comic Sans MS;fontSize=16;fontColor=#00B0B0;fillStyle=auto;" vertex="1" parent="lpabvSlIWiEK5Iqg3zDG-135">
+          <mxGeometry x="4.5" y="37" width="413" height="92" as="geometry" />
+        </mxCell>
+        <mxCell id="lpabvSlIWiEK5Iqg3zDG-142" value="&lt;span style=&quot;color: rgb(51, 51, 255); font-family: Verdana; text-align: left;&quot;&gt;Ex: Tabela de clientes e tabela de vendas, ao realizar uma venda é obrigatório levar o código de um cliente que exista na tabela de clientes&lt;/span&gt;" style="whiteSpace=wrap;html=1;rounded=1;shadow=1;glass=0;sketch=0;fillStyle=auto;strokeColor=#666666;fontFamily=Comic Sans MS;fontSize=15;fontColor=#333333;fillColor=#D4E1F5;opacity=80;" vertex="1" parent="lpabvSlIWiEK5Iqg3zDG-135">
+          <mxGeometry x="11" y="143" width="410" height="87" as="geometry" />
+        </mxCell>
+        <mxCell id="lpabvSlIWiEK5Iqg3zDG-143" value="&lt;font color=&quot;#006633&quot; face=&quot;Lucida Console&quot; style=&quot;font-size: 20px;&quot;&gt;Índice&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;labelBackgroundColor=none;shadow=1;fillStyle=auto;fontSize=15;fontFamily=Verdana;glass=0;" vertex="1" parent="1">
+          <mxGeometry x="630" y="1406" width="407" height="37" as="geometry" />
+        </mxCell>
+        <mxCell id="lpabvSlIWiEK5Iqg3zDG-144" value="&lt;ul&gt;&lt;li&gt;&lt;font color=&quot;#006633&quot;&gt;&lt;span style=&quot;font-size: 15px;&quot;&gt;Uma tabela a parte&lt;/span&gt;&lt;/font&gt;&lt;/li&gt;&lt;/ul&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;labelBackgroundColor=none;fontFamily=Comic Sans MS;fontSize=16;fontColor=#00B0B0;fillStyle=auto;" vertex="1" parent="1">
+          <mxGeometry x="613" y="1452" width="582" height="47" as="geometry" />
+        </mxCell>
+        <mxCell id="lpabvSlIWiEK5Iqg3zDG-145" value="&lt;br style=&quot;color: rgb(0, 176, 176); font-size: 16px; font-weight: 400;&quot;&gt;&lt;span style=&quot;color: rgb(0, 176, 176); font-size: 16px; font-weight: 400;&quot;&gt;Ex: dentro de uma tabela de clientes o campo cidade, conseguimos identidicar quantos/quais clientes estão em São Paulo.&lt;br&gt;&lt;br&gt;&lt;/span&gt;" style="text;whiteSpace=wrap;html=1;fontFamily=Comic Sans MS;fontSize=14;fontStyle=1;strokeColor=#82b366;rounded=1;shadow=1;glass=0;fillColor=#d5e8d4;fillStyle=auto;align=left;verticalAlign=middle;sketch=0;opacity=80;horizontal=1;arcSize=17;" vertex="1" parent="1">
+          <mxGeometry x="670" y="1511" width="367" height="89" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
