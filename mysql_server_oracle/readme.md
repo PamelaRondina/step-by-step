@@ -1,34 +1,19 @@
-# SQl
+# MySQl
 
 > Sequel (Linguagem de Consulta Estruturada)
 > SQL (Structure Query Language)
 
-* Banco de dados relacionais armazenam os dados de forma mais otimizada, economizando espaço em disco
-
-* Banco de dados relacioal: regra de relacionamento entre entidades podem ser programadas no próprio banco
-
-* Banco de dados sequencial: regra de relacionamento entre entidades devem estar contidas no programa ou na aplicação
-
-* SQL - falta de criatividade e estrutura desvantagens do padrão SQL ANSI
-
-* Novos Bancos de dados NoSQL foram criados, este para facilitador a rotina com as redes sociais
-
 _______
 
-## Comandos de BD - SQL 
+## Comandos de BD - MySQL 
+
 
 ![image](https://user-images.githubusercontent.com/108991648/194775988-0e6fb3c7-1200-4b06-bdc8-ccdd186e839c.png)
 ![image](https://user-images.githubusercontent.com/108991648/194776037-5522c0ba-3e4b-4c58-9ef0-1320da53777b.png)
 
-____
-
-**Localhost**
-
-Quando nos referenciamos a um servidor, a uma máquina chamada localhost, nós estamos nos referenciando à nossa própria máquina.
-
 ___
 
-## Entidadades do BD - SQL
+## Entidadades do BD - MySQL
 
 - [x] Tablespaces
  - Tabelas
@@ -41,3 +26,60 @@ ___
 ![image](https://user-images.githubusercontent.com/108991648/194883490-41eb2d98-6cb4-4399-bfbf-6d6a1b0a1647.png)
 ![image](https://user-images.githubusercontent.com/108991648/194883560-ab1f3353-bcdd-4185-8e83-a011d5a951e8.png)
 ![image](https://user-images.githubusercontent.com/108991648/194883659-f917ba0c-046b-4854-ab71-4aafbb37b75e.png)
+
+
+_________
+
+Para agrupar as tabelas - esquema (Schema)
+
+_____
+
+- [X] Escolher qual banco de dados acessar e dar duplo clique
+
+**Criar um DataBase**
+`CREATE DATABASE NOME_BD`
+
+**Apagar um Database**
+`DROP DATABASE NOME_BD`
+
+**Tipos de Dados**
+
+Tipo | Valor em Bytes 
+-|:-:
+TINYINT | 1
+SMALLINT | 2
+MEDIUMINT| 3
+INT | 4
+BIGNT | 8
+FLOAT |  4
+DECIMAL ou NUMERIC | Até 65 dígitos
+BIT | Até 64 bits
+SIGNED ou UNSIGNED | vai possuir ou não sinal no número
+ZEROFILL | preenche com zero os espaços
+AUTO_INCREMENT | sequencia auto incrementada
+
+>`BIT(1) armazena 1 e 0, BIT(2) armazena 01, 10, 00, 11`
+
+> `INT(4) se armazenamos o valor 5 será gravado 0005`
+
+**Criar Tabela**
+
+`CREATE TABLE NOME_TABELA (Itens)`
+
+Item|Tipo
+-|-
+CPF|VARCHAR(11),
+NOME| VARCHAR(100),
+ENDERECO| VARCHAR(150),
+BAIRRO| VARCHAR(50),
+CIDADE| VARCHAR(50),
+ESTADO| VARCHAR(50),
+CEP| VARCHAR(8),
+IDADE| SMALLINT,
+SEXO| VARCHAR(1),
+`LIMITE CREDITO`| FLOAT,
+`VOLUME COMPRA`| FLOAT,
+`PRMEIRA COMPRA`|BIT(1)
+
+
+
