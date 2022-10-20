@@ -41,6 +41,7 @@ _____
 
 **Apagar um Database**
 `DROP DATABASE NOME_BD`
+_____
 
 **Tipos de Dados**
 
@@ -62,6 +63,8 @@ AUTO_INCREMENT | sequencia auto incrementada
 
 > `INT(4) se armazenamos o valor 5 será gravado 0005`
 
+_______________
+
 **Criar Tabela**
 
 `CREATE TABLE NOME_TABELA (Itens)`
@@ -80,6 +83,16 @@ SEXO| VARCHAR(1),
 `LIMITE CREDITO`| FLOAT,
 `VOLUME COMPRA`| FLOAT,
 `PRMEIRA COMPRA`|BIT(1)
+_____
+
+**Deletar Tabela**
+`DROP TABLE NOME_TABELA`
+
+___
+
+**Inserrir Dados**
+`INSERT INTO NOME_TABELA`
+
 
 
 
