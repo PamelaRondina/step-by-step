@@ -42,6 +42,7 @@ ___
 ![image](https://user-images.githubusercontent.com/108991648/194883560-ab1f3353-bcdd-4185-8e83-a011d5a951e8.png)
 ![image](https://user-images.githubusercontent.com/108991648/194883659-f917ba0c-046b-4854-ab71-4aafbb37b75e.png)
 
+```SQL
 --CRIAR TABELA
 
 --NOT NULL obrigatório preenchimento

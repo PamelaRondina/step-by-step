@@ -1,131 +1,7 @@
-# SQL SERVER
+```SQL
+-- SCRIPT INICIAL
 
-## Definições
-
-* O número de colunas é fixo; 
-* As linhas serão ilimitadas, podem ser limitadas desde que seja alterado na criação da tabela;
-* Todos os tipos de um campo serão iguais;
-
-> CONSTRAINTS = Restrições (regras de validação de dados)
-
-* NOT NULL - registros vazios não são liberados
-* PRIMARY KEY - registros idênticos não se repetem
-* FOREIGN KEY (Chave Estrangeira) - relacionamento em tabelas, não se pode incluir dados em uma tabela, se esses mesmos dados não existirem em outra.
-
-> VIEWS = Visões
-
-Resultado passa a ser como se fosse uma tabela, por exemplo, buscar de uma tabela o valor total de vendas de anos diferentes.
-
-> Gatilhos
-
-Quando ocorrer algo, faça isso!
-__________
-
-## Criar e deletar - DataBase
-
-`CREATE DATABASE NOME_BD`
-
-```sql
--- NOME DA BASE DE DADOS:
-CREATE DATABASE NOME_BD
-
--- ARQUIVO DE DADOS SERÁ GRAVADO COMO: 
-ON (NAME = 'SUCO_VENDAS.DAT'
-
--- LOCALIZAÇÃO QUE O ARQUIVO SERÁ SALVO:
-    FILENAME = 'C:\DIRETORIO_NOME_ARQUIVO.MDF'
-
--- AO CRIAR O BANCO, AUTOMATICANTE TERÁ E TAMANAHO 10MB
-    SIZE = 10MB;
-
--- E O TAMANHO MÁXIMO SERÁ:
-    MAXSIZE = 50MB;
-
--- O BANCO VAI CRESCER DE 5 EM 5MB
-    FILEGROWTH = 5MB)
-
--- E PODEMOS REPETIR OD DADOS NO ARQUIVO DE LOG:
-
-LOG ON
-    (NAME = 'SUCO_VENDAS.'
-    FILENAME = 'C:\DIRETORIO_NOME_ARQUIVO.LDF'
-    SIZE = 10MB;
-    MAXSIZE = 50MB;
-    FILEGROWTH = 5MB)
-```
-`DROP DATABASE NOME_BD`
-
-__________
-
-## Tipos de Dados
-
-### Numéricos Exatos - Inteiros
-
-- 08 bytes - BIGINT
-- 04 bytes - INT
-- 02 bytes - SMALLINT
-- 01 byte   - TINYINT
-
-### Numéricos Exatos - Com casas decimais
-
-- NUMERIC e DECIMAL (Sinônimos)
-
-(1,2) = 1.00
-(3.0) = 100
-
-### Numéricos Exatos - Representando Dinheiro
-
-- 08 bytes - MONEY
-- 04 bytes - SMALLMONEY
-
-> representamos estes números com a moeda na frente: R$ 10.02.
-
-### Numéricos Exatos - Valor Lógico
-
-- BIT(1)
-
-0 - Falso
-1 - Verdadeiro
-
-### Numéricos Aproximados - Valor Decimais
-
-- FLOAT - 
-- 04 bytes - REAL
-
-### Data e Hora
-
-- DATE 
-AAAA-MM-DD
-<br>
-- DATETIME
-- DATETIME2 (maior intervalo de datas)
-AAAA-MM-DD HH:MM:SS:MMM
-<br>
-- DATETIMEOFFSET (fuso horário)
-AAAA-MM-DD HH:MM:SS.MMM +/- HH:MM
-<br>
-- SMALLDATE 
-AAAA-MM-DD HH:MM:SS
-<br>
-- TIME
-HH:MM:SS.MMMMMMM 
-
-### Cadeira de caracteres
-
-CHAR - tamanho fixo - preenche os espaços em branco
-VARCHAR - tamanho variável - não preenche os espaços em branco
-
-________
-
-### Criar Tabela
-
-![image](https://user-images.githubusercontent.com/108991648/197614739-f57183b5-0bf3-4671-a5bc-5dcd2320f86d.png)
-
-1º localizar em qual banco de dados está conectado.
-
-Ou, incluir no início da Query `USE NOME_DB`
-
-```sql
+-- CRIAR TABELA
 CREATE TABLE [PAM_CLIENTES]
 ([CPF] [VARCHAR] (11),
 [NOME] [VARCHAR] (100),
@@ -141,35 +17,104 @@ CREATE TABLE [PAM_CLIENTES]
 [LIMITE_CREDITO] [MONEY],
 [VOLUME_COMPRA] [FLOAT],
 [PRIMEIRA_COMPRA] [BIT]);
-```
-____
 
-### Excluir Tabela
+CREATE TABLE [VENDEDORES]
+([MATRICULA] [VARCHAR] (5),
+[NOME] [VARCHAR] (100),
+[PERCENTUAL COMISSAO] FLOAT);
 
-```sql
-DROP TABLE [NOME_TABELA];
-```` 
-________
+-- INSERIR REGISTROS NA TABELA
+INSERT INTO [TABELA DE VENDEDORES]
+([MAtRICULA], [NOME], [PERCENTUAL COMISSÃO])
+VALUES
+('00235','Márcio Almeida Silva',0.08);
+
+INSERT INTO [TABELA DE VENDEDORES]
+([MAtRICULA], [NOME], [PERCENTUAL COMISSÃO])
+VALUES
+('00236','Cláudia Morais',0.08);
+
+-- ALTERAR REGISTROS NA TABELA
+UPDATE [dbo].[PRODUTOS]
+SET [EMBALAGEM] = 'Lata',
+[PRECO_DE_LISTA] = 2.46 
+WHERE CODIGO_DO_PRODUTO = '544931'
+
+UPDATE [dbo].[VENDEDORES] 
+SET [NOME] = '	Cláudia Moraes Sousa' WHERE MATRICULA = '00236'
+
+-- EXCLUIR
+-- EXCLUIR - TABELA
+DROP TABLE [dbo].[PRODUTOS];
+DROP TABLE [PAM_CLIENTES];
+
+-- EXCLUIR - CAMPO
+ALTER TABLE MODELO_TESTE DROP COLUMN TELEFONE2;
+
+-- EXCLUIR - REGISTRO
+DELETE FROM [dbo].[PRODUTOS] WHERE CODIGO_DO_PRODUTO = '1037797';
+
+-- ADICIONAR CHAVE PRIMÁRIA
+ALTER TABLE [dbo].[VENDEDORES] ADD CONSTRAINT PK_VENDEDORES PRIMARY KEY CLUSTERED (MATRICULA)
+
+-- ADICIONAR NOT NUULL IN NULL
+ALTER TABLE [dbo].[VENDEDORES] ALTER COLUMN MATRICULA VARCHAR(5) NOT NULL;
+
+-- ADICIONAR COLUNA/CAMPO
+ALTER TABLE CADASTRO_CLIENTES ADD COLUMN (DATA_NASCIMENTO DATE);
+
+-- ADICIONAR NOME FANTASIA PARA O CAMPO (AS)
+SELECT	CPF AS CPF_CLIENTE,  NOME AS NOME_CLIENTE FROM [dbo].[CLIENTES]
 
 
+-- SELECIONAR QUANTOS CAMPOS DESEJÁVEIS NA ORDEM DE CAMPO ESCOLHIDO (ORDER BY)
+SELECT ID, NOME FROM CADASTRO_CLIENTES ORDER BY NOME;
+
+-- SELECIONAR UM LIMITE ESPECIFICO (LIMIT)
+SELECT ID, NOME FROM CADASTRO_CLIENTES LIMIT 1;
+
+-- SELECIONAR ALGUNS CAMPOS
+SELECT * FROM [dbo].[PRODUTOS] WHERE SABOR = 'Limão'
+
+-- LÓGICA
+
+-- AUMENTAR VALORES EM 10%
+UPDATE [dbo].[PRODUTOS] SET PRECO_DE_LISTA = 1.1 * PRECO_DE_LISTA WHERE SABOR = 'Limão'
+
+SELECT * FROM [dbo].[PRODUTOS] where sabor = 'Limão'
+
+-- SELECIONAR REGISTROS > < = <> <diferente>
+SELECT * FROM CADASTRO_CLIENTES WHERE ID = 1;
+SELECT * FROM CADASTRO_CLIENTES WHERE ID < 3;
+SELECT * FROM VENDEDORES WHERE PERCENTUAL_COMISSAO > 0.10;
+SELECT * FROM CADASTRO_CLIENTES WHERE ID >= 2;
+SELECT * FROM CADASTRO_CLIENTES WHERE ID <> 1;
+
+-- SELECIONAR VALORES ENTRE (BETWEEN)
+--SELECT * FROM MODELO_TESTE WHERE DATA_NASCIMENTO BETWEEN '01/01/79' AND '01/01/22';
+
+--NOT não aparece o que estou puxando
+--SELECT * FROM MODELO_TESTE WHERE NOT (DATA_NASCIMENTO = '19/10/1985' AND NOME = 'João Nascimento'); 
+
+-- SELECIONADO DATAS (AAAA-MM-DD)
+SELECT * FROM VENDEDORES WHERE DATA_ADMISSAO < '1985-10-19';
+SELECT * FROM VENDEDORES WHERE DATA_ADMISSAO > '1985-10-19';
+SELECT * FROM VENDEDORES WHERE DATA_ADMISSAO = '1985-10-19';
+SELECT * FROM VENDEDORES WHERE DATA_ADMISSAO <> '1985-10-19';
+
+SELECT * FROM CADASTRO_CLIENTES WHERE YEAR (DATA_NASCIMENTO) = 2000;
+SELECT * FROM CADASTRO_CLIENTES WHERE MONTH (DATA_NASCIMENTO) = 03;
+SELECT * FROM CADASTRO_CLIENTES WHERE DAY (DATA_NASCIMENTO) = 12;
+SELECT * FROM VENDEDORES WHERE FERIAS = 1 AND YEAR (DATA_ADMISSAO) < 2016;
 
 
+--visualizar operações lógicas AND, OR e IN
+SELECT * FROM MODELO_TESTE WHERE ID > 1 AND ID   3;
+SELECT * FROM MODELO_TESTE WHERE ID >= 1 AND ID <= 3;
+SELECT * FROM MODELO_TESTE WHERE ESTADO = 'RJ' OR ESTADO = 'SP';
+SELECT * FROM MODELO_TESTE WHERE ESTADO IN ('RJ', 'MG');
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+-- VISUALIZAR TABELAS
+SELECT * FROM [dbo].[VENDEDORES] WHERE [PERCENTUAL COMISSAO] = '00239' 
+SELECT * FROM [dbo].[PRODUTOS] where sabor = 'Limão'
 
