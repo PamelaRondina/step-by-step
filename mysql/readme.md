@@ -43,25 +43,7 @@ _____
 `DROP DATABASE NOME_BD`
 _____
 
-**Tipos de Dados**
 
-Tipo | Valor em Bytes 
--|:-:
-TINYINT | 1
-SMALLINT | 2
-MEDIUMINT| 3
-INT | 4
-BIGNT | 8
-FLOAT |  4
-DECIMAL ou NUMERIC | Até 65 dígitos
-BIT | Até 64 bits
-SIGNED ou UNSIGNED | vai possuir ou não sinal no número
-ZEROFILL | preenche com zero os espaços
-AUTO_INCREMENT | sequencia auto incrementada
-
->`BIT(1) armazena 1 e 0, BIT(2) armazena 01, 10, 00, 11`
-
-> `INT(4) se armazenamos o valor 5 será gravado 0005`
 
 _______________
 

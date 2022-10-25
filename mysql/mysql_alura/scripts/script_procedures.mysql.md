@@ -1,5 +1,56 @@
+```sql
 -- INSERT - INCLUIR DADOS A PARTIR DE UMA PROCEDURE
+
 -- INSERT PRODUTOS (PROCEDURE)
+
+CREATE PROCEDURE `SP_CADASTRO_CLIENTES_INSERT`(
+	IN p_ID INT,
+    p_CPF varchar(11),
+	p_NOME VARCHAR(150),
+    p_ENDERECO varchar(250),
+	p_BAIRRO varchar(100),
+	p_CIDADE varchar(100),
+	p_ESTADO varchar(2), 
+	p_CEP varchar(8),
+	p_IDADE smallint,
+	p_SEXO varchar(1), 
+	p_LIMITE_CREDITO float,
+	p_VOLUME_COMPRA float, 
+	p_PRIMEIRA_COMPRA bit(1), 
+	p_DATA_NASCIMENTO date)
+BEGIN
+	INSERT INTO CADASTRO_CLIENTES (
+		ID
+	,	CPF
+	,	NOME
+    ,	ENDERECO
+    ,	BAIRRO
+    ,   CIDADE
+    ,   ESTADO
+    ,	CEP
+    ,	IDADE
+    ,	SEXO
+    ,	LIMITE_CREDITO
+    ,	PRIMEIRA_COMPRA
+    ,	DATA_NASCIMENTO)
+    
+    VALUES (
+		p_ID
+	,	p_CPF
+	,	p_NOME
+    ,	p_ENDERECO
+    ,	p_BAIRRO
+    ,   p_CIDADE
+    ,   p_ESTADO
+    ,	p_CEP
+    ,	p_IDADE
+    ,	p_SEXO
+    ,	p_LIMITE_CREDITO
+    ,	p_PRIMEIRA_COMPRA
+    ,	p_DATA_NASCIMENTO);
+END
+
+-- CHAMADA DO INSERT
 CALL sp_produtos_insert ('1040107', 'Light - 350ml - Melância', 'Lata', '350 ml', 'Melância', 4.56);
 CALL sp_produtos_insert ('1037797', 'Clean - 2 Litros - Laranja', 'PET', '2 Litros', 'Laranja', 16.01);
 CALL sp_produtos_insert ('1000889', 'Sabor da Montanha - 700 ml - Uva', 'Garrafa', '700 ml', 'Uva', 6.31);

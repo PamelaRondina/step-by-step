@@ -1,3 +1,4 @@
+```sql
 -- criar tabela
 CREATE TABLE cadastro_clientes
 (
