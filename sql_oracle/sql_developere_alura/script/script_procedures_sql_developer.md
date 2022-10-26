@@ -1,5 +1,7 @@
--- CRIAR PROCEDURE INSERT
+```sql
 
+--CRIAR PROCEDURE INSERT
+'
 CREATE PROCEDURE `SP_CADASTRO_CLIENTES_INSERT`(
 	IN p_ID INT,
     p_CPF varchar(11),
@@ -124,7 +126,7 @@ BEGIN
 END
 
 -- CHAMADA PROCEDURE IF_THEN_ELSE
-CALL SP_NOVO_VELHO_CADASTRO_CLIENTES ('12345678998')
+
 
 -- VISUALIZAR TABELAS
 SELECT * FROM PRODUTOS;
@@ -133,3 +135,15 @@ SELECT * FROM CADASTRO_CLIENTES;
 
 
 COMMIT;
+
+
+Mensagem 102, Nível 15, Estado 1, Linha 154
+Incorrect syntax near '`'.
+Mensagem 155, Nível 15, Estado 2, Linha 158
+'VARCHAR' is not a recognized CURSOR option.
+Mensagem 155, Nível 15, Estado 2, Linha 159
+'DATE' is not a recognized CURSOR option.
+Mensagem 156, Nível 15, Estado 1, Linha 163
+Incorrect syntax near the keyword 'THEN'.
+Mensagem 102, Nível 15, Estado 1, Linha 169
+Incorrect syntax near 'END'.
