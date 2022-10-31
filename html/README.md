@@ -60,14 +60,14 @@ Vamos abrir um `novo_arquivo.html` e `! + enter`, o próprio editor incluirá a 
 <!DOCTYPE html>
 <html lang="pt-br"> <!-- idioma que o site, alterar para pt-br (português brasileiro) 
 <meta http-equiv="X-UA-Compatible" content="IE=edge"> DELETAR-->
-<head>
-    <meta charset="UTF-8"> <!-- Serve para não ter erro em acentuações e caracteres especiais -->
-      <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Viewport serve para melhorar a visualização em aparelhos móveis e no navegador  -->
-    <title>Document</title> <!-- Nome do que aparecerá no Browser -->
-</head>
-<body>
-    <h1>Título</h1> <!-- Aqui será o título -->
-</body>
+  <head>
+      <meta charset="UTF-8"> <!-- Serve para não ter erro em acentuações e caracteres especiais -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Viewport serve para melhorar a visualização em aparelhos móveis e no navegador  -->
+      <title>Document</title> <!-- Nome do que aparecerá no Browser -->
+  </head>
+  <body>
+      <h1>Título</h1> <!-- Aqui será o título -->
+  </body>
 </html>
 ```
 
@@ -114,6 +114,10 @@ Em head, incluir `<link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.
 > CTRL + Espaço (abrem os arquivos)
 
 - [x] Em head, incluir link de ícones
+`    <!--para a visualização dos ícones-->
+        <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'> `
+
+- [x] 
 
 <hr>
 
