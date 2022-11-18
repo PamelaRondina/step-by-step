@@ -4,10 +4,9 @@ vIP_CLIENT in VARCHAR2,
 vLAST_USER in NUMBER)
 ```
 
-> UPDATE/DELETE incluir ID
-> UPDATE incluir FLG_ATIVO
 
-### NÃO é criado na Procedure
+
+### NÃO é criado na Procedure de INCLUIR
 > São preenchidos automaticamente
 
 ```SQL
@@ -16,8 +15,10 @@ FLG_ATIVO CHAR(1) DEFAULT ON NULL '1' NOT NULL,
 CREATE_AT TIMESTAMP (6) NOT NULL,
 UPDATE_AT TIMESTAMP (6) NOT NULL,
 CREATE_BY NUMBER NOT NULL,
-);
+;
 ```
+> UPDATE/DELETE possui ID
+> UPDATE/DELETE possui FLG_ATIVO (NO FINAL)
 
 ### CRIAR PROCEDURE_INSERT/INCLUIR
 > TABELA PAI
