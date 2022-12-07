@@ -213,19 +213,112 @@ public class HomeController : Controller
        return new RedirectResult(url:"http://ositequeeuquiser.com.br");
     }
 
-    
-
-
-
-
+    public RedirectToRouteResult RedirectToRouteResult()
+    {
+        return RedirectToRouteResult(new
+        {
+            controller = "Home",
+            action = "Index"
+        });
+    }
 ```
-
 _______________
 
+### Rotas
+
+Estruturas de navegação: no diretório `App_Start`, arquivo `RouteConfig.cs`, este é um método. Ele é chamado dentro do `Global.asax`, existe um método principal **Aplication_Start** que é chamado assim que a aplicação é inicializada.
+
+Este método é algo obrigatório no MV5, podendo ter mais de um, sendo que a rota mais complexa deve ser inclusa primeiro e a padrão (Default) por último.
+
+```css
+
+public static void RegisterRoutes(RouteCollection routes)
+{
+    routes.IgnoreRoute(url: "{resource}.axd/{*pathInfo}");
+
+    /*Vai ignorar arquivos .axd*/
+
+    routes.MapRoute(
+        name: "Institucional",
+        url: "institucional/{controller}/{action}",
+        defaults: new { controller = "Teste", action = "IndexTeste"}
+    );
+
+    /*rota mais complexa acima e padrão abaixo*/
+
+    routes.MapRoute(
+        name: "Default",
+        url: "{controller}/{action}/{id}",
+        defaults: new { controller = "Home", action = "Index", id - UrlParameter.Optional }
+    );
+}
+```
+
+_________________
+
+### Rotas por atributos
+
+Podemos colocar nome nas controllers, mas antes disso, precisamos configurar o `RouteController.cs` dentro de `App_Start` e incluir **routes.MapMvcAttributeRoutes();**:
+
+```css
+public static void RegisterRoutes(RouteCollection routes)
+{
+    routes.IgnoreRoute(url: "{resource}.axd/{*pathInfo}");
+
+/*para altrar o nome das controllers*/
+   routes.MapMvcAttributeRoutes();
+
+   routes.MapRoute(
+        name: "Default",
+        url: "{controller}/{action}/{id}",
+        defaults: new { controller = "Home", action = "Index", id - UrlParameter.Optional }
+    );
+}
+```
+
+Vai ler todas as rotas da controller, vai compilar a uma coleção e adicionar a coleção de rotas do MVC
+
+Em seguida, incluir o novo nome na controller em `HomeController`:
+
+```css
+
+[Route(template: "qualquer-nome")]
+
+        public ActionResult About()
+        {
+            ViewBag.Message = "MVC5";
+
+            return View();
+        }
+```
+
+Nome | O que faz?
+-|-
+[Route(template: "qualquer-nome")] | url nome
+[RoutePrefix("testes")] | mantem um prefixo para todos os nomes, inserir antes da public
 
 
 
+### Incluir mais abas para a página
 
+Em `Controller` criar os métodos, por exemplo:
+
+```css
+ public ContentResult ContentResult()
+        {
+            return Content("Agradecemos por visitar a nossa página");
+        }
+```
+Em `Views`, `Shared`, `_Layout.cshtml`, incluir o link:
+
+```css
+<li>@Html.ActionLink("Agradecimentos", "ContentResult", "Home")</li>
+```
+- [x] **Agradecimentos:** nome da aba do site
+- [x] **ContentResult** nome do método
+- [x] **Home** da página inicial
+
+Em seguida, alterar o [nome da rota]() para o que desejar
 
 
 
