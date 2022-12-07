@@ -10,12 +10,13 @@ Pipeline
 
 MVC5 | Core
 :-:|:-:
-.|  Inovação 
+Mais antigo |  Inovação 
 . | Compatível com as tecnologias atuais()
 . | Open Source (comunidade colaborando)
 Roda apenas em Windows | Roda em multiplataformas
 WEB HOST: (ISS) | WEB HOST: ISS, CustomHost e SelfHost (não depende do servidor)
 
+Para novos projetos deve-se dar preferência ao ASP.NET Core, que é a tecnologia mais atual.
 
 > Conceito [OWIN](http://owin.org/spec/spec/owin-1.0.0.html): Open Web Interface for .NET
 
@@ -133,7 +134,93 @@ _________________________________
 - [jQuery](http://jquery.com/): Biblioteca JavaScript 
 - [Modernizr](http://modernizr.com/): Biblioteca JavaScript que detecta disponibilidade de novas características de HTML e CSS no browser
 
+________________
 
+### MVC Controller
+
+- [x] **HomeController** nome da controller, após criar o nome é necessário incluir `Controler` = HomeController
+- [x] **Controller** toda controller herda da classe controller
+- [x] **ActionResult** métodos que retornam algo da Controller
+- [x] **Diretório Views**
+    - Home: Pasta com o nome da Controller
+    - Possui 5 principais pastas, que são chamadas no `ActionResults`:
+        - Links da aplicação web:About, Contact e Index
+        - _ViewStart e Web
+           
+![image](https://user-images.githubusercontent.com/108991648/205986904-b008817b-70b4-4026-9295-120bd981c900.png)
+
+
+- [x] Nome da Controller = Home
+- [x] Nome da Action no método da controller = About(Sobre)
+
+![image](https://user-images.githubusercontent.com/108991648/205988749-02d414ce-758d-4924-99e9-fd938e2de66b.png)
+
+
+_____________
+
+### Controller - Action Results
+
+Nome | Comportamento | Tipo Produzido 
+-|-|-
+ContentResult | Retorna uma String | Content = conteúdo
+EmptyResult | Sem resposta | Não produz nada
+FileContentResult<br> FilePathResult <br> FileStreamResult| Retorna o conteúdo de um arquivo | File (array de byts)<br> File (caminho)<br> File (stream)
+HttpUnauthorizedResult | Retorna um erro HTTP 403 | Acesso negado
+JavaScriptResult | Retorna um script a ser executado | JavaScript (evitar utilizar)
+JsonResult | Retorna dados em formato JSON | JSON
+RedirectResult | Redireciona a uma nova URL | Redirect = redireciona para outra URL
+RedirectToRouteResult | Redireciona para outra Action no mesmo ou em outro Controller | RedirectToRoute <br> RedirectToAction
+ViewResult <br> PartialViewResult | Retorna uma View ou uma PartialView | View (mais utilizado) <br> PartialView
+ActionResult | Permite qualquer tipo de retorno | View<br>PartialView<br>Content etc.;
+
+
+```css
+public class HomeController : Controller 
+
+    public ActionResult Index()
+    {
+        return View();
+    }
+
+    public ContentResult ContentResult()
+    {
+        return Content("Olá!");
+    }
+
+    public FileContentResult FileContentResult()
+    {
+        var foto: byte[] = System.IO.File.ReadAllBytes(server.MapPatch("/content/images/capa.png"));
+        
+        /*caminho de onde o arquivo está salvo*/
+
+        return File(foto, contentType: "image/pmg", fileDownloadName: "capa.png");
+        /*nome de download = capa.png*/    
+    }
+
+    public HttpUnauthorizedResult HttpUnauthorizedResult()
+    {
+        return new HttpUnauthorizedResult();
+        /*retorna um resultado de não autorizado*/
+    }
+
+    public JSonResult JsonResult()
+    {
+        return Json(data:"teste: 'Teste'", JsonRequestBehavior.AllowGet);
+    }
+    
+    public RedirectResult RedirectResult()
+    {
+       return new RedirectResult(url:"http://ositequeeuquiser.com.br");
+    }
+
+    
+
+
+
+
+```
+
+_______________
 
 
 
