@@ -301,7 +301,7 @@ Nome | O que faz?
 
 ### Incluir mais abas para a página
 
-Em `Controller` criar os métodos, por exemplo:
+Em `Controller` criar os métodos:
 
 ```css
  public ContentResult ContentResult()
@@ -309,6 +309,12 @@ Em `Controller` criar os métodos, por exemplo:
             return Content("Agradecemos por visitar a nossa página");
         }
 ```
+Para incluir imagens, criar uma pasta para incluir um arquivo. Criada em `Content` um diretório `images`. Em sguida criar a controller:
+
+```css
+
+```
+
 Em `Views`, `Shared`, `_Layout.cshtml`, incluir o link:
 
 ```css
@@ -318,7 +324,7 @@ Em `Views`, `Shared`, `_Layout.cshtml`, incluir o link:
 - [x] **ContentResult** nome do método
 - [x] **Home** da página inicial
 
-Em seguida, alterar o [nome da rota]() para o que desejar
+Em seguida, alterar o [nome da rota](https://github.com/PamelaRondina/step-by-step/tree/main/asp.net_MVC#rotas-por-atributos) para o que desejar
 
 
 
