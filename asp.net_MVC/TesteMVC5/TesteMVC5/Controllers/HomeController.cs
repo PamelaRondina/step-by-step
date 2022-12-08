@@ -21,6 +21,7 @@ namespace TesteMVC5.Controllers
             return View();
         }
 
+        [Route(template: "contatos")]
         public ActionResult Contact()
         {
             ViewBag.Message = "Acesse nossa página.";
@@ -29,16 +30,19 @@ namespace TesteMVC5.Controllers
         }
 
 
+        [Route(template: "nossos-clientes")]
+        public FileContentResult fileContentResult()
+        {
+            var foto = System.IO.File.ReadAllBytes(Server.MapPath("/content/images/nossos_clientes.png"));
+
+            return File(foto, contentType: "image/png", fileDownloadName: "nossos_cliente.png");
+         }
+
+
         [Route(template: "agradecimentos")]
         public ContentResult ContentResult()
         {
             return Content("Agradecemos por visitar a nossa página!");
-        }
-
-        [Route(template: "nossos-clientes")]
-        public FileContentResult FileContentResult()
-        {
-            var foto: byte[] = System.IO.File.ReadAllBytes(Server.MapPatch("/content/images/
         }
 
 

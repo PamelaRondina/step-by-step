@@ -187,15 +187,15 @@ public class HomeController : Controller
         return Content("Olá!");
     }
 
-    public FileContentResult FileContentResult()
-    {
-        var foto: byte[] = System.IO.File.ReadAllBytes(server.MapPatch("/content/images/capa.png"));
-        
-        /*caminho de onde o arquivo está salvo*/
+    public FileContentResult fileContentResult()
+        {
+            var foto = System.IO.File.ReadAllBytes(Server.MapPath("/content/images/nossos_clientes.png"));
+            /*caminho de onde o arquivo está salvo*/
 
-        return File(foto, contentType: "image/pmg", fileDownloadName: "capa.png");
-        /*nome de download = capa.png*/    
-    }
+            return File(foto, contentType: "image/png", fileDownloadName: "nossos_cliente.png");
+         }
+            /*nome de download = capa.png*/    
+    
 
     public HttpUnauthorizedResult HttpUnauthorizedResult()
     {
@@ -309,19 +309,27 @@ Em `Controller` criar os métodos:
             return Content("Agradecemos por visitar a nossa página");
         }
 ```
-Para incluir imagens, criar uma pasta para incluir um arquivo. Criada em `Content` um diretório `images`. Em sguida criar a controller:
+Para incluir imagens, criar uma pasta para incluir um arquivo. Criada em `Content` um diretório `images`. Em seguida criar a controller:
 
 ```css
+ [Route(template: "nossos-clientes")]
+        public FileContentResult fileContentResult()
+        {
+            var foto = System.IO.File.ReadAllBytes(Server.MapPath("/content/images/nossos_clientes.png"));
 
+            return File(foto, contentType: "image/png", fileDownloadName: "nossos_cliente.png");
+         }
 ```
 
 Em `Views`, `Shared`, `_Layout.cshtml`, incluir o link:
 
 ```css
 <li>@Html.ActionLink("Agradecimentos", "ContentResult", "Home")</li>
+<li>@Html.ActionLink("Nossos Clientes", "FileContentResult", "Home")</li>
+
 ```
-- [x] **Agradecimentos:** nome da aba do site
-- [x] **ContentResult** nome do método
+- [x] **Agradecimentos** e **Nossos Clientes** nome da aba do site
+- [x] **ContentResult** e ** nome do método
 - [x] **Home** da página inicial
 
 Em seguida, alterar o [nome da rota](https://github.com/PamelaRondina/step-by-step/tree/main/asp.net_MVC#rotas-por-atributos) para o que desejar
