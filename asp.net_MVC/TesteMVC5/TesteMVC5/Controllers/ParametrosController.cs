@@ -6,17 +6,19 @@ using System.Web.Mvc;
 
 namespace TesteMVC5.Controllers
 {
-     
-    public class HomeController : Controller
+    /*Rota Pré-fixada*/
+    [RoutePrefix("parametros")]
+
+    public class ParametrosController : Controller
     {
-        
-        public ActionResult Index()
+        [Route(template:"{id2:int}/{texto:maxlength(50)}")]
+        public ActionResult IndexParametros(int id2, string texto)
         {
             return View();
         }
 
         /*Nome da Rota, o que vai aparecer na URl*/
-        [Route(template: "sobre-nos")]
+        [Route(template: "sobre-nos")]  
         public ActionResult About()
         {
             ViewBag.Message = "Account Law.";

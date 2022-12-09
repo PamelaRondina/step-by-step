@@ -332,7 +332,154 @@ Em `Views`, `Shared`, `_Layout.cshtml`, incluir o link:
 - [x] **ContentResult** e ** nome do método
 - [x] **Home** da página inicial
 
-Em seguida, alterar o [nome da rota](https://github.com/PamelaRondina/step-by-step/tree/main/asp.net_MVC#rotas-por-atributos) para o que desejar
+Em seguida, alterar o [nome da rota](https://github.com/PamelaRondina/step-by-step/tree/main/asp.net_MVC#rotas-por-atributos).
+
+_______________
+
+### Passagem de parâmetros na controller
+
+Em `App_Start` e `RouteConfig`, a configuração da rota está para chamar o ID
+
+*Rotas SEM atributos:*
+
+Chamar o parâmetro:
+- [x] `parametros/index?teste/1`
+- [x] `parametros/index?id=1&id2=5` **& concatena**
+
+```css
+public class ParametrosController : Controller
+{
+    public ActionResult Index(int id, int id2)
+    {
+        return View();
+    }
+}
+
+```
+*Rotas COM atributos:*
+
+> [Tipos de atributos](https://devblogs.microsoft.com/dotnet/attribute-routing-in-asp-net-mvc-5/#:~:text=MVC%205%20supports%20a%20new,routing%2C%20is%20still%20fully%20supported.) site Microsoft.
+
+> {id:int} indica um parâmetro
+
+> Para fazer um teste criar itens nos diretórios: Controllers, View e fazer um Index para o teste, por exemplo, Parametros!!
+
+```css
+[RoutePrefix("parametros")]
+
+    public class ParametrosController : Controller
+    {
+        [Route(template:"{id2:int}/{texto:maxlength(50)}")]
+        public ActionResult IndexParametros(int id2, string texto)
+        {
+            return View();
+        }
+```
+
+Chamar o parâmetro:
+- [x] `parametros/1/legal`
+
+___________
+
+### Trabalhando com Modelos / Models
+
+> Representada por uma tela que é a View
+
+- [x] A pasta Model por padrão vem vazia
+
+Para iniciar, vamos adicionar uma nova classe neste diretório e incluir suas prioridades.
+
+```css
+    public class Clientes
+    {
+        public int Id { get; set; }
+    
+        public string Nome { get; set; }
+
+        public string CNPJ { get; set; }
+
+        public string ContatoFinanceiro { get; set; }
+
+        public string Email { get; set; }
+
+        public string Telefone { get; set; }
+
+        public DateTime DataMatricula { get; set; }
+
+        public bool Ativo { get; set; }
+       
+
+    }
+```
+
+___________________
+
+### Data Annotations
+
+> São Aplicadas na Model, auxilia na validação
+
+```css
+ public class Clientes
+    {
+        public int Id { get; set; }
+
+        /*[Required(ErrorMessage = existem outros formatos de erros")]*/
+        /*DisplayName = Nome do que aparece na View*/
+        /*EmailAdress = estrutura de e-mail*/
+
+        [DisplayName("Nome da Empresa")]
+        [Required(ErrorMessage = "Por favor, informe o {0}.")]
+        public string NomeEmpresa { get; set; }
+
+        [Required(ErrorMessage = "Por favor, informe o {0}.")]
+        public string CNPJ { get; set; }
+
+        [DisplayName("Contato do Financeiro")]
+        [Required(ErrorMessage = "Por favor, informe o {0}.")]
+        public string NomeContatoFinanceiro { get; set; }
+
+        [DisplayName("E-mail")]
+        [Required(ErrorMessage = "Por favor, informe o {0}.")]
+        [EmailAddress(ErrorMessage = "E-mail em formato inválido" )]
+        public string Email { get; set; }
+
+
+        [Required(ErrorMessage = "Por favor, informe o {0}.")]
+        public string Telefone { get; set; }
+
+
+        public DateTime DataMatricula { get; set; }
+
+        public bool Ativo { get; set; }
+```
+
+Outros modelos
+
+```css
+[Required(ErrosMessage = "O campo {}0 é obrigatório")]
+public string Senha { get; set; }
+
+[Compare(otherProperty: "Senha", ErrorMessage = "As senhas informadas não conferem")]
+[Required(ErrorMessage = "O campo {0} é obrigatório")]
+public string SenhaConfirmacao { get; set; }
+```
+
+___________________
+
+### Validação das Models
+
+A validação é realizada na Controller
+
+> Moto Bidding, transformação de um dado de formulário em modelo
+
+A validação na Controller é feita através do ModelState, e ele valida a Model no momento que é passada no parâmetro.
+
+Após criar um
+
+using TesteMVC5.Models;
+
+
+
 
 
 
