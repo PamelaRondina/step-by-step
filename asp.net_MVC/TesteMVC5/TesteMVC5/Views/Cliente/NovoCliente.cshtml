@@ -1,0 +1,80 @@
+﻿@model TesteMVC5.Models.Cliente
+
+<h2>Novo Cliente</h2>
+
+@*Criando um formulário*@
+@using (Html.BeginForm())
+{
+    //Proteção com Token
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Informe os dados do Cliente:</h4>
+        <hr />
+
+        @* Para mostrar os erros de validação = false *@
+        @Html.ValidationSummary(excludePropertyErrors:true, message:"", htmlAttributes: new {  @class = "text-danger"})
+
+        <div class="form-group">
+            @* Label para uma Model específia *@
+            @Html.LabelFor(model => model.NomeEmpresa, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @* EditoFor = caixa de texto *@
+                @Html.EditorFor(model => model.NomeEmpresa, additionalViewData: new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.NomeEmpresa, validationMessage: "", htmlAttributes: new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CNPJ, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.CNPJ, additionalViewData: new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CNPJ, validationMessage: "", htmlAttributes: new { @class = "text-danger" } )
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.NomeContatoFinanceiro, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.NomeContatoFinanceiro, additionalViewData: new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.NomeContatoFinanceiro , validationMessage: "", htmlAttributes: new { @class = "text-danger" } )
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Email, additionalViewData: new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Email, validationMessage: "", htmlAttributes: new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Telefone, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Telefone, additionalViewData: new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Telefone, validationMessage: "", htmlAttributes: new { @class = "text-danger" })
+            </div>
+        </div>
+  
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Ativo, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.CheckBoxFor(model => model.Ativo, htmlAttributes: new { @class = "form-control" })
+            </div>
+        </div>
+
+        @Html.Partial("_BotaoRetorno")  
+
+    </div>
+
+}
+
+@* validação por JavaScript *@
+@section Scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+

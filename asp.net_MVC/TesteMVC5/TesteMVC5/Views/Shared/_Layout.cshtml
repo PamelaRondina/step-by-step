@@ -26,7 +26,7 @@
                     <li>@Html.ActionLink("Contato", "Contact", "Home")</li>
                     <li>@Html.ActionLink("Agradecimentos", "ContentResult", "Home")</li>
                     <li>@Html.ActionLink("Nossos Clientes", "FileContentResult", "Home")</li>
-                    </ul>
+                </ul>
             </div>
         </div>
     </div>
@@ -40,6 +40,9 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+
+    @Scripts.Render("~/bundles/testes")
+
     @RenderSection("scripts", required: false)
 </body>
 </html>

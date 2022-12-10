@@ -8,6 +8,12 @@ namespace TesteMVC5
         // Para obter mais informações sobre o agrupamento, visite https://go.microsoft.com/fwlink/?LinkId=301862
         public static void RegisterBundles(BundleCollection bundles)
         {
+            //BundleTable.EnableOptimizations = true;
+
+            bundles.Add(new ScriptBundle("~/bundles/testes").Include(
+                        "~/Scripts/teste1.js", 
+                        "~/Scripts/teste2.js" ));
+
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-{version}.js"));
 

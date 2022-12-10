@@ -170,3 +170,7 @@ C:\Users\pamela\Documents\cursos_tecnologia\step-by-step\step-by-step\asp.net_MV
 C:\Users\pamela\Documents\cursos_tecnologia\step-by-step\step-by-step\asp.net_MVC\TesteMVC5\TesteMVC5\bin\pt-br\System.Web.WebPages.Deployment.resources.dll
 C:\Users\pamela\Documents\cursos_tecnologia\step-by-step\step-by-step\asp.net_MVC\TesteMVC5\TesteMVC5\bin\pt-br\System.Web.WebPages.Razor.resources.dll
 C:\Users\pamela\Documents\cursos_tecnologia\step-by-step\step-by-step\asp.net_MVC\TesteMVC5\TesteMVC5\obj\Debug\TesteMVC5.csproj.CopyComplete
+C:\Users\pamela\Documents\cursos_tecnologia\step-by-step\step-by-step\asp.net_MVC\TesteMVC5\TesteMVC5\bin\EntityFramework.dll
+C:\Users\pamela\Documents\cursos_tecnologia\step-by-step\step-by-step\asp.net_MVC\TesteMVC5\TesteMVC5\bin\EntityFramework.SqlServer.dll
+C:\Users\pamela\Documents\cursos_tecnologia\step-by-step\step-by-step\asp.net_MVC\TesteMVC5\TesteMVC5\bin\EntityFramework.xml
+C:\Users\pamela\Documents\cursos_tecnologia\step-by-step\step-by-step\asp.net_MVC\TesteMVC5\TesteMVC5\bin\EntityFramework.SqlServer.xml

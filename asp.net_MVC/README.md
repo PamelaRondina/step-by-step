@@ -474,9 +474,572 @@ A validação é realizada na Controller
 
 A validação na Controller é feita através do ModelState, e ele valida a Model no momento que é passada no parâmetro.
 
-Após criar um
+- [x] Criar uma novaController;
+- [x] Verificar se entrou `using TesteMVC5.Models;`
 
+
+```css
+   public class ClienteController : Controller
+    {
+          /*Simular a entrada de um cliente*/
+
+        [Route(template:"cliente")]
+        public ActionResult Novo(Cliente cliente)
+         /*Este formato não é utilizado no dia a dia*/
+
+        {
+            cliente = new Cliente
+            {
+                Id = 1,
+                NomeEmpresa = "Advocacia Jurídica",
+                CNPJ = "00000582000189",
+                NomeContatoFinanceiro = "Kelly Cristina",
+                Email = "kelly.cristina@jurídica.adv.br",
+                Telefone = "11958250000",
+                DataMatricula = DateTime.Now,
+                Ativo = true
+            };
+
+            /*passar um dado para outra Action*/
+            return RedirectToAction("Index", cliente);
+        }
+
+        public ActionResult Index(Cliente cliente)
+        {
+            if (!ModelState.IsValid) return View(cliente);
+
+            return View(cliente);
+        }
+    }
+```
+
+- [x] Inserir breakpoint (sem ele dá erro!);
+- [x] Rodar a aplicação
+- [x] Ativar os parâmetros (em amarelo) para que os dados sejam encaminhados para as outras etapas
+
+![image](https://user-images.githubusercontent.com/108991648/206721452-02465470-d2c2-4cd9-a20f-c864d21728b2.png)
+
+**Explorar o ModelState**
+
+- Clicar na **ModelState** em `QuickWatch`;
+
+Quando existente, nesta janela veremos os erros dos parâmetros. Neste modelo não consta!
+
+![image](https://user-images.githubusercontent.com/108991648/206722797-3f03ddc3-58cd-481a-9872-905c779d1505.png)
+
+____________________________
+
+### Views e Razor
+
+O MVC da Microsoft possui o Razor e está ligado a Views
+
+- [x] Em `Views` / `Shared` / `_Layout.cshtml` algumas estrutura do Razor's:
+
+```html
+    <title>@ViewBag.Title - Meu Aplicativo ASP.NET</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+```
+
+Detalhes Razor:
+
+- [x] Para ser Razor necessita utilizar o ` @ `
+- [x] Dentro das ` {  } ` é o seu contexto, sendo código C#
+
+_____________
+
+### Trabalhando com HTmlHelpers 
+
+Criar uma nova pasta no diretório da Views, com o nome da Controller e criar um arquivo `Nome.cshtml`
+
+- [x] adicionar a model: `@model NomeDoProjeto.Models.NomeModel`
+
+> Apenas 1 model por View
+
+[**Editor Extensions**](https://learn.microsoft.com/pt-br/dotnet/api/system.web.mvc.html.editorextensions.editorfor?view=aspnet-mvc-5.2) ou [**Editor List**](https://docs.devexpress.com/AspNetMvc/12003/components/data-editors-extensions/editor-list)
+
+- [x] `@using (Html.BeginForm())` = Criar um formulário
+- [x] `EditorFor` = Lacuna
+- [x] `CheckBoxFor` = Caixinha para ticar
+- [x] `text-danger` = Texto estará em vermelho
+- [x] `ValidationMessageFor` = Valida se o campo está preenchido ou não
+
+**Controller**
+```css
+ public class ClienteController : Controller
+    {
+        [HttpGet]
+        [Route(template: "novo-cliente")]
+
+        public ActionResult NovoCliente()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [Route(template: "novo-cliente")]
+        public ActionResult NovoCliente(Cliente cliente)
+        {
+            if (!ModelState.IsValid) return View(cliente);
+
+            return View(cliente);
+
+        }
+    }
+
+}
+```
+
+**Model**
+
+```css
+@model TesteMVC5.Models.Cliente
+
+<h2>Novo Cliente</h2>
+
+@*Criando um formulário*@
+@using (Html.BeginForm())
+{
+    <div class="form-horizontal">
+        <h4>Informe os dados do Cliente:</h4>
+        <hr />
+
+        @* Para mostrar os erros de validação = false *@
+        @Html.ValidationSummary(excludePropertyErrors:true, message:"", htmlAttributes: new {  @class = "text-danger"})
+
+        <div class="form-group">
+            @* Label para uma Model específia *@
+            @Html.LabelFor(model => model.NomeEmpresa, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @* EditoFor = caixa de texto *@
+                @Html.EditorFor(model => model.NomeEmpresa, additionalViewData: new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.NomeEmpresa, validationMessage: "", htmlAttributes: new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CNPJ, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.CNPJ, additionalViewData: new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CNPJ, validationMessage: "", htmlAttributes: new { @class = "text-danger" } )
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.NomeContatoFinanceiro, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.NomeContatoFinanceiro, additionalViewData: new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.NomeContatoFinanceiro , validationMessage: "", htmlAttributes: new { @class = "text-danger" } )
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Email, additionalViewData: new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Email, validationMessage: "", htmlAttributes: new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Telefone, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Telefone, additionalViewData: new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Telefone, validationMessage: "", htmlAttributes: new { @class = "text-danger" })
+            </div>
+        </div>
+  
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Ativo, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.CheckBoxFor(model => model.Ativo, htmlAttributes: new { @class = "form-control" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Enviar" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+```
+
+**Resultado**
+![image](https://user-images.githubusercontent.com/108991648/206790460-f9596fdb-b9dc-4acf-9125-322e05e5b9cd.png)
+
+_________________________________
+
+### Jquery
+
+Outro método para auxiliar na validação: FrontEnd - JavaScript. Neste formato as informações não serão na Controller, evitando desgastes para o Banco de Dados.
+
+Sendo adicionada a validação através da @section:
+
+- Tudo será redenrizado em `_Layout` na seção de Script
+- Ordem da validação, diretório `Script`:
+    - jquery;
+    - jquery.validate;
+    - jquery.unobtrusive.
+
+```css
+@* validação por JavaScript *@
+@section Scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+}
+```
+
+__________________________________________
+
+### Rotas Partial View
+
+No formulário, para retornar para a página inicial.
+
+Criar uma nova View, porém, neste caso será uma PartialView: 
+> Ao criar uma View como PartialView utilizar o **_** na 
+frente.
+
+Criar _PartialView:
+```css
+@model TesteMVC5.Models.Cliente
+
+<div class="form-group">
+    <div class="col-md-offset-2 col-md-10">
+        <input type="submit" value="Enviar" class="btn btn-defalut" />
+        <a href="@Url.Action("Index", "Home")" class="btn btn-info">Voltar</a>
+    </div>
+</div>
+```
+
+No arquivo da Model, Eliminar campo:
+```css   <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Enviar" class="btn btn-default" />
+            </div>
+        </div>
+```
+
+E, Incluir:
+
+```css
+   @Html.Partial("_BotaoRetorno")  
+```
+
+Para que a PartialView fique disponível para todos as outrs Views devemos arrastá-la para o diretório `Shared`
+
+__________________________________
+
+### Conceito de CSRF
+
+> Falsificação de Solicitação entre Sites
+
+Para isto precisamos incluir:
+
+**Na View**
+
+```css
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+```
+
+**na Controller**
+
+```css
+  [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Route(template: "novo-cliente")]
+```
+
+_________________________
+
+### Gerenciamento de Scripts
+
+**Bundling**
+Processo de transformar diversos arquivos do mesmo tipo em um.
+
+**Minification**
+Reduzir o tamanho dos arquivos através da remoção dos espaços em branco, comentários, quebras de linhas e substituições de variáveis.
+
+_____________
+
+### Implementando Bundling e Minification
+
+Em `_Layout` temos:
+
+- [x] Bundling do Css: @Styles.Render("~/Content/css")
+- [x] Bundling do JavaScipt: @Scripts.Render("~/bundles/modernizr")
+
+> Dica! Em `_Layout` deixar todo o JavaScrip no final da aplicação
+
+As configurações desta seção estão em `App_Start` `BundleConfig.cs`
+
+* criar teste.js
+* criar bundle
+
+```css
+            bundles.Add(new ScriptBundle("~/bundles/testes").Include(
+                        "~/Scripts/teste1.js", 
+                        "~/Scripts/teste2.js" ));
+```
+* Layout embaixo, incluir o bundle
+
+   @Scripts.Render("~/bundles/testes")
+
+* E, abaixo do public:
+
+```css
+ public static void RegisterBundles(BundleCollection bundles)
+        {
+            BundleTable.EnableOptimizations = true;
+```
+
+*No `Index` da `Home`, incluir no final:
+
+```css
+
+@section scripts
+{
+    <script>
+        teste1("Teste 1");
+        teste2("Teste 2");
+    </script>
+}    
+```
+
+Para rodar em produção, podemos desabilitar o Bundle, em `Web.config`, alterar para `false` (último arquivo)
+
+```css
+  <compilation debug="true" targetFramework="4.6.1" />
+```
+
+_________________
+
+### Trabalhando com o Entity Framework
+
+Criar um Banco de Dados a partir de um Framework 6
+
+**Migrations**
+
+Automatizam os processos de atualização de BD
+
+**Comandos**
+* PM > Enable-Migrations
+
+* PM > Update-Database
+    * -Force    Forçar uma atualização da qual dados podem ser perdidos
+    * -Verbose  Mostrar mais informações 
+    * -Script   gerar um Script de migração do banco, não executa.
+
+* PM > Add-Migration
+    * Comando que vai adicuinar uma migração, fazer um versionamento do projeto. 
+* PM > Get-Migrations
+    * Pegar as migrações existentes e faz uma listagem de quais foram aplicadas
+
+    _________________
+
+    ### Configurando o EF na aplicação
+
+Utilizar - SQL Server
+
+Configurar o Entity Framework, no Nome do Projeto, com o botão direito mouse, procurar `Gerenciar pacotes de NUGET`, e buscar a versão `EntityFrameowrk`
+
+> Caso não apareça, ir em pesquisar `Console do Gerenciador de Pacotes` ou `Package Manager Console`
+
+- [x] Na linha de comandos, digitar: `PM> Install-Package EntityFramework`
+
+> Para visualizar a versão do EF: `packages.config` e verificar `EntityFramework`
+
+- [x] Adicionar nova pasta `Data` e uma classe `AppDbContext.cs`, que será o contexto do EF.
+- [x] `AppDbContext` adicionar `sing System.Data.Entity;`
+- [x] Instalar [SQL Servar Data Tools](https://learn.microsoft.com/pt-br/sql/ssdt/download-sql-server-data-tools-ssdt?view=sql-server-ver15)
+
+```css
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Data.Entity;
 using TesteMVC5.Models;
+
+namespace TesteMVC5.Data
+{
+    public class AppDbContext : DbContext
+    {
+        //objetivo do DbContext será mapear as classes para que as tabelas se tornem BD
+        public AppDbContext() : base("DefaultConnection")
+        {
+        }
+
+        public DbSet<Cliente> Clientes { get; set; }
+    }
+}
+```
+
+Em `Web.config` vamos incluir:
+
+```css
+/*Abre a seção*/
+<connectionStrings>
+
+/*DefaultConnection (mesmo nome que está no construtor do contexto)*/
+		<add name="DefaultConnection" 
+
+/*connection = vai se conectar no banco de dados*/
+        connectionString="Data Source=(localdb)
+        
+/*Instância do nome do BD da máquina*/
+        \MSSQLLocalDB;AttachDbFilename=|
+/*DataDirectory = mapeando a pasta App_Data*/
+        DataDirectory|
+        
+/*Nome do arquivo do BD*/
+        \AppTesteMvc5.mdf;
+        
+/*Nome da tabela do BD*/         
+        Initial Catalog=AppTesteMvc5;
+        
+/*O usuário da própria máquina*/        
+        Integrated Security=True" 
+        
+/*Trabalhar com SQL Server*/
+        providerName="System.Data.SqlClient" />
+
+/*Fecha a seção*/
+</connectionStrings>
+```
+Em Exibir `SQL Server Object Explorer`, podemos liberar o acesso ao BD pelo VS
+
+Abrir `Console do Gerenciador de Pacotes`:
+- [x] Rodar, `PM> enable-migrations`
+- [x] Será criado o diretório `Migratiosn` com o arquivo `Configuration.cs`, faremos alterações nele:
+
+```css
+using TesteMVC5.Data;
+
+namespace TesteMVC5.Migrations
+{
+    using System.Data.Entity.Migrations;
+
+    internal sealed class Configuration : DbMigrationsConfiguration<AppDbContext>
+    {
+        public Configuration()
+        {
+            // será alterado para true para conseguirmos aplicar as migrations
+            AutomaticMigrationsEnabled = true;
+        }
+
+        //Seed = serve para incluir informações no BD no momento da criação
+        protected override void Seed(AppDbContext context)
+        {
+            //  This method will be called after migrating to the latest version.
+
+            //  You can use the DbSet<T>.AddOrUpdate() helper extension method
+            //  to avoid creating duplicate seed data.
+        }
+    }
+}
+```
+
+Em `Console de Gerenciador de Pacotes` para criar o BD e as tabelas:
+- [x] PM> update-database -verbose
+
+> Fechar o Banco de Dados do VS, abrir novamente e dar refresh (vai ajudar com que as tabelas apareçam!!)
+
+**Criar Script par ao BD**
+Neste ponto, quem cria o BD é o usuários
+
+- [x] PM> update-database -verbose -Script
+
+**Remover Convensão Plural do EF**
+
+Neste formato o programa não incluirá o "S" nas tabelas,
+Para isso, incluiremis o `modelBuilder.Entity<Cliente>`
+
+Em `Data` `AppDbContext`
+
+```css
+        public DbSet<Cliente> Clientes { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+        }
+    }
+}
+```
+
+Deletamos o BD,  bloqueamos a convensão, alteramos a Model "Cliente", e criamos um novo BD.
+
+```css     
+        [MaxLength(100, ErrorMessage = "No máximo 100 caracteres!")]
+```
+
+____________________________
+
+### *****************
+
+Em `ClienteController`, vai salvar os dados no BD. 
+
+```css
+namespace TesteMVC5.Controllers
+{
+    public class ClienteController : Controller
+    {
+        private readonly AppDbContext context = new AppDbContext();
+
+        [HttpGet]
+        [Route(template: "novo-cliente")]
+
+        public ActionResult NovoCliente()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Route(template: "novo-cliente")]
+        public ActionResult NovoCliente(Cliente cliente)
+        {
+            if (!ModelState.IsValid) return View(cliente);
+
+             cliente.DataMatricula = DateTime.Now;
+
+            context.Clientes.Add(cliente);
+            context.SaveChanges();
+
+            return View(cliente);
+
+        }
+    }
+
+}
+```
+
+Ainda na `Controller`, por o braekpoint e iniciar a aplicação.
+
+![image](https://user-images.githubusercontent.com/108991648/206860605-d97cf643-02be-40e0-b994-a73461d6be86.png)
+
+
+
+Preencher os dados do formulário e enviar.
+
+
+Breakpoint??
+
+
+
+
+
+
+
+
+
+
+
 
 
 
