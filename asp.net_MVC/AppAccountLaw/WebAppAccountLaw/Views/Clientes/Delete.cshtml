@@ -1,0 +1,92 @@
+﻿@model WebAppAccountLaw.Models.Cliente
+
+@{
+    ViewBag.Title = "Exclusão de Cliente";
+}
+
+
+@if (!string.IsNullOrEmpty(ViewBag.Mensagem))
+{
+    <div class="alert alert-danger">
+        <button type="button" class="close" data-dismiss="alert">x</button>
+        <h3>@ViewBag.Mensagem</h3>
+    </div>
+}
+
+<h2>Exclusão de Cliente</h2>
+
+<h3>Tem certeza que deseja deletar?</h3>
+<div>
+    <h4>Cliente - @Model.NomeEmpresa </h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NomeEmpresa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NomeEmpresa)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CNPJ)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CNPJ)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NomeContatoFinanceiro)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NomeContatoFinanceiro)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Telefone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Telefone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DataMatricula)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DataMatricula)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ativo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ativo)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Deletar" class="btn btn-success" />
+                @Html.ActionLink("Voltar", actionName: "Index", routeValues: null, htmlAttributes: new { @class = "btn btn-default" })
+            </div>
+        </div>
+    }
+</div>

@@ -1,8 +1,11 @@
 {
   "ExpandedNodes": [
     "",
-    "\\TesteMVC5\\Controllers",
-    "\\TesteMVC5\\Models"
+    "\\TesteMVC5\\App_Start",
+    "\\TesteMVC5\\fonts",
+    "\\TesteMVC5\\Migrations",
+    "\\TesteMVC5\\Models",
+    "\\TesteMVC5\\Scripts"
   ],
   "SelectedNode": "\\TesteMVC5.sln",
   "PreviewInSolutionExplorer": false

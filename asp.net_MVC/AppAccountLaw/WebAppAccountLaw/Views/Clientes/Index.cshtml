@@ -1,0 +1,78 @@
+﻿@model IEnumerable<WebAppAccountLaw.Models.Cliente>
+
+@{
+    ViewBag.Title = "Cadastro de Clientes";
+}
+
+@if (TempData["Mensagem"] != null)
+{
+    <div class="alert alert-success">
+        <button type="button" class="close" data-dismiss="alert">x</button>
+        <h3>@TempData["Mensagem"].ToString()</h3>
+    </div>
+}
+
+<h2>Cadastro de Clientes</h2>
+
+<div>
+    <a href="@Url.Action("Create")" class="btn btn-primary">Novo Cliente</a><br><br>
+
+
+</div>
+
+@* Striped =    formato de tabela zebra
+   Hover   =    Saber em qual local estou com o mouse na tabela
+    *@
+
+<table class="table table-striped table-hover">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.NomeEmpresa)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CNPJ)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NomeContatoFinanceiro)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Telefone)
+        </th>       
+        <th>
+            @Html.DisplayNameFor(model => model.Ativo)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.NomeEmpresa)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CNPJ)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NomeContatoFinanceiro)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Telefone)
+        </td>       
+        <td>
+            @Html.DisplayFor(modelItem => item.Ativo)
+        </td>
+        <td>
+            <a href="@Url.Action("Edit", controllerName: "Clientes", routeValues: new {id = item.Id})" class="btn btn-warning">Editar</a>
+            <a href="@Url.Action("Details", controllerName: "Clientes", routeValues: new { id = item.Id })" class="btn btn-primary">Detalhes</a>
+            <a href="@Url.Action("Delete", controllerName: "Clientes", routeValues: new { id = item.Id })" class="btn btn-danger">Deletar</a>
+        </td>
+    </tr>
+ }
+
+</table>

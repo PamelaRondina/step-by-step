@@ -332,7 +332,6 @@ Em `Views`, `Shared`, `_Layout.cshtml`, incluir o link:
 - [x] **ContentResult** e ** nome do método
 - [x] **Home** da página inicial
 
-Em seguida, alterar o [nome da rota](https://github.com/PamelaRondina/step-by-step/tree/main/asp.net_MVC#rotas-por-atributos).
 
 _______________
 
@@ -964,12 +963,13 @@ Em `Data` `AppDbContext`
 ```css
         public DbSet<Cliente> Clientes { get; set; }
 
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+  protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            modelBuilder.Conventions.Remove<PluralizingEntitySetNameConvention>();
+
+            modelBuilder.Entity<Cliente>().ToTble("Clientes");          
+
             base.OnModelCreating(modelBuilder);
-        }
-    }
-}
 ```
 
 Deletamos o BD,  bloqueamos a convensão, alteramos a Model "Cliente", e criamos um novo BD.
@@ -980,9 +980,9 @@ Deletamos o BD,  bloqueamos a convensão, alteramos a Model "Cliente", e criamos
 
 ____________________________
 
-### *****************
+### Incluindo dados no BD via formulário 
 
-Em `ClienteController`, vai salvar os dados no BD. 
+- [x] Em `ClienteController`, vai salvar os dados no BD. 
 
 ```css
 namespace TesteMVC5.Controllers
@@ -1019,16 +1019,733 @@ namespace TesteMVC5.Controllers
 }
 ```
 
-Ainda na `Controller`, por o braekpoint e iniciar a aplicação.
+- [x] Ainda na `Controller`, **braekpoint**
 
 ![image](https://user-images.githubusercontent.com/108991648/206860605-d97cf643-02be-40e0-b994-a73461d6be86.png)
 
+- [x] Preencher os dados do formulário e enviar;
+- [x] Os dados estarão no View da ModelState;
+- [x] Setar `DataMatricula`
+- [x] Setar `context.Add`
+- [x] Em `Context/Clientes/VisualizaçõesdeResultados`veremos erro de thread para rodar
+- [x] Vamos forçar a thread para rodar
 
-
-Preencher os dados do formulário e enviar.
-
-
+![image](https://user-images.githubusercontent.com/108991648/206860979-a2955d32-aed9-4bb5-ac5d-b6f7c0fc54f8.png)
 Breakpoint??
+
+- [x] Setar `SaveChange`
+- [x] Em SQL, clicar na tabela e abrir `New Data`, abrirá a tabela com os dados do formulário preenchida
+
+Voalá! Dados inseridos na tabela do BD.
+
+![image](https://user-images.githubusercontent.com/108991648/206863280-d850925f-40bf-4230-8515-f9fa85572bd0.png)
+_____________________
+
+### Criando um novo Projeto
+
+- [x] Criar um novo projeto no VS
+- [x] Blank Solution ou Solução em branco
+- [x] Escolher o local e o nome e salvar
+- [x] Dentro da Solução, adicionar um novo projeto
+- [x] Asp.Net Framework, após o nome, optar por MVC
+- [x] Optar por autenticação> contas individuais
+
+> Neste formato foi adicionado mais opções de Models, Controller e Views
+
+NOVO: `Startup.cs` vai trata a autenticação da aplicação
+
+
+
+# Editar EdentifyConfig!
+
+- [x] `Web.config` `name` `Catalog`  alterar nome da aplicação e `DataDirectory`, sendo nome do site e nome da aplicação
+- [x] `AcountController` trata da criação de um login/usuário
+- [x] `ManagerController` gestão do usuário já logado
+
+- [x] `Console de Gerenciador de Pacotes` 
+    - habilitar `PM> enable-migrations`
+        - `Configuration.cs` alterar `AutomaticMigrationsEnabled = true;` para utilizar as migrations automáticas
+    - habilitar o BD `PM> update-database`
+<br>
+
+    Foi gerado as tabelas do Edentify:
+    - Roles: papéis que posso assumir dentro de um usuário;
+    - Claims: permissões do usuário;
+    - Logins: logins de redes sociais Edentify;
+    - UserRoles: quais Roles estão associadas aos usuários
+    - Users: Usuários
+
+    Rodar a aplicação e fazer um registro.
+
+pamela@email.com
+Teste@123
+
+Na tabela `dbo.AspNetUsers` terá dados cadastrados
+
+![image](https://user-images.githubusercontent.com/108991648/206872866-5f38b9bf-9c70-459e-8c18-0bf53e0d4ff1.png)
+
+__________________
+
+### Conceito Scaffolding
+
+> Automatizar tarefas simples, CRUD
+
+- [x] Criar uma Model classe `Cliente`
+- [x] Incluir as propriedades
+<br>
+
+**Criar CRUD em conceito Scaffolding**
+
+- [x] Nos menus do programa `Compilação` e `Compilar Solução` ou `Build/Build Solution`
+- [x] Em `Controller` / `Add` / `Controlador`
+- [x] Escolher `Entity Framework`
+
+![image](https://user-images.githubusercontent.com/108991648/206865651-84a2abab-d272-4ad4-ad32-8d1eb7ad7ec5.png)
+
+**Compreendendo a Controller criada**
+
+```css
+// instância do contexto
+        private ApplicationDbContext db = new ApplicationDbContext();
+
+// GET: Clientes (retornar uma lista dos Clientes)
+        public async Task<ActionResult> Index()
+        {            return View(await db.Clientes.ToListAsync());        }
+
+// GET: Clientes/Details/5 (com base no ID)
+        public async Task<ActionResult> Details(int? id)
+        {            if (id == null)            {
+//caso o ID seja nulo retorna BadRequest
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);            }
+            Cliente cliente = await db.Clientes.FindAsync(id);
+            if (cliente == null)            {
+
+//caso não seja encontrado retonar NotFound
+                return HttpNotFound();            }
+
+//se sim, retorna na View
+            return View(cliente);        }
+
+// GET: Clientes/Create (retorna uma View de criação)
+        public ActionResult Create()        {
+            return View();        }
+
+// POST: Clientes/Create 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+
+//receber de volta
+        public async Task<ActionResult> Create([Bind(Include = "Id,NomeEmpresa,CNPJ,NomeContatoFinanceiro,Email,Telefone,DataMatricula,Ativo")] Cliente cliente)        {            if (ModelState.IsValid)            { 
+//vai adicionar no contexto
+            db.Clientes.Add(cliente);
+//e salvar
+            await db.SaveChangesAsync();
+// retorna para Index de Clientes
+            return RedirectToAction("Index");            }
+
+//tendo algum problema, retorna para a View
+            return View(cliente);        }
+
+// GET: Clientes/Edit/5
+// vai puxar um ID específico 
+        public async Task<ActionResult> Edit(int? id)        {
+//caso não encontre, retorna um BadRequest   
+            if (id == null)
+            {return new HttpStatusCodeResult(HttpStatusCode.BadRequest);}
+
+//caso não exista, retorna um NotFound
+            Cliente cliente = await db.Clientes.FindAsync(id);
+            if (cliente == null)            {
+                return HttpNotFound();            }
+//caso exista, retorna a View para poder editar e submeter na próxima etapa
+            return View(cliente);        }
+
+// POST: Clientes/Edit/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Edit([Bind(Include = "Id,NomeEmpresa,CNPJ,NomeContatoFinanceiro,Email,Telefone,DataMatricula,Ativo")] Cliente cliente)        {           
+            {
+//se for válido, será modificado no Entry
+                db.Entry(cliente).State = EntityState.Modified;
+//será salvo
+                await db.SaveChangesAsync();
+                return RedirectToAction("Index");            }
+            return View(cliente);        }
+
+// GET: Clientes/Delete/5
+// pelo ID tenterá encotrar o Cliente
+        public async Task<ActionResult> Delete(int? id)
+        {
+            if (id == null)
+            {
+//caso não encontre, retorna um BadRequest   
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);            }
+            Cliente cliente = await db.Clientes.FindAsync(id);
+            if (cliente == null)
+            {  
+//caso não exista, retorna um NotFound
+                return HttpNotFound();            }
+//caso exista, retorna a Viewo Delete POST
+            return View(cliente);        }
+
+// POST: Clientes/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> DeleteConfirmed(int id)
+        {
+//o Cliente será remivido
+            Cliente cliente = await db.Clientes.FindAsync(id);
+            db.Clientes.Remove(cliente);
+            await db.SaveChangesAsync();
+            return RedirectToAction("Index");        }
+
+        protected override void Dispose(bool disposing)
+        {            if (disposing)            {
+                db.Dispose();            }
+            base.Dispose(disposing);        }    }}
+```
+
+- [x] Clicar `ApplicationDbContext();` do início
+- [x] Inserir `DBset` (verificar se precisa*) o `override`
+
+```css
+  public static ApplicationDbContext Create()
+        {
+            return new ApplicationDbContext();
+        }
+
+        public System.Data.Entity.DbSet<WebAppAccountLaw.Models.Cliente> Clientes { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Conventions.Remove<PluralizingEntitySetNameConvention>();
+
+            modelBuilder.Entity<Cliente>().ToTable("Clientes");          
+
+            base.OnModelCreating(modelBuilder);
+```
+
+- - [x] Nos menus do programa `Compilação` e `Compilar Solução` ou `Build/Build Solution`
+- [x] Fazer update do BD `update-database -Verbose`
+
+- [x] No BD teremos a tabela `dbo.Clientes` criada
+- [x] E nas soluções, no diretório `Views` teremos os arquivos de: Create, Delete, Details, Edit, Index
+
+* Rodar a aplicação e testar os dados do formulário.
+_________________________
+
+### Customizar a implementação padrão
+
+- [x] Em `App_Start` `RouteConfig` vamos mapear as rotas
+
+```css
+private readonly ApplicationDbContext db = new ApplicationDbContext();
+
+   routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+
+            routes.MapMvcAttributeRoutes();
+
+            routes.MapRoute
+```
+
+- [x] Na `ControllerCliente`:
+
+- Alterar
+
+```css
+     [HttpGet]
+        [Route(template:"listar-clientes") ]
+       
+        public async Task<ActionResult> Index()
+        {
+            return View(await db.Clientes.ToListAsync());
+        }
+```
+
+- Alterar
+- Deletar o ? e ID Null porque temos o ID int
+
+```css
+[HttpGet]
+        [Route(template: "cliente/detalhe/{id:int}")]
+        
+        public async Task<ActionResult> Details(int id)
+        {        
+            var cliente = await db.Clientes.FindAsync(id);
+
+            if (cliente == null)
+            {
+                //caso não seja encontrado retonar NotFound
+                return HttpNotFound();
+            }
+            
+            return View(cliente);
+        }
+```
+
+- Passar Clientes para var
+```css
+var cliente = await db.Clientes.FindAsync(id
+```
+
+- Alterar
+```css
+ [HttpGet]
+        [Route(template: "novo-cliente")]
+        public ActionResult Create()
+        {
+            return View();
+        }
+```
+
+- Alterar
+```css
+[HttpPost]
+        [Route(template: "novo-cliente")]
+        [ValidateAntiForgeryToken]
+```
+
+- Alterar
+```css
+[HttpGet]
+        [Route(template: "editar-cliente/{id:int}")]
+       
+        public async Task<ActionResult> Edit(int id)
+        {
+        var cliente = await db.Clientes.FindAsync(id);
+```
+
+- Alterar
+
+```css
+[HttpPost]
+        [Route(template:"editar-cliente/{id:int}")]
+        [ValidateAntiForgeryToken]
+```
+
+- Alterar
+
+```css
+[HttpGet]
+        [Route(template: "excluir-cliente{id:int")]
+        // pelo ID tenterá encotrar o Cliente
+        public async Task<ActionResult> Delete(int id)
+        {
+            var cliente = await db.Clientes.FindAsync(id);
+```
+
+- Alterar
+
+```css
+
+        [HttpPost]
+        [Route(template: "excluir-cliente/{id:int")]
+        [ValidateAntiForgeryToken]
+```
+
+- [x]  Em `Views`/ `Shared`/ `_Layout`
+
+- Adicionar
+```css
+<li>@Html.ActionLink("Página Inicial", "Index", "Home")</li>
+<li>@Html.ActionLink("Sobre", "About", "Home")</li>
+<li>@Html.ActionLink("Contato", "Contact", "Home")</li>
+<li>@Html.ActionLink("Clientes", "Index", "Aluno")</li>
+```
+
+________________
+
+### Customizações Visuais
+
+- [X] Em `Views` / `Clientes` / `Index`
+- Alterar Título da Página
+- Criar um Botão para Incluir Novo Cliente
+- Deixar Tabela em formato zebra
+- Alterar Links e botão para: editar, alterar e deletar
+- Excluir a visualização do DataMatrícula
+
+```css
+@{
+    ViewBag.Title = "Cadastro de Clientes";
+}
+
+<h2>Cadastro de Clientes</h2>
+
+<div>
+    <a href="@Url.Action("Create")" class="btn btn-primary">Novo Cliente</a><br><br>
+
+
+</div>
+
+@* Striped =    formato de tabela zebra
+   Hover   =    Saber em qual local estou com o mouse na tabela
+    *@
+
+<table class="table table-striped table-hover">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.NomeEmpresa)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CNPJ)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NomeContatoFinanceiro)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Telefone)
+        </th>       
+        <th>
+            @Html.DisplayNameFor(model => model.Ativo)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.NomeEmpresa)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CNPJ)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NomeContatoFinanceiro)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Telefone)
+        </td>       
+        <td>
+            @Html.DisplayFor(modelItem => item.Ativo)
+        </td>
+        <td>
+            <a href="@Url.Action("Edit", controllerName: "Clientes", routeValues: new {id = item.Id})" class="btn btn-warning">Editar</a>
+            <a href="@Url.Action("Details", controllerName: "Clientes", routeValues: new { id = item.Id })" class="btn btn-primary">Detalhes</a>
+            <a href="@Url.Action("Delete", controllerName: "Clientes", routeValues: new { id = item.Id })" class="btn btn-danger">Deletar</a>
+        </td>
+    </tr>
+ }
+
+</table>
+```
+
+- [X] Em `Views` / `Clientes` / `Create`
+- Alterar nome da Create
+- Deletar DataMatricula 
+- Criar Botão Voltar
+
+```css
+@model WebAppAccountLaw.Models.Cliente
+
+@{
+    ViewBag.Title = "Adicionar novo Cliente";
+}
+
+<h2>Adicionar novo Cliente</h2>
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4></h4>
+```
+
+```css
+     <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Salvar" class="btn btn-success" />
+                @Html.ActionLink("Voltar", actionName:"Index", routeValues: null, htmlAttributes: new {@class = "btn btn-default"})
+            </div>
+        </div>
+    </div>
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+```
+
+- [X] Em `Views` / `Clientes` / `Edit`
+- Alterar nome da Create
+- Deletar DataMatricula 
+- Criar Botão Voltar
+
+```css
+@{
+    ViewBag.Title = "Editar Cliente";
+}
+
+<h2>Editar Cliente</h2>
+
+  <h4>Edição Cliente - @Model.NomeEmpresa</h4>
+
+<div class="col-md-offset-2 col-md-10">
+<input type="submit" value="Salvar" class="btn btn-success" />
+    @Html.ActionLink("Voltar", actionName: "Index", routeValues: null, htmlAttributes: new { @class = "btn btn-default" })
+</div>      
+```
+- [X] Em `Views` / `Clientes` / `Delete`
+- Alterar nome da Create
+- Criar Botão Voltar
+
+```css
+@{
+    ViewBag.Title = "Exclusão de Cliente";
+}
+
+<h2>Exclusão de Cliente</h2>
+
+<h3>Tem certeza que deseja deletar?</h3>
+<div>
+    <h4>Cliente - @Model.NomeEmpresa </h4>
+
+div class="form-group">
+    <div class="col-md-offset-2 col-md-10">
+        <input type="submit" value="Deletar" class="btn btn-success" />
+        @Html.ActionLink("Voltar", actionName: "Index", routeValues: null, htmlAttributes: new { @class = "btn btn-default" })
+    </div>
+```
+
+ - [X] Em `Views` / `Clientes` / `Details`
+- Alterar nome da Create
+- Deletar DataMatricula 
+- Criar Botão Voltar
+
+```css
+ViewBag.Title = "Dados Cadastrais";
+}
+
+<h2>Dados Cadastrais</h2>
+
+<div>
+    <h4>Cliente - @Model.NomeEmpresa</h4>
+
+<div class="form-group">
+    <div class="col-md-offset-2 col-md-10">
+        <input type="submit" value="Salvar" class="btn btn-success" />
+        @Html.ActionLink("Voltar", actionName: "Index", routeValues: null, htmlAttributes: new { @class = "btn btn-default" })
+    </div>
+</div>
+```
+
+Também Editar:
+
+- [X] Em `Views` / `Account` / `Register`
+- [X] Em `Views` / `Account` / `Login`
+
+**DataMatrícula**
+- [x] Em `ClientesController`
+- Incluir ` cliente.DataMatricula = DateTime.Now;` em `HttpPost/Create` 
+
+```css
+[HttpPost]
+        [Route(template: "novo-cliente")]
+        [ValidateAntiForgeryToken]
+        
+        public async Task<ActionResult> Create([Bind(Include = "Id,NomeEmpresa,CNPJ,NomeContatoFinanceiro,Email,Telefone,****DataMatricula****,Ativo")] Cliente cliente)
+        {
+            if (ModelState.IsValid)
+            {
+                cliente.DataMatricula = DateTime.Now;
+```
+
+- [x] Eliminar `DataMatricula` de todos os BIND's
+- Incluir ` cliente.DataMatricula = DateTime.Now;` em `HttpPost/edit` 
+- Solicitar que ignore a data de matrícula
+
+```css
+  db.Entry(cliente).State = EntityState.Modified;
+                db.Entry(cliente).Property(Cliente => Cliente.DataMatricula).IsModified = false;
+```
+
+**Adicionar campo novo para a Tabela**
+- [x] Em `Controller`:
+- Criar o novo parâmetro;
+- Adicionar o nome do Novo Parâmetro dentro da BIND
+- [x] Em `View`, em cada pasta incluir o  noco parâmetro
+- [x] Realizar o `update-database -Verbose`
+
+**Alterar Nome das Campos Selecionáveis**
+
+Sobre / Contao / Clientes etc.;
+
+- [x] Em `_Layout` primeiro item é o nome que aparecerá no site = "Account Law"
+
+`<li>@Html.ActionLink("Account Law", "Index", "Home")</li>`
+
+**Alterar Nome da Aplicação no Site**
+- [x] Em `View` / `Shared` / `_Layout`
+
+```css
+    <title>@ViewBag.Title - Account Law</title>
+```
+
+**Alteração da url**
+
+- [x] Em [Rotas](https://github.com/PamelaRondina/step-by-step/tree/main/asp.net_MVC#rotas-por-atributos).
+
+**Alteração dos parágrafos**
+
+- [x] Em `Views` / `Home` / `Index`
+
+> Também conseguimos incluir direcionamentos para sites
+
+```html<div class="jumbotron">
+    <h1>Account Law</h1>
+    <p class="lead">Solução de gestão financeira para escritórios e departamentos jurídicos.</p>
+    <p><a href="https://accountlaw.com.br/" class="btn btn-primary btn-lg">Visitar Site &raquo;</a></p>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <h2>Nossas redes</h2>
+        <p>
+            Acompanhe nossa trajetória pelo Instagram.
+        </p>
+        <p><a class="btn btn-default" href="https://www.instagram.com/accountlawoficial/">Instagram &raquo;</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2></h2>
+        <p>Acompanhe nossa trajetória pelo Linkedin.</p>
+        <p><a class="btn btn-default" href="https://www.linkedin.com/company/accountlaw/">Linkedin &raquo;</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2></h2>
+        <p>Acompanhe nossa trajetória pelo Facebook.</p>
+        <p><a class="btn btn-default" href="https://www.facebook.com/accountlawoficial">Facebook &raquo;</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2></h2>
+        <p>Acompanhe nossa trajetória pelo Youtube.</p>
+        <p><a class="btn btn-default" href="https://www.youtube.com/channel/UCs56WDx0cRPTTOp1nnMZulg">Youtube &raquo;</a></p>
+    </div>
+
+</div>
+```
+
+_____________
+
+### Manutenção de estado
+
+Com uma Controller e uma View, a Controlle entrega dados de modelo para a View, por exemplo, uma Model.
+
+Neste capítulo, vamos entender como essa informação é passada sem uma Model, existem 03 conceitos para isso:
+
+- ViewBag e ViewData
+- TempData
+
+**ViewBag e ViewData**
+
+> Uma sacola de informação
+
+- Curto tempo de duração, apenas um request
+- Após lida perdem o conteúdo
+- Precisa definir uma chave de valor
+
+**ViewBag**
+- Atua em tipo dinâmico, resolve objeto em tempo real
+
+- [x] Em `Controller`/ `[HttpGet]/Delete` 
+
+
+
+**TempData**
+- Tem duração maior
+- Após lida perde o conteúdo
+- Semelhante a uma sessão do ASP.NEt
+
+Uma Controller fazendo um request para outra Controller e a Controller que recebeu o request chama uma View
+
+Essa TempData será insistente até ser lida:
+
+- [x] Em `Views` / `Clientes` / `Delete`
+
+```csss
+@if (!string.IsNullOrEmpty(ViewBag.Mensagem))
+{
+    <div class="alert alert-danger">
+        <button type="button" class="close" data-dismiss="alert">x</button>
+        <h3>@ViewBag.Mensagem</h3>
+    </div>
+}
+```
+
+
+- [x] Em `Controller`/ `[HttpPOst]/Create` 
+
+```css
+public async Task<ActionResult> Delete(int id)
+        {
+            var cliente = await db.Clientes.FindAsync(id);
+            if (cliente == null)
+
+            {  //caso não exista, retorna um NotFound
+                return HttpNotFound();
+            }
+            ViewBag.Mensagem = "Atenção, ao continuar: Ação Irreversível!";
+```
+
+```css
+cliente.DataMatricula = DateTime.Now;
+    db.Clientes.Add(cliente);
+    await db.SaveChangesAsync();
+
+TempData["Mensagem"] = "Cliente cadastrado com sucesso!";
+```
+
+- [x] Em `Views` / `Clientes` / `Index`
+
+> Para C# iniciar com @, código grande com `@{}`
+> TempData pode ser uma Objeto ou String
+
+```css
+    ViewBag.Title = "Cadastro de Clientes";
+}
+
+@if (TempData["Mensagem"] != null)
+{
+    <div class="alert alert-success">
+        <button type="button" class="close" data-dismiss="alert">x</button>
+        <h3>@TempData["Mensagem"].ToString()</h3>
+    </div>
+}
+```
+
+______________________
+
+### Controller - Action Filters
+
+- Podem ser utilizados diretamente na Controller
+
+Nome | Descrição
+-|-
+OutputCache | FAz o cache de um output da Controller
+ValidateInput | Desliga a validação dos requests e permite input de dados perigosos
+Authorize | Restringe uma Action a apenas usuarios autorizados ou roles
+ValidateAntiForgeryToken | Previne ataques de Cross-Site Requests Forgery
+HandleError | Captura todos os erros e possibilita a escolha de uma View para exibiçãi de erros personalizados
+
+Em `ClientesController`
+
+- Acesso ao cadastro de Clientes apenas após o Login `[Authorize]`
+```css
+namespace WebAppAccountLaw.Controllers
+{
+    [Authorize]
+```
+
+- Abrir uma exceção `[AlowAnonymous]`
+
+
 
 
 

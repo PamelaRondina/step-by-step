@@ -9,7 +9,7 @@ namespace TesteMVC5.Models
 {
     public class Cliente
     {
-        
+        [Key]
         public int Id { get; set; }
 
         /*[Required(ErrorMessage = existem outros formatos de erros")]*/
