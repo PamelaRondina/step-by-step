@@ -1745,8 +1745,115 @@ namespace WebAppAccountLaw.Controllers
 
 - Abrir uma exceção `[AlowAnonymous]`
 
+_____________________________
+
+## ASP.NET Avançado
+
+### Novo projeto
+
+**Adicionando Camadas**
+
+- [x] Escolher `Solução Em Branco`  
+- [x] No diretório do computador criar novas pastas
+- docs
+- sql
+- src
+- tests
+<br>
+- [x] No VS adicionar primeira camada: `Add` / `Novo Projeto` sendo `Asp.Net Framework / MVC / Autenticação: Contas individuais` , salvar na pasta `src` como `Nome.AppMvc`
+- [x] No VS adicionar segunda camada: `Add` / `Novo Projeto` sendo `Biblioteca de Classes` ou `Class Library`, salvar na pasta `src` como `Nome.Business`
+- [x] Deletar `Class1.cs` (não utilizaremos)
+- [x] No VS adicionar terceira camada: `Add` / `Novo Projeto`, sendo `Biblioteca de Classes` ou `Class Library`, salvar na pasta `src` como `Nome.Infra`
+- [x] Deletar `Class1.cs` (não utilizaremos)
+
+<br>
+
+- [x] Em Business podemos limpar o diretório `References` deixando apenas o arquivo `System`
+<br>
+
+**Camada de Negócios**
+- [x] Na camada de MVC, em `Referências` adicionar apontamentos: `Projetos` e ticar Business e Infra
+- [x] Na camada de Infra, em `Referências` adicionar apontamentos: `Projetos` Business
+<br>
+
+**Para mudar a versão do Framework** 
+- [x] Clicar no nome do projeto, `Descarregar Projeto` ou `Unload Project` e alterar a versão:
+
+ `<TargetFrameworkVersion>v4.8</TargetFrameworkVersion>`
+
+ - [x] Após editar, fazer `Reload Project`
+
+______________________
+
+### Modelar a camada de Negócios
+
+- [x] Em Business criar pastas/subpastas:
+- Em `Core` criar a subpasta `Models` + adicionar classe = `Entity` (será a classe mãe, que não poderá ser estanciada, apenas herdada)
+- Em `Models` criar as subpstas:
+    - `Fornecedores` + adicionar Classe = `Fornecedor ` e  
+    - `Produtos` + adicionar Classe `Produto`
+    
+    ![image](https://user-images.githubusercontent.com/108991648/207140394-18dc743a-cda0-4092-a426-be4d48569b12.png)
 
 
+**Classe: Entity**
+```css
+namespace Pam.Business.Core.Models
+{
+    //Classe mãe!
+    public abstract class Entity
+    {
+        // os membros protegidos só podem ser acessíveis de quem herdar   
+        protected Entity()
+        { 
+            //O Id será acessado pela numeração do NewGuid
+            Id = Guid.NewGuid();
+        }
+        
+        // Guid: gera numeração não sequencial como o "Int ID"
+        // Dá para definir o ID da entidade antes de salvar no BD
+        public Guid Id { get; set; }
+
+    }
+      
+}
+```
+
+**Classe - Fornecedor**
+```css
+namespace Pam.Business.Models.Fornecedores
+{
+    // Classe Fornecedor que vai herdar de Entity
+    internal class Fornecedor : Entity
+    {
+    }
+}
+```
+
+**Clase - Produto**
+```css
+namespace Pam.Business.Models.Produtos
+{
+    // Classe Fornecedor que vai herdar de Entity
+    internal class Produto : Entity
+    {
+    }
+}
+```
+
+**Classe - Endereco**
+```css
+namespace Pam.Business.Models.Fornecedores
+{
+    internal class Endereco : Entity
+    {
+    }
+}
+```
+
+_______________________________
+
+- Em `Business` / `Models` criar classe `TipoFornecedor`
 
 
 

@@ -1,0 +1,24 @@
+﻿@model Pam.AppMvc.Models.SendCodeViewModel
+@{
+    ViewBag.Title = "Enviar";
+}
+
+<h2>@ViewBag.Title.</h2>
+
+@using (Html.BeginForm("SendCode", "Account", new { ReturnUrl = Model.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" })) {
+    @Html.AntiForgeryToken()
+    @Html.Hidden("rememberMe", @Model.RememberMe)
+    <h4>Enviar código de verificação</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-8">
+            Selecione o provedor de autenticação de dois fatores:
+            @Html.DropDownListFor(model => model.SelectedProvider, Model.Providers)
+            <input type="submit" value="Enviar" class="btn btn-default" />
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

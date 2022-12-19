@@ -1,0 +1,134 @@
+﻿TERMOS DE LICENÇA PARA SOFTWARE MICROSOFT
+BIBLIOTECA MICROSOFT .NET
+Os presentes termos de licença constituem um acordo entre você e a Microsoft Corporation (ou, 
+dependendo do local no qual você esteja domiciliado, uma de suas afiliadas). Eles se aplicam ao software 
+indicado acima. Os termos também se aplicam a quaisquer serviços ou atualizações da Microsoft para o 
+software, exceto até a extensão de que eles tenham termos diferentes.
+SE VOCÊ CONCORDAR COM ESTES TERMOS DE LICENÇA, TERÁ OS DIREITOS INDICADOS 
+ABAIXO.
+1.	DIREITOS DE INSTALAÇÃO E USO. 
+Você pode instalar e usar qualquer número de cópias do software para desenvolver e testar seus 
+aplicativos.  
+2.	COMPONENTES DE TERCEIROS. O software pode incluir componentes de terceiros com notificações 
+legais separadas ou regidas por outros contratos, conforme descrito nos arquivos ThirdPartyNotices que 
+acompanham o software.
+3.	REQUISITOS DE LICENCIAMENTO E/OU DIREITOS DE USO ADICIONAIS.
+a.	CÓDIGO DISTRIBUÍVEL. O software é composto por Código Distribuível. “Código Distribuível” 
+é o código que você poderá distribuir nos aplicativos que desenvolver, caso cumpra os termos 
+abaixo.
+i.	Direito de Uso e Distribuição. 
+•	É permitido copiar e distribuir a forma do código objeto do software.
+•	Distribuição por Terceiros. Você poderá permitir que os distribuidores dos seus 
+aplicativos copiem e distribuam o Código Distribuível como parte desses aplicativos.
+ii.	Requisitos para Distribuição. Para qualquer Código Distribuível que você 
+distribuir, será preciso
+•	usar o Código Distribuível em seus aplicativos e não como distribuição autônoma;
+•	requerer que os distribuidores e usuários finais externos aceitem termos que protejam o 
+código, pelo menos tanto quanto este contrato; e
+•	indenizar, isentar de responsabilidades e defender a Microsoft de quaisquer 
+requerimentos judiciais ou extrajudiciais, incluindo honorários advocatícios, decorrentes 
+do uso ou da distribuição de seus aplicativos, exceto até a extensão de que algum 
+requerimento judicial ou extrajudicial se baseie exclusivamente no Código Distribuível 
+não modificado.
+iii.	Restrições à Distribuição. É vedado:
+•	usar marcas comerciais da Microsoft nos nomes dos seus aplicativos ou de forma a 
+indicar que seus aplicativos derivam da Microsoft ou são por ela avalizados ou
+•	modificar ou distribuir o código-fonte de qualquer Código Distribuível de modo que 
+qualquer parte do código fique sujeita a uma Licença Excluída. A “Licença Excluída” é 
+aquela que exige, como condição de uso, modificação ou distribuição do código, que (i) 
+ele seja divulgado ou distribuído na forma de código-fonte ou (ii) que outros tenham o 
+direito de modificá-lo.
+4.	DADOS.
+a.	Coleta de dados. O software pode coletar informações sobre você e o uso que você faz do 
+software e as envia para a Microsoft. A Microsoft pode usar essas informações para fornecer 
+serviços e aprimorar nossos produtos e serviços.  Você pode recusar muitos dos seus cenários, 
+mas não todos, conforme descrito na documentação do software.  Também há alguns recursos 
+no software que podem permitir que você e a Microsoft coletem dados dos usuários de seus 
+aplicativos. Se você usar esses recursos, deverá cumprir a lei aplicável, inclusive fornecendo 
+notificações apropriadas aos usuários de seus aplicativos juntamente com a política de 
+privacidade da Microsoft. Nossa política de privacidade está localizada em 
+https://go.microsoft.com/fwlink/?LinkID=824704. Você pode saber mais sobre a coleta de dados 
+e o respectivo uso consultando a documentação do software e a nossa política de privacidade. 
+Usar o software significa que você autoriza essas práticas.
+b.	Processamento de dados pessoais. Visto que a Microsoft é uma processadora ou 
+subprocessadora de dados pessoais relativos ao software, a Microsoft torna o compromisso 
+assumido no Regulamento Geral sobre a Proteção de Dados da União Europeia dos Termos de 
+Serviços Online vinculativo para todos os clientes a partir de 25 de maio de 2018, em 
+https://docs.microsoft.com/en-us/legal/gdpr.
+5.	ESCOPO DA LICENÇA. O software é licenciado, não vendido. Este contrato concede a você apenas 
+alguns direitos de uso do software. A Microsoft reserva para si todos os outros direitos. Salvo quando 
+a lei aplicável conferir outros direitos, não obstante a presente limitação, você poderá usar o software 
+apenas da maneira expressamente permitida neste contrato. Ao fazer isso, você deverá respeitar 
+todas as limitações técnicas do software que permitam seu uso apenas de determinadas formas. É 
+vedado:
+•	usar soluções alternativas para quaisquer limitações técnicas do software;
+•	fazer engenharia reversa, descompilar nem desmontar o software, nem tentar de outra forma 
+gerar o código-fonte do software, exceto e até a extensão exigida pelos termos de licenciamento 
+de terceiros que regem o uso de determinados componentes de software livre que podem ser 
+incluídos no software;
+•	remover, minimizar, bloquear ou modificar notificações da Microsoft ou de seus fornecedores no 
+software; 
+•	usar o software de qualquer maneira que seja ilegal ou
+•	compartilhar, publicar, alugar ou arrendar o software ou fornecê-lo como uma oferta 
+independente para outras pessoas usarem ou transferir o software ou este contrato a um 
+terceiro.
+6.	RESTRIÇÕES DE EXPORTAÇÃO. Você deverá cumprir com todas as leis e regulamentos nacionais 
+e internacionais de exportação aplicáveis ao software, que incluem restrições a destinos, usuários 
+finais e uso final. Para mais informações sobre restrições de exportação, acesse o site 
+www.microsoft.com/exporting.  
+7.	SERVIÇOS DE SUPORTE. Como o software é fornecido “no estado em que se encontra”, a 
+Microsoft poderá não prestar serviços de suporte para ele.
+8.	ACORDO INTEGRAL. Este contrato e os termos dos suplementos, das atualizações, dos serviços de 
+Internet e dos serviços de suporte por você usados constituem o acordo integral para o software e os 
+serviços de suporte.
+9.	LEI APLICÁVEL.  Se você tiver adquirido o software nos Estados Unidos, as leis de Washington se 
+aplicam à interpretação de e a quaisquer requerimentos judiciais ou extrajudiciais por violação deste 
+contrato, e as leis do estado no qual você reside se aplicam a todos os outros requerimentos judiciais 
+ou extrajudiciais. Se você tiver adquirido o software em qualquer outro país, serão aplicáveis as leis 
+desse país.
+10.	DIREITOS DO CONSUMIDOR; VARIAÇÕES REGIONAIS. O presente contrato descreve 
+determinados direitos legais. Você poderá ter outros direitos, incluindo os direitos do consumidor, de 
+acordo com as leis do seu estado ou país. Independentemente do seu relacionamento com a 
+Microsoft, você também poderá ter direitos com relação à parte de quem o software foi adquirido. O 
+presente contrato não altera esses outros direitos se as leis do seu estado ou país não permitirem 
+que você o faça. Por exemplo, se você adquiriu o software em uma das regiões a seguir ou se forem 
+aplicadas leis obrigatórias do país, as seguintes disposições aplicam-se a você:
+a)	Austrália. Você tem garantias estatutárias de acordo com a Lei do Consumidor Australiano, e 
+nada neste contrato visa afetar esses direitos.
+b)	Canadá. Se você adquiriu este software no Canadá, você pode parar de receber atualizações 
+desligando o recurso de atualização automática, desconectando o seu dispositivo da internet (no 
+entanto, se e quando você reconectar com a internet, o software irá continuar a verificação e 
+instalação de atualizações), ou desinstalando o software. A documentação do produto, se houver 
+alguma, também pode especificar como desligar as atualizações para o seu dispositivo específico 
+ou software.
+c)	Alemanha e Áustria.
+(i)	Garantia. O software será executado em plena conformidade com o que está descrito 
+em qualquer material da Microsoft fornecido com ele. No entanto, a Microsoft não fornece 
+nenhuma garantia contratual relativa ao software.
+(ii)	Limitação de responsabilidade. No caso de conduta intencional, negligência grave, 
+requerimentos judiciais ou extrajudiciais com base na Lei de Responsabilidade Civil sobre 
+Produtos (Product Liability Act), bem como em caso de morte ou danos físicos ou pessoais, a 
+Microsoft será responsável de acordo com a legislação.
+De acordo com a cláusula (ii) citada, a Microsoft só poderá ser responsável por negligência leve se a 
+mesma tiver violado essas obrigações contratuais substanciais, cuja observância facilitaria o devido 
+cumprimento deste contrato, cuja violação possa colocar em risco os objetivos deste contrato e a 
+conformidade com a qual uma parte poderia confiar constantemente (as chamadas “obrigações 
+primordiais”). Em outros casos de negligência leve, a Microsoft não será responsabilizada
+11.	AVISO DE ISENÇÃO DE GARANTIA. O SOFTWARE É LICENCIADO “NO ESTADO EM QUE SE 
+ENCONTRA”. VOCÊ ASSUME O RISCO DE USÁ-LO. A MICROSOFT NÃO OFERECE 
+CONDIÇÕES NEM GARANTIAS CONTRATUAIS EXPRESSAS. NA EXTENSÃO PERMITIDA 
+PELAS LEIS LOCAIS, A MICROSOFT EXCLUI A GARANTIA LEGAL DE ATENDIMENTO A 
+PADRÕES DE COMERCIALIZAÇÃO, ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA E NÃO 
+INFRAÇÃO.
+12.	LIMITAÇÃO E EXCLUSÃO DE RECURSOS E DANOS. VOCÊ PODE RECUPERAR DA 
+MICROSOFT E DE SEUS FORNECEDORES APENAS DANOS DIRETOS DE ATÉ US$ 5,00. NÃO 
+SERÁ POSSÍVEL OBTER OUTRAS INDENIZAÇÕES, INCLUSIVE POR DANOS 
+CONSEQUENCIAIS, ESPECIAIS, INDIRETOS, INCIDENTAIS OU LUCROS CESSANTES.
+Esta limitação se aplica a (a) qualquer questão relacionada ao software, aos serviços, ao conteúdo 
+(inclusive código) em sites ou aplicativos de terceiros e (b) requerimentos judiciais ou extrajudiciais 
+de violação de contrato, de garantia ou condição, de responsabilidade objetiva, de negligência ou de 
+outro ato ilícito extracontratual, até o limite permitido pela lei aplicável.
+A limitação também se aplicará mesmo que a Microsoft saiba ou tenha sido avisada da possibilidade 
+de danos. A limitação ou exclusão acima poderá não se aplicar a você se a legislação do seu estado 
+ou país proibir a exclusão ou limitação de danos incidentais, consequenciais ou outros.
+
