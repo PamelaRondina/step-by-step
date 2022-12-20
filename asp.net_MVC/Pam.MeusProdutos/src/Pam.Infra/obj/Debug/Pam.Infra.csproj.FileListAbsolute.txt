@@ -1,0 +1,14 @@
+C:\Users\pamela\Documents\cursos_tecnologia\step-by-step\step-by-step\asp.net_MVC\Pam.MeusProdutos\src\Pam.Infra\obj\Debug\Pam.Infra.csproj.AssemblyReference.cache
+C:\Users\pamela\Documents\cursos_tecnologia\step-by-step\step-by-step\asp.net_MVC\Pam.MeusProdutos\src\Pam.Infra\obj\Debug\Pam.Infra.csproj.CoreCompileInputs.cache
+C:\Users\pamela\Documents\cursos_tecnologia\step-by-step\step-by-step\asp.net_MVC\Pam.MeusProdutos\src\Pam.Infra\bin\Debug\Pam.Infra.dll.config
+C:\Users\pamela\Documents\cursos_tecnologia\step-by-step\step-by-step\asp.net_MVC\Pam.MeusProdutos\src\Pam.Infra\bin\Debug\Pam.Infra.dll
+C:\Users\pamela\Documents\cursos_tecnologia\step-by-step\step-by-step\asp.net_MVC\Pam.MeusProdutos\src\Pam.Infra\bin\Debug\Pam.Infra.pdb
+C:\Users\pamela\Documents\cursos_tecnologia\step-by-step\step-by-step\asp.net_MVC\Pam.MeusProdutos\src\Pam.Infra\bin\Debug\EntityFramework.dll
+C:\Users\pamela\Documents\cursos_tecnologia\step-by-step\step-by-step\asp.net_MVC\Pam.MeusProdutos\src\Pam.Infra\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\pamela\Documents\cursos_tecnologia\step-by-step\step-by-step\asp.net_MVC\Pam.MeusProdutos\src\Pam.Infra\bin\Debug\Pam.Business.dll
+C:\Users\pamela\Documents\cursos_tecnologia\step-by-step\step-by-step\asp.net_MVC\Pam.MeusProdutos\src\Pam.Infra\bin\Debug\Pam.Business.pdb
+C:\Users\pamela\Documents\cursos_tecnologia\step-by-step\step-by-step\asp.net_MVC\Pam.MeusProdutos\src\Pam.Infra\bin\Debug\EntityFramework.xml
+C:\Users\pamela\Documents\cursos_tecnologia\step-by-step\step-by-step\asp.net_MVC\Pam.MeusProdutos\src\Pam.Infra\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\pamela\Documents\cursos_tecnologia\step-by-step\step-by-step\asp.net_MVC\Pam.MeusProdutos\src\Pam.Infra\obj\Debug\Pam.Infra.csproj.CopyComplete
+C:\Users\pamela\Documents\cursos_tecnologia\step-by-step\step-by-step\asp.net_MVC\Pam.MeusProdutos\src\Pam.Infra\obj\Debug\Pam.Infra.dll
+C:\Users\pamela\Documents\cursos_tecnologia\step-by-step\step-by-step\asp.net_MVC\Pam.MeusProdutos\src\Pam.Infra\obj\Debug\Pam.Infra.pdb

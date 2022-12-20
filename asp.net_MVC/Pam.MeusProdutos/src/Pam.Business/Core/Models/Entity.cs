@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Pam.Business.Core.Models
 {
-    //Classe mãe!
+    //Classe mãe, classe BASE!
     public abstract class Entity
     {
         // os membros protegidos só podem ser acessíveis de quem herdar   

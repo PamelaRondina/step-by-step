@@ -1,8 +1,8 @@
 ﻿namespace Pam.Business.Models.Fornecedores
 {
-    public class TipoFornecedor
+    public enum TipoFornecedor
     {
-        PessoaFisica 1,
+        PessoaFisica = 1,
         PessoaJuridica
     }
 }

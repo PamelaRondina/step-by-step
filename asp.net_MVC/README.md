@@ -1797,10 +1797,18 @@ ______________________
 
 
 **Classe: Entity**
+
+> Guid: gera numeração não sequencial como o "Int ID"
+
+> Classe mãe! Classe BASE
+
 ```css
 namespace Pam.Business.Core.Models
+
+
+
 {
-    //Classe mãe!
+    
     public abstract class Entity
     {
         // os membros protegidos só podem ser acessíveis de quem herdar   
@@ -1824,7 +1832,7 @@ namespace Pam.Business.Core.Models
 namespace Pam.Business.Models.Fornecedores
 {
     // Classe Fornecedor que vai herdar de Entity
-    internal class Fornecedor : Entity
+    public class Fornecedor : Entity
     {
     }
 }
@@ -1835,7 +1843,7 @@ namespace Pam.Business.Models.Fornecedores
 namespace Pam.Business.Models.Produtos
 {
     // Classe Fornecedor que vai herdar de Entity
-    internal class Produto : Entity
+    public class Produto : Entity
     {
     }
 }
@@ -1845,7 +1853,7 @@ namespace Pam.Business.Models.Produtos
 ```css
 namespace Pam.Business.Models.Fornecedores
 {
-    internal class Endereco : Entity
+    public class Endereco : Entity
     {
     }
 }
@@ -1853,23 +1861,489 @@ namespace Pam.Business.Models.Fornecedores
 
 _______________________________
 
-- Em `Business` / `Models` criar classe `TipoFornecedor`
+### Incluindo Propriedades
+
+**Fornecedor**
+```css
+using Pam.Business.Core.Models;
+using Pam.Business.Models.Produtos;
+using System.Collections.Generic;
+
+namespace Pam.Business.Models.Fornecedores
+{
+    // Classe Fornecedor que vai herdar de Entity
+    public class Fornecedor : Entity
+    {
+        public string Nome { get; set; }
+        public string Documento { get; set; }
+        public TipoFornecedor TipoFornecedor { get; set; }
+        public Endereco Endereco { get; set; } 
+        public bool Ativo { get; set; }
+    
+        /*EF Relations*/
+        public ICollection<Produto> Produtos { get; set; }
+    }
+}
+```
+
+**Classe - Tipo Fornecedor**
+
+```css
+namespace Pam.Business.Models.Fornecedores
+{
+    public enum TipoFornecedor
+    {
+        PessoaFisica = 1,
+        PessoaJuridica
+    }
+}
+```
+
+**Classe - Endereço**
+
+> incluir as propriedades! 
+
+> Todas com `string` pois o próprio usuário que vai informar os dados
+
+```css
+using Pam.Business.Core.Models;
+
+namespace Pam.Business.Models.Fornecedores
+{
+    public class Endereco : Entity
+    {
+        public string Logradouro { get; set; }
+        public string Numero { get; set; }
+        public string Complemento { get; set; }
+        public string Cep { get; set; }
+        public string Bairro { get; set; }
+        public string Cidade { get; set; }
+        public string Estado { get; set; }
+
+        public Fornecedor Fornecedor { get; set; }
+    }
+}
+```
+
+**Classe - Produto**
+
+```css
+using Pam.Business.Core.Models;
+using Pam.Business.Models.Fornecedores;
+
+namespace Pam.Business.Models.Produtos
+{
+    // Classe Fornecedor que vai herdar de Entity
+    internal class Produto : Entity
+    {
+        public Guid FornecedorId { get; set; }
+        public string Nome { get; set; }
+        public string Descricao { get; set; }
+        public string Imagem { get; set; }
+        public decimal Valor { get; set; }
+        public DateTime DataCadastro { get; set; }
+        public bool Ativo { get; set; }
+       
+        public Fornecedor Fornecedor { get; set; }
+    }
+}
+```
+______________________
+
+### Mapeando as Interfaces 
+
+- [x] Em Core, criar pasta `Data`
+- [x] Em Data, criar interface `IRepository`
+
+> Fará as regras de CRUD
+
+```css
+using Pam.Business.Core.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Threading.Tasks;
+
+namespace Pam.Business.Core.Data
+{
+    //Entity representa a Entidade
+    // 
+    public interface IRepository<TEntity> : IDisposable where TEntity : Entity
+    {
+        //métodos
+        Task Adicionar(TEntity entity);
+        Task<TEntity> ObterPorId(Guid id);
+        Task<List<TEntity>> ObterTodos();
+        Task Atualizar(TEntity entity);
+        Task Remover(Guid id);
+
+        //retornar uma coleção de entidade com o método Buscar, que recebe uma expressão lambida em cima da entidade que estou trabalhando, que busca no banco o formato que quisermos
+        Task<IEnumerable<TEntity>> Buscar(Expression<Func<TEntity, bool>> predicate);
+
+        //método para salvar no banco
+        //retorna um inteiro (número de linhas afetadas após persistir no BD)
+        Task<int> SaveChanges();
+    }
+}
+```
+
+**Implementar o acesso as entidades, atavés das interfaces especializadas.**
+
+- [x] Em Fornecedores, criar interface `IFornecedorRepository`
+
+> Para não repetirmos informações [ : IRepository<Fornecedor> ], tudo o que o Irepository implementa + os métodos (TASK) do atual
+
+```css
+using Pam.Business.Core.Data;
+using System;
+using System.Threading.Tasks;
+
+namespace Pam.Business.Models.Fornecedores
+{
+    
+    public interface IFornecedorRepository : IRepository<Fornecedor>
+    {
+        Task<Fornecedor> ObterFornecedorEndereco(Guid id);
+        Task<Fornecedor> ObterFornecedorProdutosEndereco(Guid id);
+
+    }
+}
+```
+
+- [x] Em Fornecedores, criar interface `IEnderecoRepository`
+
+> Para não repetirmos informações [ : IRepository<Endereco> ], tudo o que o Irepository implementa + os métodos (TASK) do atual
+
+```css
+using Pam.Business.Core.Data;
+using System;
+using System.Threading.Tasks;
+
+namespace Pam.Business.Models.Fornecedores
+{
+    public interface IEnderecoRepository : IRepository<Endereco>
+    {
+        Task<Endereco> ObterEnderecoPorFornecedor(Guid fornecedorId);
+    }
+}
+```
+
+- [x] Em Produtos, criar interface `IProdutoRepository`
+
+> Para não repetirmos informações [ : IRepository<Produto> ], tudo o que o Irepository implementa + os métodos (TASK) do atual
+
+```css
+using Pam.Business.Core.Data;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+
+namespace Pam.Business.Models.Produtos
+{
+    public interface IProdutoRepository : IRepository<Produto>
+    {
+        Task<IEnumerable<Produto>> ObterProdutosPorFornecedor(Guid fornecedorId);
+        //lista de produtos e seus fornecedores
+        Task<IEnumerable<Produto>> ObterProdutosFornecedores();
+        Task<Produto> ObterProdutosFornecedor(Guid id);
+    }
+}
+```
+______________________
+
+### Mapeando o BD
+
+**Adicionar Pacote**
+- [x] Em Console do Gerenciados de Pacotes:
+    - Projeto padrão = Pam.infra
+    - `PM> install-package EntityFramework `
+
+**Alterar Nome do BD**
+- [x] Em Pam.AppMvc, Web.Config, em ` <add name="DefaultConnection"` alterar o nome para o da aplicação:
+
+Antes: `|DataDirectory|\aspnet-Pam.AppMvc-20221212032038.mdf;Initial Catalog=aspnet-Pam.AppMvc-20221212032038;`
+
+Depois: `|DataDirectory|\Pam.MeusProdutos.mdf;Initial Catalog=Pam.MeusProdutos;`
+
+**Classe - MeuDbContext**
+
+- [x] Na camada de Infra, criar diretório `Data`
+- [x] Em Data, criar `Context`
+- [x] Em Context, criar classe `MeuDbContext`
+
+```css
+using Pam.Business.Models.Fornecedores;
+using Pam.Business.Models.Produtos;
+using System.Data.Entity;
 
 
+namespace Pam.Infra.Data.Context
+{
+    //Adicionar herança
+    public class MeuDbContext : DbContext
+    {
+        //constructor vai passar para a classe base com o nome abaixo
+        public MeuDbContext() : base(nameOrConnectionString: "DefaultConnection")
+        { }
+
+        //Mapeamento (nomes sempre no PLURAL)
+        public DbSet<Produto> Produtos { get; set; }
+        public DbSet<Endereco> Enderecos { get; set; }
+        public DbSet<Fornecedor> Fornecedores { get; set; }
+    }
+}
+```
+
+**Adicionar Pacote**
+
+Em `Console de Gerenciador de Pacotes` para criar o BD e as tabelas:
+- [x] Pam.Infra
+- [x] PM> enable-migrations
+
+Será gerado um erro:
+
+`Unable to determine the principal end of an association between the types 'Pam.Business.Models.Fornecedores.Fornecedor' and 'Pam.Business.Models.Fornecedores.Endereco'. The principal end of this association must be explicitly configured using either the relationship fluent API or data annotations.`
+
+Para resolvê-lo, **trabalharemos com o FluentAPI**
+
+- [x] Em Pam.Infra, Data, criar pasta `Mappings`
+- [x] Em Mapping, criar classe `FornecedorConfig`
+
+```css
+using Pam.Business.Models.Fornecedores;
+using System.Data.Entity.ModelConfiguration;
+using System.Data.Entity.Infrastructure.Annotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 
+namespace Pam.Infra.Data.Mappings
+{
+    /*Aqui temos um mapeamento realizado através do EntityTypeConfiguration de Fornecedor*/
+    public class FornecedorConfig : EntityTypeConfiguration<Fornecedor>
+    {
+        public FornecedorConfig()
+        {
+            /*A chave primária da minha tabela é o ID*/
+            HasKey(f => f.Id);
+
+            /*mapear Propriedade = Nome não pode ser nulo | VARCHAR(200)*/
+            Property(f => f.Nome)
+                .IsRequired()
+                .HasMaxLength(200);
+
+            /*mapear Documento = Documento não pode ser nulo | VARCHAR(14) para CPF ou CNPJ | Possui um Índice (para mapeamento mais rápido)*/
+            Property(f => f.Documento)
+                .IsRequired()
+                .HasMaxLength(14)
+                .HasColumnAnnotation("IX_Documento", 
+                /*Index ser único não é possível cadastrar dois ou mais iguais*/
+                value: new IndexAnnotation(new IndexAttribute {IsUnique = true }));
+
+            /*É Obrigatório o Endereço
+            Se não fosse obrigatório seria incluso:  HasOptional*/
+            HasRequired(f => f.Endereco)
+                //O principal é o Fornecedor nesta relação
+                .WithRequiredPrincipal(e => e.Fornecedor);
+
+            /*Nome da Tabela*/
+            ToTable("Fornecedores");
+        }
+    }
+}
+```
+
+- [x] Em Mapping, criar class `EnderecoConfig`
+
+```css
+using Pam.Business.Models.Fornecedores;
+using System.Data.Entity.ModelConfiguration;
 
 
+namespace Pam.Infra.Data.Mappings
+{
+    public class EnderecoConfig : EntityTypeConfiguration<Endereco>
+    {
+
+        public EnderecoConfig()
+        {
+            /*A chave primária da minha tabela é o ID*/
+            HasKey(p => p.Id);
+
+            Property(c => c.Logradouro)
+                .IsRequired()
+                .HasMaxLength(200);
+
+            Property(c => c.Numero)
+                .IsRequired()
+                .HasMaxLength(50);
+
+            /*Possui tamanho fixo*/
+            Property(c => c.Cep)
+                .IsRequired()
+                .HasMaxLength(8)
+                .IsFixedLength();
+
+            Property(c => c.Complemento)
+                .HasMaxLength(250);
+
+            Property(c => c.Bairro)
+               .IsRequired()
+               .HasMaxLength(100);
+
+            Property(c => c.Cidade)
+               .IsRequired()
+               .HasMaxLength(100);
+
+            Property(c => c.Estado)
+               .IsRequired()
+               .HasMaxLength(100);
 
 
+            /*Nome da Tabela*/
+            ToTable("Enderecos");
+        }
+    }
+}
+```
+
+- [x] Em Mapping, criar class `ProdutoConfig`
+
+```css
+using Pam.Business.Models.Produtos;
+using System.Data.Entity.ModelConfiguration;
+
+namespace Pam.Infra.Data.Mappings
+{
+    public class ProdutoConfig : EntityTypeConfiguration<Produto>   
+    {
+        public ProdutoConfig()
+        {
+            HasKey(p => p.Id);
+
+            Property(p => p.Nome)
+                .IsRequired()
+                .HasMaxLength(200);
+
+            Property(p => p.Descricao)
+               .IsRequired()
+               .HasMaxLength(1000);
+
+            Property(p => p.Imagem)
+               .IsRequired()
+               .HasMaxLength(100);
+
+            /*Produto tem um relacionamento com o Fornecedor*/
+            HasRequired(p => p.Fornecedor)
+                .WithMany(f => f.Produtos)
+                .HasForeignKey(p => p.FornecedorId);
+
+            /*Nome da Tabela*/
+            ToTable("Produtos");
+        }
+    }
+}
+```
+
+- [x] Em MeuDbContext configurar mapeamentos
+
+```css
+using Pam.Infra.Data.Mappings;
+using System.Data.Entity;
+
+...  
+public DbSet<Fornecedor> Fornecedores { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Configurations.Add(new FornecedorConfig());
+            modelBuilder.Configurations.Add(new EnderecoConfig());
+            modelBuilder.Configurations.Add(new ProdutoConfig());
+        }
+```
+
+> BD que já possua uma tabela .HasColumnNamw("Rua)
+
+Novamente, Em `Console de Gerenciador de Pacotes` para criar o BD e as tabelas:
+- [x] Pam.Infra
+- [x] PM> enable-migrations
+
+- Em Pam.Infra, Migrations, `Configuration.cs`
+    - Alterar `AutomaticMigrationsEnabled = true;` para utilizar as migrations automáticas
+    - Deletar: `protected override void` 
+    - Seguir modelo abaixo
+
+```css
+using Pam.Infra.Data.Context;
+using System.Data.Entity.Migrations;
+
+namespace Pam.Infra.Migrations
+{
+    internal sealed class Configuration : DbMigrationsConfiguration<MeuDbContext>
+    {
+        public Configuration()
+        {
+            AutomaticMigrationsEnabled = true;
+        }
+                
+    }
+}
+```
+
+**Ajustar scripts das tabelas**
+
+- [x] Em MeuDbContext, adicionar:
+
+```css
+using System.Data.Entity.ModelConfiguration.Conventions;
+
+..."DefaultConnection")
+        { 
+            Configuration.ProxyCreationEnabled = false;
+            Configuration.LazyLoadingEnabled = false;
+        }
 
 
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            /*Deabilitar: Nome das tabelas no plural*/
+            modelBuilder.Conventions.Remove<PluralizingEntitySetNameConvention>();
+            /*Desabilitar: a exclusão em cascata*/
+            modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
+            modelBuilder.Conventions.Remove<ManyToManyCascadeDeleteConvention>();
+
+            /*Se for do tipo string = será VARCHAR(100)*/
+            modelBuilder.Properties<string>().Configure(p => p
+                .HasColumnType("varchar")
+                .HasMaxLength(100));
+
+            modelBuilder.Configurations.Add(new FornecedorConfig());
+            modelBuilder.Configurations.Add(new EnderecoConfig());
+            modelBuilder.Configurations.Add(new ProdutoConfig());
+
+            base.OnModelCreating(modelBuilder);
+        }
+    }
+}
+```
+
+> Podendo ser deletado `.HasMaxLength(100));` dos outros arquivos
+
+- [x] Fazer update do BD `update-database -Verbose`
+
+> As tabelas serão criadas. Visualizar em `SQL Server Object Explorer`
+
+______________
+
+### Padrão Repository
+
+- [x] Em Pam.Infra, Data, criar pasta `Repository`
+- [x] Em Repository, criar classe `Repository`
+- [x] **IRepository<TEntity>** Implementar interface
 
 
+____________________
 
-
-
-
+PM> update-database -Script`: vai mostrar o Script das criações das tabelas
 
 
 

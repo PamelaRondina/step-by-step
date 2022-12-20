@@ -34,10 +34,14 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\Data\IRepository.cs" />
     <Compile Include="Core\Models\Entity.cs" />
     <Compile Include="Models\Fornecedores\Endereco.cs" />
     <Compile Include="Models\Fornecedores\Fornecedor.cs" />
+    <Compile Include="Models\Fornecedores\IEnderecoRepository.cs" />
+    <Compile Include="Models\Fornecedores\IFornecedorRepository.cs" />
     <Compile Include="Models\Fornecedores\TipoFornecedor.cs" />
+    <Compile Include="Models\Produtos\IProdutoRepository.cs" />
     <Compile Include="Models\Produtos\Produto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

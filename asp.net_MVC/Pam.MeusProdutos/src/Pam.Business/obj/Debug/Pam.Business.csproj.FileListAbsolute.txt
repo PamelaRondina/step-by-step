@@ -1,0 +1,6 @@
+C:\Users\pamela\Documents\cursos_tecnologia\step-by-step\step-by-step\asp.net_MVC\Pam.MeusProdutos\src\Pam.Business\obj\Debug\Pam.Business.csproj.AssemblyReference.cache
+C:\Users\pamela\Documents\cursos_tecnologia\step-by-step\step-by-step\asp.net_MVC\Pam.MeusProdutos\src\Pam.Business\obj\Debug\Pam.Business.csproj.CoreCompileInputs.cache
+C:\Users\pamela\Documents\cursos_tecnologia\step-by-step\step-by-step\asp.net_MVC\Pam.MeusProdutos\src\Pam.Business\bin\Debug\Pam.Business.dll
+C:\Users\pamela\Documents\cursos_tecnologia\step-by-step\step-by-step\asp.net_MVC\Pam.MeusProdutos\src\Pam.Business\bin\Debug\Pam.Business.pdb
+C:\Users\pamela\Documents\cursos_tecnologia\step-by-step\step-by-step\asp.net_MVC\Pam.MeusProdutos\src\Pam.Business\obj\Debug\Pam.Business.dll
+C:\Users\pamela\Documents\cursos_tecnologia\step-by-step\step-by-step\asp.net_MVC\Pam.MeusProdutos\src\Pam.Business\obj\Debug\Pam.Business.pdb
