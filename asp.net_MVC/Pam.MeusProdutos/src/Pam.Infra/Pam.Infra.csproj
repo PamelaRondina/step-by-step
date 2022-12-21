@@ -55,8 +55,12 @@
     <Compile Include="Data\Mappings\ProdutoConfig.cs" />
     <Compile Include="Data\Mappings\EnderecoConfig.cs" />
     <Compile Include="Data\Mappings\FornecedorConfig.cs" />
+    <Compile Include="Data\Repository\EnderecoRepository.cs" />
+    <Compile Include="Data\Repository\FornecedorRepository.cs" />
+    <Compile Include="Data\Repository\IProdutoRepository.cs" />
+    <Compile Include="Data\Repository\IProdutosRepository.cs" />
     <Compile Include="Data\Repository\Repository.cs" />
-    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Data\Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -12,3 +12,10 @@ C:\Users\pamela\Documents\cursos_tecnologia\step-by-step\step-by-step\asp.net_MV
 C:\Users\pamela\Documents\cursos_tecnologia\step-by-step\step-by-step\asp.net_MVC\Pam.MeusProdutos\src\Pam.Infra\obj\Debug\Pam.Infra.csproj.CopyComplete
 C:\Users\pamela\Documents\cursos_tecnologia\step-by-step\step-by-step\asp.net_MVC\Pam.MeusProdutos\src\Pam.Infra\obj\Debug\Pam.Infra.dll
 C:\Users\pamela\Documents\cursos_tecnologia\step-by-step\step-by-step\asp.net_MVC\Pam.MeusProdutos\src\Pam.Infra\obj\Debug\Pam.Infra.pdb
+C:\Users\pamela\Documents\cursos_tecnologia\step-by-step\step-by-step\asp.net_MVC\Pam.MeusProdutos\src\Pam.Infra\bin\Debug\FluentValidation.dll
+C:\Users\pamela\Documents\cursos_tecnologia\step-by-step\step-by-step\asp.net_MVC\Pam.MeusProdutos\src\Pam.Infra\bin\Debug\netstandard.dll
+C:\Users\pamela\Documents\cursos_tecnologia\step-by-step\step-by-step\asp.net_MVC\Pam.MeusProdutos\src\Pam.Infra\bin\Debug\System.Threading.Tasks.Extensions.dll
+C:\Users\pamela\Documents\cursos_tecnologia\step-by-step\step-by-step\asp.net_MVC\Pam.MeusProdutos\src\Pam.Infra\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\pamela\Documents\cursos_tecnologia\step-by-step\step-by-step\asp.net_MVC\Pam.MeusProdutos\src\Pam.Infra\bin\Debug\FluentValidation.xml
+C:\Users\pamela\Documents\cursos_tecnologia\step-by-step\step-by-step\asp.net_MVC\Pam.MeusProdutos\src\Pam.Infra\bin\Debug\System.Threading.Tasks.Extensions.xml
+C:\Users\pamela\Documents\cursos_tecnologia\step-by-step\step-by-step\asp.net_MVC\Pam.MeusProdutos\src\Pam.Infra\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml

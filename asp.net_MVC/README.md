@@ -2340,10 +2340,989 @@ ______________
 - [x] Em Repository, criar classe `Repository`
 - [x] **IRepository<TEntity>** Implementar interface
 
+```css
+using Pam.Business.Core.Data;
+using Pam.Business.Core.Models;
+using Pam.Infra.Data.Context;
+using System;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Threading.Tasks;
+
+namespace Pam.Infra.Data.Repository
+{
+    /*Abstract Class = não se pode instanciar sozinha, deve ser herdar*/
+    public abstract class Repository<TEntity> : IRepository<TEntity> where TEntity : Entity, new()
+    {
+        /*criar acesso ao contexto*/
+        protected readonly MeuDbContext Db;
+        protected readonly DbSet<TEntity> DbSet;
+
+        protected Repository()
+        {
+            /*Contexto em geral*/
+            Db = new MeuDbContext();
+            /*Acesso rápido a minha Entidade*/
+            DbSet = Db.Set<TEntity>();
+        }       
+
+        /*método de leitura*/
+        public virtual async Task<TEntity> ObterPorId(Guid id)
+        {
+            /*método "FindAsync" serve para encontrar a entidade através da PK*/
+            return await DbSet.FindAsync(id);
+        }
+
+        /*método de leitura que trará uma lista*/
+        public virtual async Task<List<TEntity>> ObterTodos()
+        {
+            /*Retorna uma lista de forma assíncrona*/
+            return await DbSet.ToListAsync(); 
+        }
+        /*Método que implementa uma expressão*/
+        public async Task<IEnumerable<TEntity>> Buscar(Expression<Func<TEntity, bool>> predicate)
+        {
+            /*Desabilita o Track*/
+            return await DbSet.AsNoTracking().Where(predicate).ToListAsync(); 
+        }
+
+        /*Inicia a transformação de dados*/
+        public virtual async Task Adicionar(TEntity entity)
+        {
+            DbSet.Add(entity);
+            await SaveChanges();
+        }
+
+        public virtual async Task Atualizar(TEntity entity)
+        {
+            Db.Entry(entity).State = EntityState.Modified;
+            await SaveChanges();
+        }
+                       
+
+        public virtual async Task Remover(Guid id)
+        {
+            Db.Entry(new TEntity { Id = id }).State = EntityState.Deleted;
+            await SaveChanges();
+        }
+
+        public async Task<int> SaveChanges()
+        {
+            return await Db.SaveChangesAsync();
+        }
+
+        public void Dispose()
+        {/*? = Só chama o método se tiver ums instância definida*/
+            Db?.Dispose();
+        }
+    }
+}
+```
+
+___________________
+
+### Criar Repository: Fornecedor, Endereco e Produto
+
+- [x] Em Pam.Infra, Data, criar pasta `Repository`
+- [x] Em Repository, criar classe `FornecedorRepository` 
+- [x] Implementar a Interface de `IFornecedorRepository`
+- [x] Incluir referência `using System.Data.Entity;`
+
+```css
+using Pam.Business.Models.Fornecedores;
+using System;
+using System.Data.Entity;
+using System.Threading.Tasks;
+
+namespace Pam.Infra.Data.Repository
+{
+    public class FornecedorRepository : Repository<Fornecedor>, IFornecedorRepository
+    {
+        public async Task<Fornecedor> ObterFornecedorEndereco(Guid id)
+        {
+            /*retornar o Fornecedor + Endereço populado*/
+            return await Db.Fornecedores.AsNoTracking()
+                .Include(f => f.Endereco)
+                .FirstOrDefaultAsync(f => f.Id == id);
+        }
+
+        public async Task<Fornecedor> ObterFornecedorProdutosEndereco(Guid id)
+        {
+            return await Db.Fornecedores.AsNoTracking()
+             .Include(f => f.Endereco)
+             .Include(f => f.Produtos)
+             .FirstOrDefaultAsync(f => f.Id == id);
+        }
+
+        /*Método para não remover um Fornecedor e sim deixá-lo Intaivo
+        public override async Task Remover(Guid id)
+        {
+            var fornecedor = await ObterPorId(id);
+            fornecedor.Ativo = false;
+
+            await Atualizar(fornecedor);*/
+    }
+}
+```
+
+- [x] Em Pam.Infra, Data, criar pasta `Repository`
+- [x] Em Repository, criar classe `EnderecoRepository` 
+- [x] Implementar a Interface de `IEnderecoRepository`
+
+```css
+using Pam.Business.Models.Fornecedores;
+using System;
+using System.Threading.Tasks;
+
+namespace Pam.Infra.Data.Repository
+{
+    public class EnderecoRepository : Repository<Endereco>, IEnderecoRepository
+    {
+        public async Task<Endereco> ObterEnderecoPorFornecedor(Guid fornecedorId)
+        {
+            return await ObterPorId(fornecedorId);
+        }
+    }
+}
+```
+
+- [x] Em Pam.Infra, Data, criar pasta `Repository`
+- [x] Em Repository, criar classe `ProdutoRepository` 
+- [x] Implementar a Interface de `IProdutoRepository`
+- [x] Incluir referência `using System.Data.Entity;`
+
+```css
+using Pam.Business.Models.Produtos;
+using System;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace Pam.Infra.Data.Repository
+{
+    public class ProdutosRepository : Repository<Produto>, IProdutoRepository
+
+    {
+        public async Task<Produto> ObterProdutosFornecedor(Guid id)
+        {
+            return await Db.Produtos.AsNoTracking()
+                .Include(f => f.Fornecedor)
+                .FirstOrDefaultAsync(p => p.Id == id);
+        }
+
+        public async Task<IEnumerable<Produto>> ObterProdutosFornecedores()
+        {
+            return await Db.Produtos.AsNoTracking()
+                .Include(f => f.Fornecedor)
+                .OrderBy(p => p.Nome).ToListAsync();
+        }
+
+        public async Task<IEnumerable<Produto>> ObterProdutosPorFornecedor(Guid fornecedorId)
+        {
+            return await Buscar(p => p.FornecedorId == fornecedorId);
+        }
+    }
+}
+```
+
+________________________
+
+### Trabalhando com Fluent Validation
+
+- [x] Em Pam.Business, Fornecedores, criar pasta `Validations`
+- [x] Em Validations criar classe `FornecedorValidation` 
+<br><br>
+
+Em `Console de Gerenciador de Pacotes` **Instalar o [Fluent Validation](https://github.com/FluentValidation/FluentValidation)**
+- [x] Pam.Business
+- [x] PM> Install-Package FluentValidation
+
+- [x] Em Pam.Business, Core, criar pasta `Validations` e subpasta `Documentos`
+- [x] Em Documentos criar classe `validacaoDocs` 
+
+```css
+using System.Collections.Generic;
+using System.Linq;
+
+
+namespace Pam.Business.Core.Validations.Documentos
+{
+            public class CpfValidacao
+        {
+            public const int TamanhoCpf = 11;
+
+            public static bool Validar(string cpf)
+            {
+                var cpfNumeros = Utils.ApenasNumeros(cpf);
+
+                if (!TamanhoValido(cpfNumeros)) return false;
+                return !TemDigitosRepetidos(cpfNumeros) && TemDigitosValidos(cpfNumeros);
+            }
+
+            private static bool TamanhoValido(string valor)
+            {
+                return valor.Length == TamanhoCpf;
+            }
+
+            private static bool TemDigitosRepetidos(string valor)
+            {
+                string[] invalidNumbers =
+                {
+                "00000000000",
+                "11111111111",
+                "22222222222",
+                "33333333333",
+                "44444444444",
+                "55555555555",
+                "66666666666",
+                "77777777777",
+                "88888888888",
+                "99999999999"
+            };
+                return invalidNumbers.Contains(valor);
+            }
+
+            private static bool TemDigitosValidos(string valor)
+            {
+                var number = valor.Substring(0, TamanhoCpf - 2);
+                var digitoVerificador = new DigitoVerificador(number)
+                    .ComMultiplicadoresDeAte(2, 11)
+                    .Substituindo("0", 10, 11);
+                var firstDigit = digitoVerificador.CalculaDigito();
+                digitoVerificador.AddDigito(firstDigit);
+                var secondDigit = digitoVerificador.CalculaDigito();
+
+                return string.Concat(firstDigit, secondDigit) == valor.Substring(TamanhoCpf - 2, 2);
+            }
+        }
+
+        public class CnpjValidacao
+        {
+            public const int TamanhoCnpj = 14;
+
+            public static bool Validar(string cpnj)
+            {
+                var cnpjNumeros = Utils.ApenasNumeros(cpnj);
+
+                if (!TemTamanhoValido(cnpjNumeros)) return false;
+                return !TemDigitosRepetidos(cnpjNumeros) && TemDigitosValidos(cnpjNumeros);
+            }
+
+            private static bool TemTamanhoValido(string valor)
+            {
+                return valor.Length == TamanhoCnpj;
+            }
+
+            private static bool TemDigitosRepetidos(string valor)
+            {
+                string[] invalidNumbers =
+                {
+                "00000000000000",
+                "11111111111111",
+                "22222222222222",
+                "33333333333333",
+                "44444444444444",
+                "55555555555555",
+                "66666666666666",
+                "77777777777777",
+                "88888888888888",
+                "99999999999999"
+            };
+                return invalidNumbers.Contains(valor);
+            }
+
+            private static bool TemDigitosValidos(string valor)
+            {
+                var number = valor.Substring(0, TamanhoCnpj - 2);
+
+                var digitoVerificador = new DigitoVerificador(number)
+                    .ComMultiplicadoresDeAte(2, 9)
+                    .Substituindo("0", 10, 11);
+                var firstDigit = digitoVerificador.CalculaDigito();
+                digitoVerificador.AddDigito(firstDigit);
+                var secondDigit = digitoVerificador.CalculaDigito();
+
+                return string.Concat(firstDigit, secondDigit) == valor.Substring(TamanhoCnpj - 2, 2);
+            }
+        }
+
+        public class DigitoVerificador
+        {
+            private string _numero;
+            private const int Modulo = 11;
+            private readonly List<int> _multiplicadores = new List<int> { 2, 3, 4, 5, 6, 7, 8, 9 };
+            private readonly IDictionary<int, string> _substituicoes = new Dictionary<int, string>();
+            private bool _complementarDoModulo = true;
+
+            public DigitoVerificador(string numero)
+            {
+                _numero = numero;
+            }
+
+            public DigitoVerificador ComMultiplicadoresDeAte(int primeiroMultiplicador, int ultimoMultiplicador)
+            {
+                _multiplicadores.Clear();
+                for (var i = primeiroMultiplicador; i <= ultimoMultiplicador; i++)
+                    _multiplicadores.Add(i);
+
+                return this;
+            }
+
+            public DigitoVerificador Substituindo(string substituto, params int[] digitos)
+            {
+                foreach (var i in digitos)
+                {
+                    _substituicoes[i] = substituto;
+                }
+                return this;
+            }
+
+            public void AddDigito(string digito)
+            {
+                _numero = string.Concat(_numero, digito);
+            }
+
+            public string CalculaDigito()
+            {
+                return !(_numero.Length > 0) ? "" : GetDigitSum();
+            }
+
+            private string GetDigitSum()
+            {
+                var soma = 0;
+                for (int i = _numero.Length - 1, m = 0; i >= 0; i--)
+                {
+                    var produto = (int)char.GetNumericValue(_numero[i]) * _multiplicadores[m];
+                    soma += produto;
+
+                    if (++m >= _multiplicadores.Count) m = 0;
+                }
+
+                var mod = (soma % Modulo);
+                var resultado = _complementarDoModulo ? Modulo - mod : mod;
+
+                return _substituicoes.ContainsKey(resultado) ? _substituicoes[resultado] : resultado.ToString();
+            }
+        }
+
+        public class Utils
+        {
+            public static string ApenasNumeros(string valor)
+            {
+                var onlyNumber = "";
+                foreach (var s in valor)
+                {
+                    if (char.IsDigit(s))
+                    {
+                        onlyNumber += s;
+                    }
+                }
+                return onlyNumber.Trim();
+            }
+        }
+    }
+```
+
+- [x] Retornar em `FornecedorValidation` para incluir as regras:
+
+```css
+using FluentValidation;
+using Pam.Business.Core.Validations.Documentos;
+
+namespace Pam.Business.Models.Fornecedores.Validations
+{
+    public class FornecedorValidation : AbstractValidator<Fornecedor>
+    {
+        public FornecedorValidation() 
+        {
+            RuleFor(f => f.Nome)
+                /*Não pode ser vazio | Com mensagem*/
+                .NotEmpty().WithMessage("O campo {PropertyName} precisa ser fornecido.")
+                /*Tamanho do Nome 2 = mínimo e 100 = máximo*/
+                .Length(2,200).WithMessage("O campo {propertyName} precisa ter entre {MinLength} e {MaxLength} caracteres.");
+
+            /*Validar CPF ou CNPJ*/
+            When(f => f.TipoFornecedor == TipoFornecedor.PessoaFisica, () =>
+            {
+                RuleFor(f => f.Documento.Length).Equal(CpfValidacao.TamanhoCpf)
+                .WithMessage("O campo Documento precisa ter {ComparisonValue} caracteres e foi fornecido {PropertyValue}.");
+                RuleFor(f => CpfValidacao.Validar(f.Documento)).Equal(true)
+                .WithMessage("O documento forneceido é inválido.");
+            });
+
+            When(f => f.TipoFornecedor == TipoFornecedor.PessoaJuridica, () =>
+            {
+                RuleFor(f => f.Documento.Length).Equal(CnpjValidacao.TamanhoCnpj)
+                .WithMessage("O campo Documento precisa ter {ComparisonValue} caracteres e foi fornecido {PropertyValue}.");
+                RuleFor(f => CnpjValidacao.Validar(f.Documento)).Equal(true)
+                .WithMessage("O documento forneceido é inválido.");
+
+            });
+        }
+    }
+}
+```
+
+- [x] Em Pam.Business, Models, Fornecedores, Validations criar classe `EnderecoValidation` 
+
+```css
+using FluentValidation;
+
+namespace Pam.Business.Models.Fornecedores.Validations
+{
+    public class EnderecoValidation : AbstractValidator<Endereco>
+    {
+        public EnderecoValidation() 
+        {
+            /*As regras não podem ser vazias e possuem um tamanho específico*/
+            RuleFor(c => c.Logradouro)
+                    .NotEmpty().WithMessage("O campo {PropertyName} precisa ser fornecido")
+                    .Length(2, 200).WithMessage("O campo {PropertyName} precisa ter entre {MinLength} e {MaxLength} caracteres");
+
+            RuleFor(c => c.Bairro)
+                    .NotEmpty().WithMessage("O campo {PropertyName} precisa ser fornecido")
+                    .Length(2, 100).WithMessage("O campo {PropertyName} precisa ter entre {MinLength} e {MaxLength} caracteres");
+
+            RuleFor(c => c.Cep)
+                    .NotEmpty().WithMessage("O campo {PropertyName} precisa ser fornecido")
+                    .Length(8).WithMessage("O campo {PropertyName} precisa ter {MaxLength} caracteres");
+
+            RuleFor(c => c.Cidade)
+                    .NotEmpty().WithMessage("A campo {PropertyName} precisa ser fornecida")
+                    .Length(2, 100).WithMessage("O campo {PropertyName} precisa ter entre {MinLength} e {MaxLength} caracteres");
+
+            RuleFor(c => c.Estado)
+                    .NotEmpty().WithMessage("O campo {PropertyName} precisa ser fornecido")
+                    .Length(2, 50).WithMessage("O campo {PropertyName} precisa ter entre {MinLength} e {MaxLength} caracteres");
+
+            RuleFor(c => c.Numero)
+                    .NotEmpty().WithMessage("O campo {PropertyName} precisa ser fornecido")
+                    .Length(1, 50).WithMessage("O campo {PropertyName} precisa ter entre {MinLength} e {MaxLength} caracteres");
+
+        }
+        
+    }
+}
+```
+
+- [x] Em Pam.Business, Produtos, criar pasta `Validations`
+- [x] Em Validations, criar classe `ProdutoValidation`
+
+```css
+using FluentValidation;
+
+namespace Pam.Business.Models.Produtos.Validations
+{
+    public class ProdutoValidation : AbstractValidator<Produto>
+    {
+        public ProdutoValidation()
+        {
+            /*As regras não podem ser vazias e possuem um tamanho específico*/
+            RuleFor(c => c.Nome)
+                .NotEmpty().WithMessage("O campo {PropertyName} precisa ser fornecido")
+                .Length(2, 200).WithMessage("O campo {PropertyName} precisa ter entre {MinLength} e {MaxLength} caracteres");
+
+            RuleFor(c => c.Descricao)
+                .NotEmpty().WithMessage("O campo {PropertyName} precisa ser fornecido")
+                .Length(2, 1000).WithMessage("O campo {PropertyName} precisa ter entre {MinLength} e {MaxLength} caracteres");
+
+            /*O campo valor precisa ser > que 0*/
+            RuleFor(c => c.Valor)
+                .GreaterThan(0).WithMessage("O campo {PropertyName} precisa ser maior que {ComparisonValue}");
+        }
+    }
+}
+```
+
+> Podendo ser validada também desta forma:
+![image](https://user-images.githubusercontent.com/108991648/208689074-eca93e4b-89c3-4328-b205-3ebb11271515.png)
+
+_____________________
+
+### Serviços de Negócio
+
+- [x] Em Pam.Business, Core, Models, Fornecedores criar pasta `Services`
+- [x] Em Services, criar interface `IFornecedorService`
+
+```css
+using System;
+using System.Threading.Tasks;
+
+namespace Pam.Business.Models.Fornecedores
+{
+    public interface IFornecedorService : IDisposable
+    {
+        Task Adicionar(Fornecedor fornecedor);
+        Task Atualizar(Fornecedor fornecedor);
+        Task Remover(Guid id);
+        Task AtualizarEndereco(Endereco endereco);
+
+    }
+}
+```
+
+- [x] Em Services, criar classe `FornecedorService`
+- [x] **IFornecedoreService** implementar interface
+
+```css
+using System;
+using System.Threading.Tasks;
+using Pam.Business.Core.Service;
+using Pam.Business.Models.Fornecedores.Validations;
+
+
+namespace Pam.Business.Models.Fornecedores.Services
+{
+    public class FornecedorService : BaseService, IFornecedorService
+    {
+        private readonly IFornecedorRepository _fornecedorRepository;
+        private readonly IEnderecoRepository _enderecoRepository;
+
+        public FornecedorService(IFornecedorRepository fornecedorRepository, IEnderecoRepository enderecoRepository)
+        {
+            _fornecedorRepository = fornecedorRepository;
+            _enderecoRepository = enderecoRepository;
+        }
+        public async Task Adicionar(Fornecedor fornecedor)
+        {
+            /*Fornecedor e Endereço estão validos? Se não, retorna!*/
+            if (!ExecutarValidacao(new FornecedorValidation(), fornecedor)
+                || !ExecutarValidacao(new EnderecoValidation(), fornecedor.Endereco)) return;
+
+            /*Fornecedor Existe com esse documento? Se sim, retorna*/
+            if (await FornecedorExistente(fornecedor)) return;
+
+            /*estando ok, Adiciona*/
+            await _fornecedorRepository.Adicionar(fornecedor);
+
+        }
+
+        public async Task Atualizar(Fornecedor fornecedor)
+        {
+            /*Fornecedor está válido? Se não, retorna!*/
+            if (!ExecutarValidacao(new FornecedorValidation(), fornecedor)) return;
+
+            /*Fornecedor Existe com esse documento? Se sim, retorna*/
+            if (await FornecedorExistente(fornecedor)) return;
+
+            /*estando ok, Atualiza*/
+            await _fornecedorRepository.Atualizar(fornecedor);
+        }
+
+        public async Task Remover(Guid id)
+        {
+            var fornecedor = await _fornecedorRepository.ObterFornecedorProdutosEndereco(id);
+            /*regra, não pode deletar fornecedor com produtos
+             Se o fornecedor possui produtos, retorna*/
+            if (fornecedor.Produtos.Any()) return;
+
+            /*Se o endereço do fornecedor.Endereço for diferente de NULL será removido o Endereço*/
+            if (fornecedor.Endereco != null)
+            {
+                await _enderecoRepository.Remover(fornecedor.Endereco.Id);
+            }
+            /*Depois de remover o endereço, remover o fornecedor*/
+
+            await _fornecedorRepository.Remover(id);
+        }
+        public async Task AtualizarEndereco(Endereco endereco)
+        {
+            /*Endereço está válido? Se não, retorna!*/
+            if (!ExecutarValidacao(new EnderecoValidation(), endereco)) return;
+
+            await _enderecoRepository.Atualizar(endereco);
+        }
+
+        private async Task<bool> FornecedorExistente(Fornecedor fornecedor)
+        {
+            var fornecedorAtual = await _fornecedorRepository.Buscar(f => f.Documento == fornecedor.Documento && f.Id != fornecedor.Id);
+
+            if (!fornecedorAtual.Any()) return false;
+
+            /*Notificar("Já existe um fornecedor com este documento infomado.");*/
+            return true;
+        }
+
+            public void Dispose()
+            {
+                _fornecedorRepository?.Dispose();
+                _enderecoRepository?.Dispose();
+            }
+
+        }
+    } 
+```
+
+- [x] Em Pam.Business, Core, criar pasta `Services`
+- [x] Em Services, criar classe `BaseService`
+
+
+
+```css
+using FluentValidation;
+using Pam.Business.Core.Models;
+
+
+namespace Pam.Business.Core.Service
+{
+   public abstract class BaseService
+    {
+        /*método que executa qualquer validação de qualquer entidade*/   
+        protected bool ExecutarValidacao<TV, TE>(TV validacao, TE entidade) where TV: AbstractValidator<TE> where TE : Entity
+        {
+            var validator = validacao.Validate(entidade);
+
+            return validator.IsValid;
+        }
+    }
+}
+```
+
+
+- [x] Em Pam.AppMvc, Controller, criar controlador vazio `FornecedoresController`
+
+```css
+using Pam.Business.Models.Fornecedores;
+using Pam.Business.Models.Fornecedores.Services;
+using Pam.Infra.Data.Repository;
+using System.Threading.Tasks;
+using System.Web.Mvc;
+
+namespace Pam.AppMvc.Controllers
+{
+    public class FornecedoresController : Controller
+    {
+        
+    }
+} 
+```
+
+**Rodar a aplicação**
+
+Incluie Breakpoint em `FornecedorController` em 
+`await _fornecedorService.Adicionar(fornecedor);`
+
+Ao rodar a aplicação deu erro no Global.asax.
+
+- [x] Em Pam.AppMvc, arquivo `Global.aasx` foi necessário editar para:
+
+```css
+using System.Web;
+
+namespace Pam.AppMvc
+{
+    public class MvcApplication : HttpApplication
+    {
+        protected void Application_Start()
+        {
+            AreaRegistration.RegisterAllAreas();
+            FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
+            RouteConfig.RegisterRoutes(RouteTable.Routes);
+            BundleConfig.RegisterBundles(BundleTable.Bundles);
+        }
+    }
+}
+```
+
+A aplicação funcionou!!
+
+______________________
+
+### Criar Services: Produtos
+
+- [x] Em Pam.Business, Models, Produtos `Services`
+- [x] Em Services, criar interface `IProdutosService`
+
+```css
+using System;
+using System.Threading.Tasks;
+
+namespace Pam.Business.Models.Produtos.Services
+{
+    public interface IProdutosService : IDisposable
+    {
+        /*Realizar modificações no estado da minha entidade*/
+        Task Adicionar(Produto produto);
+        Task Atualizar(Produto produto);
+        Task Remover(Guid id);
+    }
+}
+```
+- [x] Em Services, criar classe `ProdutoService`
+- [x] Implementar a interface de `IProdutosService`
+
+```css
+using Pam.Business.Core.Service;
+using Pam.Business.Models.Produtos.Validations;
+using System;
+using System.Threading.Tasks;
+
+namespace Pam.Business.Models.Produtos.Services
+{
+    public class ProdutoService : BaseService, IProdutosService
+    {
+
+        private readonly IProdutoRepository _produtoRepository;
+
+        public ProdutoService(IProdutoRepository produtoRepository)
+        {
+            _produtoRepository = produtoRepository;
+        }
+
+        public async Task Adicionar(Produto produto)
+        {/*Para Adicionar um produto, executa a validação*/
+            if (!ExecutarValidacao(new ProdutoValidation(), produto)) return;
+
+            await _produtoRepository.Adicionar(produto);
+        }
+
+        public async Task Atualizar(Produto produto)
+        {
+            if (!ExecutarValidacao(new ProdutoValidation(), produto)) return;
+
+            await _produtoRepository.Atualizar(produto);
+        }
+               
+        public async Task Remover(Guid id)
+        {
+            await _produtoRepository.Remover(id);
+        }
+        /*verificar se no repositório possui instância*/
+        public void Dispose()
+        {
+            _produtoRepository?.Dispose();
+        }
+    }
+
+}
+```
+____________________
+### Mecanismo de Notificação de erros
+
+- [x] Em Pam.Business, Core criar pasta `Notificacoes`
+- [x] Em Notificacoes, criar classe `Notificacao`
+
+```css
+namespace Pam.Business.Core.Notificacoes
+{
+    public class Notificacao
+    {
+
+        public Notificacao(string mensagem) 
+        {
+            mensagem = mensagem;
+        }
+
+        public string Mensagem { get; }
+        
+    }
+}
+```
+
+- [x] Em Notificacoes, criar interface `INotificador`
+
+```css
+using System.Collections.Generic;
+
+
+namespace Pam.Business.Core.Notificacoes
+{
+    public interface INotificador
+    {
+        /*método de teste para saber se tem notificação*/
+        bool TemNotificacao();
+        /*retorna uma lista das notificações*/
+        List<Notificacao> ObterNotificacoes();
+        /*Handle = manipular quando uma notificação é lançada*/
+        void Handle(Notificacao notificacao);
+    }
+}
+```
+
+- [x] Em Notificacoes, criar classe `Notificador`
+- [x] Implementar a interface de `INotificador`
+
+```css
+using System.Collections.Generic;
+using System.Linq;
+
+
+namespace Pam.Business.Core.Notificacoes
+{
+    public class Notificador : INotificador
+    {
+
+        private List<Notificacao> _notificacoes;
+
+        public Notificador()
+        {
+            /*As notificações = uma nova instância*/
+            _notificacoes = new List<Notificacao>();
+        }
+        public void Handle(Notificacao notificacao)
+        {
+            _notificacoes.Add(notificacao);
+        }
+
+        public List<Notificacao> ObterNotificacoes()
+        {
+            return _notificacoes;
+        }
+
+        public bool TemNotificacao()
+        {
+            return _notificacoes.Any();
+          
+        }
+    }
+}
+```
+________________
+
+### Implementar a notificação de erro
+
+- [x] Em Pam.Business, Core, Services, arquivo `BaseService` adicionar:
+
+```css
+using FluentValidation;
+using FluentValidation.Results;
+using Pam.Business.Core.Models;
+using Pam.Business.Core.Notificacoes;
+
+namespace Pam.Business.Core.Service
+{
+   public abstract class BaseService
+    {
+        private readonly INotificador _notificador;
+
+        protected BaseService(INotificador notificador)
+        {
+            _notificador = notificador;
+        }
+
+        protected void Notificar(ValidationResult validationResult)
+        {
+            foreach (var error in validationResult.Errors)
+            {
+                /*o que fazer com cada erro que encontrar?*/
+                Notificar(error.ErrorMessage);
+            }
+        }
+
+        protected void Notificar(string mensagem)
+        {
+            _notificador.Handle(new Notificacao(mensagem));
+        }
+
+        /*método que executa qualquer validação de qualquer entidade*/   
+        protected bool ExecutarValidacao<TV, TE>(TV validacao, TE entidade) where TV: AbstractValidator<TE> where TE : Entity
+        {
+            var validator = validacao.Validate(entidade);
+
+            if (validator.IsValid) return true;
+
+            Notificar(validator);
+
+            return false;
+        }
+    }
+}
+```
+
+- [x] Em Pam.Business, Models, Fornecedores  Services, no arquivo `FornecedorService`
+- [x] Modificar
+
+```css
+...
+   public FornecedorService(
+    IFornecedorRepository fornecedorRepository, 
+    IEnderecoRepository enderecoRepository,
+    INotificador notificador) : base(notificador)
+        {
+            _fornecedorRepository = fornecedorRepository;
+            _enderecoRepository = enderecoRepository;
+            
+        }
+...
+
+  public async Task Remover(Guid id)
+        {
+            var fornecedor = await _fornecedorRepository.ObterFornecedorProdutosEndereco(id);
+            
+            if (fornecedor.Produtos.Any())
+            {
+                Notificar("O fornecedor possui produtos cadastrados!")
+                return;
+            }
+
+  private async Task<bool> FornecedorExistente(Fornecedor fornecedor)
+        {
+            var fornecedorAtual = await _fornecedorRepository.Buscar(f => f.Documento == fornecedor.Documento && f.Id != fornecedor.Id);
+
+            if (!fornecedorAtual.Any()) return false;
+
+            Notificar("Já existe um fornecedor com este documento informado.")
+            
+            return true;
+        }
+```
+
+- [x] Em Pam.Business, Models, Produtos,  Services, no arquivo `ProdutoService`
+- [x] Modificar
+
+```css
+...
+ public ProdutoService(IProdutoRepository produtoRepository, INotificador notificador) : base(notificador) 
+        {
+            _produtoRepository = produtoRepository;
+        }
+```
 
 ____________________
 
-PM> update-database -Script`: vai mostrar o Script das criações das tabelas
+### Camada de Apresentação - MVC
+
+- [x] Em Pam.AppMvc criar pasta `ViewModels` e `Extensions`
+- [x] Em ViewModel, criar classe `ProdutoViewModel`
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+_______________
+
+Item | Ação
+-|-
+Breakpoint | ?
+? | Caso a instância não exista, não chama o método
+Task | ?
+Disposable | ?
+! | ? (retornar negativo?)
+`||` | ou
+= | Recebe
+== | igual
+!= | Diferente
+[Required] | Campo obrigatório
+[DisplayName] | Nome que o usuário visualiza
+public abstract | São protegidos (protected)
+virtual | Em outros arquivos são chamados pelo overrride
+PM> update-database -Script`: | Vai apresentar o Script das criações das tabelas
 
 
 
