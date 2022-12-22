@@ -2869,7 +2869,9 @@ namespace Pam.Business.Models.Fornecedores
 
 ```css
 using System;
+using System.Linq;
 using System.Threading.Tasks;
+using Pam.Business.Core.Notificacoes;
 using Pam.Business.Core.Service;
 using Pam.Business.Models.Fornecedores.Validations;
 
@@ -2881,10 +2883,13 @@ namespace Pam.Business.Models.Fornecedores.Services
         private readonly IFornecedorRepository _fornecedorRepository;
         private readonly IEnderecoRepository _enderecoRepository;
 
-        public FornecedorService(IFornecedorRepository fornecedorRepository, IEnderecoRepository enderecoRepository)
+        public FornecedorService(IFornecedorRepository fornecedorRepository, 
+                                 IEnderecoRepository enderecoRepository,
+                                 INotificador notificador) : base(notificador)
         {
             _fornecedorRepository = fornecedorRepository;
             _enderecoRepository = enderecoRepository;
+            
         }
         public async Task Adicionar(Fornecedor fornecedor)
         {
@@ -2917,8 +2922,11 @@ namespace Pam.Business.Models.Fornecedores.Services
             var fornecedor = await _fornecedorRepository.ObterFornecedorProdutosEndereco(id);
             /*regra, não pode deletar fornecedor com produtos
              Se o fornecedor possui produtos, retorna*/
-            if (fornecedor.Produtos.Any()) return;
-
+            if (fornecedor.Produtos.Any())
+            {
+                Notificar("O fornecedor possui produtos cadastrados!");
+                return;
+            }
             /*Se o endereço do fornecedor.Endereço for diferente de NULL será removido o Endereço*/
             if (fornecedor.Endereco != null)
             {
@@ -2942,7 +2950,8 @@ namespace Pam.Business.Models.Fornecedores.Services
 
             if (!fornecedorAtual.Any()) return false;
 
-            /*Notificar("Já existe um fornecedor com este documento infomado.");*/
+            Notificar("Já existe um fornecedor com este documento informado.");
+                  
             return true;
         }
 
@@ -3285,12 +3294,466 @@ ____________________
 
 ### Camada de Apresentação - MVC
 
-- [x] Em Pam.AppMvc criar pasta `ViewModels` e `Extensions`
-- [x] Em ViewModel, criar classe `ProdutoViewModel`
+- [x] Em Pam.AppMvc, ViewModels criar classe 
+ `ProdutoViewModel`, `FornecedorViewModel` e `EnderecoViewModel`
 
+ **`ProdutoViewModel`**
+ 
+ ```css
+ using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using System.Web;
 
+namespace Pam.AppMvc.ViewModels
+{
+    /*Aqui temos uma representação da entidade Produto, representa as mesmas catacterísticas*/
+    public class ProdutoViewModel
+    { 
+    public ProdutoViewModel()
+    {
+        Id = Guid.NewGuid();
+    }
 
+    /*Campo Id é a Chave*/
+    [Key]
+    public Guid Id { get; set; }
 
+    [Required(ErrorMessage = "O campo {0} é obrigatório")]
+    [DisplayName("Fornecedor")]
+    public Guid FornecedorId { get; set; }
+
+    [Required(ErrorMessage = "O campo {0} é obrigatório")]
+    [StringLength(200, ErrorMessage = "O campo {0} precisa ter entre {2} e {1} caracteres", MinimumLength = 2)]
+    public string Nome { get; set; }
+
+    [DisplayName("Descrição")]
+    [Required(ErrorMessage = "O campo {0} é obrigatório")]
+    [StringLength(1000, ErrorMessage = "O campo {0} precisa ter entre {2} e {1} caracteres", MinimumLength = 2)]
+    public string Descricao { get; set; }
+
+    /*Nome da imagem no BD*/
+    [DisplayName("Imagem do Produto")]
+    public HttpPostedFileBase ImagemUpload { get; set; }
+    
+    public string Imagem { get; set; }
+
+    [Required(ErrorMessage = "O campo {0} é obrigatório")]
+    public decimal Valor { get; set; }
+
+    [ScaffoldColumn(false)]
+    public DateTime DataCadastro { get; set; }
+
+    [DisplayName("Ativo?")]
+    public bool Ativo { get; set; }
+
+    /*Fornecedor que representa o produto*/
+    public FornecedorViewModel Fornecedor { get; set; }
+
+    /*Lista de Fornecedores que auxilia a escrever o DropDownList*/
+    public IEnumerable<FornecedorViewModel> Fornecedores { get; set; }
+    
+    }
+
+}
+```
+ 
+ **`FornecedorViewModel`**
+ 
+ ```css
+ using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+namespace Pam.AppMvc.ViewModels
+{
+    public class FornecedorViewModel
+    { 
+        public FornecedorViewModel()
+        {
+            Id = Guid.NewGuid();
+        }
+
+        [Key]
+        public Guid Id { get; set; }
+
+        [Required(ErrorMessage = "O campo {0} é obrigatório")]
+        [StringLength(100, ErrorMessage = "O campo {0} precisa ter entre {2} e {1} caracteres", MinimumLength = 2)]
+        public string Nome { get; set; }
+
+        [Required(ErrorMessage = "O campo {0} é obrigatório")]
+        [StringLength(14, ErrorMessage = "O campo {0} precisa ter entre {2} e {1} caracteres", MinimumLength = 11)]
+        public string Documento { get; set; }
+
+        [DisplayName("Tipo")]
+        public int TipoFornecedor { get; set; }
+
+        public EnderecoViewModel Endereco { get; set; }
+
+        [DisplayName("Ativo?")]
+        public bool Ativo { get; set; }
+
+        public IEnumerable<ProdutoViewModel> Produtos { get; set; }
+    }
+}
+```
+ 
+ 
+ **`EnderecoViewModel`**
+
+```css
+using System;
+using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc;
+
+namespace Pam.AppMvc.ViewModels
+{
+    public class EnderecoViewModel
+    {
+        public EnderecoViewModel()
+        {
+            Id = Guid.NewGuid();
+        }
+
+        [Key]
+        public Guid Id { get; set; }
+
+        [Required(ErrorMessage = "O campo {0} é obrigatório")]
+        [StringLength(200, ErrorMessage = "O campo {0} precisa ter entre {2} e {1} caracteres", MinimumLength = 2)]
+        public string Logradouro { get; set; }
+
+        [Required(ErrorMessage = "O campo {0} é obrigatório")]
+        [StringLength(50, ErrorMessage = "O campo {0} precisa ter entre {2} e {1} caracteres", MinimumLength = 1)]
+        public string Numero { get; set; }
+
+        public string Complemento { get; set; }
+
+        [Required(ErrorMessage = "O campo {0} é obrigatório")]
+        [StringLength(100, ErrorMessage = "O campo {0} precisa ter entre {2} e {1} caracteres", MinimumLength = 2)]
+        public string Bairro { get; set; }
+
+        [Required(ErrorMessage = "O campo {0} é obrigatório")]
+        [StringLength(8, ErrorMessage = "O campo {0} precisa ter {1} caracteres", MinimumLength = 8)]
+        public string Cep { get; set; }
+
+        [Required(ErrorMessage = "O campo {0} é obrigatório")]
+        [StringLength(100, ErrorMessage = "O campo {0} precisa ter entre {2} e {1} caracteres", MinimumLength = 2)]
+        public string Cidade { get; set; }
+
+        [Required(ErrorMessage = "O campo {0} é obrigatório")]
+        [StringLength(50, ErrorMessage = "O campo {0} precisa ter entre {2} e {1} caracteres", MinimumLength = 2)]
+        public string Estado { get; set; }
+
+        [HiddenInput]
+        public Guid FornecedorId { get; set; }
+    }
+}
+```
+____________________________________
+
+### Recurso Scaffolding
+
+Para que este método funcione precisamos comentar alguns campos, arquivo `ProdutoViewModel`
+
+```css
+
+    ///*Nome da imagem no BD*/
+    //[DisplayName("Imagem do Produto")]
+    //public HttpPostedFileBase ImagemUpload { get; set; }
+
+    ///*Fornecedor que representa o produto*/
+    //public FornecedorViewModel Fornecedor { get; set; }
+
+    ///*Lista de Fornecedores que auxilia a escrever o DropDownList*/
+    //public IEnumerable<FornecedorViewModel> Fornecedores { get; set; }
+```
+
+- [x] Compilar aplicação AppMvc
+- [x] Em Pam.AppMvc, Controller, adicionar novo item com scalffold / New Scaffolded Item.
+- [x] Controlador MVC 5 com modos de exibição usando o Entity Framework
+- [x] Se der erro, faça Recompilação AppMvc
+
+![image](https://user-images.githubusercontent.com/108991648/208911177-8395a897-0c1c-4063-a333-e30896ea039c.png)
+
+> Criei uma nova Classe de contexto de dados, pois estava dando erro.
+
+- [x] Foi gerado:
+    - Uma controller `ProdutosController`
+    - Em Views, criou a pasta `Produtos`, com aquivos: Create, Delete, Details, Edit, Index 
+
+Precisamos editar alguns itens do ProdutoController:
+
+```css
+public class ProdutosController : Controller
+    {
+        /*para realizar a leitura*/
+        private readonly IProdutoRepository _produtoRepository;
+        /*para modificar o BD*/
+        private readonly IProdutoService _produtoService;
+
+        public ProdutosController()
+        {
+            _produtoRepository = new ProdutoRepository();
+            _produtoService = new ProdutoService(_produtoRepository,new Notificador());
+        }
+
+        public async Task<ActionResult> Index()
+        {
+            return View(await _produtoRepository.ObterTodos());
+        }
+
+        // GET: Produtos/Details/5
+        public async Task<ActionResult> Details(Guid id)
+        {            
+            var produto = await _produtoRepository.ObterPorId(id);
+     
+            if (produtoViewModel == null)
+            {
+                return HttpNotFound();
+            }
+            return View(produtoViewModel);
+        }
+
+        ...
+
+        public async Task<ActionResult> Create(ProdutoViewModel produtoViewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                _produtoService.Adicionar(produtoViewModel);
+               
+                return RedirectToAction("Index");
+            }
+
+            return View(produtoViewModel);
+        }
+```
+________________________________
+
+### Recurso Auto Mapper
+
+> Mapeamento automático. Criar um arquivo de configuração de Entidade para DTO e vice versa
+
+[AutoMapper](https://github.com/AutoMapper/AutoMapper) funciona mapeando um tipo e um nome
+
+Em `Console de Gerenciador de Pacotes` instalar:
+- [x] Pam.AppMvc
+- [x] PM> Install-Package AutoMapper -Version 10.1.1 (a ultima versão não funcionou)
+
+Vamos configurar o pacote!
+
+- [x] Em Pam.AppMvc, App_Start criar classe `AutoMapperConfig`
+
+```css
+using AutoMapper;
+using Pam.AppMvc.ViewModels;
+using Pam.Business.Models.Fornecedores;
+using Pam.Business.Models.Produtos;
+using System;
+using System.Linq;
+using System.Reflection;
+
+namespace Pam.AppMvc.App_Start
+{
+    /* Classe para ativar o AutoMapper*/
+    public class AutoMapperConfig
+    {
+        /*Config para encontrar qualquer classe que herde de Profile edo AutoMapper*/ 
+        public static MapperConfiguration GetMapperConfiguration()
+        {
+            /*Coleção que herdam de Profile
+             var profile onde através do objeto Assembly, na inicialização do projeto pega todos os Assemblys executados | 
+             GetTyoe = vai obter os tipos deles
+            Onde os tipos são do tipo Profile | E se está atribuido*/
+            var profiles = Assembly.GetExecutingAssembly()
+                .GetTypes()
+                .Where(x => typeof(Profile).IsAssignableFrom(x));
+
+            return new MapperConfiguration(cfg =>
+            {
+                foreach (var profile in profiles)
+                {
+                    cfg.AddProfile(Activator.CreateInstance(profile) as Profile);
+                }
+            });
+
+        }
+    }
+        /*classe de que herda do Profile do AutoMapper*/
+    public class AutoMapperProfile : Profile
+    {
+        public AutoMapperProfile() 
+        {
+            /*mapear das entidades para viewModel e ReverseMap(vice e versa)*/
+            CreateMap<Fornecedor, FornecedorViewModel>().ReverseMap();
+            CreateMap<Endereco, EnderecoViewModel>().ReverseMap();
+            CreateMap<Produto, ProdutoViewModel>().ReverseMap();
+        }
+    }    
+}
+```
+
+- [x] Em ProdutosController adicionar o AutoMapper através de uma interface
+
+```css
+using AutoMapper;
+
+   private readonly IMapper _mapper;
+```
+
+- [x] Comentar:
+
+```css
+  /*_produtoRepository = new ProdutoRepository();
+            _produtoService = new ProdutoService(_produtoRepository,new Notificador());*/
+```            
+
+- [x] Realizar:
+    - mapeamentos
+    - acima do Dispose, criar método ObterProduto
+
+**Index**
+```css
+public async Task<ActionResult> Index()
+            /*retornar uma lista de produtos ViewModel
+             produtosVM = ProdutosViewModel*/
+        {            
+            return View(_mapper.Map<IEnumerable<ProdutoViewModel>>(await _produtoRepository.ObterTodos()));
+        }
+```
+**Details**
+```css
+ public async Task<ActionResult> Details(Guid id)
+        {            
+            var produtoViewModel = await ObterProduto(id);
+     
+            if (produtoViewModel == null)
+            {
+                return HttpNotFound();
+            }
+            return View(produtoViewModel);
+        }
+```
+
+**Create POST**
+```css
+ if (ModelState.IsValid)
+            {
+               await _produtoService.Adicionar(_mapper.Map<Produto>(produtoViewModel));
+```
+
+**Edit GET**
+```css
+ public async Task<ActionResult> Edit(Guid id)
+        {
+
+            var produtoViewModel = await ObterProduto(id);
+
+            if (produtoViewModel == null)
+            {
+                return HttpNotFound(); 
+            }
+
+            return View(produtoViewModel);
+
+        }
+```
+
+**Edit POST**
+
+```css
+   public async Task<ActionResult> Edit(ProdutoViewModel produtoViewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                await _produtoService.Atualizar(_mapper.Map<Produto>(produtoViewModel));
+
+                return RedirectToAction("Index");
+            }
+            return View(produtoViewModel);
+        }
+
+```
+
+**Delete GET**
+```css
+ public async Task<ActionResult> Delete(Guid id)
+        {
+            var produtoViewModel = await ObterProduto(id);
+
+            if (produtoViewModel == null)
+
+            {                
+                return HttpNotFound();
+            }
+
+            return View(produtoViewModel);
+        }
+```
+
+**Delete POST**
+```css
+   public async Task<ActionResult> DeleteConfirmed(Guid id)
+        {
+
+            var produtoViewModel = await ObterProduto(id);
+
+            if (produtoViewModel == null)
+
+            {
+                return HttpNotFound();
+            }
+
+            await _produtoService.Remover(id);
+
+            return RedirectToAction("Index");
+        }
+
+```
+
+**Adicionar Método ObterProduto**
+```css
+   private async Task<ProdutoViewModel> ObterProduto(Guid id)
+        {
+            var produto = _mapper.Map<ProdutoViewModel>(await _produtoRepository.ObterProdutosPorFornecedor(id));
+            return produto;
+        }
+```
+
+**Dispose**
+```css
+  if (disposing)
+            {
+                _produtoRepository.Dispose();
+                _produtoService.Dispose();
+            }
+            base.Dispose(disposing);
+```
+
+___________________
+
+### Criar atributos de Navegação/Rotas
+
+- [X] Em ProdutosController, adicionar as Rotas de Navegação
+
+Local | Rota
+-|-
+Index | [Route("lista-de-produtos")]
+Details | [Route("dados_do_produto/{id:guid}")]
+Create GET | [Route("novo-produto")] 
+Create POST | [Route("novo-produto")] 
+Edit GET | [Route("editar-produto/{id:guid}")]
+Edit POST | [Route("editar-produto/{id:guid}")]
+Delete GET | [Route("excluir-produto/{id:guid}")]
+Delete POST | [Route("excluir-produto/{id:guid}")]
+
+- [x] Adicionar `[HttpGet]` nos GET's
+- [x] Adicionar `[ValidateAntiForgeryToken]` nos POST's
+
+___________________
+
+### Configurar o SimpleInjector
 
 
 

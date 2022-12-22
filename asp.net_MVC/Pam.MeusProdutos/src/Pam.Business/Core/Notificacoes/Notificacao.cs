@@ -6,7 +6,7 @@ namespace Pam.Business.Core.Notificacoes
 
         public Notificacao(string mensagem) 
         {
-            mensagem = mensagem;
+            Mensagem = mensagem;
         }
 
         public string Mensagem { get; }

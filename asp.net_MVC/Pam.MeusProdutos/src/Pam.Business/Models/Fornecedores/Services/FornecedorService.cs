@@ -54,7 +54,7 @@ namespace Pam.Business.Models.Fornecedores.Services
              Se o fornecedor possui produtos, retorna*/
             if (fornecedor.Produtos.Any())
             {
-                Notificar("O fornecedor possui produtos cadastrados!")
+                Notificar("O fornecedor possui produtos cadastrados!");
                 return;
             }
             /*Se o endereço do fornecedor.Endereço for diferente de NULL será removido o Endereço*/
@@ -80,9 +80,8 @@ namespace Pam.Business.Models.Fornecedores.Services
 
             if (!fornecedorAtual.Any()) return false;
 
-            Notificar("Já existe um fornecedor com este documento informado.")
-
-            /*Notificar("Já existe um fornecedor com este documento infomado.");*/
+            Notificar("Já existe um fornecedor com este documento informado.");
+                  
             return true;
         }
 
