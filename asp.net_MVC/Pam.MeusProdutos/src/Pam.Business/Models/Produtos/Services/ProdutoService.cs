@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Pam.Business.Models.Produtos.Services
 {
-    public class ProdutoService : BaseService, IProdutosService
+    public class ProdutoService : BaseService, IProdutoService
     {
 
         private readonly IProdutoRepository _produtoRepository;

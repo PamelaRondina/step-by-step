@@ -1952,7 +1952,7 @@ ______________________
 
 ### Mapeando as Interfaces 
 
-- [x] Em Core, criar pasta `Data`
+- [x] Em Pam.Business, Core, criar pasta `Data`
 - [x] Em Data, criar interface `IRepository`
 
 > Fará as regras de CRUD
@@ -3755,6 +3755,232 @@ ___________________
 
 ### Configurar o SimpleInjector
 
+> [SimpleInjector](https://simpleinjector.org/) é um Container de Ingestão de Independência, ele que cria a instância do objeto e vai atuar em conjunto com a Controller Factory.
+
+- [x] Em Console do Gerenciados de Pacotes:
+    - Projeto padrão = Pam.AppMvc
+    - `PM> Install-Package SimpleInjector.Integration.Web.Mvc`
+<br><br>
+- [x] Em App.Start ciar classe  `DependencyInjectionConfig`
+
+**Tipod de Lifestyle**
+Como o objeto é criado e quanto tempo ele dura
+
+- Lifestyle.Scoped: funciona apenas para WEB
+Uma única instância por request
+
+- Lifestyle.Singleton: TOMAR CUIDADO!
+Uma única instãncia por aplicação
+
+- Lifestyle.Transient:  
+Cria uma nova instância para cada injeção
+
+
+
+```css
+using SimpleInjector;
+using SimpleInjector.Integration.Web;
+using System.Reflection;
+using System.Web.Mvc;
+using SimpleInjector.Integration.Web.Mvc;
+using Pam.Business.Core.Notificacoes;
+using Pam.Business.Models.Fornecedores.Services;
+using Pam.Business.Models.Fornecedores;
+using Pam.Business.Models.Produtos.Services;
+using Pam.Business.Models.Produtos;
+using Pam.Infra.Data.Context;
+using Pam.Infra.Data.Repository;
+
+
+namespace Pam.AppMvc.App_Start
+{
+    public class DependencyInjectionConfig
+    {
+
+        public static void RegisterDIContainer()
+        {
+            /*Definir o Container*/
+            var container = new Container();
+
+            /*Definir o LifeStyle -SCOPED WEB Aplicação Web*/
+            container.Options.DefaultScopedLifestyle = new WebRequestLifestyle();
+
+            InitializeContainer(container);
+            
+            /*Definir as Controllers para validar se estão configuradas corretamente*/
+            container.RegisterMvcControllers(Assembly.GetExecutingAssembly());
+
+            container.Verify();
+
+            /*DepenencyResolver: Classe do MVC, vai passar a instância (SetResolver) para o container*/
+            DependencyResolver.SetResolver(new SimpleInjectorDependencyResolver(container));
+        }
+
+        /*Método InitializeContainer para configurar objetos: Repository, Service, Mapper*/
+        private static void InitializeContainer(Container container) 
+        {
+            container.Register<MeuDbContext>(Lifestyle.Scoped);
+            container.Register<IProdutoRepository, ProdutoRepository>(Lifestyle.Scoped);
+            container.Register<IProdutoService, ProdutoService>(Lifestyle.Scoped);
+            container.Register<IFornecedorRepository, FornecedorRepository>(Lifestyle.Scoped);
+            container.Register<IEnderecoRepository, EnderecoRepository>(Lifestyle.Scoped);
+            container.Register<IFornecedorService, FornecedorService>(Lifestyle.Scoped);
+            container.Register<INotificador, Notificador>(Lifestyle.Scoped);
+
+            /*Está como SINGLETON*/
+            container.RegisterSingleton(() => AutoMapperConfig.GetMapperConfiguration().CreateMapper(container.GetInstance));
+
+        }
+    }
+}
+```
+
+- [x] Em Pam.Infra, Data, Repository alterar arquivo `Repository`
+
+> Alterar de instância de objeto para receber um objeto já injetado
+
+```css
+ protected Repository(MeuDbContext db)
+        {
+            Db = db;            
+            DbSet = Db.Set<TEntity>();
+        } 
+```
+
+- [x] Em Pam.Infra, Data, Repository alterar arquivo `ProdutoRepository`
+    - Incluir constructor 
+
+```css
+public class ProdutoRepository : Repository<Produto>, IProdutoRepository
+    {
+
+public ProdutoRepository(MeuDbContext context) : base(context) { }
+```
+
+- [x] Em Pam.Infra, Data, Repository alterar arquivo `FornecedorRepository`
+    - Incluir constructor 
+
+```css
+  public class FornecedorRepository : Repository<Fornecedor>, IFornecedorRepository
+    {
+        public ProdutosRepository(MeuDbContext context) : base(context) { }
+```
+
+- [x] Em Pam.Infra, Data, Repository alterar arquivo `EnderecoRepository`
+    - Incluir constructor 
+
+```Css
+
+public class FornecedorRepository : Repository<Endereco>, IEnderecoRepository
+    {
+        public FornecedorRepository(MeuDbContext context) : base(context) { }
+```
+______________________
+
+### Classe Startup
+
+Levar as configurações do `Global.asax` para `Startup.cs`
+
+
+- Em Pam.AppMvc, abrir classe `Startup.cs`
+
+> Classe que inicializa a configuração da aplicação
+
+```css
+using Microsoft.Owin;
+using Owin;
+using Pam.AppMvc.App_Start;
+using System.Web.Mvc;
+using System.Web.Optimization;
+using System.Web.Routing;
+
+[assembly: OwinStartupAttribute(typeof(Pam.AppMvc.Startup))]
+namespace Pam.AppMvc
+{
+    public partial class Startup
+    {
+        public void Configuration(IAppBuilder app)
+        {
+            ConfigureAuth(app);
+
+            /*Dando Start na aplicação o SimpleInjector que resolverá todas as independências abaixo*/
+            DependencyInjectionConfig.RegisterDIContainer();
+            AreaRegistration.RegisterAllAreas();
+            FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
+            RouteConfig.RegisterRoutes(RouteTable.Routes);
+            BundleConfig.RegisterBundles(BundleTable.Bundles);
+        }
+    }
+}
+```
+
+- Em Pam.AppMvc, abrir arquivo `Global.asax`
+
+´´´css
+using System.Web;
+
+namespace Pam.AppMvc
+{
+    public class MvcApplication : HttpApplication
+    {
+        protected void Application_Start()
+        {
+
+        }
+    }
+}
+```
+_______________________
+
+### *****
+
+- Em Pam.AppMvc, Controllers, arquivo `ProdutosController` adicionar:
+
+```css
+ public ProdutosController(IProdutoRepository produtoRepository,
+                                  IProdutoService produtoService,
+                                  IMapper mapper)
+        {
+
+            _produtoRepository = produtoRepository;
+            _produtoService = produtoService;
+            _mapper = mapper;
+        }
+```
+
+- Em App.Mvc, Views, Shared, arquivo `_Layout.cshtml`
+    - Excluir `<li>@Html.ActionLink("Contato", "Contact", "Home")</li>
+    `
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -3769,6 +3995,8 @@ ___________________
 
 
 _______________
+
+**Pesquisar sobre SOLID**
 
 Item | Ação
 -|-

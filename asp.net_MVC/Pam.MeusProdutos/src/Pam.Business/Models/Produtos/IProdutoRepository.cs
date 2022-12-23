@@ -10,6 +10,6 @@ namespace Pam.Business.Models.Produtos
         Task<IEnumerable<Produto>> ObterProdutosPorFornecedor(Guid fornecedorId);
         //lista de produtos e seus fornecedores
         Task<IEnumerable<Produto>> ObterProdutosFornecedores();
-        Task<Produto> ObterProdutosFornecedor(Guid id);
+        Task<Produto> ObterProdutoFornecedor(Guid id);
     }
 }

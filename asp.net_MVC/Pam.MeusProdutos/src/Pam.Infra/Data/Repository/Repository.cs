@@ -17,10 +17,10 @@ namespace Pam.Infra.Data.Repository
         protected readonly MeuDbContext Db;
         protected readonly DbSet<TEntity> DbSet;
 
-        protected Repository()
+        protected Repository(MeuDbContext db)
         {
             /*Contexto em geral*/
-            Db = new MeuDbContext();
+            Db = db;
             /*Acesso rápido a minha Entidade*/
             DbSet = Db.Set<TEntity>();
         }       

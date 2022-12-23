@@ -1,4 +1,5 @@
 ﻿using Pam.Business.Models.Produtos;
+using Pam.Infra.Data.Context;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -7,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace Pam.Infra.Data.Repository
 {
-    public class ProdutosRepository : Repository<Produto>, IProdutoRepository
-
+    public class ProdutosRepository : Repository<Produto>, Business.Models.Produtos.IProdutoRepository
     {
+        public ProdutosRepository(MeuDbContext context) : base(context) { }
         public async Task<Produto> ObterProdutosFornecedor(Guid id)
         {
             return await Db.Produtos.AsNoTracking()

@@ -1,19 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Linq;
 using System.Threading.Tasks;
-using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using Pam.AppMvc.Teste;
 using Pam.AppMvc.ViewModels;
 using Pam.Business.Models.Produtos;
-using Pam.Business.Models.Produtos.Services;
-using Pam.Business.Core.Notificacoes;
-using Pam.Infra.Data.Repository;
 using AutoMapper;
+using Pam.Business.Models.Produtos.Services;
 
 namespace Pam.AppMvc.Controllers
 {
@@ -26,10 +18,14 @@ namespace Pam.AppMvc.Controllers
         /*adicionar o AutoMapper*/
         private readonly IMapper _mapper;
 
-        public ProdutosController()
+        public ProdutosController(IProdutoRepository produtoRepository,
+                                  IProdutoService produtoService,
+                                  IMapper mapper)
         {
-            /*_produtoRepository = new ProdutoRepository();
-            _produtoService = new ProdutoService(_produtoRepository,new Notificador());*/
+
+            _produtoRepository = produtoRepository;
+            _produtoService = produtoService;
+            _mapper = mapper;
         }
 
         [Route("lista-de-produtos")]

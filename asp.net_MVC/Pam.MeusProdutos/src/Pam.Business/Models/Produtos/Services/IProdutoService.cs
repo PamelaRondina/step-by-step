@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace Pam.Business.Models.Produtos.Services
 {
-    public interface IProdutosService : IDisposable
+    public interface IProdutoService : IDisposable
     {
         /*Realizar modificações no estado da minha entidade*/
         Task Adicionar(Produto produto);
