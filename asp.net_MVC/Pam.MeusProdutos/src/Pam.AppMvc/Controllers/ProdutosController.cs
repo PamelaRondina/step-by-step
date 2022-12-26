@@ -9,7 +9,7 @@ using Pam.Business.Models.Produtos.Services;
 
 namespace Pam.AppMvc.Controllers
 {
-    public class ProdutosController : Controller
+    public class ProdutosController : BaseController
     {
         /*para realizar a leitura*/
         private readonly IProdutoRepository _produtoRepository;

@@ -1751,6 +1751,22 @@ _____________________________
 
 ### Novo projeto
 
+#### 
+**Camadas Internas**
+
+Dentro para fora:
+
+- Mapeamento de Identidade;
+- Configuração de Validação;
+- Serviço da Entidade;
+- Mapear e Configurar os Repositórios;
+
+**Camadas Externas**
+
+- Views
+- Validação JavaScript
+- Upload de Imagens 
+
 **Adicionando Camadas**
 
 - [x] Escolher `Solução Em Branco`  
@@ -3819,11 +3835,11 @@ namespace Pam.AppMvc.App_Start
         /*Método InitializeContainer para configurar objetos: Repository, Service, Mapper*/
         private static void InitializeContainer(Container container) 
         {
-            container.Register<MeuDbContext>(Lifestyle.Scoped);
+      container.Register<MeuDbContext>(Lifestyle.Scoped);
             container.Register<IProdutoRepository, ProdutoRepository>(Lifestyle.Scoped);
             container.Register<IProdutoService, ProdutoService>(Lifestyle.Scoped);
             container.Register<IFornecedorRepository, FornecedorRepository>(Lifestyle.Scoped);
-            container.Register<IEnderecoRepository, EnderecoRepository>(Lifestyle.Scoped);
+            container.Register<IEnderecoRepository, EnderecoRepository>(Lifestyle.Scoped);            
             container.Register<IFornecedorService, FornecedorService>(Lifestyle.Scoped);
             container.Register<INotificador, Notificador>(Lifestyle.Scoped);
 
@@ -3916,7 +3932,7 @@ namespace Pam.AppMvc
 
 - Em Pam.AppMvc, abrir arquivo `Global.asax`
 
-´´´css
+```css
 using System.Web;
 
 namespace Pam.AppMvc
@@ -3930,9 +3946,8 @@ namespace Pam.AppMvc
     }
 }
 ```
-_______________________
 
-### *****
+_____________
 
 - Em Pam.AppMvc, Controllers, arquivo `ProdutosController` adicionar:
 
@@ -3942,15 +3957,848 @@ _______________________
                                   IMapper mapper)
         {
 
+
             _produtoRepository = produtoRepository;
             _produtoService = produtoService;
             _mapper = mapper;
         }
 ```
 
-- Em App.Mvc, Views, Shared, arquivo `_Layout.cshtml`
-    - Excluir `<li>@Html.ActionLink("Contato", "Contact", "Home")</li>
-    `
+### Ajustar Erro 
+
+Ao rodar a aplicação, aparece o erro:
+](https://user-images.githubusercontent.com/108991648/209353992-06bb4c6f-e907-46f6-858a-26fc86fa36de.png)
+
+A controller deve ter apenas 1 único construtor público, neste erro possuem 2.
+
+- [x] Em pam.AppMvc, Controllers, arquivo `AccountController`, excluir:
+
+```css
+public AccountController()
+        {
+        }
+
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        {
+            UserManager = userManager;
+            SignInManager = signInManager;
+        }
+```
+
+- [x] Em pam.AppMvc, Controllers, arquivo `ManagerController`, excluir:
+
+```css
+public ManageController()
+        {
+        }
+
+        public ManageController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
+        {
+            UserManager = userManager;
+            SignInManager = signInManager;
+        }
+```
+_________________________
+
+
+### Modificações 
+
+**RouteConfig**
+- [x] Em App.Mvc, AppStart, arquivo `RouteConfig`, adicionar rota:
+
+```css
+    routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+
+            routes.MapMvcAttributeRoutes();
+```
+
+
+**Layout**
+
+- [x] Em App.Mvc, Views, Shared, arquivo `_Layout.cshtml`
+    
+    ``html
+    <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Página Inicial", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Fornecedores", "Index", "Fornecedores")</li>                   
+                    <li>@Html.ActionLink("Produtos", "Index", "Produtos")</li>
+    ```
+
+__________________
+
+### Camada de Apresentação
+
+- [x] Em Pam.App.Mvc, Controllers, criar classe `BaseController` e chamar a Controller
+- [x] No arquivo `ProdutosController` e `FornecedoresController` alterar a chamada para `BaseController`
+
+No arquivo `FornecedoresController` teremos um CRUD:
+
+```css
+using AutoMapper;
+using Pam.AppMvc.ViewModels;
+using Pam.Business.Models.Fornecedores;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using System.Web.Mvc;
+
+namespace Pam.AppMvc.Controllers
+{
+    public class FornecedoresController : BaseController
+    {
+        /*Declarar as ionterfaces*/
+        private readonly IFornecedorRepository _fornecedorRepository;
+        private readonly IFornecedorService _fornecedorService;
+        private readonly IMapper _mapper;
+        public FornecedoresController(IFornecedorRepository fornecedorRepository,
+                                         IMapper mapper,
+                                         IFornecedorService fornecedorService)
+        {
+            _fornecedorRepository = fornecedorRepository;
+            _mapper = mapper;
+            _fornecedorService = fornecedorService;
+        }
+
+
+        [Route("lista-de-fornecedores")]
+        /*método Index que retorna uma lista de fornecedores*/
+        public async Task<ActionResult> Index()
+        {
+            return View(_mapper.Map<IEnumerable<FornecedorViewModel>>(await _fornecedorRepository.ObterTodos()));
+        }
+
+        [Route("novo-fornecedor")]
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        [Route("novo-fornecedor")]
+        [HttpPost]
+        public async Task<ActionResult> Create(FornecedorViewModel fornecedorViewModel)
+        {
+            if (!ModelState.IsValid) return View(fornecedorViewModel);
+
+            var fornecedor = _mapper.Map<Fornecedor>(fornecedorViewModel);
+            await _fornecedorService.Adicionar(fornecedor);
+
+           /*se não der certo será notificado*/
+
+            return RedirectToAction("Index");
+        }
+
+        [Route("editar-fornecedor/{id:guid}")]
+        public async Task<ActionResult> Edit(Guid id)
+        {
+            var fornecedorViewModel = await ObterFornecedorProdutosEndereco(id);
+
+            if (fornecedorViewModel == null)
+            {
+                /*retorna 404*/
+                return HttpNotFound();
+            }
+
+            return View(fornecedorViewModel);
+        }
+
+        [Route("editar-fornecedor/{id:guid}")]
+        [HttpPost]
+        public async Task<ActionResult> Edit(Guid id, FornecedorViewModel fornecedorViewModel)
+        {
+            if (id != fornecedorViewModel.Id) return HttpNotFound();
+
+            if (!ModelState.IsValid) return View(fornecedorViewModel);
+
+            var fornecedor = _mapper.Map<Fornecedor>(fornecedorViewModel);
+            await _fornecedorService.Atualizar(fornecedor);
+
+            /*Se não der certo será notificado*/
+            return RedirectToAction("Index");
+        }
+
+        [Route("excluir-fornecedor/{id:guid}")]
+        public async Task<ActionResult> Delete(Guid id)
+        {
+            var fornecedorViewModel = await ObterFornecedorEndereco(id);
+
+            if (fornecedorViewModel == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(fornecedorViewModel);
+        }
+
+        [Route("excluir-fornecedor/{id:guid}")]
+        [HttpPost, ActionName("Delete")]
+        public async Task<ActionResult> DeleteConfirmed(Guid id)
+        {
+            var fornecedor = await ObterFornecedorEndereco(id);
+
+            if (fornecedor == null) return HttpNotFound();
+
+            await _fornecedorService.Remover(id);
+
+          /*Se não der certo será notificado*/
+            return RedirectToAction("Index");
+        }
+
+        private async Task<FornecedorViewModel> ObterFornecedorEndereco(Guid id)
+        {
+            return _mapper.Map<FornecedorViewModel>(await _fornecedorRepository.ObterFornecedorEndereco(id));
+        }
+
+        private async Task<FornecedorViewModel> ObterFornecedorProdutosEndereco(Guid id)
+        {
+            return _mapper.Map<FornecedorViewModel>(await _fornecedorRepository.ObterFornecedorProdutosEndereco(id));
+        }
+    }
+}
+```
+
+__________________
+
+- [x] Em Pam.AppMvc, Controller, `FornecedoresController` incluir Details para ser chamado no Index da View/Fornecedores
+
+
+```css
+     [Route("dados-do-fornecedor/{id:guid}")]
+        public async Task<ActionResult> Details(Guid id)
+        {
+            var fornecedorViewModel = await ObterFornecedorEndereco(id);
+
+            if (fornecedorViewModel == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(fornecedorViewModel);
+        }
+```
+
+
+- [x] Em Pam.AppMvc, View, Fornecedores criar View/Exibir:
+    - Nome do modo: Index
+    - Modelo: vazia
+    - Ticar: Usar uma página de layout
+
+Arquivo `Index`
+
+```html
+@*Lista de vários fornecedores via Viewmodel*@
+@model IEnumerable<Pam.AppMvc.ViewModels.FornecedorViewModel>
+
+@{
+    ViewBag.Title = "lista de Fornecedores";
+}
+
+@* Aqui vai repetir o nome acima*@
+<h2>@ViewBag.Title</h2>
+
+@* Espaço*@
+<hr />
+
+<p>
+    <a class="btn btn-info" href="Url.Action("Create", "Fornecedores")">Novo Fornecedor>
+    </a>
+</p>
+
+@* Criar tabela estilo modal - HOVER para colorir a linha que estiver *@
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Documento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ativo)
+            </th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @* foreach para buscar item a item do meu fornecedor *@
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Documento)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ativo)
+                </td>
+                @* Alinhamento para direita *@
+                <td class="text-right">
+
+                    @*botão amarelo, href vai para link: action details, da Controller Fornecedores, puxando o id*@
+
+                    @* botão escrito DETALHES <a class="=" btn btn-warning" href="@Url.Action("Details", "Fornecedores", new {id = item.Id})">Detalhes</a>*@
+
+                    @* botão amarelo do ícone(lupa), span, glyphicon (biclioteca de ícones) *@
+                    <a class="=" btn btn-warning" href="@Url.Action("Details", "Fornecedores", new {id = item.Id})"><spam class="glyphicon glyphicon-search"></spam></a>
+
+                    @*botão azul do ícone(pincel)*@
+                    <a class="=" btn btn-info" href="@Url.Action("Edit", "Fornecedores", new {id = item.Id})"><spam class="glyphicon glyphicon-pencil"></spam></a>
+
+                    @*botão vermelho do ícone(lata de lixo)*@
+                    <a class="=" btn btn-danger" href="@Url.Action("Delete", "Fornecedores", new {id = item.Id})"><spam class="glyphicon glyphicon-trash"></spam></a>
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>
+```
+
+- [x] Em Pam.AppMvc, Views, Fornecedores criar as demais Views: Create, Delete, Details e Edit.
+
+**Create**
+```html
+@model Pam.AppMvc.ViewModels.FornecedorViewModel
+
+@{
+    ViewBag.Title = "Novo Fornecedor";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<hr />
+
+@* BeginForm recurso do Razor, inicia um formulário *@
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        @*ValidationSummary - exibir erros de preenchimento*@
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Nome, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-3">
+                @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Documento, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-3">
+                @Html.EditorFor(model => model.Documento, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Documento, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TipoFornecedor, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-3">
+                @Html.RadioButtonFor(m => m.TipoFornecedor, "1", new { @checked = true }) Pessoa Física <br />
+                @Html.RadioButtonFor(m => m.TipoFornecedor, "2") Pessoa Jurídica
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Ativo, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-3">
+                @Html.CheckBoxFor(model => model.Ativo, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-3">
+                <input type="submit" value="Cadastrar" class="btn btn-primary" />
+                <a class="btn btn-info" href="@Url.Action("Index", "Fornecedores")">Voltar</a>
+            </div>
+        </div>
+    </div>
+}
+
+
+```
+
+**Delete**
+```html
+@model Pam.AppMvc.ViewModels.FornecedorViewModel
+
+@{
+    ViewBag.Title = $"Deseja realmente excluir o Fornecedor {Model.Nome}?";
+}
+
+<h1>@ViewBag.Title</h1>
+
+<div>
+    <h4>Esta ação será permanente!</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Nome)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Nome)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Documento)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Documento)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Ativo)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Ativo)
+        </dd>
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-group">
+            <input type="submit" value="Excluir" class="btn btn-danger" />
+            @Html.ActionLink("Voltar", "Index", null, new { @class = "btn btn-default" })
+        </div>
+    }
+</div>
+```
+
+**Details**
+```html
+@model Pam.AppMvc.ViewModels.FornecedorViewModel
+
+@{
+    ViewBag.Title = "Detalhes";
+}
+
+<h1>@ViewBag.Title</h1>
+
+<div>
+    <h4>Informação somente leitura</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Nome)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Nome)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Documento)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Documento)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Ativo)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Ativo)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a href="@Url.Action("Edit", "Fornecedores", new {id = Model.Id})" class="btn btn-primary">Editar</a>
+    <a href="@Url.Action("Index", "Fornecedores")" class="btn btn-info">Voltar</a>
+</div>
+```
+
+**Edit**
+```html
+@model Pam.AppMvc.ViewModels.FornecedorViewModel
+
+@{
+    ViewBag.Title = "Editar Fornecedor";
+}
+
+<h2>@ViewBag.Title</h2>
+<hr />
+<br />
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Nome, new { @class = "control-label col-md-2" })
+            <div class="col-md-3">
+                @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Documento, new { @class = "control-label col-md-2" })
+            <div class="col-md-3">
+                @Html.EditorFor(model => model.Documento, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Documento, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TipoFornecedor, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-3">
+                @Html.RadioButtonFor(m => m.TipoFornecedor, "1") Pessoa Física <br />
+                @Html.RadioButtonFor(m => m.TipoFornecedor, "2") Pessoa Jurídica
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Ativo, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-3">
+                @Html.CheckBoxFor(model => model.Ativo, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+
+        <div class="col-md-offset-2">
+            <input type="submit" value="Salvar" class="btn btn-primary" />
+        </div>
+
+    </div>
+}
+```
+
+__________________________
+
+### Criação de Partial View
+
+- [x] Em Pam.AppMvc, Views, Fornecedores, criar partialView: _Endereco.cshtml, _AtualizarEndereco.cshtml e _DetalhesEndereco.cshtml
+
+> Contem parte uma View!
+
+**_Endereco.cshtml**
+```html
+@model Pam.AppMvc.ViewModels.FornecedorViewModel
+
+<div class="form-group">
+    @Html.LabelFor(model => model.Endereco.Cep, htmlAttributes: new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+        @Html.EditorFor(model => model.Endereco.Cep, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.Endereco.Cep, "", new { @class = "text-danger" })
+    </div>
+</div>
+
+<div class="form-group">
+    @Html.LabelFor(model => model.Endereco.Logradouro, htmlAttributes: new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+        @Html.EditorFor(model => model.Endereco.Logradouro, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.Endereco.Logradouro, "", new { @class = "text-danger" })
+    </div>
+</div>
+
+<div class="form-group">
+    @Html.LabelFor(model => model.Endereco.Numero, htmlAttributes: new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+        @Html.EditorFor(model => model.Endereco.Numero, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.Endereco.Numero, "", new { @class = "text-danger" })
+    </div>
+</div>
+
+<div class="form-group">
+    @Html.LabelFor(model => model.Endereco.Complemento, htmlAttributes: new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+        @Html.EditorFor(model => model.Endereco.Complemento, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.Endereco.Complemento, "", new { @class = "text-danger" })
+    </div>
+</div>
+
+<div class="form-group">
+    @Html.LabelFor(model => model.Endereco.Bairro, htmlAttributes: new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+        @Html.EditorFor(model => model.Endereco.Bairro, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.Endereco.Bairro, "", new { @class = "text-danger" })
+    </div>
+</div>
+
+<div class="form-group">
+    @Html.LabelFor(model => model.Endereco.Cidade, htmlAttributes: new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+        @Html.EditorFor(model => model.Endereco.Cidade, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.Endereco.Cidade, "", new { @class = "text-danger" })
+    </div>
+</div>
+
+<div class="form-group">
+    @Html.LabelFor(model => model.Endereco.Estado, htmlAttributes: new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+        @Html.EditorFor(model => model.Endereco.Estado, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.Endereco.Estado, "", new { @class = "text-danger" })
+    </div>
+</div>
+```
+
+- [x] Incluir a PartialView `_Endereco` em Create, acima do ultima DIV
+
+```html
+     </div>
+
+        <h4>Endereço</h4>
+        <hr />
+
+        @Html.Partial("_Endereco")
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-3">
+```
+____________________
+
+### Informar o erro antes do usuário submeter o formulário
+
+- [x] Em Pam.AppMvc, Views, Fornecedores, arquivo `Create`, no final do arquivo incluir:
+
+> Para validar o jquery.
+
+```html
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+```
+_____________________
+
+### Buscar dados a partir de um CEP
+
+- [x] Em Pam.App.Mvc, Scripts criar um novo Script
+"C+V" `Site`
+
+```js
+function BuscaCep() {
+    $(document).ready(function () {
+
+        function limpa_formulário_cep() {
+            // Limpa valores do formulário de cep.
+            $("#Endereco_Logradouro").val("");
+            $("#Endereco_Bairro").val("");
+            $("#Endereco_Cidade").val("");
+            $("#Endereco_Estado").val("");
+        }
+
+        //Quando o campo cep perde o foco.
+        $("#Endereco_Cep").blur(function () {
+
+            //Nova variável "cep" somente com dígitos.
+            var cep = $(this).val().replace(/\D/g, '');
+
+            //Verifica se campo cep possui valor informado.
+            if (cep != "") {
+
+                //Expressão regular para validar o CEP.
+                var validacep = /^[0-9]{8}$/;
+
+                //Valida o formato do CEP.
+                if (validacep.test(cep)) {
+
+                    //Preenche os campos com "..." enquanto consulta webservice.
+                    $("#Endereco_Logradouro").val("...");
+                    $("#Endereco_Bairro").val("...");
+                    $("#Endereco_Cidade").val("...");
+                    $("#Endereco_Estado").val("...");
+
+                    //Consulta o webservice viacep.com.br/
+                    $.getJSON("https://viacep.com.br/ws/" + cep + "/json/?callback=?",
+                        function (dados) {
+
+                            if (!("erro" in dados)) {
+                                //Atualiza os campos com os valores da consulta.
+                                $("#Endereco_Logradouro").val(dados.logradouro);
+                                $("#Endereco_Bairro").val(dados.bairro);
+                                $("#Endereco_Cidade").val(dados.localidade);
+                                $("#Endereco_Estado").val(dados.uf);
+                            } //end if.
+                            else {
+                                //CEP pesquisado não foi encontrado.
+                                limpa_formulário_cep();
+                                alert("CEP não encontrado.");
+                            }
+                        });
+                } //end if.
+                else {
+                    //cep é inválido.
+                    limpa_formulário_cep();
+                    alert("Formato de CEP inválido.");
+                }
+            } //end if.
+            else {
+                //cep sem valor, limpa formulário.
+                limpa_formulário_cep();
+            }
+        });
+    });
+}
+
+function SetModal() {
+
+    $(document).ready(function () {
+        $(function () {
+            $.ajaxSetup({ cache: false });
+
+            $("a[data-modal]").on("click",
+                function (e) {
+                    $('#myModalContent').load(this.href,
+                        function () {
+                            $('#myModal').modal({
+                                keyboard: true
+                            },
+                                'show');
+                            bindForm(this);
+                        });
+                    return false;
+                });
+        });
+    });
+}
+
+function bindForm(dialog) {
+    $('form', dialog).submit(function () {
+        $.ajax({
+            url: this.action,
+            type: this.method,
+            data: $(this).serialize(),
+            success: function (result) {
+                if (result.success) {
+                    $('#myModal').modal('hide');
+                    $('#EnderecoTarget').load(result.url); // Carrega o resultado HTML para a div demarcada
+                } else {
+                    $('#myModalContent').html(result);
+                    bindForm(dialog);
+                }
+            }
+        });
+
+        SetModal();
+        return false;
+    });
+}
+```
+
+- [x] Em Pam.AppMvc, Views, Fornecedores, arquivo `Create`, no final do arquivo incluir, antes da última }:
+
+```html
+    <script>
+        BuscaCep();
+    </script>
+```
+
+- [x] Em Pam.AppMvc, App_Start, arquivo `BundleConfig` incluir um novo Bundle, acima do último bundle:
+
+```html
+bundles.Add(new ScriptBundle("~/bundles/site").Include(
+                      "~/Scripts/site.js"));
+```
+
+- [x] Em Pam.AppMvc, Views, arquivo `Layout` incluir um novo Bundle, abaico do ultimo script de bundle:
+
+```html
+@Scripts.Render("~/bundles/site")
+```
+____________________________
+
+### ModalView - Tela Modal
+
+- [x] Em Pam.AppMvc, Views, Fornecedores, criar uma partialView `_DetalhesEndereco`
+
+**_DetalhesEndereco.cshtml**
+```html
+@using Pam.AppMvc.Extensions
+@model Pam.AppMvc.ViewModels.FornecedorViewModel
+
+<div style="padding-top: 50px">
+    <div>
+        <hr />
+        <h3>Endereço</h3>
+    </div>
+
+    @if (Model != null)
+    {
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Endereco.Logradouro)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Endereco.Numero)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Endereco.Complemento)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Endereco.Bairro)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Endereco.Cep)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Endereco.Cidade)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Endereco.Estado)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+
+            <tr>
+                <td>
+                    @Html.DisplayFor(model => model.Endereco.Logradouro)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.Endereco.Numero)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.Endereco.Complemento)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.Endereco.Bairro)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.Endereco.Cep)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.Endereco.Cidade)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.Endereco.Estado)
+                </td>
+                <td>
+                  
+                        <a class="btn btn-info" href="#"><spam class="glyphicon glyphicon-pencil"></spam> </a>
+                </td>
+            </tr>
+        </table>   
+```
+- [x] Em Pam.AppMvc, Views, Fornecedores, arquivo `Edit`, incluir no final de tudo o caminho para a PartialView `_DetalhesEndereco` (modal)
+
+```html
+<div>
+    @Html.Partial("_DetalhesEndereco")
+     
+</div>
+```
+
+Para que o botão de Editar de EditarFornecedor funcione no site, com uma modal, precisamos:
+
+- [x] Em Pam.AppMvc, Views, Fornecedores criar uma nova PartialView `_AtualizarEndereco`
+
+
+
+
+________________________________
+
+**_AtualizarEndereco.cshtml**
+```html
+
+```
 
 
 
@@ -3998,6 +4846,9 @@ _______________
 
 **Pesquisar sobre SOLID**
 
+HTML
+tr - linha
+
 Item | Ação
 -|-
 Breakpoint | ?
@@ -4015,7 +4866,8 @@ public abstract | São protegidos (protected)
 virtual | Em outros arquivos são chamados pelo overrride
 PM> update-database -Script`: | Vai apresentar o Script das criações das tabelas
 
-
+Convenção:
+Tendo NOMESController, deve existir pasta com o mesmo nome em Views, exemplo: `FornecedoresControllers`, dentro da view `Fornecedores`
 
 
 

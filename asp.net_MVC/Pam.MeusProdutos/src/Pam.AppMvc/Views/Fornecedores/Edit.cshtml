@@ -1,0 +1,63 @@
+﻿@model Pam.AppMvc.ViewModels.FornecedorViewModel
+
+@{
+    ViewBag.Title = "Editar Fornecedor";
+}
+
+<h2>@ViewBag.Title</h2>
+<hr />
+<br />
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Nome, new { @class = "control-label col-md-2" })
+            <div class="col-md-3">
+                @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Documento, new { @class = "control-label col-md-2" })
+            <div class="col-md-3">
+                @Html.EditorFor(model => model.Documento, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Documento, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TipoFornecedor, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-3">
+                @Html.RadioButtonFor(m => m.TipoFornecedor, "1") Pessoa Física <br />
+                @Html.RadioButtonFor(m => m.TipoFornecedor, "2") Pessoa Jurídica
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Ativo, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-3">
+                @Html.CheckBoxFor(model => model.Ativo, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+
+        <div class="col-md-offset-2">
+            <input type="submit" value="Salvar" class="btn btn-primary" />
+        </div>
+
+    </div>
+}
+
+<div>
+    @Html.Partial("_DetalhesEndereco")
+     
+</div>
+
+

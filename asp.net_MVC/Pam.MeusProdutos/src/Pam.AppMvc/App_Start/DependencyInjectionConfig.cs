@@ -38,13 +38,13 @@ namespace Pam.AppMvc.App_Start
         }
 
         /*Método InitializeContainer para configurar objetos: Repository, Service, Mapper*/
-        private static void InitializeContainer(Container container) 
+        private static void InitializeContainer(Container container)
         {
             container.Register<MeuDbContext>(Lifestyle.Scoped);
             container.Register<IProdutoRepository, ProdutoRepository>(Lifestyle.Scoped);
             container.Register<IProdutoService, ProdutoService>(Lifestyle.Scoped);
-            container.Register<IFornecedorRepository, Infra.Data.Repository.ProdutoRepository>(Lifestyle.Scoped);
-            container.Register<IEnderecoRepository, ProdutoRepository>(Lifestyle.Scoped);
+            container.Register<IFornecedorRepository, FornecedorRepository>(Lifestyle.Scoped);
+            container.Register<IEnderecoRepository, EnderecoRepository>(Lifestyle.Scoped);            
             container.Register<IFornecedorService, FornecedorService>(Lifestyle.Scoped);
             container.Register<INotificador, Notificador>(Lifestyle.Scoped);
 

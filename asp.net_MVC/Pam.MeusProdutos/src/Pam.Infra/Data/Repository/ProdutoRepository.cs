@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace Pam.Infra.Data.Repository
 {
-    public class ProdutosRepository : Repository<Produto>, Business.Models.Produtos.IProdutoRepository
+    public class ProdutoRepository : Repository<Produto>, IProdutoRepository
     {
-        public ProdutosRepository(MeuDbContext context) : base(context) { }
-        public async Task<Produto> ObterProdutosFornecedor(Guid id)
+        public ProdutoRepository(MeuDbContext context) : base(context) { }
+        public async Task<Produto> ObterProdutoFornecedor(Guid id)
         {
             return await Db.Produtos.AsNoTracking()
                 .Include(f => f.Fornecedor)

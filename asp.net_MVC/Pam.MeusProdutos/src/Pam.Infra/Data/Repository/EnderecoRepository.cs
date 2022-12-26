@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace Pam.Infra.Data.Repository
 {
-    public class ProdutoRepository : Repository<Endereco>, IEnderecoRepository
+    public class EnderecoRepository : Repository<Endereco>, IEnderecoRepository
     {
-        public ProdutoRepository(MeuDbContext context) : base(context) { }
+        public EnderecoRepository(MeuDbContext context) : base(context) { }
         public async Task<Endereco> ObterEnderecoPorFornecedor(Guid fornecedorId)
         {
             return await ObterPorId(fornecedorId);

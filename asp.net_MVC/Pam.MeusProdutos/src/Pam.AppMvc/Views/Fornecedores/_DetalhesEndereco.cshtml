@@ -1,0 +1,76 @@
+﻿@using Pam.AppMvc.Extensions
+@model Pam.AppMvc.ViewModels.FornecedorViewModel
+
+<div style="padding-top: 50px">
+    <div>
+        <hr />
+        <h3>Endereço</h3>
+    </div>
+
+    @if (Model != null)
+    {
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Endereco.Logradouro)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Endereco.Numero)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Endereco.Complemento)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Endereco.Bairro)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Endereco.Cep)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Endereco.Cidade)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Endereco.Estado)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+
+            <tr>
+                <td>
+                    @Html.DisplayFor(model => model.Endereco.Logradouro)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.Endereco.Numero)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.Endereco.Complemento)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.Endereco.Bairro)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.Endereco.Cep)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.Endereco.Cidade)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.Endereco.Estado)
+                </td>
+                <td>
+                    @if (this.ExibirNaURL(Model.Id))
+                    {
+                        <a class="btn btn-info" href="@Url.Action("AtualizarEndereco", "Fornecedores", new {id = Model.Id})" data-modal=""><spam class="glyphicon glyphicon-pencil"></spam> </a>
+                    }
+                </td>
+            </tr>
+        </table>
+    }
+
+</div>
+
+<script>
+    SetModal();
+</script>

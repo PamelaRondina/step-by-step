@@ -8,7 +8,7 @@ namespace Pam.Infra.Data.Repository
 {
     public class FornecedorRepository : Repository<Fornecedor>, IFornecedorRepository
     {
-        public FornecedorRepository(MeuDbContext context) : base(context) { }
+        public FornecedorRepository(MeuDbContext context) : base(context) {}
 
         public async Task<Fornecedor> ObterFornecedorEndereco(Guid id)
         {

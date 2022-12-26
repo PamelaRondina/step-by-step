@@ -1,0 +1,72 @@
+﻿@*Lista de vários fornecedores via Viewmodel*@
+@model IEnumerable<Pam.AppMvc.ViewModels.FornecedorViewModel>
+
+@{
+    ViewBag.Title = "lista de Fornecedores";
+}
+
+@* Aqui vai repetir o nome acima*@
+<h2>@ViewBag.Title</h2>
+
+@* Espaço*@
+<hr />
+
+<p>
+    <a class="btn btn-info" href="@Url.Action("Create", "Fornecedores")">
+        Novo Fornecedor
+    </a>
+</p>
+
+@* Criar tabela estilo modal - HOVER para colorir a linha que estiver *@
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Documento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ativo)
+            </th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @* foreach para buscar item a item do meu fornecedor *@
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Documento)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ativo)
+                </td>
+                @* Alinhamento para direita *@
+                <td class="text-right">
+
+                    @*botão amarelo, href vai para link: action details, da Controller Fornecedores, puxando o id*@
+
+                    @* botão escrito DETALHES <a class="=" btn btn-warning" href="@Url.Action("Details", "Fornecedores", new {id = item.Id})">Detalhes</a>*@
+
+                    @* botão amarelo do ícone(lupa), span, glyphicon (biclioteca de ícones) *@
+                    <a class="=" btn btn-warning" href="@Url.Action("Details", "Fornecedores", new {id = item.Id})"><spam class="glyphicon glyphicon-search"></spam></a>
+
+                    @*botão azul do ícone(pincel)*@
+                    <a class="=" btn btn-info" href="@Url.Action("Edit", "Fornecedores", new {id = item.Id})"><spam class="glyphicon glyphicon-pencil"></spam></a>
+
+                    @*botão vermelho do ícone(lata de lixo)*@
+                    <a class="=" btn btn-danger" href="@Url.Action("Delete", "Fornecedores", new {id = item.Id})"><spam class="glyphicon glyphicon-trash"></spam></a>
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>
+
+

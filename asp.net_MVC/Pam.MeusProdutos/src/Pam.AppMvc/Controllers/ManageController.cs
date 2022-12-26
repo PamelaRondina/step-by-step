@@ -14,17 +14,7 @@ namespace Pam.AppMvc.Controllers
     public class ManageController : Controller
     {
         private ApplicationSignInManager _signInManager;
-        private ApplicationUserManager _userManager;
-
-        public ManageController()
-        {
-        }
-
-        public ManageController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
-        {
-            UserManager = userManager;
-            SignInManager = signInManager;
-        }
+        private ApplicationUserManager _userManager;        
 
         public ApplicationSignInManager SignInManager
         {

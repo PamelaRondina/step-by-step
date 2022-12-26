@@ -8,6 +8,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
+
 namespace Pam.Infra.Data.Repository
 {
     /*Abstract Class = não se pode instanciar sozinha, deve ser herdar*/
@@ -61,7 +62,7 @@ namespace Pam.Infra.Data.Repository
 
         public virtual async Task Remover(Guid id)
         {
-            Db.Entry(new TEntity { Id = id }).State = EntityState.Deleted;
+            Db.Entry(new TEntity {Id = id}).State = EntityState.Deleted;
             await SaveChanges();
         }
 
