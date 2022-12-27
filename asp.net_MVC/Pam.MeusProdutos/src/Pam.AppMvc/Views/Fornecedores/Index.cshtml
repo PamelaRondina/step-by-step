@@ -1,4 +1,6 @@
-﻿@*Lista de vários fornecedores via Viewmodel*@
+﻿@using Pam.AppMvc.Extensions
+
+@*Lista de vários fornecedores via Viewmodel*@
 @model IEnumerable<Pam.AppMvc.ViewModels.FornecedorViewModel>
 
 @{
@@ -42,7 +44,7 @@
                     @Html.DisplayFor(modelItem => item.Nome)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Documento)
+                    @this.FormatarDocumento(item.TipoFornecedor, item.Documento)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Ativo)

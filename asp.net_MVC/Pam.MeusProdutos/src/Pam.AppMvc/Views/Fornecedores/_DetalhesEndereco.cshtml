@@ -61,7 +61,8 @@
                 </td>
                 <td>
                     @if (this.ExibirNaURL(Model.Id))
-                    {
+                            {
+                        //data-modal - botão que chama uma modal
                         <a class="btn btn-info" href="@Url.Action("AtualizarEndereco", "Fornecedores", new {id = Model.Id})" data-modal=""><spam class="glyphicon glyphicon-pencil"></spam> </a>
                     }
                 </td>

@@ -55,9 +55,26 @@
     </div>
 }
 
-<div>
-    @Html.Partial("_DetalhesEndereco")
-     
+<div id="mymModal" class="modal fade in">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id="myModalContent"></div>
+        </div>
+    </div>
 </div>
+
+<div id="EnderecoTarget">
+    @Html.Partial("_DetalhesEndereco")     
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryyval")
+
+    <script>
+        $(documtn).ready(function () {
+            Setmodal();
+        });
+    </script>
+    }
 
 

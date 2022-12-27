@@ -4777,11 +4777,89 @@ ____________________________
             </tr>
         </table>   
 ```
+
+
 - [x] Em Pam.AppMvc, Views, Fornecedores, arquivo `Edit`, incluir no final de tudo o caminho para a PartialView `_DetalhesEndereco` (modal)
 
 ```html
 <div>
-    @Html.Partial("_DetalhesEndereco")
+    @using Pam.AppMvc.Extensions
+@model Pam.AppMvc.ViewModels.FornecedorViewModel
+
+<div style="padding-top: 50px">
+    <div>
+        <hr />
+        <h3>Endereço</h3>
+    </div>
+
+    @if (Model != null)
+    {
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Endereco.Logradouro)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Endereco.Numero)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Endereco.Complemento)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Endereco.Bairro)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Endereco.Cep)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Endereco.Cidade)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Endereco.Estado)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+
+            <tr>
+                <td>
+                    @Html.DisplayFor(model => model.Endereco.Logradouro)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.Endereco.Numero)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.Endereco.Complemento)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.Endereco.Bairro)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.Endereco.Cep)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.Endereco.Cidade)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.Endereco.Estado)
+                </td>
+                <td>
+                    @if (this.ExibirNaURL(Model.Id))
+                            {
+                        //data-modal - botão que chama uma modal
+                        <a class="btn btn-info" href="@Url.Action("AtualizarEndereco", "Fornecedores", new {id = Model.Id})" data-modal=""><spam class="glyphicon glyphicon-pencil"></spam> </a>
+                    }
+                </td>
+            </tr>
+        </table>
+    }
+
+</div>
+
+<script>
+    SetModal();
+</script>
      
 </div>
 ```
@@ -4790,15 +4868,344 @@ Para que o botão de Editar de EditarFornecedor funcione no site, com uma modal,
 
 - [x] Em Pam.AppMvc, Views, Fornecedores criar uma nova PartialView `_AtualizarEndereco`
 
-
-
-
-________________________________
-
 **_AtualizarEndereco.cshtml**
+
 ```html
 
 ```
+
+- [x] Em Pam.AppMvc, Controllers, arquivo FornecedoresControllers criar um Get da Action:
+
+- Abaixo da Action `[Route("excluir-fornecedor/{id:guid}")]` POST
+
+```html
+      [Route("atualizar-endereco-fornecedor/{id:guid}")]
+        [HttpGet]
+        public async Task<ActionResult> AtualizarEndereco(Guid id)
+        {
+            var fornecedor = await ObterFornecedorEndereco(id);
+
+            if (fornecedor == null)
+            {
+                return HttpNotFound();
+            }
+
+            return PartialView("_AtualizarEndereco", new FornecedorViewModel { Endereco = fornecedor.Endereco });
+        }
+```
+
+Além de retornar a PartialView, precisamos exibir ela na ModalView
+
+- [x] Em Pam.AppMvc, Views, Fornecedores, arquivo Edit, incluir um bloco html `MyModal`:
+
+```html
+
+<div id="mymModal" class="modal fade in">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id="myModalContent"></div>
+        </div>
+    </div>
+</div>
+
+<div>
+    @Html.Partial("_DetalhesEndereco")
+```
+
+- [x] Em Pam.AppMvc, Scripts, arquivo `site.js`,  incluir uma nova função no final:
+
+```js
+function SetModal() {
+
+    $(document).ready(function () {
+        $(function () {
+            $.ajaxSetup({ cache: false });
+
+            $("a[data-modal]").on("click",
+                function (e) {
+                    $('#myModalContent').load(this.href,
+                        function () {
+                            $('#myModal').modal({
+                                keyboard: true
+                            },
+                                'show');
+                            bindForm(this);
+                        });
+                    return false;
+                });
+        });
+    });
+}
+```
+
+- [x] Retornando ao `Edit.cshtml`, adicionar no final:
+
+```html
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryyval")
+
+    <script>
+        $(documtn).ready(function () {
+            Setmodal();
+        });
+    </script>
+    }
+```
+
+- [x] Em Pam.AppMvc, Controllers, arquivo FornecedoresControllers criar uma nova Action:
+
+- Acima da Action `[Route("excluir-fornecedor/{id:guid}")] ` GET
+
+```html
+
+        [Route("obter-endereco-fornecedor/{id:guid}")]       
+        public async Task<ActionResult> ObterEndereco(Guid id)
+        {
+            var fornecedor = await ObterFornecedorEndereco(id);
+
+            if (fornecedor == null)
+            {
+                return HttpNotFound();
+            }
+
+            return PartialView("_DetalhesEndereco", fornecedor);
+        }
+```
+
+- E, abaixo do `  [Route("atualizar-endereco-fornecedor/{id:guid}")]` GET
+
+```html
+        [Route("atualizar-endereco-fornecedor/{id:guid}")]
+        [HttpPost]
+        public async Task<ActionResult> AtualizarEndereco(FornecedorViewModel fornecedorViewModel)
+        {
+            /*Não validar Nome e Documento do Fornecedor*/
+            ModelState.Remove("Nome");
+            ModelState.Remove("Documento");
+
+            if (!ModelState.IsValid) return PartialView("_AtualizarEndereco", fornecedorViewModel);
+
+            await _fornecedorService.AtualizarEndereco(_mapper.Map<Endereco>(fornecedorViewModel.Endereco));
+            
+            //E se não der certo?
+
+            var url = Url.Action("ObterEndereco", "Fornecedores", new { id = fornecedorViewModel.Endereco.FornecedorId });
+            return Json(new { success = true, url });
+        }
+```
+
+- [x] No Script `site.js`
+
+```js
+function bindForm(dialog) {
+    $('form', dialog).submit(function () {
+        $.ajax({
+            url: this.action,
+            type: this.method,
+            data: $(this).serialize(),
+            success: function (result) {
+                if (result.success) {
+                    $('#myModal').modal('hide');
+                    $('#EnderecoTarget').load(result.url); // Carrega o resultado HTML para a div demarcada
+                } else {
+                    $('#myModalContent').html(result);
+                    bindForm(dialog);
+                }
+            }
+        });
+
+        SetModal();
+        return false;
+    });
+}
+
+```
+
+- [x] Na View `Edit.cshtml`, apenas alterar o nome da DIV:
+
+```html
+<div id="EnderecoTarget">
+    @Html.Partial("_DetalhesEndereco")     
+</div>
+```
+
+- [x] Na PartialView `_DetalhesEndereco.cshtml`, incluir a chamada do JavaScript, no final
+
+```html
+<script>
+    SetModal();
+</script>
+```
+
+______________________
+
+### Extensões de Razor
+
+#### Numeração CNPF/CNPJ Padrão
+
+> Por exemplo, numeração de CPF, aparecer em todas as páginas neste formato: 000.111.333-87
+
+- [x] Em Pam.AppMVc, Extension, adicionar classe `RazorExtensions`
+
+```css
+namespace Pam.AppMvc.Extensions
+        
+{
+    public static class RazorExtensions
+    {
+        public static string FormatarDocumento(this WebViewPage page, int tipoPessoa, string documento)
+        {
+            return tipoPessoa == 1
+                ? Convert.ToUInt64(documento).ToString(@"000\.000\.000\-00")
+                : Convert.ToUInt64(documento).ToString(@"00\.000\.000\/0000\-00");
+        }
+    }
+```
+
+**Aplicar método em Delete, Details e Index**
+
+**Delete**
+
+- [x] Em Pam.AppMvc, Views, Fornecedores, arquivo `Delete.cshtml`, alterar:
+
+De
+```html
+         @Html.DisplayFor(model => model.Documento)
+```
+
+Para
+```html
+@using Pam.AppMvc.Extensions
+
+    @this.FormatarDocumento(Model.TipoFornecedor, Model.Documento)
+```
+
+No final incluir
+
+```html
+@Html.Partial("_DetalhesEndereco")
+```
+
+
+**Details**
+
+- [x] Em Pam.AppMvc, Views, Fornecedores, arquivo `Details.cshtml`, alterar:
+
+De
+```html
+@Html.DisplayFor(model => model.Documento)
+```
+
+Para
+```html
+@using Pam.AppMvc.Extensions
+
+    @this.FormatarDocumento(Model.TipoFornecedor, Model.Documento)
+```
+
+No final incluir
+
+```html
+@Html.Partial("_DetalhesEndereco")
+```
+
+**Index**
+
+- [x] Em Pam.AppMvc, Views, Fornecedores, arquivo `Index.cshtml`, alterar:
+
+De
+```html
+    @Html.DisplayFor(modelItem => item.Documento)
+```
+
+Para
+```html
+@using Pam.AppMvc.Extensions
+
+    @Html.DisplayFor(modelItem => item.Documento)
+```
+
+
+#### Exibição Botão Editar da PartialView Endereço
+
+- [x] Em Pam.AppMVc, Extension, adicionar um novo método `RazorExtensions`, no final:
+
+```css
+ public static bool ExibirNaURL(this WebViewPage value, Guid Id)
+        {
+            var urlHelper = new UrlHelper(HttpContext.Current.Request.RequestContext);
+            var urlTarget = urlHelper.Action("Edit", "Fornecedores", new { id = Id });
+            var urlTarget2 = urlHelper.Action("ObterEndereco", "Fornecedores", new { id = Id });
+
+            var urlEmUso = HttpContext.Current.Request.Path;
+
+            return urlTarget == urlEmUso || urlTarget2 == urlEmUso;
+        }
+```
+
+- [x] na View de Fornecedores `_DetalhesEndereco`
+
+> O botão de editar estará disponível apenas quando necessário
+
+```css
+ @if (this.ExibirNaURL(Model.Id))
+                            {
+                        //data-modal - botão que chama uma modal
+                        <a class="btn btn-info" href="@Url.Action("AtualizarEndereco", "Fornecedores", new {id = Model.Id})" data-modal=""><spam class="glyphicon glyphicon-pencil"></spam> </a>
+                    }
+```
+________________________________
+
+### Implementando DropDownList
+
+**DropDown do Fornecedor**
+
+- [x] Na Controller `ProdutosControllers` declatar interface:
+
+```css
+private readonly IProdutoService _produtoService;
+private readonly IFornecedorRepository fornecedorRepository;
+
+...
+
+IProdutoService produtoService,
+IFornecedorRepository fornecedorRepository,
+
+...
+
+_produtoService = produtoService;
+_fornecedorRepository = fornecedorRepository;
+```
+
+Alterar `[Route("novo-produto")]` GET
+
+```css
+public async Task<ActionResult> Create()
+        {
+            var produtoViewModel = await PopularFornecedores(new ProdutoViewModel());
+
+            return View(produtoViewModel);
+        }
+```
+
+Alterar `[Route("novo-produto")]` POST
+
+```css
+if (ModelState.IsValid)
+            {
+                await _produtoService.Adicionar(_mapper.Map<Produto>(produtoViewModel));
+```
+
+Acima do Dispose, adicionar:
+
+```css
+   private async Task<ProdutoViewModel> PopularFornecedores(ProdutoViewModel produto)
+        {
+            produto.Fornecedores = _mapper.Map<IEnumerable<FornecedorViewModel>>(await _fornecedorRepository.ObterTodos());
+            return produto;
+        }
+```
+
 
 
 
@@ -4852,8 +5259,8 @@ tr - linha
 Item | Ação
 -|-
 Breakpoint | ?
-? | Caso a instância não exista, não chama o método
-Task | ?
+? | Se
+: | Caso não
 Disposable | ?
 ! | ? (retornar negativo?)
 `||` | ou

@@ -1,4 +1,5 @@
-﻿@model Pam.AppMvc.ViewModels.FornecedorViewModel
+﻿@using Pam.AppMvc.Extensions
+@model Pam.AppMvc.ViewModels.FornecedorViewModel
 
 @{
     ViewBag.Title = "Detalhes";
@@ -20,7 +21,7 @@
             @Html.DisplayNameFor(model => model.Documento)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Documento)
+            @this.FormatarDocumento(Model.TipoFornecedor, Model.Documento)
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Ativo)
@@ -34,3 +35,6 @@
     <a href="@Url.Action("Edit", "Fornecedores", new {id = Model.Id})" class="btn btn-primary">Editar</a>
     <a href="@Url.Action("Index", "Fornecedores")" class="btn btn-info">Voltar</a>
 </div>
+
+
+@Html.Partial("_DetalhesEndereco")
