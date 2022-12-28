@@ -6,6 +6,10 @@ using Pam.AppMvc.ViewModels;
 using Pam.Business.Models.Produtos;
 using AutoMapper;
 using Pam.Business.Models.Produtos.Services;
+using Pam.Business.Models.Fornecedores;
+using Pam.Infra.Data.Repository;
+using System.IO;
+using System.Web;
 
 namespace Pam.AppMvc.Controllers
 {
@@ -15,16 +19,20 @@ namespace Pam.AppMvc.Controllers
         private readonly IProdutoRepository _produtoRepository;
         /*para modificar o BD*/
         private readonly IProdutoService _produtoService;
+
+        private readonly IFornecedorRepository fornecedorRepository;
         /*adicionar o AutoMapper*/
         private readonly IMapper _mapper;
 
         public ProdutosController(IProdutoRepository produtoRepository,
                                   IProdutoService produtoService,
+                                  IFornecedorRepository fornecedorRepository,
                                   IMapper mapper)
         {
 
             _produtoRepository = produtoRepository;
             _produtoService = produtoService;
+            _fornecedorRepository = fornecedorRepository;
             _mapper = mapper;
         }
 
@@ -34,7 +42,7 @@ namespace Pam.AppMvc.Controllers
             /*retornar uma lista de produtos ViewModel
              produtosVM = ProdutosViewModel*/
         {            
-            return View(_mapper.Map<IEnumerable<ProdutoViewModel>>(await _produtoRepository.ObterTodos()));
+            return View(_mapper.Map<IEnumerable<ProdutoViewModel>>(await _produtoRepository.ObterProdutosFornecedores()));
         }
 
      
@@ -54,9 +62,11 @@ namespace Pam.AppMvc.Controllers
                 
         [Route("novo-produto")]
         [HttpGet]
-        public ActionResult Create()
+        public async Task<ActionResult> Create()
         {
-            return View();
+            var produtoViewModel = await PopularFornecedores(new ProdutoViewModel());
+
+            return View(produtoViewModel);
         }
 
         [Route("novo-produto")]
@@ -64,14 +74,19 @@ namespace Pam.AppMvc.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create(ProdutoViewModel produtoViewModel)
         {
-            if (ModelState.IsValid)
+            produtoViewModel = await PopularFornecedores(produtoViewModel);
+            if (!ModelState.IsValid) return View(produtoViewModel);
+
+            var imgPrefixo = Guid.NewGuid() + "_";
+            if (!UploadImagem(produtoViewModel.ImagemUpload, imgPrefixo))
             {
-                await _produtoService.Adicionar(_mapper.Map<Produto>(produtoViewModel));
-               
-                return RedirectToAction("Index");
+                return View(produtoViewModel);
             }
 
-            return View(produtoViewModel);
+            produtoViewModel.Imagem = imgPrefixo + produtoViewModel.ImagemUpload.FileName;
+           await _produtoService.Adicionar(_mapper.Map<Produto>(produtoViewModel));       
+
+            return RedirectToAction("Index");
         }
 
         [Route("editar-produto/{id:guid}")]
@@ -141,8 +156,37 @@ namespace Pam.AppMvc.Controllers
         private async Task<ProdutoViewModel> ObterProduto(Guid id)
         {
             var produto = _mapper.Map<ProdutoViewModel>(await _produtoRepository.ObterProdutosPorFornecedor(id));
+            produto.Fornecedores = _mapper.Map<IEnumerable<FornecedorViewModel>>(await _fornecedorRepository.ObterTodos());
             return produto;
         }
+
+        private async Task<ProdutoViewModel> PopularFornecedores(ProdutoViewModel produto)
+        {
+            produto.Fornecedores = _mapper.Map<IEnumerable<FornecedorViewModel>>(await _fornecedorRepository.ObterTodos());
+            return produto;
+        }
+
+        private bool UploadImagem(HttpPostedFileBase img, string imgPrefixo)
+        {
+            if (img == null || img.ContentLength <= 0)
+            {
+                ModelState.AddModelError(string.Empty, "Imagem em formato inválido!");
+                return false;
+            }
+
+            var path = Path.Combine(HttpContext.Server.MapPath("~/imagens"), imgPrefixo + img.FileName);
+
+            if (System.IO.File.Exists(path))
+            {
+                ModelState.AddModelError(string.Empty, "Já existe um arquivo com este nome!");
+                return false;
+            }
+
+            img.SaveAs(path);
+            return true;
+        }
+
+
 
         protected override void Dispose(bool disposing)
         {

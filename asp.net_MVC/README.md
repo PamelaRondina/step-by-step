@@ -5191,9 +5191,30 @@ public async Task<ActionResult> Create()
 Alterar `[Route("novo-produto")]` POST
 
 ```css
-if (ModelState.IsValid)
+   public async Task<ActionResult> Create(ProdutoViewModel produtoViewModel)
+        {
+           produtoViewModel = await PopularFornecedores(new ProdutoViewModel);
+
+            if (ModelState.IsValid)
             {
                 await _produtoService.Adicionar(_mapper.Map<Produto>(produtoViewModel));
+```
+
+Alterar `[Route("lista-de-produto")]` GET
+```css
+return View(_mapper.Map<IEnumerable<ProdutoViewModel>>(await _produtoRepository.ObterProdutosFornecedores()));
+```
+
+
+No método `ObterProdutos` adicionar:
+
+```css
+   private async Task<ProdutoViewModel> ObterProduto(Guid id)
+        {
+            var produto = _mapper.Map<ProdutoViewModel>(await _produtoRepository.ObterProdutosPorFornecedor(id));
+            produto.Fornecedores = _mapper.Map<IEnumerable<FornecedorViewModel>>(await _fornecedorRepository.ObterTodos());
+            return produto;
+        }
 ```
 
 Acima do Dispose, adicionar:
@@ -5206,6 +5227,553 @@ Acima do Dispose, adicionar:
         }
 ```
 
+- [x] Em Pam.App.Mvc, Views, arquivo `Create.cshtml`
+
+De:
+```html
+@Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control" } })
+```
+
+Para
+```html
+@Html.DropDownListFor(model => model.FornecedorId, new SelectList(Model.Fornecedores, "Id", "Nome"), string.Empty, new { @class = "form-control"})
+```
+
+- [x] Em Pam.App.Mvc, Views, arquivo `Edit.cshtml`
+
+De
+```html
+ @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control" } })
+```
+Para
+```html
+@Html.DropDownListFor(model => model.FornecedorId, new SelectList(Model.Fornecedores, "Id", "Nome"), string.Empty, new { @class = "form-control"})
+```
+
+____________________________
+
+### Cultura Local de Valores (Real, Dólar, Euro)
+
+**Validar R$**
+
+- [X] Em Pam.AppMvc, Views, Produtos criar PartialView `_ListaProdutos`
+
+```html
+@using Pam.AppMvc.Extensions
+@model IEnumerable<DevIO.AppMvc.ViewModels.ProdutoViewModel>
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>
+
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Fornecedor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Valor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ativo)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <img src="~/imagens/@item.Imagem" alt="@item.Imagem" style="width: 70px; height: 100px" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Fornecedor.Nome)
+                </td>
+                <td>
+                    @item.Valor.ToString("C")
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ativo)
+                </td>
+                <td class="text-right">
+                    <a class="btn btn-warning" href="@Url.Action("Details", "Produtos", new {id = item.Id})"><spam class="glyphicon glyphicon-search"></spam></a>
+
+                    @Html.ActionLink("Editar", "Edit", new { id = item.Id }, new { @class = "btn btn-info" }).PermitirExibicao("Produto", "Editar")
+
+                    <a class="btn btn-info" href="@Url.ActionComPermissao("Edit", "Produtos", new {id = item.Id},"Produto", "Editar")"><spam class="glyphicon glyphicon-pencil"></spam></a>
+                    
+                    @{
+                        if (this.PermitirExibicao("Produto", "Excluir"))
+                        {
+                            <a class="btn btn-danger" href="@Url.Action("Delete", "Produtos", new {id = item.Id})"><spam class="glyphicon glyphicon-trash"></spam></a>
+                        }
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+```
+
+- [x] Em Pam.App.Mvc, App_Start, criar classe `CultureConfig`
+
+```css
+using System.Globalization;
+
+namespace Pam.AppMvc
+{
+    public class CultureConfig
+    {
+        public static void RegisterCulture()
+        {
+            var culture = new CultureInfo("pt-BR");
+            CultureInfo.DefaultThreadCurrentCulture = culture;
+            CultureInfo.CurrentCulture = culture;
+            CultureInfo.CurrentUICulture = culture;
+        }
+    }
+}
+```
+
+- [x] Em Pam.App.Mvc, arquivo `Startup.cs` adicionar:
+
+```css
+BundleConfig.RegisterBundles(BundleTable.Bundles);
+CultureConfig.RegisterCulture();
+```
+
+***Validar entrada de Valor com (1.000,00)**
+
+> Com ponto e vírgula - formato pt-BR
+
+- [x] Em Pam.AppMvc, Extensions, criar classe `MoedaAttribute.cs`
+
+```css
+using System;
+using System.ComponentModel.DataAnnotations;
+using System.Globalization;
+
+namespace Pam.AppMvc.Extensions
+{
+    public class MoedaAttribute : ValidationAttribute
+    {
+        protected override ValidationResult IsValid(object value, ValidationContext validationContext)
+        {
+            try
+            {
+                var moeda = Convert.ToDecimal(value, new CultureInfo("pt-BR"));
+            }
+            catch (Exception)
+            {
+                return new ValidationResult("Moeda em formato inválido");
+            }
+
+            return ValidationResult.Success;
+        }
+    }
+}
+```
+
+- [x] Em Pam.AppMvc, ViewsModel, em `ProdutoViewModel` adicionar o atributo `MoedaAttribute`
+
+```css
+ [Moeda]
+    [Required(ErrorMessage = "O campo {0} é obrigatório")]
+    public decimal Valor { get; set; }
+```
+
+- [x] Em Pam.AppMvc, Scripts, arquivo `jquery.validate.js`, incluir no final do código:
+
+```js
+$.validator.methods.range = function (value, element, param) {
+    var globalizedValue = value.replace(",", ".");
+    return this.optional(element) || (globalizedValue >= param[0] && globalizedValue <= param[1]);
+};
+
+$.validator.methods.number = function (value, element) {
+    return this.optional(element) || /-?(?:\d+|\d{1,3}(?:[\s\.,]\d{3})+)(?:[\.,]\d+)?$/.test(value);
+};
+
+$.validator.methods.date = function (value, element) {
+    var date = value.split("/");
+    return this.optional(element) || !/Invalid|NaN/.test(new Date(date[2], date[1], date[0]).toString());
+};
+```
+
+**Alterar texto que está aparecendo em inglês**
+
+- [x] Em Pam.AppMvc, Views, `Create.cshtml`, incluir parâmetros no BeginForm:
+
+```html
+@using (Html.BeginForm("Create", "Produtos", FormMethod.Post, new { id = "produtoForm"})) 
+```
+
+No final, antes do ultimo }, adicionar:
+
+```html
+<script>
+    $('#produtoForm').submit(function () {
+        const valor = $('#Valor').val();
+        $('#Valor').val(valor.replace(".", ""));
+    });
+
+    $("#Valor").attr("data-val-number", "Moeda em formato inválido");
+</script>
+```
+____________________________
+
+### Ajustar erros
+
+**Data em formato null**
+
+- [x] Em Pam.Infra, Data, Context, arquivo `MeuDbContext`:
+
+```css
+     base.OnModelCreating(modelBuilder);
+        }
+
+       public override Task<int> SaveChangesAsync(CancellationToken cancellationToken)
+        {
+            foreach (var entry in ChangeTracker.Entries().Where(entry => entry.Entity.GetType().GetProperty("DataCadastro") != null))
+            {
+                if (entry.State == EntityState.Added)
+                {
+                    entry.Property("DataCadastro").CurrentValue = DateTime.Now;
+                }
+
+                if (entry.State == EntityState.Modified)
+                {
+                    entry.Property("DataCadastro").IsModified = false;
+                }
+            }
+
+            return base.SaveChangesAsync(cancellationToken);
+        }
+```
+
+**Limitações do EF 6 fora da convenção**
+
+- [x] Em Pam.Business, Models, Fornecedores, Servives, arquivo `FornecedorService`
+
+```css
+ public async Task Adicionar(Fornecedor fornecedor)
+        {            
+            fornecedor.Endereco.Id = fornecedor.Id;
+            fornecedor.Endereco.Fornecedor = fornecedor;
+```
+
+**Upload de imagens - Front End**
+
+> A imagem está como campo de texto, vamos ajustar.
+
+- [x] Em Pam.AppMvc, Views, Produtos, arquivo `Create.cshtml` nome do título:
+
+```html
+  ViewBag.Title = "Novo Produto";
+
+  <h2>@ViewBag.Title</h2>
+  ```
+
+  Em `Create`, alterar:
+
+```css
+@using (Html.BeginForm("Create", "Produtos", FormMethod.Post, new { enctype = "multipart/form-data", id = "produtoForm" }))
+```
+
+Em `Create` Alterar o grupo da imagem:
+
+
+```css
+        <div class="form-group">
+            @Html.LabelFor(model => model.ImagemUpload, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">       
+
+                <div class="input-group">
+                    <input type="text" name="ImagemNome" id="ImagemNome" class="form-control">
+                    <span class="input-group-btn">
+                        @* Caixa de texto e botão de upload *@
+                        <label class="btn btn-primary" for="ImagemUpload">
+                            <input class="form-control" id="ImagemUpload" name="ImagemUpload" type="file" style="display: none"
+                                   onchange="$('#ImagemNome').val(this.files[0].name); $('#ImagemUpload').blur();">
+                            @* ícone do botão *@
+                            <span class="glyphicon glyphicon-cloud-upload"></span>
+                        </label>
+                    </span>
+                </div>
+
+               @Html.ValidationMessage("ImagemNome", "", new { @class = "text-danger" })
+            </div>
+        </div>
+```
+
+
+
+Ainda em `Create`, no final, adicionar:
+
+```css
+    ...$("#Valor").attr("data-val-number", "Moeda em formato inválido");
+
+    $("#ImagemNome").attr("data-val", "true");
+    $("#ImagemNome").attr("data-val-required", "Preencha o campo Imagem");
+```
+
+**Upload de imagens - Back End**
+
+- [x] Em Pam.AppMvc, criar um novo diretório `Imagens`
+
+- [x] Em Pam.AppMvc, Controllers, arquivo `ProdutosController` adicionar método para salvar as imagens, acima do Dispose:
+
+```css
+ private bool UploadImagem(HttpPostedFileBase img, string imgPrefixo)
+        {
+               if (img == null || img.ContentLength <= 0)
+            {
+                ModelState.AddModelError(string.Empty, "Imagem em formato inválido!");
+                return false;
+            }
+            var path = Path.Combine(HttpContext.Server.MapPath("~/imagens"), imgPrefixo + img.FileName);
+             if (System.IO.File.Exists(path))
+            {
+                ModelState.AddModelError(string.Empty, "Já existe um arquivo com este nome!");
+                return false;
+            }
+
+            img.SaveAs(path);
+            return true;
+        }
+```
+
+No mesmo arquivo, em `[Route("novo-produto")]` POST, alterar para:
+
+```css
+public async Task<ActionResult> Create(ProdutoViewModel produtoViewModel)
+        {
+            produtoViewModel = await PopularFornecedores(produtoViewModel);
+            if (!ModelState.IsValid) return View(produtoViewModel);
+
+            var imgPrefixo = Guid.NewGuid() + "_";
+            if (!UploadImagem(produtoViewModel.ImagemUpload, imgPrefixo))
+            {
+                return View(produtoViewModel);
+            }
+
+            produtoViewModel.Imagem = imgPrefixo + produtoViewModel.ImagemUpload.FileName;
+           await _produtoService.Adicionar(_mapper.Map<Produto>(produtoViewModel));       
+
+            return RedirectToAction("Index");
+        }
+```
+
+- [x] Em Pam.AppMvc, Views, Produtos, arquivo `Edit.cshtml` alterar nome do título:
+
+```html
+    ViewBag.Title = "Editar" + Model.Nome;
+}
+
+<h2>@ViewBag.Ttile</h2>
+  ```
+
+Em `Edit`, alterar:
+
+```css
+@using (Html.BeginForm("Edit", "Produtos", FormMethod.Post, new { enctype = "multipart/form-data", id = "produtoForm" }))
+```
+
+Em `Create` Alterar o grupo da Imagem:
+
+
+```css
+        <div class="form-group">
+            @Html.LabelFor(model => model.ImagemUpload, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">       
+
+                <div class="input-group">
+                    <input type="text" name="ImagemNome" id="ImagemNome" class="form-control">
+                    <span class="input-group-btn">
+                        @* Caixa de texto e botão de upload *@
+                        <label class="btn btn-primary" for="ImagemUpload">
+                            <input class="form-control" id="ImagemUpload" name="ImagemUpload" type="file" style="display: none"
+                                   onchange="$('#ImagemNome').val(this.files[0].name); $('#ImagemUpload').blur();">
+                            @* ícone do botão *@
+                            <span class="glyphicon glyphicon-cloud-upload"></span>
+                        </label>
+                    </span>
+                </div>
+
+               @Html.ValidationMessage("ImagemNome", "", new { @class = "text-danger" })
+            </div>
+        </div>
+```
+
+Em `Create`, no final, antes do ultimo }, adicionar:
+
+```css
+<script>
+    $('#produtoForm').submit(function () {
+        const valor = $('#Valor').val();
+        $('#Valor').val(valor.replace(".", ""));
+    });
+
+    $("#Valor").attr("data-val-number", "Moeda em formato inválido");
+</script>
+```
+
+Em `Edit`, acima do Form_group da Imagem adicionar:
+
+```css
+    <div class="form-group">
+        <label class="control-label col-md-2">Imagem Atual</label><br />
+        <div class="col-md-3">
+            <img src="~/imagens/@Model.Imagem" alt="@Model.Imagem" style="width: 70px; height: 100px" />
+        </div>
+    </div>
+```
+
+**Parar o Upload no ato da edição**
+
+- [x] Em Pam.AppMvc, Controllers, arquivo `ProdutosController` alterar ` [Route("editar-produto/{id:guid}")]` POST
+
+```css
+  [Route("editar-produto/{id:guid}")]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Edit(ProdutoViewModel produtoViewModel)
+        {
+            if (!ModelState.IsValid) return View(produtoViewModel);
+
+            var produtoAtualizacao = await ObterProduto(produtoViewModel.Id);
+            produtoViewModel.Imagem = produtoAtualizacao.Imagem;
+
+            if (produtoViewModel.ImagemUpload != null)
+            {
+                var imgPrefixo = Guid.NewGuid() + "_";
+                if (!UploadImagem(produtoViewModel.ImagemUpload, imgPrefixo))
+                {
+                    return View(produtoViewModel);
+                }
+
+                produtoAtualizacao.Imagem = imgPrefixo + produtoViewModel.ImagemUpload.FileName;
+            }
+
+            produtoAtualizacao.Nome = produtoViewModel.Nome;
+            produtoAtualizacao.Descricao = produtoViewModel.Descricao;
+            produtoAtualizacao.Valor = produtoViewModel.Valor;
+            produtoAtualizacao.Ativo = produtoViewModel.Ativo;
+            produtoAtualizacao.FornecedorId = produtoViewModel.FornecedorId;
+            produtoAtualizacao.Fornecedor = produtoViewModel.Fornecedor;
+
+            await _produtoService.Atualizar(_mapper.Map<Produto>(produtoAtualizacao));          
+
+            return RedirectToAction("Index");
+        }
+```
+
+______________________
+
+### Exibindo erros de negócio
+
+> erros que não estão mais na camada de aplicação
+
+> Por exemplo, Cadastrar CPF já existente
+
+> Passar feedback para usuário sobre o erro
+
+
+- [x] Em Pam.AppMvc, Controllers, arquivo `BaseController` adicionar:
+
+```css
+using System.Web.Mvc;
+using Pam.Business.Core.Notificacoes;
+
+
+namespace Pam.AppMvc.Controllers
+{
+    public class BaseController : Controller
+    {
+        private readonly INotificador _notificador;
+
+        public BaseController(INotificador notificador)
+        {
+            _notificador = notificador;
+        }
+
+        protected bool OperacaoValida()
+        {
+            if (!_notificador.TemNotificacao()) return true;
+
+            var notificacoes = _notificador.ObterNotificacoes();
+            notificacoes.ForEach(c => ViewData.ModelState.AddModelError(string.Empty, c.Mensagem));
+            return false;
+        }
+    }
+}
+```
+
+- [x] Em Pam.AppMvc, Controllers, arquivo `FornecedorController` adicionar em `[Route("novo-fornecedor")]` POST
+
+```css
+        await _fornecedorService.Adicionar(fornecedor);
+         
+            if (!OperacaoValida()) return View(FornecedorViewModel);
+
+```
+- [x] Em Pam.AppMvc, Controllers, arquivo `ProdutoController` adicionar:
+
+> A partir de agora a BaseController recebe do construtor uma independência, é necessário passar para a classe base.
+
+```css
+IMapper mapper,
+INotificador noticador) : base(notificador)
+```
+
+- [x] Em Pam.AppMvc, Controllers, arquivo `FornecedorController` adicionar:
+
+```css
+IMapper mapper,
+INotificador noticador) : base(notificador)
+```
+
+- [x] Em Pam.AppMvc, Views, Shared, criar uma PartialView `_ErrorSummary.cshtml`
+
+```css
+@if (ViewData.ModelState[""] != null && ViewData.ModelState[""].Errors.Any())
+{
+    <div class="alert alert-danger">
+        <button type="button" class="close" data-dismiss="alert">×</button>
+        <h3>Opa! Alguma coisa não deu certo:</h3>
+        @Html.ValidationSummary(true)
+    </div>
+}
+
+@if (!string.IsNullOrEmpty(ViewBag.Sucesso))
+{
+    <div class="alert alert-success">
+        <button type="button" class="close" data-dismiss="alert">×</button>
+        <h3>@ViewBag.Sucesso</h3>
+    </div>
+}
+```
+- [x] Em Pam.AppMvc, Views,Fornecedores, arquivo `Create`
+
+De
+```css
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+```
+
+Para
+```css
+     @Html.Partial("_ErrorSummary")
+```
+_______________
+
+### Segurança na aplicação
 
 
 
@@ -5217,6 +5785,14 @@ Acima do Dispose, adicionar:
 
 
 
+
+
+
+
+
+
+Alterar tamanho da coluna
+MD10 para MD3
 
 
 

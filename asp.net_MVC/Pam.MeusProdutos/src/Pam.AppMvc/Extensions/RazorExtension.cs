@@ -3,7 +3,7 @@ using System.Web;
 using System.Web.Mvc;
 
 namespace Pam.AppMvc.Extensions
-        
+
 {
     public static class RazorExtensions
     {
@@ -40,3 +40,5 @@ namespace Pam.AppMvc.Extensions
             return urlTarget == urlEmUso || urlTarget2 == urlEmUso;
         }
     }
+
+}
