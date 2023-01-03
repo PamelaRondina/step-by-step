@@ -14,7 +14,7 @@ namespace Pam.Infra.Data.Context
     public class MeuDbContext : DbContext
     {
         //constructor vai passar para a classe base com o nome abaixo
-        public MeuDbContext() : base(nameOrConnectionString: "DefaultConnection")
+        public MeuDbContext() : base("DefaultConnection")
         { 
             Configuration.ProxyCreationEnabled = false;
             Configuration.LazyLoadingEnabled = false;
@@ -28,13 +28,15 @@ namespace Pam.Infra.Data.Context
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             /*Deabilitar: Nome das tabelas no plural*/
-            modelBuilder.Conventions.Remove<PluralizingEntitySetNameConvention>();
+           modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+
             /*Desabilitar: a exclusão em cascata*/
             modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
             modelBuilder.Conventions.Remove<ManyToManyCascadeDeleteConvention>();
 
             /*Se for do tipo string = será VARCHAR(100)*/
-            modelBuilder.Properties<string>().Configure(p => p
+            modelBuilder.Properties<string>()
+            .Configure(p => p
                 .HasColumnType("varchar")
                 .HasMaxLength(100));
 

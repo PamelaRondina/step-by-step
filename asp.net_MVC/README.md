@@ -4234,20 +4234,20 @@ Arquivo `Index`
                     @Html.DisplayFor(modelItem => item.Ativo)
                 </td>
                 @* Alinhamento para direita *@
-                <td class="text-right">
+           <td class="text-right">
 
                     @*botão amarelo, href vai para link: action details, da Controller Fornecedores, puxando o id*@
 
                     @* botão escrito DETALHES <a class="=" btn btn-warning" href="@Url.Action("Details", "Fornecedores", new {id = item.Id})">Detalhes</a>*@
 
                     @* botão amarelo do ícone(lupa), span, glyphicon (biclioteca de ícones) *@
-                    <a class="=" btn btn-warning" href="@Url.Action("Details", "Fornecedores", new {id = item.Id})"><spam class="glyphicon glyphicon-search"></spam></a>
+                    <a class="btn btn-warning" href="@Url.Action("Details", "Fornecedores", new {id = item.Id})"><span class="glyphicon glyphicon-search"></span></a>
 
                     @*botão azul do ícone(pincel)*@
-                    <a class="=" btn btn-info" href="@Url.Action("Edit", "Fornecedores", new {id = item.Id})"><spam class="glyphicon glyphicon-pencil"></spam></a>
+                    <a class="btn btn-info" href="@Url.Action("Edit", "Fornecedores", new {id = item.Id})"><span class="glyphicon glyphicon-pencil"></span></a>
 
                     @*botão vermelho do ícone(lata de lixo)*@
-                    <a class="=" btn btn-danger" href="@Url.Action("Delete", "Fornecedores", new {id = item.Id})"><spam class="glyphicon glyphicon-trash"></spam></a>
+                    <a class="btn btn-danger" href="@Url.Action("Delete", "Fornecedores", new {id = item.Id})"><span class="glyphicon glyphicon-trash"></span></a>
                 </td>
 
             </tr>
@@ -5775,17 +5775,282 @@ _______________
 
 ### Segurança na aplicação
 
+**Bloquear senha de usuário**
+
+- [x] Em Pam.AppMvc, Controller, arquivo `AccountController`, ativar o `true` para:
+
+```css
+ var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: true);
+ ```
+
+ **Criar restrições para o usuário**
+
+> Um usuário que não esteja logado não terá a visão da lista de fornecedores
+
+- [x] Em Pam.AppMvc, Controller, arquivo `FornecedorController`, incluir `[Authorize]` abaixo do namespace
+
+> Para que seja visível a lista de fornecedores sem login
+
+Acima de `[Route("lista-de-fornecedores")]` e `  [Route("dados-do-fornecedor/{id:guid}")]` incluir `[AllowAnonymous]`
+
+> Usuário como ADM poderá excluir fornecedor, incluir no GET e no POST
+
+Acima de `     [Route("excluir-fornecedor/{id:guid}")]` ncluir `[Authorize(Roles = "Admin")]`
+
+**Incluir usuário ADMIN**
+
+- [x] Vamos abrir a tabela: em SQL Server Objetc Explorer,  SQL Server, localdb, Databases, [NOME DO PROJETO], tables,  
+
+NÃO DEU CERTO!!!!!
+
+________________
+
+### Claims
+
+- [x] Em Pam.AppMvc, Extensions, criar nova classe `CustomAuthorization.cs`
+
+```css
+using System.Linq;
+using System.Net;
+using System.Security.Claims;
+using System.Web;
+using System.Web.Mvc;
+
+namespace Pam.AppMvc.Extensions
+{
+    public class CustomAuthorization
+    {
+        public static bool ValidarClaimsUsuario(string claimName, string claimValue)
+        {
+            var identity = (ClaimsIdentity)HttpContext.Current.User.Identity;
+            var claim = identity.Claims.FirstOrDefault(c => c.Type == claimName);
+            return claim != null && claim.Value.Contains(claimValue);
+        }
+    }
+
+    public class ClaimsAuthorizeAttribute : AuthorizeAttribute
+    {
+        private readonly string _claimName;
+        private readonly string _claimValue;
+
+        public ClaimsAuthorizeAttribute(string claimName, string claimValue)
+        {
+            _claimName = claimName;
+            _claimValue = claimValue;
+        }
+
+        protected override void HandleUnauthorizedRequest(AuthorizationContext filterContext)
+        {
+            if (filterContext.HttpContext.Request.IsAuthenticated)
+            {
+                filterContext.Result = new HttpStatusCodeResult((int)HttpStatusCode.Forbidden);
+            }
+            else
+            {
+                base.HandleUnauthorizedRequest(filterContext);
+            }
+        }
+
+        protected override bool AuthorizeCore(HttpContextBase httpContext)
+        {
+            return CustomAuthorization.ValidarClaimsUsuario(_claimName, _claimValue);
+        }
+    }
+}
+```
+
+- [x] Em Pam.AppMvc, Controllers, arquivo `FornecedorController`, adicionar acima de         `[Route("novo-fornecedor")]` a claim `[ClaimsAuthorize("Fornecedor", "Adicionar")]`
 
 
+NÃO DEU CERTO!!!!!
 
 
+____________________
+
+### Validar Claim no Razor
+
+> Usuário que não tem autorização de fazer algo, ao invés de dar erro 403, não irá exibir os botões
+
+- [x] Em Pam.AppMvc, Extensions, arquivo `RazorExtension.cs` abaixo da classe `RazorExtension` adicionar:
+
+```css
+ public static bool PermitirExibicao(this WebViewPage page, string claimName, string claimValu)
+        {
+            return CustomAuthorization.ValidarClaimsUsuario(claimName, claimValue);
+        }
+```
+
+> Já que o usuário não tem permissão, não poderá criar um novo produto.
+
+- [x] Em Pam.AppMvc, View, Produto, arquivo `Index`
+alterar tudo para:
+
+```css
+@using Pam.AppMvc.Extensions
+@model IEnumerable<Pam.AppMvc.ViewModels.ProdutoViewModel>
+
+@{
+    ViewBag.Title = "Lista de Produtos";
+}
+
+<h1><b>@ViewBag.Title</b></h1>
+<hr />
+
+@{
+    if (this.PermitirExibicao("Produto", "Adicionar"))
+    {
+        <p>
+            <a class="btn btn-info" href="@Url.Action("Create", "Produtos")">
+                Novo Produto
+            </a>
+        </p>
+    }
+}
 
 
+@Html.Partial("_ListaProdutos")
+```
 
+**Eliminar a exibição dos botões em Produtos**
 
+- [x] Em Pam.AppMvc, Extensions, arquivo `RazorExtension.cs` abaixo da classe `RazorExtension` adicionar 2ª versão método PermitirExibição:
 
+```css
+public static MvcHtmlString PermitirExibicao(this MvcHtmlString value, string claimName, string claimValue)
+        {
+            return CustomAuthorization.ValidarClaimsUsuario(claimName, claimValue) ? value : MvcHtmlString.Empty;
+        }
+```
 
+- [x] Em Pam.AppMvc, View, Produto, arquivo `_ListadeProdutos` alterar tudo para:
+```css
+        <td class="text-right">
+                    <a class="btn btn-warning" href="@Url.Action("Details", "Produtos", new {id = item.Id})"><spam class="glyphicon glyphicon-search"></spam></a>
 
+                    @Html.ActionLink("Editar", "Edit", new { id = item.Id }, new { @class = "btn btn-info" }).PermitirExibicao("Produto", "Editar")
+
+                    @*<a class="btn btn-info" href="@Url.Action("Edit", "Produtos", new {id = item.Id},"Produto", "Editar")"><spam class="glyphicon glyphicon-pencil"></spam></a>*@
+
+                    @{
+                        if (this.PermitirExibicao("Produto", "Excluir"))
+                        {
+                            <a class="btn btn-danger" href="@Url.Action("Delete", "Produtos", new {id = item.Id})"><spam class="glyphicon glyphicon-trash"></spam></a>
+                        }
+                    }
+```
+
+**Botão sem Action**
+
+- [x] Em Pam.AppMvc, Extensions, arquivo `RazorExtension.cs` abaixo da classe `RazorExtension` adicionar 
+
+```css
+public static string ActionComPermissao(this UrlHelper urlHelper, string actionName, string controllerName, object routeValues, string claimName, string claimValue)
+        {
+            return CustomAuthorization.ValidarClaimsUsuario(claimName, claimValue) ? urlHelper.Action(actionName, controllerName, routeValues) : "";
+        }
+```
+
+- [x] Em `_ListaProdutos` ativar Action em Edit
+
+```css
+ <a class="btn btn-info" href="@Url.ActionComPermissao("Edit", "Produtos", new {id = item.Id},"Produto", "Editar")"><spam class="glyphicon glyphicon-pencil"></spam></a>
+ ```
+
+_____________________
+
+### Tratamento de erros do APS.NET
+
+- [x] Em Pam.AppMvc, arquivo `WebConfig` incluir abaico do módulo `FormsAuthentication`
+
+```css
+      <remove name="FormsAuthentication"/>
+    </modules>
+	  <httpErrors errorMode="Custom" existingResponse="Replace">
+		  <remove statusCode="404"/>
+		  <remove statusCode="403"/>
+		  <remove statusCode="500"/>
+
+		  <error statusCode="404" responseMode="ExecuteURL" path="/erro/404"/>
+		  <error statusCode="403" responseMode="ExecuteURL" path="/erro/403"/>
+		  <error statusCode="500" responseMode="ExecuteURL" path="/erro/500"/>	  
+	  </httpErrors>	  
+```
+
+- [x] Em Pam.AppMvc, ViewsModels, criar uma nova classe `ErrorViewModel.cs`
+
+```css
+namespace Pam.AppMvc.ViewModels
+{
+    public class ErrorViewModel
+    {
+        public int ErroCode { get; set; }
+        public string Titulo { get; set; }
+        public string Mensagem { get; set; }
+    }
+}
+```
+
+- [x] Em Pam.AppMvc, Controllers, arquivo `HomeController` criar uma nova Action no final:
+
+```css
+ [Route("erro/{id:length(3,3)}")]
+        public ActionResult Errors(int id)
+        {
+            var modelErro = new ErrorViewModel();
+
+            switch (id)
+            {
+                case 500:
+                    modelErro.Mensagem = "Ocorreu um erro! Tente novamente mais tarde ou contate nosso suporte.";
+                    modelErro.Titulo = "Ocorreu um erro!";
+                    modelErro.ErroCode = id;
+                    break;
+                case 404:
+                    modelErro.Mensagem = "A página que está procurando não existe! <br />Em caso de dúvidas entre em contato com nosso suporte";
+                    modelErro.Titulo = "Ops! Página não encontrada.";
+                    modelErro.ErroCode = id;
+                    break;
+                case 403:
+                    modelErro.Mensagem = "Você não tem permissão para fazer isto.";
+                    modelErro.Titulo = "Acesso Negado";
+                    modelErro.ErroCode = id;
+                    break;
+                default:
+                    return new HttpStatusCodeResult(500);
+            }
+
+            return View("Error", modelErro);
+        }
+    }
+```
+
+- [x] Em Pam.AppMvc, Views, Shared, arquivo `Error` editar para:
+
+```Css
+@model Pam.AppMvc.ViewModels.ErrorViewModel
+
+@{
+    ViewBag.Title = "Ocorreu um erro";
+}
+
+@{
+    if (Model == null)
+    {
+        <div>
+            <h2>Ooops! Ocorreu um erro, mas não se preocupe. Nosso time será avisado e iremos corrigir em breve!</h2>
+        </div>
+    }
+    else
+    {
+        <h1>@Html.Raw(Model.Titulo)</h1>
+        <h2 class="text-danger">@Html.Raw(Model.Mensagem)</h2>
+    }
+}
+```
+
+_______________________________
+
+### Compilação e Deploy
 
 
 

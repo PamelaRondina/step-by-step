@@ -7,20 +7,20 @@ namespace Pam.AppMvc.Extensions
 {
     public static class RazorExtensions
     {
-        //public static bool PermitirExibicao(this WebViewPage page, string claimName, string claimValu)
-        //{
-        //    return CustomAuthorization.ValidarClaimsUsuario(claimName, claimValue);
-        //}
+        public static bool PermitirExibicao(this WebViewPage page, string claimName, string claimValue)
+        {
+            return CustomAuthorization.ValidarClaimsUsuario(claimName, claimValue);
+        }
 
-        //public static MvcHtmlString PermitirExibicao(this MvcHtmlString value, string claimName, string claimValue)
-        //{
-        //    return CustomAuthorization.ValidarClaimsUsuario(claimName, claimValue) ? value : MvcHtmlString.Empty;
-        //}
+        public static MvcHtmlString PermitirExibicao(this MvcHtmlString value, string claimName, string claimValue)
+        {
+           return CustomAuthorization.ValidarClaimsUsuario(claimName, claimValue) ? value : MvcHtmlString.Empty;
+        }
 
-        //public static string ActionComPermissao(this UrlHelper urlHelper, string actionName, string controllerName, object routeValues, string claimName, string claimValue)
-        //{
-        //    return CustomAuthorization.ValidarClaimsUsuario(claimName, claimValue) ? urlHelper.Action(actionName, controllerName, routeValues) : "";
-        //}
+        public static string ActionComPermissao(this UrlHelper urlHelper, string actionName, string controllerName, object routeValues, string claimName, string claimValue)
+        {
+            return CustomAuthorization.ValidarClaimsUsuario(claimName, claimValue) ? urlHelper.Action(actionName, controllerName, routeValues) : "";
+        }
 
         public static string FormatarDocumento(this WebViewPage page, int tipoPessoa, string documento)
         {

@@ -62,7 +62,7 @@ namespace Pam.Infra.Data.Repository
 
         public virtual async Task Remover(Guid id)
         {
-            Db.Entry(new TEntity {Id = id}).State = EntityState.Deleted;
+            Db.Entry(new TEntity{Id = id}).State = EntityState.Deleted;
             await SaveChanges();
         }
 

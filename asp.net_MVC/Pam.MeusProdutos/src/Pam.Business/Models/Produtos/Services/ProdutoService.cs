@@ -1,5 +1,5 @@
 ﻿using Pam.Business.Core.Notificacoes;
-using Pam.Business.Core.Service;
+using Pam.Business.Core.Services;
 using Pam.Business.Models.Produtos.Validations;
 using System;
 using System.Threading.Tasks;

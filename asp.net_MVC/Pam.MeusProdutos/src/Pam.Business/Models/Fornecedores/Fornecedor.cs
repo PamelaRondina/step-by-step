@@ -2,6 +2,7 @@
 using Pam.Business.Core.Models;
 using Pam.Business.Models.Produtos;
 using System.Collections.Generic;
+using Pam.Business.Models.Fornecedores.Validations;
 
 namespace Pam.Business.Models.Fornecedores
 {

@@ -49,10 +49,10 @@ namespace Pam.AppMvc.ViewModels
     public bool Ativo { get; set; }
 
     ///*Fornecedor que representa o produto*/
-    //public FornecedorViewModel Fornecedor { get; set; }
+    public FornecedorViewModel Fornecedor { get; set; }
 
     ///*Lista de Fornecedores que auxilia a escrever o DropDownList*/
-    //public IEnumerable<FornecedorViewModel> Fornecedores { get; set; }
+    public IEnumerable<FornecedorViewModel> Fornecedores { get; set; }
     
     }
 

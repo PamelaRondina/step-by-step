@@ -1,0 +1,61 @@
+﻿@using Pam.AppMvc.Extensions
+@model IEnumerable<Pam.AppMvc.ViewModels.ProdutoViewModel>
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>
+
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Fornecedor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Valor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ativo)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <img src="~/imagens/@item.Imagem" alt="@item.Imagem" style="width: 70px; height: 100px" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Fornecedor.Nome)
+                </td>
+                <td>
+                    @item.Valor.ToString("C")
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ativo)
+                </td>
+                <td class="text-right">
+                    <a class="btn btn-warning" href="@Url.Action("Details", "Produtos", new {id = item.Id})"><spam class="glyphicon glyphicon-search"></spam></a>
+
+                    @Html.ActionLink("Editar", "Edit", new { id = item.Id }, new { @class = "btn btn-info" }).PermitirExibicao("Produto", "Editar")
+
+                    <a class="btn btn-info" href="@Url.ActionComPermissao("Edit", "Produtos", new {id = item.Id},"Produto", "Editar")"><spam class="glyphicon glyphicon-pencil"></spam></a>
+
+                    @{
+                        if (this.PermitirExibicao("Produto", "Excluir"))
+                        {
+                            <a class="btn btn-danger" href="@Url.Action("Delete", "Produtos", new {id = item.Id})"><spam class="glyphicon glyphicon-trash"></spam></a>
+                        }
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

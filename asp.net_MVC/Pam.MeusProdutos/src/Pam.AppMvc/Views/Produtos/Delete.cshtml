@@ -1,72 +1,78 @@
 ﻿@model Pam.AppMvc.ViewModels.ProdutoViewModel
 
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Title = "Excluir " + Model.Nome;
 }
 
-<h2>Delete</h2>
+<h2>@ViewBag.Title </h2>
+<h4>Você tem certeza disso?</h4>
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>ProdutoViewModel</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.FornecedorId)
-        </dt>
+<div class="row">
+    <div class="col-md-4">
+        <img src="~/imagens/@Model.Imagem" alt="@Model.Imagem" style="width: 300px; height: 428px" />
+    </div>
+    <div class="col-md-6">
+        <dl>
+            <dt>
+                @Html.DisplayNameFor(model => model.FornecedorId)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.FornecedorId)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Fornecedor.Nome)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Nome)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Nome)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Nome)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Nome)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Descricao)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Descricao)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Descricao)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Descricao)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Imagem)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Valor)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Imagem)
-        </dd>
+            <dd>
+                @Model.Valor.ToString("C")
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.DataCadastro)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Valor)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.DataCadastro)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Valor)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Ativo)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Ativo)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Ativo)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Ativo)
-        </dd>
+        </dl>
 
-    </dl>
+        <div>
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                @Html.Partial("_ErrorSummary")
 
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+                <div class="form-group">
+                    <input type="submit" value="Excluir" class="btn btn-danger" />
+                    <a class="btn btn-info" href="javascript:window.history.back();">Voltar</a>
+                </div>
+            }
         </div>
-    }
+    </div>
 </div>

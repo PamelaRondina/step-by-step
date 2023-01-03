@@ -4,7 +4,7 @@
 @model IEnumerable<Pam.AppMvc.ViewModels.FornecedorViewModel>
 
 @{
-    ViewBag.Title = "lista de Fornecedores";
+    ViewBag.Title = "Lista de Fornecedores";
 }
 
 @* Aqui vai repetir o nome acima*@
@@ -57,13 +57,13 @@
                     @* botão escrito DETALHES <a class="=" btn btn-warning" href="@Url.Action("Details", "Fornecedores", new {id = item.Id})">Detalhes</a>*@
 
                     @* botão amarelo do ícone(lupa), span, glyphicon (biclioteca de ícones) *@
-                    <a class="=" btn btn-warning" href="@Url.Action("Details", "Fornecedores", new {id = item.Id})"><spam class="glyphicon glyphicon-search"></spam></a>
+                    <a class="btn btn-warning" href="@Url.Action("Details", "Fornecedores", new {id = item.Id})"><span class="glyphicon glyphicon-search"></span></a>
 
                     @*botão azul do ícone(pincel)*@
-                    <a class="=" btn btn-info" href="@Url.Action("Edit", "Fornecedores", new {id = item.Id})"><spam class="glyphicon glyphicon-pencil"></spam></a>
+                    <a class="btn btn-info" href="@Url.Action("Edit", "Fornecedores", new {id = item.Id})"><span class="glyphicon glyphicon-pencil"></span></a>
 
                     @*botão vermelho do ícone(lata de lixo)*@
-                    <a class="=" btn btn-danger" href="@Url.Action("Delete", "Fornecedores", new {id = item.Id})"><spam class="glyphicon glyphicon-trash"></spam></a>
+                    <a class="btn btn-danger" href="@Url.Action("Delete", "Fornecedores", new {id = item.Id})"><span class="glyphicon glyphicon-trash"></span></a>
                 </td>
 
             </tr>

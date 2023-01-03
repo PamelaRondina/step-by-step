@@ -5,90 +5,86 @@
 }
 
 <h2>@ViewBag.Title</h2>
+<hr />
 
 
 @using (Html.BeginForm("Create", "Produtos", FormMethod.Post, new { enctype = "multipart/form-data", id = "produtoForm" }))
-            {
-                @Html.AntiForgeryToken()
+{
+   @Html.AntiForgeryToken()
+<div class="form-horizontal">
 
-                < div class="form-horizontal">
-        <h4>ProdutoViewModel</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.FornecedorId, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.FornecedorId, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.FornecedorId, "", new { @class = "text-danger" })
-            </div>
-        </div>
+    @Html.Partial("_ErrorSummary")
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Nome, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Descricao, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Descricao, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Descricao, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.ImagemUpload, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-
-                <div class="input-group">
-                    <input type="text" name="ImagemNome" id="ImagemNome" class="form-control">
-                    <span class="input-group-btn">
-                        @* Caixa de texto e botão de upload *@
-                        <label class="btn btn-primary" for="ImagemUpload">
-                            <input class="form-control" id="ImagemUpload" name="ImagemUpload" type="file" style="display: none"
-                                   onchange="$('#ImagemNome').val(this.files[0].name); $('#ImagemUpload').blur();">
-                            @* ícone do botão *@
-                            <span class="glyphicon glyphicon-cloud-upload"></span>
-                        </label>
-                    </span>
-                </div>
-
-                @Html.ValidationMessage("ImagemNome", "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Valor, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Valor, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Valor, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Ativo, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.Ativo)
-                    @Html.ValidationMessageFor(model => model.Ativo, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.FornecedorId, new { @class = "control-label col-md-2" })
+        <div class="col-md-3">
+            @Html.DropDownListFor(model => model.FornecedorId,
+                 new SelectList(Model.Fornecedores, "Id", "Nome"),
+                 string.Empty, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.FornecedorId, "", new { @class = "text-danger" })
         </div>
     </div>
-}
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
+    <div class="form-group">
+        @Html.LabelFor(model => model.Nome, new { @class = "control-label col-md-2" })
+        <div class="col-md-3">
+            @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Descricao, new { @class = "control-label col-md-2" })
+        <div class="col-md-3">
+            @Html.TextAreaFor(model => model.Descricao, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Descricao, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ImagemUpload, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-3">
+
+            <div class="input-group">
+                <input type="text" name="ImagemNome" id="ImagemNome" class="form-control">
+                <span class="input-group-btn">
+                    @* Caixa de texto e botão de upload *@
+                    <label class="btn btn-primary" for="ImagemUpload">
+                        <input class="form-control" id="ImagemUpload" name="ImagemUpload" type="file" style="display: none"
+                               onchange="$('#ImagemNome').val(this.files[0].name); $('#ImagemUpload').blur();">
+                        @* ícone do botão *@
+                        <span class="glyphicon glyphicon-cloud-upload"></span>
+                    </label>
+                </span>
+            </div>
+
+            @Html.ValidationMessage("ImagemNome", "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Valor, new { @class = "control-label col-md-2" })
+        <div class="col-md-3">
+            @Html.TextBoxFor(model => model.Valor, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Valor, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Ativo, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-3">
+            @Html.CheckBoxFor(model => model.Ativo, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-3">
+            <input type="submit" value="Cadastrar" class="btn btn-primary" />
+            <a href="@Url.Action("Index", "Produtos")" class="btn btn-info">Voltar</a>
+        </div>
+    </div>
 </div>
+}
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
@@ -96,7 +92,7 @@
 <script>
     $('#produtoForm').submit(function () {
         const valor = $('#Valor').val();
-        $('#Valor').val(valor.replace(".", ""));
+        $('#Valor').val(valor.replace(".",""));
     });
 
     $("#Valor").attr("data-val-number", "Moeda em formato inválido");

@@ -25,7 +25,7 @@ namespace Pam.Infra.Data.Mappings
                 .HasMaxLength(14)
                 .HasColumnAnnotation("IX_Documento",
                 //Index ser único não é possível cadastrar dois ou mais iguais
-                value: new IndexAnnotation(new IndexAttribute { IsUnique = true }));
+               new IndexAnnotation(new IndexAttribute {IsUnique = true}));
                
             //É Obrigatório o Endereço
             //Se não fosse obrigatório seria incluso:  HasOptional

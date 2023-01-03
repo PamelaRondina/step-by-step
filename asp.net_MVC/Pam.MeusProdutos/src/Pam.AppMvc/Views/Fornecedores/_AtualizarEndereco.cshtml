@@ -16,22 +16,23 @@
 <br />
 @using (Html.BeginForm())
 {
-@Html.AntiForgeryToken()
-<div class="form-horizontal col-md-offset-1">
+    @Html.AntiForgeryToken()
+    @Html.Partial("_ErrorSummary")
+    <div class="form-horizontal col-md-offset-1">
 
-    @Html.HiddenFor(model => model.Endereco.FornecedorId)
-    @Html.HiddenFor(model => model.Endereco.Id)
+        @Html.HiddenFor(model => model.Endereco.FornecedorId)
+        @Html.HiddenFor(model => model.Endereco.Id)
 
-    @Html.Partial("_Endereco")
+        @Html.Partial("_Endereco")
 
-    <div class="modal-footer">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Atualizar Endereço" class="btn btn-success" />
-            <input type="button" class="btn btn-info" value="Fechar" data-dismiss="modal" />
+        <div class="modal-footer">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Atualizar Endereço" class="btn btn-success" />
+                <input type="button" class="btn btn-info" value="Fechar" data-dismiss="modal" />
+            </div>
         </div>
-    </div>
 
-</div>
+    </div>
 }
 
 <script>

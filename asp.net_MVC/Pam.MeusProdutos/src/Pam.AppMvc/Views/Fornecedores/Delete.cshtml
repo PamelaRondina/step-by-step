@@ -34,6 +34,7 @@
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
+        @Html.Partial("_ErrorSummary")
 
         <div class="form-group">
             <input type="submit" value="Excluir" class="btn btn-danger" />

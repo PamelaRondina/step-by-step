@@ -48,7 +48,7 @@
     <Compile Include="Core\Notificacoes\INotificador.cs" />
     <Compile Include="Core\Notificacoes\Notificacao.cs" />
     <Compile Include="Core\Notificacoes\Notificador.cs" />
-    <Compile Include="Core\Service\BaseService.cs" />
+    <Compile Include="Core\Services\BaseService.cs" />
     <Compile Include="Core\Validations\Documentos\ValidacaoDocs.cs" />
     <Compile Include="Models\Fornecedores\Endereco.cs" />
     <Compile Include="Models\Fornecedores\Fornecedor.cs" />

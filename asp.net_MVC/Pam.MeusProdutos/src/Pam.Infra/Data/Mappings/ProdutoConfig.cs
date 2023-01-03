@@ -20,7 +20,8 @@ namespace Pam.Infra.Data.Mappings
                .HasMaxLength(1000);
 
             Property(p => p.Imagem)
-               .IsRequired();
+                .IsRequired()
+                .HasMaxLength(100);
              
             /*Produto tem um relacionamento com o Fornecedor*/
             HasRequired(p => p.Fornecedor)

@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Pam.Business.Core.Notificacoes;
-using Pam.Business.Core.Service;
+using Pam.Business.Core.Services;
 using Pam.Business.Models.Fornecedores.Validations;
 
 

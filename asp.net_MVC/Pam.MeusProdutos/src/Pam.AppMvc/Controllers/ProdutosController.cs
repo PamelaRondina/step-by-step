@@ -10,9 +10,12 @@ using Pam.Business.Models.Fornecedores;
 using Pam.Infra.Data.Repository;
 using System.IO;
 using System.Web;
+using Pam.Business.Core.Notificacoes;
+using Pam.AppMvc.Extensions;
 
 namespace Pam.AppMvc.Controllers
 {
+    [Authorize]
     public class ProdutosController : BaseController
     {
         /*para realizar a leitura*/
@@ -20,14 +23,15 @@ namespace Pam.AppMvc.Controllers
         /*para modificar o BD*/
         private readonly IProdutoService _produtoService;
 
-        private readonly IFornecedorRepository fornecedorRepository;
+        private readonly IFornecedorRepository _fornecedorRepository;
         /*adicionar o AutoMapper*/
         private readonly IMapper _mapper;
 
         public ProdutosController(IProdutoRepository produtoRepository,
                                   IProdutoService produtoService,
                                   IFornecedorRepository fornecedorRepository,
-                                  IMapper mapper)
+                                  IMapper mapper,
+                                  INotificador notificador) : base(notificador)
         {
 
             _produtoRepository = produtoRepository;
@@ -36,6 +40,7 @@ namespace Pam.AppMvc.Controllers
             _mapper = mapper;
         }
 
+        [AllowAnonymous]
         [Route("lista-de-produtos")]
         [HttpGet]
         public async Task<ActionResult> Index()
@@ -45,8 +50,8 @@ namespace Pam.AppMvc.Controllers
             return View(_mapper.Map<IEnumerable<ProdutoViewModel>>(await _produtoRepository.ObterProdutosFornecedores()));
         }
 
-     
-        [Route("dados_do_produto/{id:guid}")]
+        [AllowAnonymous]
+        [Route("dados-do-produto/{id:guid}")]
         [HttpGet]
 
         public async Task<ActionResult> Details(Guid id)
@@ -59,7 +64,8 @@ namespace Pam.AppMvc.Controllers
             }
             return View(produtoViewModel);
         }
-                
+
+        [ClaimsAuthorize("Produto", "Adicionar")]
         [Route("novo-produto")]
         [HttpGet]
         public async Task<ActionResult> Create()
@@ -69,6 +75,7 @@ namespace Pam.AppMvc.Controllers
             return View(produtoViewModel);
         }
 
+        [ClaimsAuthorize("Produto", "Adicionar")]
         [Route("novo-produto")]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -84,41 +91,65 @@ namespace Pam.AppMvc.Controllers
             }
 
             produtoViewModel.Imagem = imgPrefixo + produtoViewModel.ImagemUpload.FileName;
-           await _produtoService.Adicionar(_mapper.Map<Produto>(produtoViewModel));       
+           await _produtoService.Adicionar(_mapper.Map<Produto>(produtoViewModel));
+
+            if (!OperacaoValida()) return View(produtoViewModel);
 
             return RedirectToAction("Index");
         }
 
+        [ClaimsAuthorize("Produto", "Editar")]
         [Route("editar-produto/{id:guid}")]
         [HttpGet]
         public async Task<ActionResult> Edit(Guid id)
         {
-
             var produtoViewModel = await ObterProduto(id);
 
             if (produtoViewModel == null)
             {
-                return HttpNotFound(); 
+                return HttpNotFound();
             }
 
             return View(produtoViewModel);
-
         }
-         
-        [Route("editar-produto/{id:guid}")]        
+
+        [ClaimsAuthorize("Produto", "Editar")]
+        [Route("editar-produto/{id:guid}")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit(ProdutoViewModel produtoViewModel)
         {
-            if (ModelState.IsValid)
-            {
-                await _produtoService.Atualizar(_mapper.Map<Produto>(produtoViewModel));
+            if (!ModelState.IsValid) return View(produtoViewModel);
 
-                return RedirectToAction("Index");
+            var produtoAtualizacao = await ObterProduto(produtoViewModel.Id);
+            produtoViewModel.Imagem = produtoAtualizacao.Imagem;
+
+            if (produtoViewModel.ImagemUpload != null)
+            {
+                var imgPrefixo = Guid.NewGuid() + "_";
+                if (!UploadImagem(produtoViewModel.ImagemUpload, imgPrefixo))
+                {
+                    return View(produtoViewModel);
+                }
+
+                produtoAtualizacao.Imagem = imgPrefixo + produtoViewModel.ImagemUpload.FileName;
             }
-            return View(produtoViewModel);
+
+            produtoAtualizacao.Nome = produtoViewModel.Nome;
+            produtoAtualizacao.Descricao = produtoViewModel.Descricao;
+            produtoAtualizacao.Valor = produtoViewModel.Valor;
+            produtoAtualizacao.Ativo = produtoViewModel.Ativo;
+            produtoAtualizacao.FornecedorId = produtoViewModel.FornecedorId;
+            produtoAtualizacao.Fornecedor = produtoViewModel.Fornecedor;
+
+            await _produtoService.Atualizar(_mapper.Map<Produto>(produtoAtualizacao));
+
+            if (!OperacaoValida()) return View(produtoViewModel);
+
+            return RedirectToAction("Index");
         }
 
+        [ClaimsAuthorize("Produto", "Excluir")]
         [Route("excluir-produto/{id:guid}")]
         [HttpGet]
         public async Task<ActionResult> Delete(Guid id)
@@ -134,6 +165,7 @@ namespace Pam.AppMvc.Controllers
             return View(produtoViewModel);
         }
 
+        [ClaimsAuthorize("Produto", "Excluir")]
         [Route("excluir-produto/{id:guid}")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
@@ -150,12 +182,14 @@ namespace Pam.AppMvc.Controllers
 
             await _produtoService.Remover(id);
 
+            if (!OperacaoValida()) return View(produtoViewModel);
+
             return RedirectToAction("Index");
         }
 
         private async Task<ProdutoViewModel> ObterProduto(Guid id)
         {
-            var produto = _mapper.Map<ProdutoViewModel>(await _produtoRepository.ObterProdutosPorFornecedor(id));
+            var produto = _mapper.Map<ProdutoViewModel>(await _produtoRepository.ObterProdutoFornecedor(id));
             produto.Fornecedores = _mapper.Map<IEnumerable<FornecedorViewModel>>(await _fornecedorRepository.ObterTodos());
             return produto;
         }
@@ -185,8 +219,6 @@ namespace Pam.AppMvc.Controllers
             img.SaveAs(path);
             return true;
         }
-
-
 
         protected override void Dispose(bool disposing)
         {

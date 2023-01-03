@@ -9,11 +9,10 @@ using Pam.Business.Models.Fornecedores;
 using Pam.Business.Models.Produtos.Services;
 using Pam.Business.Models.Produtos;
 using Pam.Infra.Data.Context;
-using Pam.Business.Models.Produtos.Validations;
 using Pam.Infra.Data.Repository;
+using Pam.AppMvc.App_Start;
 
-
-namespace Pam.AppMvc.App_Start
+namespace Pam.AppMvc
 {
     public class DependencyInjectionConfig
     {
