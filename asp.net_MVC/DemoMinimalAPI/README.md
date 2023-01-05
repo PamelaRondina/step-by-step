@@ -6,13 +6,20 @@ Criar um novo Projeto no Visual Studio 2022: `API Web do ASP.NET Core`
 
 ### Conhecendo os arquivos
 
+- 
+
+```html
+<UserSecretsId>51f48ddb-5a9e-43f5-ad01-ac4abd2b3fcf</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+```
+
 - [x] Em Properties no arquivo `launchSettigns` comentar a chamada do Docker
 
 - [x] No arquvivo `Program.cs`
     - `var builder = WebApplication.CreateBuilder(args);`
         - Acesso ao container de DI;
         - Serviços que serão configurados no pipeline;
-        - Forma de configuração do request
+        - Forma de configuração do request        
 
 ```css
 var builder = WebApplication.CreateBuilder(args);
@@ -496,10 +503,10 @@ app.MapPost("/login", /*[AllowAnonymous]*/ async (
 
 Adicionar `builder.Services.AddRazorPages();` no início do Program.cs
 
-### Autorização de métodos**
+### Autorização de métodos
 
- `[AllowAnonyumous]`: Pode ser acesso por qualquer usuário
- `[Authorize]` - precisa estart logado
+ `[AllowAnonyumous]`: Pode ser acessado por qualquer usuário
+ `[Authorize]` - Usuário precisa estar logado
 
 - [x] Incluir `[AllowAnonyumous]` depois da chave:
     - ("/registro", ;
@@ -531,10 +538,172 @@ builder.Services.AddAuthorization(options =>
 - Em SQL Server Objects abrir a tabela do `AspNetUseClaims`, clicar em ViewData:
 
 
+**Site de Leitura de Token**
+
+Na aplicação em login, copiar o token:
+
+![image](https://user-images.githubusercontent.com/108991648/210563390-f3edee6f-014d-491d-b6b9-7a14ba366c37.png)
+
+No site [JTT IO](https://jwt.io/) colar o token:
+
+![image](https://user-images.githubusercontent.com/108991648/210564858-17102e36-e172-4d41-bd05-26e50167b472.png)
+
+```cs
+{
+  "email": "teste@teste.com",
+  "password": "Teste@123"
+}
+
+{
+  "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI5OWE3ZTFjMS02MTczLTQ5YTctOTY4Ny01MjI0NWQxYWQwNDkiLCJlbWFpbCI6InRlc3RlQHRlc3RlLmNvbSIsImp0aSI6ImEzZmFiMjczLTFhNDItNGE0MS1hOGQzLWQ5MDdhYjc3ODc3OCIsIm5iZiI6MTY3Mjg0NjQ3NCwiaWF0IjoxNjcyODQ2NDc0LCJFeGNsdWlyRm9ybmVjZWRvciI6IkV4Y2x1aXJGb3JuZWNlZG9yIiwiZXhwIjoxNjcyODUzNjc0LCJpc3MiOiJNaW5pbWFsUGlsb3QiLCJhdWQiOiJodHRwczovL2xvY2FsaG9zdCJ9.talSgBOYvav88Hn40bDKf6wB9_Pwmt-wrm8ZAF9NNMQ",
+  "expiresIn": 7200,
+  "userToken": {
+    "id": "99a7e1c1-6173-49a7-9687-52245d1ad049",
+    "email": "teste@teste.com",
+    "claims": [
+      {
+        "value": "ExcluirFornecedor",
+        "type": "ExcluirFornecedor"
+      }
+    ]
+  },
+  "refreshToken": null
+}
+```
+
+### Suporte a JWT no Swagger
+
+- [x] Em `Program.cs` em `builder.Services.AddSwaggerGen();` adicionar (incluir todo o método abaixo do policy)
+
+```cs
+  policy => policy.RequireClaim("ExcluirFornecedor"));
+});
+
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen(c => 
+
+{
+    c.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Title = "Minimal API Sample",
+        Description = "Developed by Eduardo Pires - Owner @ desenvolvedor.io",
+        Contact = new OpenApiContact { Name = "Eduardo Pires", Email = "contato@eduardopires.net.br" },
+        License = new OpenApiLicense { Name = "MIT", Url = new Uri("https://opensource.org/licenses/MIT") }
+    });
+
+    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        Description = "Insira o token JWT desta maneira: Bearer {seu token}",
+        Name = "Authorization",
+        Scheme = "Bearer",
+        BearerFormat = "JWT",
+        In = ParameterLocation.Header,
+        Type = SecuritySchemeType.ApiKey
+    });
+
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Type = ReferenceType.SecurityScheme,
+                    Id = "Bearer"
+                }
+            },
+            new string[] {}
+        }
+    });
+});
+
+var app = builder.Build();
+```
+
+**Gerou o botou de Authorize!**
+
+- [x] Temos um usuário com a Claim, criaremos outro sem a Claim:
+
+```cs
+{
+  "email": "pamela@eteste1.com",
+  "password": "P@m123",
+  "confirmPassword": "P@m123"
+}
+
+
+ "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxZmY1MmJmNC0yZjU3LTRlY2YtYTkxMy05MWVhYzNlMmNiZGIiLCJlbWFpbCI6InBhbWVsYUBldGVzdGUxLmNvbSIsImp0aSI6IjZiZjk3N2ZkLTQxNjEtNGY2YS04MDE4LTVmODBiYmIwM2Q5YyIsIm5iZiI6MTY3MjgzODM2OSwiaWF0IjoxNjcyODM4MzY5LCJleHAiOjE2NzI4NDU1NjksImlzcyI6Ik1pbmltYWxQaWxvdCIsImF1ZCI6Imh0dHBzOi8vbG9jYWxob3N0In0.p4o-CDZyHPsLXPXRY-b1Fy531tcx3mlQyURZkQVcXuw",
+  "expiresIn": 7200,
+  "userToken": {
+    "id": "1ff52bf4-2f57-4ecf-a913-91eac3e2cbdb",
+    "email": "pamela@eteste1.com",
+    "claims": []
+  },
+```
+
+- [x] Utilizar o token do 2º usuário, clicando no botão de Authorize.
+    - Adicionar "Bearer + espaço + token
+    - Fazer um POST em fornecedor
+
+```cs
+{
+  "id": "3fa85f64-5717-4562-b3fc-2c963f66afa4",
+  "nome": "Pamela Rondina",
+  "documento": "12345678911",
+  "ativo": true
+}
+```
+
+### Organizar o projeto
+
+- [x]~Em `Program.cs` ajustar:
+    - Adicionar `region Configure Services` abaixo de `var builder = WebApplication.CreateBuilder(args);`
+    - Finalizar região após `var app = builder.Build();` com `endregion`
+    <br>
+    - Abaixo de `endregion` criar `#region Configure Pipeline`, e após `app.Run();` incluir `#endregion`
+<br>
+    - criar método para mapear as Actions, no final de tudo e incluir todos os app: 
+        - app.MapPost("/registro",
+        - app.MapPost("/login",
+        - app.MapGet("/fornecedor",
+        - app.MapGet("/fornecedor/{id}",
+        - app.MapPost("/fornecedor", 
+        - app.MapPut("/fornecedor/{id}",
+        - app.MapDelete("/fornecedor/{id}",
+        - e transformar tudo em uma região: `region Actions`
+        
+    ```cs
+void MapActions(WebApplication app)
+{
+    ```
+
+
+
+
+
+_______________________________________
+
+**Code** | **Descrição**
+-|-
+200 |	OK e pode retornar informação
+204	| Apenas OK
+400	|Bad request
+401	|Não autorizado
+403	|Acesso negado
+404	|Não encontrado
+500	|Família 500, erro interno no servidor
+
 
 _________________________________
 
 
 [Desenvolvendo uma Minimal APIs - Canal Desenvolvedor.IO](https://www.youtube.com/watch?v=aXayqUfSNvw)
+[Eduardo Pires - Minimal-API](https://github.com/EduardoPires/Minimal-API)
 [Damian Edwards - Mini Validation](https://github.com/DamianEdwards/MiniValidation)
 [NetdevPack - Security.Identity](https://github.com/NetDevPack/Security.Identity)
+[Leitura de Token](https://jwt.io/)
+
+
+EXCLUIDO:
+  <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.17.0" />
+

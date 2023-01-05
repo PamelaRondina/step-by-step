@@ -54,10 +54,6 @@
               "target": "Package",
               "version": "[6.0.3, )"
             },
-            "Microsoft.VisualStudio.Azure.Containers.Tools.Targets": {
-              "target": "Package",
-              "version": "[1.17.0, )"
-            },
             "NetDevPack": {
               "target": "Package",
               "version": "[6.1.0, )"

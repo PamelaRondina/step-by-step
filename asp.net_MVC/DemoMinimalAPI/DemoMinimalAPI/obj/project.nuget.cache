@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "2rl/6nvRjFn7TXkr2Xbzi4+pGUVYIQbsYAoTptOSNg+4CqoSgkhd2q/aao03igutWPqQPHsmT2OR6vXxX8UFBA==",
+  "dgSpecHash": "RC8F/ZOOTo6ZKBE6KX7g2AMHCS5AdeZYSj6cv1JKCjEQQ/3fVLPFe6W3Epqk+cYhwhx05g+GfTquds8RzY913A==",
   "success": true,
   "projectFilePath": "C:\\Users\\pamela\\Documents\\cursos_tecnologia\\step-by-step\\step-by-step\\asp.net_MVC\\DemoMinimalAPI\\DemoMinimalAPI\\DemoMinimalAPI.csproj",
   "expectedPackageFiles": [
@@ -55,7 +55,6 @@
     "C:\\Users\\pamela\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.0\\microsoft.netcore.platforms.3.1.0.nupkg.sha512",
     "C:\\Users\\pamela\\.nuget\\packages\\microsoft.netcore.targets\\1.1.0\\microsoft.netcore.targets.1.1.0.nupkg.sha512",
     "C:\\Users\\pamela\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
-    "C:\\Users\\pamela\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.17.0\\microsoft.visualstudio.azure.containers.tools.targets.1.17.0.nupkg.sha512",
     "C:\\Users\\pamela\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",
     "C:\\Users\\pamela\\.nuget\\packages\\microsoft.win32.systemevents\\4.7.0\\microsoft.win32.systemevents.4.7.0.nupkg.sha512",
     "C:\\Users\\pamela\\.nuget\\packages\\minivalidation\\0.4.2-pre.20220306.48\\minivalidation.0.4.2-pre.20220306.48.nupkg.sha512",
