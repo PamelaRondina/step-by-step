@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "dgSpecHash": "HFUSzR7Np2nSlbcgWvaNt9evto4v+SiVBpXlh+xkNSTv/cMBTUicxWJwSI2INgRg7zwrUTWPUsH7rx/X0DGitA==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\pamela\\Documents\\cursos_tecnologia\\step-by-step\\step-by-step\\asp.net_MVC\\Alura.MinimalAPI\\Alura.MinimalAPI\\Alura.MinimalAPI.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\pamela\\.nuget\\packages\\microsoft.extensions.apidescription.server\\6.0.5\\microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",
+    "C:\\Users\\pamela\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
+    "C:\\Users\\pamela\\.nuget\\packages\\swashbuckle.aspnetcore\\6.4.0\\swashbuckle.aspnetcore.6.4.0.nupkg.sha512",
+    "C:\\Users\\pamela\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.4.0\\swashbuckle.aspnetcore.swagger.6.4.0.nupkg.sha512",
+    "C:\\Users\\pamela\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.4.0\\swashbuckle.aspnetcore.swaggergen.6.4.0.nupkg.sha512",
+    "C:\\Users\\pamela\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\6.4.0\\swashbuckle.aspnetcore.swaggerui.6.4.0.nupkg.sha512"
+  ],
+  "logs": []
+}

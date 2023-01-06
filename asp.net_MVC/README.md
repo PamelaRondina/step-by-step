@@ -834,7 +834,7 @@ Automatizam os processos de atualização de BD
     * -Script   gerar um Script de migração do banco, não executa.
 
 * PM > Add-Migration
-    * Comando que vai adicuinar uma migração, fazer um versionamento do projeto. 
+    * Comando que vai adicionar uma migração, fazer um versionamento do projeto. 
 * PM > Get-Migrations
     * Pegar as migrações existentes e faz uma listagem de quais foram aplicadas
 

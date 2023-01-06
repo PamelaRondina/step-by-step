@@ -398,8 +398,7 @@ builder.Services.AddJwtConfiguration(builder.Configuration, "AppSettings");
 ```
 
 - [x] No Consolde de Pacotes rodar para criar as tabelas do BD:
-    - Primeiro comando `PM> 
-    
+   
     - Primeiro comando `Add-Migration AuthInitial -Context NetDevPackAppDbContext`
     - Segundo comando `Update-database -Context NetDevPackAppDbContext`
 
@@ -707,3 +706,481 @@ _________________________________
 EXCLUIDO:
   <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.17.0" />
 
+__________________________________
+
+## Minial API - Alura
+
+Criar um novo Projeto no Visual Studio 2022: `ASP.NET Core Vazio`
+
+> .NET 6.0
+> Desmarcar: Habilitar o Docker
+
+Adicionar diretório `Model`, classes `Pessoa` e `RepositorioDePessoas`
+
+Em Pessoa:
+```cs
+namespace Alura.MinimalAPI.Model
+{
+    public class Pessoa
+    {
+        public Pessoa()
+        {
+            Identificador = Guid.NewGuid();
+        }
+        public Guid Identificador { get; set; }
+        public string Nome { get; set; } = string.Empty;
+        public string CPF { get; set; } = string.Empty;
+        public string Email { get; set; } = string.Empty;
+    }
+}
+```
+Em RepositorioDePessoas:
+```cs
+namespace Alura.MinimalAPI.Model
+{
+    public class RepositorioDePessoas
+    {
+        public RepositorioDePessoas(bool dados)
+        {
+            if (dados)
+            {
+                CriarDadosEmMemoria();
+            }
+            else
+            {
+                ListaPessoas = new List<Pessoa>();
+            }
+        }
+
+        private void CriarDadosEmMemoria()
+        {
+
+            this.ListaPessoas = new List<Pessoa>()
+            {
+                new Pessoa()
+                {
+                    Nome = "André Silva",
+                    CPF = "123456789-12",
+                    Email ="andresilva@email.com"
+                },
+                new Pessoa()
+                {
+                    Nome = "Pedro Malazartes",
+                    CPF = "182993692-12",
+                    Email ="pedromala@email.com"
+                },
+                new Pessoa()
+                {
+                    Nome = "Maria Joaquina",
+                    CPF = "987351984-12",
+                    Email ="mariajoaquina@email.com"
+                }
+            };
+        }
+
+        public List<Pessoa> ListaPessoas { get; set; }
+
+        public Pessoa AdicionarPessoas(Pessoa p)
+        {
+            ListaPessoas.Add(p);
+            return p;
+        }
+
+        public bool RemoverPessoas(string cpf)
+        {
+            var pessoaTemp = (from pessoa in this.ListaPessoas
+                              where pessoa.CPF == cpf
+                              select pessoa).SingleOrDefault();
+            if (pessoaTemp == null)
+            {
+                return false;
+            }
+            var removido = ListaPessoas.Remove(pessoaTemp);
+            return removido;
+        }
+
+        public List<Pessoa> SelecionarPessoas()
+        {
+            return this.ListaPessoas;
+        }
+
+        public Pessoa SelecionarPessoa(string cpf)
+        {
+            var pessoaTemp = (from pessoa in ListaPessoas
+                              where pessoa.CPF == cpf
+                              select pessoa).SingleOrDefault();
+            if (pessoaTemp == null)
+            {
+                return new Pessoa();
+            }
+            return pessoaTemp;
+        }
+
+        public bool AtualizarPessoas(Pessoa p)
+        {
+            var pessoaTemp = (from pessoa in this.ListaPessoas
+                              where pessoa.CPF == p.CPF
+                              select pessoa).SingleOrDefault();
+            if (pessoaTemp == null)
+            {
+                return false;
+            }
+
+            pessoaTemp.Identificador = p.Identificador;
+            pessoaTemp.Nome = p.Nome;
+
+            return true;
+        }
+
+    }
+}
+```
+
+### Global usings
+
+> importações das bibliotecas básicas que usarmos, já estão habilitadas no arquivo principal (nome do projeto)
+
+```html
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+</Project>
+
+```
+
+Com isso, o projeto acompanha as bibliotecas:
+
+```cs
+System.Net.Http.Json
+Microsoft.AspNetCore.Builder
+Microsoft.AspNetCore.Hosting
+Microsoft.AspNetCore.Http
+Microsoft.AspNetCore.Routing
+Microsoft.Extensions.Configuration
+Microsoft.Extensions.DependencyInjection
+Microsoft.Extensions.Hosting
+Microsoft.Extensions.Logging
+
+System.Collections.Generic
+System.IO
+System.Linq
+System.Net.Http
+System.Threading
+System.Threading.Task
+```
+
+### Classe Program.cs
+
+**Configuração do Swagger**
+
+- [x] Em “Ferramentas”> “Gerenciador de pacotes do Nuget” > “Gerenciador de pacotes do NuGet para essa solução…” Adicionar pacote `Swashbuckle.AspNetCore`, escolher o projeto e instalar.
+
+- [x] Em `Program.cs` adicionar:
+```cs
+using Alura.MinimalAPI.Model;
+
+var builder = WebApplication.CreateBuilder(args);
+
+//Habilitando o SWAGGER
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
+var app = builder.Build();
+
+//instanciando o repositório em memória
+var repositorio = new RepositorioDePessoas(true);
+
+app.UseSwagger();//Ativando o Swagger
+
+//Endpoints de solução
+app.MapGet("/", () => "Hello World!");
+
+// Listar todas as pessoas
+app.MapGet("/ListaPessoas/{cpf}", (string cpf) =>
+{
+    return repositorio.SelecionarPessoa(cpf);
+});
+
+//Adicionar pessoa
+app.MapPost("/ListaPessoa/adicionar", (Pessoa pessoa) =>
+{
+    return repositorio.AdicionarPessoas(pessoa);
+});
+
+//Atualizar pessoa.
+app.MapPut("/ListaPessoas/atualizar", (Pessoa pessoa) => {
+    return repositorio.AtualizarPessoas(pessoa);
+});
+
+//Remover pessoa.
+app.MapDelete("/ListaPessoas/remover", (string cpf) => {
+    return repositorio.RemoverPessoas(cpf);
+});
+
+app.UseSwaggerUI();// Ativando a interface Swagger
+
+app.Run();
+```
+
+**Referências**
+
+[Alura - Minial API](https://github.com/alura-cursos/Alura.MinimalAPI)
+
+__________________________
+
+## Minimal API - Balta.IO
+
+Criar um novo Projeto no Visual Studio 2022: `ASP.NET Core Vazio`
+
+> .NET 6.0
+> Desmarcar: Habilitar o Docker
+
+Adicionar diretório `Model`, classe `Todo`
+```cs
+SALVAR CÓDIGO!!
+```
+
+- [X] Baixar Pacotes `Install-Package Microsoft.EntityFrameworkCore.SqLite` e `Install-Package Microsoft.EntityFrameworkCore.Design`
+
+- Criar diretório "Data" e adicionar classe "AppDbContext"
+
+```cs
+SALVAR CÒDIGO
+```
+
+- [x] No Consolde de Pacotes rodar:
+    - Primeiro comando `PM> add-migration Initial`
+    - Segundo comando `PM> update-database`
+
+
+**Referências**
+[ASP.NET Minimal APIS Balta](https://www.youtube.com/watch?v=s_ihuUjnsec)
+
+________________________________
+
+## Minimal API Pizzaria - Microsoft
+
+### Configurar o projeto
+
+Criar um novo Projeto pelo terminal CMD, localizar o local onde deseja salvar:
+
+> dir: lista os diretórios
+> cd + nome: entra no diretório
+
+`dotnet new web -o PizzaStore -f net6.0`
+
+Entrar na pasta:
+`cs PizzaStore`
+
+Adicionar Pacote:
+`dotnet add package Swashbuckle.AspNetCore --version 6.2.3`
+
+Criar um arquivo e abrir o VSCode:
+`code Pizza.cs`
+
+```cs
+namespace PizzaStore.Models 
+{
+    public class Pizza
+    {
+          public int Id { get; set; }
+          public string? Name { get; set; }
+          public string? Description { get; set; }
+    }
+}
+```
+> A classe Pizza anterior é um objeto simples que representa uma pizza. Esse código é seu modelo de dados
+
+- [x] Em `Program.cs` adicionar:
+
+```cs
+using Microsoft.OpenApi.Models;
+
+var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen(c =>
+{
+     c.SwaggerDoc("v1", new OpenApiInfo {
+         Title = "PizzaStore API",
+         Description = "Making the Pizzas you love",
+         Version = "v1" });
+});
+
+var app = builder.Build();
+
+app.UseSwagger();
+app.UseSwaggerUI(c =>
+{
+   c.SwaggerEndpoint("/swagger/v1/swagger.json", "PizzaStore API V1");
+});
+
+app.MapGet("/", () => "Hello World!");
+
+app.Run();
+```
+
+### Adicionar o EF Core ao projeto
+
+No VSCode abra um terminal `Ctrl + '` para adicionar pacote `dotnet add package Microsoft.EntityFrameworkCore.InMemory --version 6.0`
+
+- [x] Adicione `using Microsoft.EntityFrameworkCore;` à parte superior dos arquivos Program.cs e Pizza.cs.
+
+- [x] Crir uma classe `PizzaDb.cs`
+
+- [x] Em `Pizza.cs` (acima do } final). adicione:
+
+```cs
+class PizzaDb : DbContext
+{
+    public PizzaDb(DbContextOptions options) : base(options) { }
+    public DbSet<Pizza> Pizzas { get; set; } = null!;
+}
+```
+
+>DbContext representa uma conexão ou sessão usada para consultar e salvar as instâncias das entidades em um banco de dados.
+
+- [x] Adicione using PizzaStore.Models; à parte superior do arquivo Program.cs.
+
+- [x] Em `Program.cs`:
+    - Antes da chamada para AddSwaggerGen, adicione:
+
+```cs
+builder.Services.AddDbContext<PizzaDb>(options => options.UseInMemoryDatabase("items"));
+```
+
+### Retornar uma lista de itens
+
+    - Antes de app.Run, adicione:
+```cs
+app.MapGet("/pizzas", async (PizzaDb db) => await db.Pizzas.ToListAsync());
+```
+
+>Para ler de uma lista de itens na lista de pizzas
+
+### Exeutar o Aplicativo
+
+- No terminal: `dotnet run` 
+- Na saída aparecerá `http://localhot:7049` (podendo der qualquer númeração)
+- Clique no link e adicione: `https://localhost:7049/swagger/`
+
+>Se quiser substituir o comportamento de seleção de porta aleatória, você poderá definir as portas a serem usadas em launchSettings.json.
+
+> Para parar de rodar a aplicação no terminal `Ctrl+C`
+
+### Criar itens
+
+> adicionar novos itens à lista de pizzas.
+
+- [x] Em `Program.cs` adicione abaixo de app.MapGet(/"pizzas):
+
+```cs
+app.MapPost("/pizza", async (PizzaDb db, Pizza pizza) =>
+{
+    await db.Pizzas.AddAsync(pizza);
+    await db.SaveChangesAsync();
+    return Results.Created($"/pizza/{pizza.Id}", pizza);
+});
+```
+
+### Testar a API
+
+- No terminal: `dotnet run` 
+- Na saída aparecerá `http://localhot:7049` (podendo der qualquer númeração)
+- Clique no link e adicione: `https://localhost:7049/swagger/`
+- Para adicionar dados: Post/pizza > Try it out > Adicione os dados > Execute
+- Para ler os dados: Get/pizza > Tru it out > Execute > Responde body (teve ter informações inclusas)
+- No terminal, parar a aplicação `Ctrl+C`
+
+### Obter um único item
+
+> Para GET (OBTER) um item por id
+
+```css
+app.MapGet("/pizza/{id}", async (PizzaDb db, int id) => await db.Pizzas.FindAsync(id));
+```
+
+### Atualizar um item
+
+> Atualizar um item existente
+
+- [x] Em `Program.cs` adicionar abaixo da rota GET/pizza{id}
+
+```cs
+app.MapPut("/pizza/{id}", async (PizzaDb db, Pizza updatepizza, int id) =>
+{
+      var pizza = await db.Pizzas.FindAsync(id);
+      if (pizza is null) return Results.NotFound();
+      pizza.Name = updatepizza.Name;
+      pizza.Description = updatepizza.Description;
+      await db.SaveChangesAsync();
+      return Results.NoContent();
+});
+```
+
+### Excluir um item
+
+> Para excluir um item existente
+
+```cs
+app.MapDelete("/pizza/{id}", async (PizzaDb db, int id) =>
+{
+   var pizza = await db.Pizzas.FindAsync(id);
+   if (pizza is null)
+   {
+      return Results.NotFound();
+   }
+   db.Pizzas.Remove(pizza);
+   await db.SaveChangesAsync();
+   return Results.Ok();
+});
+```
+### Configurar o banco de dados SQLite
+
+Há suporte para outros bancos de dados [Suporte BD EF Core](https://learn.microsoft.com/pt-br/ef/core/providers/?tabs=dotnet-core-cli)
+
+1) No terminal, instala pacote: `dotnet add package Microsoft.EntityFrameworkCore.Sqlite --version 6.0`
+
+2) No terminal, instalar pacote: `dotnet tool install --global dotnet-ef`
+
+> Ferramentas EF Core: ferramentas para EF Core realizar tarefas de desenvolvimento de tempo de design. Por exemplo, eles criam migrações, aplicam migrações e geram código para um modelo com base em um banco de dados existente.
+
+3) No terminal instalar pacote: `dotnet add package Microsoft.EntityFrameworkCore.Design --version 6.0`
+
+> Microsoft.EntityFrameworkCore.Design: contém toda a lógica de tempo de design para o EF Core criar seu banco de dados.
+
+### Habilitar a criação do banco de dados
+
+
+
+
+
+
+_____
+Questionário:
+
+1. Qual das afirmações a seguir é verdadeira sobre o EF (Entity Framework) Core?
+
+Ele é uma tecnologia de acesso a dados leve, extensível e de plataforma cruzada para aplicativos .NET.
+
+2. Qual das afirmações a seguir descreve como uma classe de entidade é usada no EF Core?
+
+Cada classe representa um objeto de negócios em seu aplicativo e geralmente é mapeado para uma única tabela de banco de dados.
+
+3. Qual etapa é usada para criar o banco de dados SQLite?
+
+Executar o comando dotnet ef database update depois de criar uma ou mais migrações.
+
+
+
+
+
+
+
+[Minimal API - Microsoft](https://learn.microsoft.com/pt-br/training/modules/build-web-api-minimal-database/6-knowledge-check)
+[Documentação EF Core - Banco de Dados Suportados](https://learn.microsoft.com/pt-br/training/modules/build-web-api-minimal-database/4-add-sqlite-database-provider)

@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\buildMultiTargeting\Balta.MinimalAPI.props" />
+</Project>
