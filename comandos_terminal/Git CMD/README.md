@@ -12,6 +12,7 @@ Branco	|	Arquivo
 DIR | Lista arquivos e pastas
 ERASE + Nome | Deletar Diretório
 CD | Entrar no diretório
+CD .. | Retorna um diretório
 MD + Nome | Criar Diretório
 CODE + Nome | Cria arquivo e abre o VSCODE 
 
@@ -20,7 +21,6 @@ CODE + Nome | Cria arquivo e abre o VSCODE
 clear | limpar o terminal
 ls | Lista arquivos
 ls -a | Lista arquivos + ocultos
-cd - | Retorna um diretório/carpeta
 touch nomeDoArquivo| Criar arquivo/archivo
 python -i | Iniciar Python
 exit() | Encerrar Python

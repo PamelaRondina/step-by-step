@@ -4,9 +4,16 @@ using PizzaStore.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
+var connectionString = builder.Configuration.GetConnectionString("Pizzas") ?? "Data Source=Pizzas.db";
+
 builder.Services.AddEndpointsApiExplorer();
 
-builder.Services.AddDbContext<PizzaDb>(options => options.UseInMemoryDatabase("items"));
+//dados salvos em memória
+//builder.Services.AddDbContext<PizzaDb>(options => options.UseInMemoryDatabase("items"));
+
+//dados salvos no BD
+builder.Services.AddSqlite<PizzaDb>(connectionString);
+
 
 builder.Services.AddSwaggerGen(c =>
 {

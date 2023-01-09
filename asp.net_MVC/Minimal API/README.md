@@ -1,12 +1,12 @@
-## Minimal API's
+# Minimal API's
 
+## Minimal API - Desenvoldor.IO
 Criar um novo Projeto no Visual Studio 2022: `API Web do ASP.NET Core`
 
 > Desmarcar: Usar controladores(desmarque para usar APIs mínimas)
 
 ### Conhecendo os arquivos
 
-- 
 
 ```html
 <UserSecretsId>51f48ddb-5a9e-43f5-ad01-ac4abd2b3fcf</UserSecretsId>
@@ -127,11 +127,11 @@ Para versões antigas devemos tirar o `    <ImplicitUsings>enable</ImplicitUsing
 ```
 
 - [x] Ou adicionar via `Console do Gerenciados de Pacotes`
-    Install-Package Microsoft.EntityFrameworkCore.SqlServer
-    Install-Package Microsoft.EntityFrameworkCore.Tools
+    - Install-Package Microsoft.EntityFrameworkCore.SqlServer
+    - Install-Package Microsoft.EntityFrameworkCore.Tools
 
 
- [x] Em DemoMinimalAPI criar repositório `Data`, dentro criar classe `MinimalContext.cs`
+- [x] Em DemoMinimalAPI criar repositório `Data`, dentro criar classe `MinimalContext.cs`
 
 ```css
 using DemoMinimalAPI.Models;
@@ -942,16 +942,43 @@ Criar um novo Projeto no Visual Studio 2022: `ASP.NET Core Vazio`
 
 Adicionar diretório `Model`, classe `Todo`
 ```cs
-SALVAR CÓDIGO!!
+public record Todo(Guid Id, string Title, bool Done);
 ```
 
-- [X] Baixar Pacotes `Install-Package Microsoft.EntityFrameworkCore.SqLite` e `Install-Package Microsoft.EntityFrameworkCore.Design`
+- [X] Baixar Pacotes: 
+    -Install-Package Microsoft.EntityFrameworkCore.SqLite
+    - Install-Package Microsoft.EntityFrameworkCore.Design
+    - Install-Package Microsoft.EntityFrameworkCore.Tools
 
-- Criar diretório "Data" e adicionar classe "AppDbContext"
+- [X] Criar diretório "Data" e adicionar classe "AppDbContext"
 
 ```cs
-SALVAR CÒDIGO
+using Microsoft.EntityFrameworkCore;
+
+namespace Baltar.MinimalAPI.Data
+{
+    public class AppDbContext : DbContext
+    {
+        public DbSet<Todo> Todos { get; set; }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder options)
+            => options.UseSqlServer("DataSource=app.db;Cache:Shared");
+
+    }
+}
 ```
+
+- [x] Em `Program.cs`:
+    - Adicionar abaixo de args:
+   
+   ```cs
+   builder.Services.AddDbContext<AppDbContext>();
+```
+    - Adicionar em app.MapGet:
+```cs
+
+```
+
 
 - [x] No Consolde de Pacotes rodar:
     - Primeiro comando `PM> add-migration Initial`
@@ -1156,11 +1183,38 @@ Há suporte para outros bancos de dados [Suporte BD EF Core](https://learn.micro
 
 ### Habilitar a criação do banco de dados
 
+- Em `Program.cs`, em `var builder = WebApplication.CreateBuilder(args);`adicione:
+
+> Esse código verifica o provedor de configuração em busca de uma cadeia de conexão chamada Pizzas. Se ele não encontrar uma, usará Data Source=Pizzas.db como a cadeia de conexão. O SQLite mapeará isso para um arquivo.
+
+**Substituição de banco de dados de memória para persistente**
+
+De: 
+> dados salvos em memória
+```cs
+builder.Services.AddDbContext<PizzaDb>(options => options.UseInMemoryDatabase("items"));
+```
+
+Para:
+> dados salvos no BD
+```cs
+builder.Services.AddSqlite<PizzaDb>(connectionString);
+```
+
+**Início da criação - BD**
+
+- 1ª etapa: criar a migração
+
+Salve todas as alterações e no terminal inclua: `dotnet ef migrations add InitialCreate`
+
+> Será criado um diretório `Migrations` com dois arquivos
+
+- 2º etapa: concluir a migração
+
+No terminal inclua: `dotnet ef database update`
 
 
-
-
-
+**
 _____
 Questionário:
 
