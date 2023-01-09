@@ -947,7 +947,13 @@ public record Todo(Guid Id, string Title, bool Done);
 
 - [X] Baixar Pacotes: 
     -Install-Package Microsoft.EntityFrameworkCore.SqLite
-    - Install-Package Microsoft.EntityFrameworkCore.Design
+    - Install-Package Microsoft.EntityFrameworkCore.Design ou 
+        ```html
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.1">
+  <PrivateAssets>all</PrivateAssets>
+  <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+</PackageReference>
+    ´´´
     - Install-Package Microsoft.EntityFrameworkCore.Tools
 
 - [X] Criar diretório "Data" e adicionar classe "AppDbContext"
@@ -971,18 +977,29 @@ namespace Baltar.MinimalAPI.Data
 - [x] Em `Program.cs`:
     - Adicionar abaixo de args:
    
-   ```cs
+```cs
    builder.Services.AddDbContext<AppDbContext>();
 ```
     - Adicionar em app.MapGet:
 ```cs
+app.MapGet("v1/todos", (AppDbContext context) =>
+{
+    var todos = context.Todos.ToList();
+    return Results.Ok(todo);
+});
 
+app.Run();
 ```
 
+**Criar o BD**
 
-- [x] No Consolde de Pacotes rodar:
-    - Primeiro comando `PM> add-migration Initial`
-    - Segundo comando `PM> update-database`
+- [x] No Terminal rodar:
+    - Primeiro comando `dotnet ef migrations add InitialCreation`
+
+> Vai gerar o diretório `Migrations`
+
+  - Segundo comando: 
+    - Segundo comando `dotnet ef database update`
 
 
 **Referências**
@@ -1171,7 +1188,7 @@ app.MapDelete("/pizza/{id}", async (PizzaDb db, int id) =>
 
 Há suporte para outros bancos de dados [Suporte BD EF Core](https://learn.microsoft.com/pt-br/ef/core/providers/?tabs=dotnet-core-cli)
 
-1) No terminal, instala pacote: `dotnet add package Microsoft.EntityFrameworkCore.Sqlite --version 6.0`
+1) No terminal, instalar pacote: `dotnet add package Microsoft.EntityFrameworkCore.Sqlite --version 6.0`
 
 2) No terminal, instalar pacote: `dotnet tool install --global dotnet-ef`
 
