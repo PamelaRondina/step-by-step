@@ -1315,21 +1315,19 @@ _________________________________
 
 # Referências
 
-[Youtube - Desenvolvendo uma Minimal API Completa - Canal Desenvolvedor.io](https://www.youtube.com/watch?v=aXayqUfSNvw)
-[Youtube - Patrick God - CRUD with a .NET 6 Minimal API](https://www.youtube.com/watch?v=NhWMx5atpms)
-
-[Documentação - Minimal API - Microsoft](https://learn.microsoft.com/pt-br/training/modules/build-web-api-minimal-database/6-knowledge-check)
-[Documentação - EF Core - Banco de Dados Suportados](https://learn.microsoft.com/pt-br/training/modules/build-web-api-minimal-database/4-add-sqlite-database-provider)
-
-[GitHub - Eduardo Pires - Minimal-API](https://github.com/EduardoPires/Minimal-API)
-[GitHub - Damian Edwards - Mini Validation](https://github.com/DamianEdwards/MiniValidation)
-[GitHub - NetdevPack - Security.Identity](https://github.com/NetDevPack/Security.Identity)
-[GitHub - Alura - Minial API](https://github.com/alura-cursos/Alura.MinimalAPI)
-[GitHUb - Patrick God - Minimal API](https://github.com/patrickgod/MinimalAPITutorial)
-
-[Artigo - Alura: Minimal API.NET: o que é isso?](https://www.alura.com.br/artigos/minimal-api-net-o-que-e-isso#:~:text=%F0%9F%98%89-,O%20que%20%C3%A9%20uma%20Minimal%20API%3F,m%C3%ADnimo%20de%20depend%C3%AAncias%20do%20ASP%20.)
-
-[Leitura de Token](https://jwt.io/)
+Referência | Link
+-|-
+Youtube - Desenvolvendo uma Minimal API Completa - Canal Desenvolvedor.io | [Link](https://www.youtube.com/watch?v=aXayqUfSNvw)
+Youtube - Patrick God - CRUD with a .NET 6 Minimal API |[Link](https://www.youtube.com/watch?v=NhWMx5atpms)
+Documentação - Minimal API - Microsoft | [Link](https://learn.microsoft.com/pt-br/training/modules/build-web-api-minimal-database/1-introduction)
+Documentação - EF Core - Banco de Dados Suportados | [Link](https://learn.microsoft.com/pt-br/training/modules/build-web-api-minimal-database/4-add-sqlite-database-provider)
+GitHub - Eduardo Pires - Minimal-API | [Link](https://github.com/EduardoPires/Minimal-API)
+GitHub - Damian Edwards - Mini Validation |[Link](https://github.com/DamianEdwards/MiniValidation)
+GitHub - NetdevPack - Security.Identity|[Link](https://github.com/NetDevPack/Security.Identity)
+GitHub - Alura - Minimal API|[Link](https://github.com/alura-cursos/Alura.MinimalAPI)
+GitHUb - Patrick God - Minimal API|[Link](https://github.com/patrickgod/MinimalAPITutorial)
+Artigo - Alura: Minimal API.NET: o que é isso?|[Link](https://www.alura.com.br/artigos/minimal-api-net-o-que-e-isso#:~:text=%F0%9F%98%89-,O%20que%20%C3%A9%20uma%20Minimal%20API%3F,m%C3%ADnimo%20de%20depend%C3%AAncias%20do%20ASP%20.)
+Leitura de Token|[Link](https://jwt.io/)
 
 
 
