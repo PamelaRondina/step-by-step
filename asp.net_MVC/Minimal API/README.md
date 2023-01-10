@@ -930,81 +930,6 @@ app.Run();
 **Referências**
 
 [Alura - Minial API](https://github.com/alura-cursos/Alura.MinimalAPI)
-
-__________________________
-
-## Minimal API - Balta.IO
-
-Criar um novo Projeto no Visual Studio 2022: `ASP.NET Core Vazio`
-
-> .NET 6.0
-> Desmarcar: Habilitar o Docker
-
-Adicionar diretório `Model`, classe `Todo`
-```cs
-public record Todo(Guid Id, string Title, bool Done);
-```
-
-- [X] Baixar Pacotes: 
-    -Install-Package Microsoft.EntityFrameworkCore.SqLite
-    - Install-Package Microsoft.EntityFrameworkCore.Design ou 
-        ```html
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.1">
-  <PrivateAssets>all</PrivateAssets>
-  <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
-</PackageReference>
-    ´´´
-    - Install-Package Microsoft.EntityFrameworkCore.Tools
-
-- [X] Criar diretório "Data" e adicionar classe "AppDbContext"
-
-```cs
-using Microsoft.EntityFrameworkCore;
-
-namespace Baltar.MinimalAPI.Data
-{
-    public class AppDbContext : DbContext
-    {
-        public DbSet<Todo> Todos { get; set; }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder options)
-            => options.UseSqlServer("DataSource=app.db;Cache:Shared");
-
-    }
-}
-```
-
-- [x] Em `Program.cs`:
-    - Adicionar abaixo de args:
-   
-```cs
-   builder.Services.AddDbContext<AppDbContext>();
-```
-    - Adicionar em app.MapGet:
-```cs
-app.MapGet("v1/todos", (AppDbContext context) =>
-{
-    var todos = context.Todos.ToList();
-    return Results.Ok(todo);
-});
-
-app.Run();
-```
-
-**Criar o BD**
-
-- [x] No Terminal rodar:
-    - Primeiro comando `dotnet ef migrations add InitialCreation`
-
-> Vai gerar o diretório `Migrations`
-
-  - Segundo comando: 
-    - Segundo comando `dotnet ef database update`
-
-
-**Referências**
-[ASP.NET Minimal APIS Balta](https://www.youtube.com/watch?v=s_ihuUjnsec)
-
 ________________________________
 
 ## Minimal API Pizzaria - Microsoft
@@ -1230,10 +1155,7 @@ Salve todas as alterações e no terminal inclua: `dotnet ef migrations add Init
 
 No terminal inclua: `dotnet ef database update`
 
-
-**
-_____
-Questionário:
+### Questionário:
 
 1. Qual das afirmações a seguir é verdadeira sobre o EF (Entity Framework) Core?
 
@@ -1246,12 +1168,85 @@ Cada classe representa um objeto de negócios em seu aplicativo e geralmente é 
 3. Qual etapa é usada para criar o banco de dados SQLite?
 
 Executar o comando dotnet ef database update depois de criar uma ou mais migrações.
+________________________
+
+## Minimal API - Patrick God
+
+Criar um novo Projeto no Visual Studio 2022: `API Web do ASP.NET Core`
+
+> Desmarcar: Usar controladores(desmarque para usar APIs mínimas)
+
+### Modelando a Entidade - MODEL
+
+```cs
+var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
+var app = builder.Build();
+
+
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
+
+app.UseHttpsRedirection();
+
+//Para teste:
+app.MapGet("/", () => "Desenvolvedora Full Stack em andamento...");
+
+app.Run();
+```
+
+- [x] Criar diretório `Models`e criar classe para inserirmos os dados:
+
+```css
+namespace MinimalAPIPG.Models
+{
+    public class SuperHero
+    {
+
+        public int Id { get; set; }
+        public string? Nome { get; set; }
+        public string? Sobrenome { get; set; }
+        public string? Nome_Heroi { get; set; }
+    }
+}
+```
+
+### Configurando o EF
+
+- [x] Adicionar Pacotes
+    - Install-Package Microsoft.EntityFrameworkCore
+    - Install-Package Microsoft.EntityFrameworkCore.Design
+    - Install-Package Microsoft.EntityFrameworkCore.SqlServer
+    - dotnet tool uninstall --global dotnet-ef
+    - dotnet tool install --global dotnet-ef
+
+    - [x] Em `appsettings.json` incluir:
+    ```cs
+    {
+    "ConnectionStrings": {
+      "DefaultConnection": "server=(localdb)\\mssqllocaldb; database=MinimalAPIPG; trusted_connection=true"
+    
+  },
+  ```
+
+  - [x] Criar diretório `Data`, dentro criar classe `DataContext.cs`
 
 
 
 
 
 
+__________________________
 
+Referências
 [Minimal API - Microsoft](https://learn.microsoft.com/pt-br/training/modules/build-web-api-minimal-database/6-knowledge-check)
 [Documentação EF Core - Banco de Dados Suportados](https://learn.microsoft.com/pt-br/training/modules/build-web-api-minimal-database/4-add-sqlite-database-provider)
+
+[Patrick God - Minimal API](https://www.youtube.com/watch?v=NhWMx5atpms)
+[Patrivk God - GitHUb - Minimal API](https://github.com/patrickgod/MinimalAPITutorial)

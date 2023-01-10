@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\pamela\\Documents\\cursos_tecnologia\\step-by-step\\step-by-step\\asp.net_MVC\\DemoMinimalAPI\\DemoMinimalAPI\\DemoMinimalAPI.csproj": {}
+    "C:\\Users\\pamela\\Documents\\cursos_tecnologia\\step-by-step\\step-by-step\\asp.net_MVC\\Minimal API\\DemoMinimalAPI\\DemoMinimalAPI\\DemoMinimalAPI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\pamela\\Documents\\cursos_tecnologia\\step-by-step\\step-by-step\\asp.net_MVC\\DemoMinimalAPI\\DemoMinimalAPI\\DemoMinimalAPI.csproj": {
+    "C:\\Users\\pamela\\Documents\\cursos_tecnologia\\step-by-step\\step-by-step\\asp.net_MVC\\Minimal API\\DemoMinimalAPI\\DemoMinimalAPI\\DemoMinimalAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\pamela\\Documents\\cursos_tecnologia\\step-by-step\\step-by-step\\asp.net_MVC\\DemoMinimalAPI\\DemoMinimalAPI\\DemoMinimalAPI.csproj",
+        "projectUniqueName": "C:\\Users\\pamela\\Documents\\cursos_tecnologia\\step-by-step\\step-by-step\\asp.net_MVC\\Minimal API\\DemoMinimalAPI\\DemoMinimalAPI\\DemoMinimalAPI.csproj",
         "projectName": "DemoMinimalAPI",
-        "projectPath": "C:\\Users\\pamela\\Documents\\cursos_tecnologia\\step-by-step\\step-by-step\\asp.net_MVC\\DemoMinimalAPI\\DemoMinimalAPI\\DemoMinimalAPI.csproj",
+        "projectPath": "C:\\Users\\pamela\\Documents\\cursos_tecnologia\\step-by-step\\step-by-step\\asp.net_MVC\\Minimal API\\DemoMinimalAPI\\DemoMinimalAPI\\DemoMinimalAPI.csproj",
         "packagesPath": "C:\\Users\\pamela\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\pamela\\Documents\\cursos_tecnologia\\step-by-step\\step-by-step\\asp.net_MVC\\DemoMinimalAPI\\DemoMinimalAPI\\obj\\",
+        "outputPath": "C:\\Users\\pamela\\Documents\\cursos_tecnologia\\step-by-step\\step-by-step\\asp.net_MVC\\Minimal API\\DemoMinimalAPI\\DemoMinimalAPI\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\pamela\\AppData\\Roaming\\NuGet\\NuGet.Config",

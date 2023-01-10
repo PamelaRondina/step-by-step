@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "RC8F/ZOOTo6ZKBE6KX7g2AMHCS5AdeZYSj6cv1JKCjEQQ/3fVLPFe6W3Epqk+cYhwhx05g+GfTquds8RzY913A==",
+  "dgSpecHash": "s6cF4LIrWCNUcKB4HM1SkNncXxGJ5DeF+H1ZKRhWrnAbV1r6IDNCROaUtpJTyoIK1zAqmvA7EhE4F0qvbSznJw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\pamela\\Documents\\cursos_tecnologia\\step-by-step\\step-by-step\\asp.net_MVC\\DemoMinimalAPI\\DemoMinimalAPI\\DemoMinimalAPI.csproj",
+  "projectFilePath": "C:\\Users\\pamela\\Documents\\cursos_tecnologia\\step-by-step\\step-by-step\\asp.net_MVC\\Minimal API\\DemoMinimalAPI\\DemoMinimalAPI\\DemoMinimalAPI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\pamela\\.nuget\\packages\\fluentvalidation\\10.4.0\\fluentvalidation.10.4.0.nupkg.sha512",
     "C:\\Users\\pamela\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",

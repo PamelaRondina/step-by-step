@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33122.133
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MinimalAPIPG", "MinimalAPIPG\MinimalAPIPG.csproj", "{706168B9-CD41-4C07-9474-55EAD5CCF4D9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{706168B9-CD41-4C07-9474-55EAD5CCF4D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{706168B9-CD41-4C07-9474-55EAD5CCF4D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{706168B9-CD41-4C07-9474-55EAD5CCF4D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{706168B9-CD41-4C07-9474-55EAD5CCF4D9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5750F53B-FACD-4AA5-8E64-35D1B94366D2}
+	EndGlobalSection
+EndGlobal
