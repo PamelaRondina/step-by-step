@@ -1,5 +1,161 @@
 # Minimal API's
 
+![image](https://user-images.githubusercontent.com/108991648/211644211-b5eca2f5-db79-4c45-bb8c-d677fe89f83f.png)
+
+## Minimal API - Patrick God
+
+Criar um novo Projeto no Visual Studio 2022: `API Web do ASP.NET Core`
+
+> Desmarcar: Usar controladores(desmarque para usar APIs mínimas)
+
+### Modelando a Entidade - MODEL
+
+```cs
+var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
+var app = builder.Build();
+
+
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
+
+app.UseHttpsRedirection();
+
+//Para teste:
+app.MapGet("/", () => "Desenvolvedora Full Stack em andamento...");
+
+app.Run();
+```
+
+- [x] Criar diretório `Models`e criar classe para inserirmos os dados:
+
+```css
+namespace MinimalAPIPG.Models
+{
+    public class SuperHero
+    {
+
+        public int Id { get; set; }
+        public string? Nome { get; set; }
+        public string? Sobrenome { get; set; }
+        public string? Nome_Heroi { get; set; }
+    }
+}
+```
+
+### Configurando o EF
+
+- [x] Adicionar Pacotes
+    - Install-Package Microsoft.EntityFrameworkCore
+    - Install-Package Microsoft.EntityFrameworkCore.Tools
+    - Install-Package Microsoft.EntityFrameworkCore.SqlServer
+    - dotnet tool uninstall --global dotnet-ef
+    - dotnet tool install --global dotnet-ef
+
+    - [x] Em `appsettings.json` incluir:
+    ```cs
+    {
+
+    "DefaultConnection": "Persist Security Info=False;Trusted_Connection=True; database=MinimalAPIPG;server=(localdb)\\mssqllocaldb"
+    },
+
+  ```
+
+  - [x] Criar diretório `Data`, dentro criar classe `DataContext.cs`
+
+  ```cs
+global using Microsoft.EntityFrameworkCore;
+using MinimalAPIPG.Models;
+
+namespace MinimalAPIPG.Data
+{
+    public class DataContext : DbContext
+    {
+        public DataContext(DbContextOptions<DataContext> options) : base(options) 
+        {
+        }
+
+        public DbSet<SuperHero> SuperHeroes => Set<SuperHero>();
+    }
+}
+  ```
+
+  - [x] Em `Program.cs`, embaixo de AddSwagger adicionar:
+
+  ```cs
+  builder.Services.AddDbContext<DataContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+``` 
+
+- [x] No Consolde de Pacotes rodar:
+    - Primeiro comando `PM> add-migration Initial`
+    - Segundo comando `PM> update-database`
+
+- [x] Em `Program.cs` adicionar endpoints:
+
+
+
+```cs
+app.MapGet("/", () => "Desenvelvedora Full Stack em andamento...");
+
+app.MapGet("/superhero", async (DataContext context) => 
+    await context.SuperHeroes.ToListAsync());
+
+app.MapGet("/superhero/{id}", async (DataContext context, int id) =>
+    await context.SuperHeroes.FindAsync(id) is SuperHero hero ?
+    Results.Ok(hero) :
+    Results.NotFound("Sorry, heto not found. :/"));
+
+app.MapPost("/superhero", async (DataContext context, SuperHero hero) =>
+    {
+        context.SuperHeroes.Add(hero);
+        await context.SaveChangesAsync();
+       return Results.Ok(await GetAllHeroes(context));
+    });
+
+app.MapPut("/superhero/{id}", async (DataContext context, SuperHero hero, int id) =>
+{
+    var dbHero = await context.SuperHeroes.FindAsync(id);
+    if (dbHero == null) return Results.NotFound("No hero found. :/");
+
+    dbHero.FirstName = hero.FirstName;
+    dbHero.LastName = hero.LastName;
+    dbHero.HeroName = hero.HeroName;
+    await context.SaveChangesAsync();
+
+    return Results.Ok(await GetAllHeroes(context));
+
+});
+
+app.MapDelete("/superhero/{id}", async (DataContext context, int id) =>
+{
+    var dbHero = await context.SuperHeroes.FindAsync(id);
+    if (dbHero == null) return Results.NotFound("Who's that?");
+
+    context.SuperHeroes.Remove(dbHero);
+    await context.SaveChangesAsync();
+
+    return Results.Ok(await GetAllHeroes(context));
+
+});
+```
+Embaixo de UseHttpsRedirection:
+```cs
+async Task<List<SuperHero>> GetAllHeroes(DataContext context) =>
+    await context.SuperHeroes.ToListAsync();
+```
+Após finalizar, inicie a aplicação e faça os testes nos Endpoints
+
+:)
+___________________________________
+
+
 ## Minimal API - Desenvoldor.IO
 Criar um novo Projeto no Visual Studio 2022: `API Web do ASP.NET Core`
 
@@ -130,6 +286,8 @@ Para versões antigas devemos tirar o `    <ImplicitUsings>enable</ImplicitUsing
     - Install-Package Microsoft.EntityFrameworkCore.SqlServer
     - Install-Package Microsoft.EntityFrameworkCore.Tools
 
+```cs
+
 
 - [x] Em DemoMinimalAPI criar repositório `Data`, dentro criar classe `MinimalContext.cs`
 
@@ -192,6 +350,8 @@ builder.Services.AddDbContext<MinimalContextDb>(options =>
 - [x] No Consolde de Pacotes rodar:
     - Primeiro comando `PM> add-migration Initial`
     - Segundo comando `PM> update-database`
+
+    .drop-database (deletar o BD)
 
 ### Mapear os métodos para expor os dados da API
 
@@ -619,7 +779,7 @@ builder.Services.AddSwaggerGen(c =>
 var app = builder.Build();
 ```
 
-**Gerou o botou de Authorize!**
+**Gerar o botão de Authorize!**
 
 - [x] Temos um usuário com a Claim, criaremos outro sem a Claim:
 
@@ -655,7 +815,7 @@ var app = builder.Build();
 
 ### Organizar o projeto
 
-- [x]~Em `Program.cs` ajustar:
+- [x] Em `Program.cs` ajustar:
     - Adicionar `region Configure Services` abaixo de `var builder = WebApplication.CreateBuilder(args);`
     - Finalizar região após `var app = builder.Build();` com `endregion`
     <br>
@@ -677,35 +837,10 @@ void MapActions(WebApplication app)
     ```
 
 
-
-
-
-_______________________________________
-
-**Code** | **Descrição**
--|-
-200 |	OK e pode retornar informação
-204	| Apenas OK
-400	|Bad request
-401	|Não autorizado
-403	|Acesso negado
-404	|Não encontrado
-500	|Família 500, erro interno no servidor
-
-
-_________________________________
-
-
-[Desenvolvendo uma Minimal APIs - Canal Desenvolvedor.IO](https://www.youtube.com/watch?v=aXayqUfSNvw)
-[Eduardo Pires - Minimal-API](https://github.com/EduardoPires/Minimal-API)
-[Damian Edwards - Mini Validation](https://github.com/DamianEdwards/MiniValidation)
-[NetdevPack - Security.Identity](https://github.com/NetDevPack/Security.Identity)
-[Leitura de Token](https://jwt.io/)
-
-
 EXCLUIDO:
+```html
   <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.17.0" />
-
+```
 __________________________________
 
 ## Minial API - Alura
@@ -926,10 +1061,6 @@ app.UseSwaggerUI();// Ativando a interface Swagger
 
 app.Run();
 ```
-
-**Referências**
-
-[Alura - Minial API](https://github.com/alura-cursos/Alura.MinimalAPI)
 ________________________________
 
 ## Minimal API Pizzaria - Microsoft
@@ -1170,83 +1301,39 @@ Cada classe representa um objeto de negócios em seu aplicativo e geralmente é 
 Executar o comando dotnet ef database update depois de criar uma ou mais migrações.
 ________________________
 
-## Minimal API - Patrick God
+**Code** | **Descrição**
+-|-
+200 |	OK e pode retornar informação
+204	| Apenas OK
+400	|Bad request
+401	|Não autorizado
+403	|Acesso negado
+404	|Não encontrado
+500	|Família 500, erro interno no servidor
 
-Criar um novo Projeto no Visual Studio 2022: `API Web do ASP.NET Core`
+_________________________________
 
-> Desmarcar: Usar controladores(desmarque para usar APIs mínimas)
+# Referências
 
-### Modelando a Entidade - MODEL
+[Youtube - Desenvolvendo uma Minimal API Completa - Canal Desenvolvedor.io](https://www.youtube.com/watch?v=aXayqUfSNvw)
+[Youtube - Patrick God - CRUD with a .NET 6 Minimal API](https://www.youtube.com/watch?v=NhWMx5atpms)
 
-```cs
-var builder = WebApplication.CreateBuilder(args);
+[Documentação - Minimal API - Microsoft](https://learn.microsoft.com/pt-br/training/modules/build-web-api-minimal-database/6-knowledge-check)
+[Documentação - EF Core - Banco de Dados Suportados](https://learn.microsoft.com/pt-br/training/modules/build-web-api-minimal-database/4-add-sqlite-database-provider)
 
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+[GitHub - Eduardo Pires - Minimal-API](https://github.com/EduardoPires/Minimal-API)
+[GitHub - Damian Edwards - Mini Validation](https://github.com/DamianEdwards/MiniValidation)
+[GitHub - NetdevPack - Security.Identity](https://github.com/NetDevPack/Security.Identity)
+[GitHub - Alura - Minial API](https://github.com/alura-cursos/Alura.MinimalAPI)
+[GitHUb - Patrick God - Minimal API](https://github.com/patrickgod/MinimalAPITutorial)
 
-var app = builder.Build();
+[Artigo - Alura: Minimal API.NET: o que é isso?](https://www.alura.com.br/artigos/minimal-api-net-o-que-e-isso#:~:text=%F0%9F%98%89-,O%20que%20%C3%A9%20uma%20Minimal%20API%3F,m%C3%ADnimo%20de%20depend%C3%AAncias%20do%20ASP%20.)
 
-
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
-
-app.UseHttpsRedirection();
-
-//Para teste:
-app.MapGet("/", () => "Desenvolvedora Full Stack em andamento...");
-
-app.Run();
-```
-
-- [x] Criar diretório `Models`e criar classe para inserirmos os dados:
-
-```css
-namespace MinimalAPIPG.Models
-{
-    public class SuperHero
-    {
-
-        public int Id { get; set; }
-        public string? Nome { get; set; }
-        public string? Sobrenome { get; set; }
-        public string? Nome_Heroi { get; set; }
-    }
-}
-```
-
-### Configurando o EF
-
-- [x] Adicionar Pacotes
-    - Install-Package Microsoft.EntityFrameworkCore
-    - Install-Package Microsoft.EntityFrameworkCore.Design
-    - Install-Package Microsoft.EntityFrameworkCore.SqlServer
-    - dotnet tool uninstall --global dotnet-ef
-    - dotnet tool install --global dotnet-ef
-
-    - [x] Em `appsettings.json` incluir:
-    ```cs
-    {
-    "ConnectionStrings": {
-      "DefaultConnection": "server=(localdb)\\mssqllocaldb; database=MinimalAPIPG; trusted_connection=true"
-    
-  },
-  ```
-
-  - [x] Criar diretório `Data`, dentro criar classe `DataContext.cs`
+[Leitura de Token](https://jwt.io/)
 
 
 
 
 
 
-__________________________
 
-Referências
-[Minimal API - Microsoft](https://learn.microsoft.com/pt-br/training/modules/build-web-api-minimal-database/6-knowledge-check)
-[Documentação EF Core - Banco de Dados Suportados](https://learn.microsoft.com/pt-br/training/modules/build-web-api-minimal-database/4-add-sqlite-database-provider)
-
-[Patrick God - Minimal API](https://www.youtube.com/watch?v=NhWMx5atpms)
-[Patrivk God - GitHUb - Minimal API](https://github.com/patrickgod/MinimalAPITutorial)

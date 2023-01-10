@@ -4,8 +4,8 @@
     {
 
         public int Id { get; set; }
-        public string? Nome { get; set; }
-        public string? Sobrenome { get; set; }
-        public string? Nome_Heroi { get; set; }
+        public string? FirstName { get; set; }
+        public string? LastName { get; set; }
+        public string? HeroName { get; set; }
     }
 }

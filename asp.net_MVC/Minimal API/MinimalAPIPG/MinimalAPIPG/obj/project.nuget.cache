@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "OJLZZQHVdm3AuHkXtt/iowCwWA2gSzcSkk9s+J+wzyMPDO01JZFjhbFQ1Cu1kjjCXh8RmZqtVahtUsFjObIUmQ==",
+  "dgSpecHash": "20vQDk3wL4xZhrKkK6X/xBg09uDh9W7M0JMA6JG3M6yFONM/4fgx5NEvGUC0dRDwAenvT9nWTMQZI8t/1RatlA==",
   "success": true,
   "projectFilePath": "C:\\Users\\pamela\\Documents\\cursos_tecnologia\\step-by-step\\step-by-step\\asp.net_MVC\\Minimal API\\MinimalAPIPG\\MinimalAPIPG\\MinimalAPIPG.csproj",
   "expectedPackageFiles": [
@@ -17,6 +17,7 @@
     "C:\\Users\\pamela\\.nuget\\packages\\microsoft.entityframeworkcore.design\\7.0.1\\microsoft.entityframeworkcore.design.7.0.1.nupkg.sha512",
     "C:\\Users\\pamela\\.nuget\\packages\\microsoft.entityframeworkcore.relational\\7.0.1\\microsoft.entityframeworkcore.relational.7.0.1.nupkg.sha512",
     "C:\\Users\\pamela\\.nuget\\packages\\microsoft.entityframeworkcore.sqlserver\\7.0.1\\microsoft.entityframeworkcore.sqlserver.7.0.1.nupkg.sha512",
+    "C:\\Users\\pamela\\.nuget\\packages\\microsoft.entityframeworkcore.tools\\7.0.1\\microsoft.entityframeworkcore.tools.7.0.1.nupkg.sha512",
     "C:\\Users\\pamela\\.nuget\\packages\\microsoft.extensions.apidescription.server\\3.0.0\\microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
     "C:\\Users\\pamela\\.nuget\\packages\\microsoft.extensions.caching.abstractions\\7.0.0\\microsoft.extensions.caching.abstractions.7.0.0.nupkg.sha512",
     "C:\\Users\\pamela\\.nuget\\packages\\microsoft.extensions.caching.memory\\7.0.0\\microsoft.extensions.caching.memory.7.0.0.nupkg.sha512",
