@@ -95,8 +95,9 @@ namespace MinimalAPIPG.Data
 
 - [x] No Consolde de Pacotes rodar:
     - Primeiro comando `PM> add-migration Initial`
+    >   remove-imigration
     - Segundo comando `PM> update-database`
-
+    > drop-database
 - [x] Em `Program.cs` adicionar endpoints:
 
 
