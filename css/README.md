@@ -21,7 +21,7 @@ As configurações para CSS são feitas através de seletores:
         color: blue;    }
 ```
 
-> Note que: ao final de cada linha finalizamos com ( **;** ).
+> Note que ao final de cada linha finalizamos com ( **;** ).
     
 <hr>
 
@@ -87,9 +87,112 @@ element {
 
 <hr>
 
+## Item a item
+
+
+## Total da Pagina
+
+**Margin**
+
+Espaçamento da tela com os elementos
+
+```css
+* {
+    margin: 0;
+}
+```
+![image](https://user-images.githubusercontent.com/108991648/213766860-1b052045-e927-431e-b1dc-389e9dfebc89.png)
+
+**Padding**
+
+INSERIR 
+
+**ul**
+
+Listas criadas
+
+```css
+ul {
+    list-style: none;
+
+
+}
+```
+
+- list-style: none = lista sem marcação
+
+**a - utilizado para incluir imagem**
+
+```css
+a {
+    text-decoration: none;
+}
+```
+
+- text-decoration: none = eliminar decoração de link nos textos (cor azul)
+
+## Body
+
+```css
+
+```
+
+- Font-family = inserir a fonte
+
+
+## Header
+
+```css
+.cabecalho {
+    background-color: rgb(109, 132, 194);
+    display: flex;
+       justify-content: space-between;
+}
+```
+- background-color = cor do fundo
+- display: flex = faz com que os elementos fiquem um ao lado do outro
+
+![image](https://user-images.githubusercontent.com/108991648/213780218-f40cc3f2-01a3-4b41-b8f7-6fa557427d86.png)
+
+   - justify-content: space-between = espaço entre os elementos
+
+![image](https://user-images.githubusercontent.com/108991648/213780731-65533c01-bcc4-401f-a3b8-f90494d49aa1.png)
+
+```css
+.cabecalho .logo {
+    width: 65px;
+}
+```
+- width = alterar o tamanho da imagem
+
+```css
+.cabecalho .menu {
+    display: flex;
+    height: 100%;
+    align-items: center;
+```
+- display-flex = faz com que os elementos fiquem um ao lado do outro
+- height = altura / espaçamento
+-  align-items: center = alinhar no centro
+
+
+
+
+
+CSS GRADIENTE .IO
+
+
+<hr>
+
 Comandos: CSS | Descrição
 :-|:-
 * | Início do CSS
 /* comentário */ | Comentário
 .nomeDaClasse | Chamar uma classe 
 
+<hr>
+
+Ferramentas para CSS | Link
+-|-
+Css Gradient | [Link](https://cssgradient.io/)
+Responsive Viewer | Extensão Google

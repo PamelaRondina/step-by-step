@@ -64,7 +64,55 @@ São listas
 ```javascript
 var segredos = [´1, 3, 4, 7, 9];
 ```
+<hr>
 
+**Método toggle**
+
+- Abrir e fechar uma modal com um trailer
+
+```js
+botaoTrailer.addEventListener("click", () => {
+    //1.4: abrir a modal na tela
+    //classlist = propriedade
+    modal.classList.add("aberto"); 
+    video.setAttribute("src", linkDoVideo);   
+});
+
+//2.2: identificar quando o usuário clicar no "X"
+botaoFecharModal.addEventListener("click", () => {
+    //2.3: fechar a modal
+    modal.classList.remove("aberto");
+    //2.4: remover audio do trailer
+    //setAtribute = separar um atributo (no caso o src do video | link do Trailer)
+    video.setAttribute("src", "");
+});
+```
+
+Neste caso, podemos criar uma função:
+
+```js
+function alternarModal(){
+       //classlist = propriedade
+    modal.classList.toggle("aberto"); 
+}
+
+// 1.2. - identificar quando o usuário clicar no botão
+// quando clicar no botão Trailer vai executar 
+botaoTrailer.addEventListener("click", () => {
+    //1.4: abrir a modal na tela - chamar a função
+    alternarModal();   
+    video.setAttribute("src", linkDoVideo);   
+});
+
+//2.2: identificar quando o usuário clicar no "X"
+botaoFecharModal.addEventListener("click", () => {
+    //2.3: fechar a modal
+    alternarModal(); 
+    //2.4: remover audio do trailer
+    //setAtribute = separar um atributo (no caso o src do video | link do Trailer)
+    video.setAttribute("src", "");
+});
+```
 
 
 

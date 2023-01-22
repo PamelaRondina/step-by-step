@@ -79,8 +79,18 @@ Vamos abrir um `novo_arquivo.html` e `! + enter`, o próprio editor incluirá a 
 ```html
 <img src="logo-html150.png" alt="imagem HTML5">
 ```
+**src** local de onde estará o arquivo
+**alt** Nome alternativo para incluir texto alternativo
 
-- De uma url ***********
+> Ctrl + espaço (abre a lista de arquivos de uma determinada pasta)
+
+- De uma url 
+
+**Copiar endereço da imagem**
+
+```html
+<img src="colar_endereco_da_imagem" alt="Imagem da internet">
+```
 
 <hr>
 
@@ -117,8 +127,6 @@ Em head, incluir `<link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.
 `    <!--para a visualização dos ícones-->
         <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'> `
 
-- [x] 
-
 <hr>
 
 Comandos: HTML | Descrição
@@ -136,6 +144,8 @@ F12 + Console | para localizar um problema no código
 
 <br>
 
+<hr>
+
 **TAGS** | **NÃO possui fechamento**
 :-|:-
 &lt;a&gt; | âncora
@@ -144,10 +154,12 @@ F12 + Console | para localizar um problema no código
 &lt;hr&gt;  | linha horizontal
 &lt;big&gt;  | aumenta o tamanho da letra
 &lt;h1 align="center"&gt; | título 1 + centralizado
-&lt;!--"texto"--&gt; | comentário
+&lt;!--"texto"--&gt;  ou `Ctrl + ;`  | comentário
 &lt;input/&gt;| cria uma lacuna de preenchimento
 
 <br>
+
+<hr>
 
 **TAGS < / >** | **POSSUI fechamento**
 :-|:-
@@ -166,6 +178,9 @@ F12 + Console | para localizar um problema no código
 
 <br>
 
+<hr>
+
+
 **HTML Entities** | **Símbolos**
 :-|:-
 W3School | [Link](https://www.w3schools.com/charsets/ref_utf_symbols.asp)
@@ -175,5 +190,44 @@ W3School | [Link](https://www.w3schools.com/charsets/ref_utf_symbols.asp)
 `&copy;` | &copy; copyright
 `&empty;` | &empty; vazio
 
+<hr>
 
+Nome | Link
+:-|:-
+Pexels|https://www.pexels.com/pt-br/procurar/cachorro/
+Unplash|https://unsplash.com/
+Freepik|https://br.freepik.com/
+Rawpixel|https://www.rawpixel.com/
+Pixabay|https://pixabay.com/pt/
+LibreShot|https://libreshot.com/
 
+<hr>
+
+- [x] Software Gimp (programa gratuito para edição de imagens)
+
+ * Utilizar a ferramenta de corte para identificar o tamanho que deseja da imagem 
+* Diminuir a largura do arquivo: imagem > Redimensionar 
+
+<hr>
+
+## Adicionar favicon
+
+Favicon é o ícone que aparece na guia do navegador
+
+![image](https://user-images.githubusercontent.com/108991648/183938708-be7b8236-d0c0-40cb-aff5-97d1516bc356.png)
+
+Podemos criar ícones nos sites abaixo:
+
+Recomendação|Sites|Tipo
+:-|:-|:-
+IconArchive|https://iconarchive.com/|Íconnes feitos
+Favicon|https://www.favicon.cc/| Criar um Icon
+Favicon .io | https://favicon.io/|De PNG para Icon - Emojis para Icon
+
+Após escolher o ícone, extensão ICO, salve o arquivo em seu repositório.
+
+Em `head`, acima de `title`, vamos incluir:
+
+- [x] Digitar link, procurar por `link:favicon` e apertar enter
+- [x] Em `href=` deletar `favicon.ico` 
+- [x] Nas aspas de `href=` clique Ctrl+espaço e selecione o arquivo
