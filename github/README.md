@@ -15,3 +15,5 @@
 
 - [x] Dar um Refresh na página e procure por `Environments`, clicar 
 - Clicar em `View deplyment`
+
+
