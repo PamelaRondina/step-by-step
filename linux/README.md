@@ -18,12 +18,22 @@ python -i | Iniciar Python
 exit() | Encerrar Python
 Copiar | `CTRL+Insert`
 Colar | `Shift+Insert`
+erase | apagar
 history | acesso o histórico de comandos já executados
 uname -a | comando para visualizar especificações do LInus do servidor
 cat | concatenação (apenas arquivos)
 pwd | diretório atual
 sudo su - | troca para usuário root
-dnf | yum (gerenciador de pacotes)
+dnf para yum | (gerenciador de pacotes)
+yum search maria | lista os pacotes
+mysql -uroot -p | Estabelece conexão com o MariaDB Server, -u (usuário) root (master) -p(password)
+systemctl status mariadb | administra aplicativos -status (se up ou down) 
+
+
+rpm -qa | Trazer todos os pacotes instalados 
+rpm -ql | Lista o que um determinado pacote instalou
+rpm -qarpm | grep zabbix
+
 
 Comandos (VIM) | Descrição
 -|-
@@ -38,7 +48,7 @@ u | undo
 p | cola na linha debaixo
 o | abrir modo de edição na linha debaixo
 i | abrir modo de edição na mesma linha
-ESC | sair do modo `-- INSERT --`
+ESC | sair do modo de edição `-- INSERT --`
 Colar | `Shift+Insert`
 Copiar | `CTRL+Insert`o
 

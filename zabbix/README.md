@@ -88,11 +88,27 @@ ___________________
 
 ## Baixar o Zabbix - Via Pacotes de Distribuição
 
+> Primeiro identificar: Debian ou Red Hat
+
+- Via documentação: Instalação via pacote
+    - Red Hat Enterprise Linux/CentOS
+    - Debian/Ubuntu/Raspbian
+    - SUSE Linux Enterprise Server
+
+- Seguir o passo a passo da documentação
+- acessar o diretório onde está o epel
+- Abrir com o VIM (vi + nome arquivo)
+
+> alterar o epel.repo (provavelmente pelo usuário root)
 
 
 
 
 
+![image](https://user-images.githubusercontent.com/108991648/216977924-d4836639-a6a8-45ca-9aae-316776f06812.png)
+
+
+__________
 
 Item | Descrição
 -|-

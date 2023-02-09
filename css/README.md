@@ -175,6 +175,65 @@ a {
 - height = altura / espaçamento
 -  align-items: center = alinhar no centro
 
+___________________
+
+**Opacidade**
+
+```css
+.card {
+  background-color: #ffffff20 (branco);
+  background-color: #00000060 (preto);
+}
+```
+_________________
+**Transparente**
+
+```css
+background-color: transparent;
+```
+____________________
+
+**Sombra**
+
+```css
+
+box-shadow: 3px 3px 1px 0px
+```
+(Sombra -> baixo <- cima)
+
+_________
+
+**Eliminar linhas das bordas**
+```css
+ outline: none;
+```
+
+______________
+
+**linha do formulário mudar de cor ao clicar**
+
+```Css
+.label-float input:focus{
+  border-bottom: 2px solid #4038a0;
+}
+```
+_________________
+
+**Pointer - cursor do mouse**
+
+```css
+pointer-event: none;
+```
+
+_______________________
+
+**Ficar por cima**
+
+```css
+position: absolute;
+```
+
+_______________________
 
 
 
@@ -188,7 +247,10 @@ Comandos: CSS | Descrição
 :-|:-
 * | Início do CSS
 /* comentário */ | Comentário
-.nomeDaClasse | Chamar uma classe 
+.nomeDaClasse | Chamar uma classe (necessário o (.))
+width | largura
+padding | tamanho
+
 
 <hr>
 
