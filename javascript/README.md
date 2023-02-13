@@ -114,6 +114,48 @@ botaoFecharModal.addEventListener("click", () => {
 });
 ```
 
+_____________
+
+**Se conter menos de 2 caracteres faça isso, se não, faça aqui**
+
+```js
+
+let nome = document.querySelector('#nome')
+let labelNome = document.querySelector('#labelNome')
+
+nome.addEventListener('keyup', () => {
+  if(nome.value.length <= 2){
+    labelNome.setAttribute('style', 'color: red')
+    labelNome.innerHTML = 'Nome *Insira no mínino 3 caracteres'
+    nome.setAttribute('style', 'border-color: red')
+    
+  } else {
+    labelNome.setAttribute('style', 'color: green')
+    labelNome.innerHTML = 'Nome'
+    nome.setAttribute('style', 'border-color: green')
+  }
+})
+```
+
+____________
+
+**Senhas iguais - Confirmar senha**
+
+```js
+senha.addEventListener('keyup', () => {
+  if(senha.value.length <= 5){
+    labelSenha.setAttribute('style', 'color: red')
+    labelSenha.innerHTML = 'Senha *Insira no mínino 6 caracteres'
+    senha.setAttribute('style', 'border-color: red')
+    
+  } else {
+    labelSenha.setAttribute('style', 'color: green')
+    labelSenha.innerHTML = 'Senha'
+    senha.setAttribute('style', 'border-color: green')
+  }
+})
+```
+
 
 
 <hr>
