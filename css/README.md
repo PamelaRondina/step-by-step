@@ -217,12 +217,26 @@ ______________
   border-bottom: 2px solid #4038a0;
 }
 ```
+
+_________________
+
+**linha do formulário ao incluir dados manter**
+
+```css
+.label-float input:focus + label,
+.label-float input:valid + label{
+  font-size: 13px;
+  margin-top: 0;
+  color: #4038a0;
+  border-bottom: 2px solid #4038a0;
+  ```
 _________________
 
 **Pointer - cursor do mouse**
 
 ```css
 pointer-event: none;
+cursor: pointer;
 ```
 
 _______________________
@@ -234,6 +248,124 @@ position: absolute;
 ```
 
 _______________________
+
+**Fonte com negrito**
+
+```css
+font-weight: bold;
+```
+__________
+
+**Tamanho de fonte**
+
+```css
+font-size: 12pt;
+```
+
+___________
+
+**Efeitos do Button**
+
+```css
+button:hover{
+  background-color: #687A64;
+  transition: all .3s ease-out;  
+}
+```
+
+________________
+
+**Centralizar**
+
+```css
+.justify-center{
+  display: flex;
+  justify-content: center;
+}
+```
+
+______________
+
+**Eliminar linha da link**
+
+```css
+text-decoration: none;
+```
+
+______________
+
+```css
+
+```
+
+______________
+
+```css
+
+```
+
+______________
+
+```css
+
+```
+
+______________
+```css
+
+```
+
+______________
+
+```css
+
+```
+
+______________
+```css
+
+```
+
+______________
+
+```css
+
+```
+
+______________
+```css
+
+```
+
+______________
+
+```css
+
+```
+
+______________
+```css
+
+```
+
+______________
+
+```css
+
+```
+
+______________
+```css
+
+```
+
+______________
+
+```css
+
+```
+
+______________
 
 
 
