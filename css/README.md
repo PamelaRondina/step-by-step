@@ -286,7 +286,7 @@ ________________
 
 ______________
 
-**Eliminar linha da link**
+**Eliminar linha do link**
 
 ```css
 text-decoration: none;

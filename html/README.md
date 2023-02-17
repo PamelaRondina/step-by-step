@@ -110,6 +110,16 @@ Vamos abrir um `novo_arquivo.html` e `! + enter`, o próprio editor incluirá a 
 
 Em head, incluir `<link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>`
 
+______________________
+
+**Incluir Links do CSS**
+
+Incluir no espaço head acima do Tittle
+
+```html
+<link rel="stylesheet" href="css/reset.css">
+```
+
 <hr>
 
 ## Passo a passo
