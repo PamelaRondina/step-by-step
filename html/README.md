@@ -139,6 +139,31 @@ Incluir no espaço head acima do Tittle
 
 <hr>
 
+## Adicionar favicon
+
+Favicon é o ícone que aparece na guia do navegador
+
+![image](https://user-images.githubusercontent.com/108991648/183938708-be7b8236-d0c0-40cb-aff5-97d1516bc356.png)
+
+Podemos criar ícones nos sites abaixo:
+
+Recomendação|Sites|Tipo
+:-|:-|:-
+IconArchive|https://iconarchive.com/|Íconnes feitos
+Favicon|https://www.favicon.cc/| Criar um Icon
+Favicon .io | https://favicon.io/|De PNG para Icon - Emojis para Icon
+
+Após escolher o ícone, extensão ICO, salve o arquivo em seu repositório.
+
+Em `head`, acima de `title`, vamos incluir:
+
+- [x] Digitar link, procurar por `link:favicon` e apertar enter
+- [x] Em `href=` deletar `favicon.ico` 
+- [x] Nas aspas de `href=` clique Ctrl+espaço e selecione o arquivo
+
+<hr>
+
+
 Comandos: HTML | Descrição
 :-|:-
 !+enter| Estrutura básica do Html
@@ -160,14 +185,11 @@ F12 + Console | para localizar um problema no código
 :-|:-
 &lt;a&gt; | âncora
 &lt;br&gt; | pular linha
-&lt;b&gt;  | negrito
 &lt;hr&gt;  | linha horizontal
-&lt;big&gt;  | aumenta o tamanho da letra
 &lt;h1 align="center"&gt; | título 1 + centralizado
 &lt;!--"texto"--&gt;  ou `Ctrl + ;`  | comentário
 &lt;input/&gt;| cria uma lacuna de preenchimento
 
-<br>
 
 <hr>
 
@@ -180,7 +202,16 @@ F12 + Console | para localizar um problema no código
 &lt;ol&gt;  | lista ordenada (com números )
 &lt;li&gt;  | dentro da Lista são os elementos
 &lt;p&gt; | parágrafo
-&lt;strong&gt;  | texto em negrito, introduzir valor R$10.00
+&lt;ins&gt;  | texto sublinhado
+&lt;strong&gt;  | texto em negrito
+&lt;em&gt;  | texto em itálico
+&lt;mark&gt;  | marca texto
+&lt;pre&gt;&lt;code&gt;  | texto como código - monoespaçado
+&lt;big&gt;  | aumenta o tamanho da letra
+&lt;del&gt;  | risco no centro do texto
+&lt;sup&gt;  | texto sobrescrito<sup>11</sup> 
+&lt;sub&gt;  | texto subscrito<sub>11</sub>
+&lt;small&gt;  | diminui o tamanho da letra
 &lt;span&gt;  | tag genérica, não faz quebra de linha
 &lt;div&gt;  | tag genérica, executa quebra de linha
 &lt;button&gt;| cria uma botão, texto entre as tags não precisa de **" "**
@@ -220,24 +251,3 @@ LibreShot|https://libreshot.com/
 
 <hr>
 
-## Adicionar favicon
-
-Favicon é o ícone que aparece na guia do navegador
-
-![image](https://user-images.githubusercontent.com/108991648/183938708-be7b8236-d0c0-40cb-aff5-97d1516bc356.png)
-
-Podemos criar ícones nos sites abaixo:
-
-Recomendação|Sites|Tipo
-:-|:-|:-
-IconArchive|https://iconarchive.com/|Íconnes feitos
-Favicon|https://www.favicon.cc/| Criar um Icon
-Favicon .io | https://favicon.io/|De PNG para Icon - Emojis para Icon
-
-Após escolher o ícone, extensão ICO, salve o arquivo em seu repositório.
-
-Em `head`, acima de `title`, vamos incluir:
-
-- [x] Digitar link, procurar por `link:favicon` e apertar enter
-- [x] Em `href=` deletar `favicon.ico` 
-- [x] Nas aspas de `href=` clique Ctrl+espaço e selecione o arquivo
