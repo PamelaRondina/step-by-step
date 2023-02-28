@@ -198,9 +198,6 @@ F12 + Console | para localizar um problema no código
 &lt;h1&gt;  | título, de 1 até 6
 &lt;header&gt;  | cabeçalho
 &lt;section&gt; | seções
-&lt;ul&gt;| lista não ordenada (com pontinhos)
-&lt;ol&gt;  | lista ordenada (com números )
-&lt;li&gt;  | dentro da Lista são os elementos
 &lt;p&gt; | parágrafo
 &lt;ins&gt;  | texto sublinhado
 &lt;strong&gt;  | texto em negrito
@@ -212,12 +209,28 @@ F12 + Console | para localizar um problema no código
 &lt;sup&gt;  | texto sobrescrito<sup>11</sup> 
 &lt;sub&gt;  | texto subscrito<sub>11</sub>
 &lt;small&gt;  | diminui o tamanho da letra
+&lt;q&gt; | citação simples"texto"
+&lt;blockquote cite="site"&gt; | citação completa 
+&lt;abbr title="text"&gt; | abreviações 
+&lt;<bdo dir="rtl">Texto</bdo> | texto invertido
 &lt;span&gt;  | tag genérica, não faz quebra de linha
 &lt;div&gt;  | tag genérica, executa quebra de linha
 &lt;button&gt;| cria uma botão, texto entre as tags não precisa de **" "**
 `&#x1F604;` | inserir emoji
 
 <br>
+
+<hr>
+
+**Listas**
+
+**TAGS < / >** | Descrição
+:-|:-
+<code>&lt;ol type="opções" start"4"&gt;  | lista ordenada
+&lt;li&gt;  | Elementos (não precisa fechar a TAG)
+&lt;ul&gt;| lista não ordenada (com pontinhos)
+
+
 
 <hr>
 
