@@ -99,8 +99,8 @@ Vamos abrir um `novo_arquivo.html` e `! + enter`, o próprio editor incluirá a 
 [Site Emoji](https://www.emojipedia.org/openmoji/) 
 
 - [x] Escolha um emoji e vá até a seção "Codepoints" próximo do fim da página;
-- [x] Note o código, por exemplo, `U+1F970`
-- [x] Para incluir em HTML para alterar o `U+` por `&#x`, passando para `&#x1F970`
+- [x] Anote o código, por exemplo, `U+1F970`
+- [x] Para incluir em HTML: alterar o `U+` por `&#x`, passando para `&#x1F970`
 
 <hr>
 
@@ -183,7 +183,6 @@ F12 + Console | para localizar um problema no código
 
 **TAGS** | **NÃO possui fechamento**
 :-|:-
-&lt;a&gt; | âncora
 &lt;br&gt; | pular linha
 &lt;hr&gt;  | linha horizontal
 &lt;h1 align="center"&gt; | título 1 + centralizado
@@ -205,10 +204,10 @@ F12 + Console | para localizar um problema no código
 &lt;mark&gt;  | marca texto
 &lt;pre&gt;&lt;code&gt;  | texto como código - monoespaçado
 &lt;big&gt;  | aumenta o tamanho da letra
+&lt;small&gt;  | diminui o tamanho da letra
 &lt;del&gt;  | risco no centro do texto
 &lt;sup&gt;  | texto sobrescrito<sup>11</sup> 
 &lt;sub&gt;  | texto subscrito<sub>11</sub>
-&lt;small&gt;  | diminui o tamanho da letra
 &lt;q&gt; | citação simples"texto"
 &lt;blockquote cite="site"&gt; | citação completa 
 &lt;abbr title="text"&gt; | abreviações 
@@ -217,23 +216,38 @@ F12 + Console | para localizar um problema no código
 &lt;div&gt;  | tag genérica, executa quebra de linha
 &lt;button&gt;| cria uma botão, texto entre as tags não precisa de **" "**
 `&#x1F604;` | inserir emoji
-
-<br>
-
 <hr>
 
 **Listas**
 
 **TAGS < / >** | Descrição
 :-|:-
-<code>&lt;ol type="opções" start"4"&gt;  | lista ordenada
+<code>&lt;ol type="opções" start="4"&gt;  | lista ordenada <code>(1  A  a  I  i)</code>
+<code>&lt;ul type="opções" start="4"&gt;  | lista NÃO ordenada <code>(bolinhas - disc   circle   square)</code>
 &lt;li&gt;  | Elementos (não precisa fechar a TAG)
-&lt;ul&gt;| lista não ordenada (com pontinhos)
-
-
-
+&lt;dl&gt;  | Definition List
+&lt;dt&gt;  | Termo
+&lt;dd&gt;  | Definição
 <hr>
 
+**Links**
+
+**TAGS < / >** | Descrição
+:-|:-
+&lt;a&gt; | âncora
+&lt;a href="link"&gt; | âncora para incluri link
+&lt;...target="_blank...&gt; | abrir em uma nova aba
+&lt;...target="_self...&gt; | na própria aba
+&lt;...rel="external"&gt; | página externa
+&lt;...rel="next"&gt; | próxima página, avanço
+&lt;...rel="prev"&gt; | página anterior
+&lt;...rel="nofollow"&gt; | não seguir o conteúdo (páginas externas)
+<big>**../**</big> |  retorna 1 diretório
+&lt;...download="nomearquivo" type="application/pdf"&gt; | para download de arquivos na minha página
+
+**LINK para saber tipo de download** [Iana](https://www.iana.org/assignments/media-types/media-types.xhtml)
+
+<hr>
 
 **HTML Entities** | **Símbolos**
 :-|:-
