@@ -71,26 +71,6 @@ Vamos abrir um `novo_arquivo.html` e `! + enter`, o próprio editor incluirá a 
 </html>
 ```
 
-<hr>
-
-**Inclusão de imagem**
-
-- De diretório local
-```html
-<img src="logo-html150.png" alt="imagem HTML5">
-```
-**src** local de onde estará o arquivo
-**alt** Nome alternativo para incluir texto alternativo
-
-> Ctrl + espaço (abre a lista de arquivos de uma determinada pasta)
-
-- De uma url 
-
-**Copiar endereço da imagem**
-
-```html
-<img src="colar_endereco_da_imagem" alt="Imagem da internet">
-```
 
 <hr>
 
@@ -216,9 +196,10 @@ F12 + Console | para localizar um problema no código
 &lt;div&gt;  | tag genérica, executa quebra de linha
 &lt;button&gt;| cria uma botão, texto entre as tags não precisa de **" "**
 `&#x1F604;` | inserir emoji
+
 <hr>
 
-**Listas**
+## Listas
 
 **TAGS < / >** | Descrição
 :-|:-
@@ -228,9 +209,10 @@ F12 + Console | para localizar um problema no código
 &lt;dl&gt;  | Definition List
 &lt;dt&gt;  | Termo
 &lt;dd&gt;  | Definição
+
 <hr>
 
-**Links**
+## Links
 
 **TAGS < / >** | Descrição
 :-|:-
@@ -249,6 +231,43 @@ F12 + Console | para localizar um problema no código
 
 <hr>
 
+## Imagens
+
+**TAGS < / >** | Descrição
+:-|:-
+&lt;picture&gt; | tag para incluir imagens
+&lt;img src &gt; | incluir imagem
+<code>source media="(max-width: 1050px)" srcset="imagens/foto-m.png" type="image/png"</code> | imagem < que 1050px, abra o arquivo M> **ordem do menor para o maior**
+
+
+**Inclusão de imagem**
+
+- De diretório local
+```html
+<img src="logo-html150.png" alt="imagem HTML5">
+```
+- [x] **src** local de onde estará o arquivo
+- [x] **alt** Nome alternativo para incluir texto alternativo
+
+> Ctrl + espaço (abre a lista de arquivos de uma determinada pasta)
+
+- De uma url 
+
+**Copiar endereço da imagem**
+
+```html
+<img src="colar_endereco_da_imagem" alt="Imagem da internet">
+```
+<hr>
+
+## Áudios
+
+**TAGS < / >** | Descrição
+:-|:-
+<code>&lt;audio src="arquivo.mp3" controls autoplay></audio><code> | tag para incluir audios
+
+<hr>
+
 **HTML Entities** | **Símbolos**
 :-|:-
 W3School | [Link](https://www.w3schools.com/charsets/ref_utf_symbols.asp)
@@ -260,7 +279,7 @@ W3School | [Link](https://www.w3schools.com/charsets/ref_utf_symbols.asp)
 
 <hr>
 
-Nome | Link
+Sites para Imagens | Acesso
 :-|:-
 Pexels|https://www.pexels.com/pt-br/procurar/cachorro/
 Unplash|https://unsplash.com/
