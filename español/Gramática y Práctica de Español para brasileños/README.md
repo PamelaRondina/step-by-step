@@ -1,5 +1,65 @@
 ### Español
 
+¿¿¿
+
+## Página 50 y 51
+
+**Muy**
+Adjetivo
+Adverbio (bien, mal, lejos, cerca, pronto, tarde)
+
+**Muchos**
+nombre
+Sustantivo
+Adjetivos + Adverbios de comparación (mejor, peor, mayor, más, antes y después)
+
+muchísimo, muchísima
+
+I - Coloca cada palabra de la caja en la collumna correspondiente, según la forma que las precede
+
+Muy | Mucho | Muchos | Mucha | Muchas
+- | - | - | -| -
+importante |  cuidado|depósitos | lluvia |  chicas
+buena | amor | mensajes | pintura | blusas
+calor XX | segura XX | inmuebles  | distancia | salidas
+
+Muy | Mucho | Muchos | Mucha | Muchas
+- | - | - | -| -
+importante |  cuidado|depósitos | lluvia |  chicas
+buena | amor | mensajes | pintura | blusas
+segura | calor | inmuebles  | distancia | salidas
+
+II - Relaciona las columnas, según corresponda:
+
+a) Mi hijo lee muy [ ] bien francês
+b) Comes mucho [ ] chocolate. Es inevitable que engordes
+c) Ir a un hotel es mucho [ ] mejor que ir a la casa de parientes
+d) Es tu falta de atención que ocasiona muchos [ ] de los problemas que tienes
+e) El perfume importado aumentó [ ] mucho 
+
+III - Introduce en las frases las palabras abajo y relaciona con las palabras señaladas:
+
+- muy
+- mucho
+- muchos
+- mucha
+- muchas
+
+a) Dejé la conexión telefónica porque perdía ```mucho``` tiempo. La banda ancha es ```mucho```más rápida
+
+b) ```Mucho```antes que tú, Lucía supo cosas ```mucho``` peores sobre esas personas
+
+c) Estamos ```muy``` acostumbrados a recibir ```muchos``` materiales en español
+
+d) Hay que hablarle ```muy``` suavemente o se irrita ```mucho```
+
+e) ¿Te faltan ```muchas``` páginas para terminar el libro?
+
+f) Quiero quedarme ```muchos``` más días en esa ciudad. !Es ```muy``` grande como para conocerla en dos días!
+
+
+
+
 ## Página 128 y 129
 
 **Hay o Tiene**

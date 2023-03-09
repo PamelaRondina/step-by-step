@@ -271,10 +271,27 @@ LibreShot|https://libreshot.com/
 
 <hr>
 
+## Software GIMP
+
 - [x] Software Gimp (programa gratuito para edição de imagens)
 
  * Utilizar a ferramenta de corte para identificar o tamanho que deseja da imagem 
 * Diminuir a largura do arquivo: imagem > Redimensionar 
+<br>
+
+## Criar arquivo
+
+- [x] Arquivo + Novo
+- [x] Alterar largura x altura 
+- [x] Opções avançadas: alterar resolução
+
+Largura | Altura | Resolução x | Resolução y | Específico
+- |- | - | - | - | - |
+300 | 300 | 80 x | 80 x |Celular
+700 | 700 | 80 x | 80 y | Tablet
+100 | 1000 | 80 x | 80 y | Computador/Televisão
+
+**Exportar para salvar em PNG**
 
 <hr>
 
