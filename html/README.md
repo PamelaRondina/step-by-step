@@ -90,6 +90,8 @@ Vamos abrir um `novo_arquivo.html` e `! + enter`, o próprio editor incluirá a 
 
 Em head, incluir `<link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>`
 
+ <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+
 ______________________
 
 **Incluir Links do CSS**
@@ -129,7 +131,7 @@ Podemos criar ícones nos sites abaixo:
 
 Recomendação|Sites|Tipo
 :-|:-|:-
-IconArchive|https://iconarchive.com/|Íconnes feitos
+IconArchive|https://iconarchive.com/|Ícones feitos
 Favicon|https://www.favicon.cc/| Criar um Icon
 Favicon .io | https://favicon.io/|De PNG para Icon - Emojis para Icon
 
@@ -217,18 +219,25 @@ F12 + Console | para localizar um problema no código
 **TAGS < / >** | Descrição
 :-|:-
 &lt;a&gt; | âncora
-&lt;a href="link"&gt; | âncora para incluri link
-&lt;...target="_blank...&gt; | abrir em uma nova aba
-&lt;...target="_self...&gt; | na própria aba
+&lt;a href="link"&gt; | âncora + incluir link
+&lt;hreflang="en"&gt; | indica o idioma principal
 &lt;...rel="external"&gt; | página externa
 &lt;...rel="next"&gt; | próxima página, avanço
 &lt;...rel="prev"&gt; | página anterior
 &lt;...rel="nofollow"&gt; | não seguir o conteúdo (páginas externas)
+&lt;...target="_blank...&gt; | abrir em uma nova aba
+&lt;...target="_self...&gt; | na própria aba
+&lt;...target="_top...&gt; | desfaz os frames e abre o destino no navegador completo (desuso)
+&lt;...target="_parent...&gt; | referência a janela mãe (desuso)
 <big>**../**</big> |  retorna 1 diretório
 &lt;...download="nomearquivo" type="application/pdf"&gt; | para download de arquivos na minha página
 
-**LINK para saber tipo de download** [Iana](https://www.iana.org/assignments/media-types/media-types.xhtml)
+**LINK para saber tipo de download (media types)** [Iana](https://www.iana.org/assignments/media-types/media-types.xhtml)
 
+```html
+  <h2>Links Internos - criar outras páginas</h2>    
+    <p>Acesse a <a href="pag002.html" rel="next" target="_self">página 002.</a></p>
+```
 <hr>
 
 ## Imagens
@@ -236,9 +245,23 @@ F12 + Console | para localizar um problema no código
 **TAGS < / >** | Descrição
 :-|:-
 &lt;picture&gt; | tag para incluir imagens
+<code>&lt;source media="(max-width: 1050px)" srcset="imagens/foto-m.png" type="image/png"&gt;</code> | imagem < que 1050px, abra o arquivo M> **ordem do menor para o maior**
 &lt;img src &gt; | incluir imagem
-<code>source media="(max-width: 1050px)" srcset="imagens/foto-m.png" type="image/png"</code> | imagem < que 1050px, abra o arquivo M> **ordem do menor para o maior**
 
+- 1 - picture
+- 2 - source
+  - media (tamanho máximo)
+  - srcset (imagem carregada) 
+  - type (media type)
+- 3 - img
+
+```html
+<picture>
+        <source media="(max-width: 750px)" srcset="imagens/foto-p.png" type="image/png">
+        <source media="(max-width: 1050px)" srcset="imagens/foto-m.png" type="image/png">
+        <img src="imagens/foto-g.png" alt="Imagem G">
+    </picture>
+```
 
 **Inclusão de imagem**
 
@@ -258,13 +281,65 @@ F12 + Console | para localizar um problema no código
 ```html
 <img src="colar_endereco_da_imagem" alt="Imagem da internet">
 ```
+
+<hr>
+
+## Color
+
+
+**BackGround colorido**
+```html
+<style>
+        body {
+            background-color: chartreuse;
+        }
+    </style>
+```
+
+**H1 colorido**
+```html
+<h1 style="color:green;">Teste<h1>
+```
+
+Dicas Html Cores de Fundo: [Aqui](https://pt.wikihow.com/Configurar-Cores-de-Fundo-em-HTML#:~:text=Se%20quiser%20usar%20cores%20b%C3%A1sicas,plano%20de%20fundo%20usando%20HTML.)
+
+
 <hr>
 
 ## Áudios
 
 **TAGS < / >** | Descrição
 :-|:-
-<code>&lt;audio src="arquivo.mp3" controls autoplay></audio><code> | tag para incluir audios
+<code>&lt;audio preload="metadata" controls autoplay loop></code> | atributo audio
+<code>&lt;source src="local/midia.mp3 type="audio/mpeg"><code> | midia mp3
+<code>&lt;source src="local/midia.ogg type="audio/ogg"><code> | midia mp3
+<code>&lt;source src="local/midia.wav type="audio/mpeg"><code> | midia wav
+
+- [x] Atributo preload:
+  - *metadata*: carrega apenas as informações sobre o arquivo (tamanho, tempo, informações)
+  - *none*: não carrega informações, até que o usuário clique no botão
+  - *auto*: carrega o áudio por completo assim que a página for carregada, mesmo que o usuário não aperte o play.
+  
+<hr>
+
+## Vídeos
+
+**TAGS < / >** | Descrição
+:-|:-
+<code>&lt;video class autoplay loop width="" poster="" controls&gt;&lt;source  src="" type=""></code> | tag para incluir vídeos
+
+- *width*: largura do vídeo
+- *poster*: capa
+
+**Conversor para vídeos** [HandBrake](https://handbrake.fr/)
+
+Navegador | Arquivos compatíveis
+- | -
+Microsoft Edge | .mp4 .m4v
+Apple Safari | .mp4 .m4v
+Google Chrome | .mp4 .m4v .webm .gov
+Mozilla Firefox | .webm .ogv
+Opera | .webm .ogv
 
 <hr>
 
