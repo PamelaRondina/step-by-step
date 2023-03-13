@@ -43,12 +43,6 @@ body {
 
 <hr>
 
-**Comentários**
-
-Em CSS para inserir um comentário: `/*texto*/` 
-
-<hr>
-
 **Cascata**
 
 Tendo 2 declarações, a última será o de maior relevância.
@@ -106,30 +100,6 @@ Espaçamento da tela com os elementos
 **Padding**
 
 INSERIR 
-
-**ul**
-
-Listas criadas
-
-```css
-ul {
-    list-style: none;
-
-
-}
-```
-
-- list-style: none = lista sem marcação
-
-**a - utilizado para incluir imagem**
-
-```css
-a {
-    text-decoration: none;
-}
-```
-
-- text-decoration: none = eliminar decoração de link nos textos (cor azul)
 
 ## Body
 
@@ -249,21 +219,6 @@ position: absolute;
 
 _______________________
 
-**Fonte com negrito**
-
-```css
-font-weight: bold;
-```
-__________
-
-**Tamanho de fonte**
-
-```css
-font-size: 12pt;
-```
-
-___________
-
 **Efeitos do Button**
 
 ```css
@@ -286,102 +241,57 @@ ________________
 
 ______________
 
-**Eliminar linha do link**
-
-```css
-text-decoration: none;
-```
-
-______________
-
-```css
-
-```
-
-______________
-
-```css
-
-```
-
-______________
-
-```css
-
-```
-
-______________
-```css
-
-```
-
-______________
-
-```css
-
-```
-
-______________
-```css
-
-```
-
-______________
-
-```css
-
-```
-
-______________
-```css
-
-```
-
-______________
-
-```css
-
-```
-
-______________
-```css
-
-```
-
-______________
-
-```css
-
-```
-
-______________
-```css
-
-```
-
-______________
-
-```css
-
-```
-
-______________
-
-
-
 
 CSS GRADIENTE .IO
+
+___________
+
+## Fonte
+
+Comandos: CSS | Descrição
+:-|:-
+<code>font-weight: bold;</code> | Fonte negrito
+<code>font-size: 12pt;</code> | Fonte tamanho
+
 
 
 <hr>
 
 Comandos: CSS | Descrição
 :-|:-
-* | Início do CSS
-/* comentário */ | Comentário
-.nomeDaClasse | Chamar uma classe (necessário o (.))
-width | largura
-padding | tamanho
+<code>*</code> | Início do CSS
+<code>/* texto */</code> | Comentário
+<code>.nomeDaClasse</code> | Chamar uma classe (necessário o (.))
+<code>width</code> | largura
+<code>padding</code> | tamanho
+
+<hr>
+
+## Listas
+
+```css
+ul {
+
+}
+```
+
+Comandos: CSS | Descrição
+:-|:-
+<code>list-style: none;</code> | Elimina marcações
+<hr>
+
+## Links
+
+```css
+a {
+
+}
+```
+
+Comandos: CSS | Descrição
+:-|:-
+<code>text-decoration: none;</code> | Elimina link dos textos
+
 
 
 <hr>
