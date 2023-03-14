@@ -285,19 +285,14 @@ Psicologia das Cores - [RockContent](https://rockcontent.com/br/blog/psicologia-
 
 ### História e Família - Fonte
 
+- [x] História Fontes [Link](LINK**************)
+- [x] Google Fontes ([Step by Step](https://github.com/PamelaRondina/menu_digital#editando-as-fontes))
+- [x] Fontes Externas ([Step by Step](LINK*********)
+
 Comandos: CSS | Descrição
 :-|:-
 <code>font-family:Arial, Helvetica, sans-serif;</code> | Família das Fontes
 
-![image](https://user-images.githubusercontent.com/108991648/224875711-0aaf7fe8-4591-4bd4-b7a7-ed71c5fc40cf.png)
-
-![image](https://user-images.githubusercontent.com/108991648/224873716-50519e14-999c-49ca-9179-908bfa6ecacb.png)
-
-![image](https://user-images.githubusercontent.com/108991648/224873921-63625dc0-7251-4c40-81b5-b33aeb2f1168.png)
-
-![image](https://user-images.githubusercontent.com/108991648/224874771-32b4670b-689f-482d-90a6-db08ad6a6512.png)
-
-![image](https://user-images.githubusercontent.com/108991648/224875059-243da244-17f3-446c-be62-d9fb4fa1a688.png)
 
 ### Tamanho - Fonte
 
@@ -305,9 +300,26 @@ Comandos: CSS | Descrição
 :-|:-
 <code>font-size: 12pt;</code> | Fonte tamanho
 
+```css
+<style>
+    @font-face {
+    font-family: 'CrieUmNome';
+    src: url('fonts/Bachelorette_PERSONAL_USE_ONLY.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+    }
+
+body {
+    font-family: 'CrieUmNome', Times, serif;
+    font-size: 3em;
+    font-weight: normal;
+    }
+    </style>
+```
+
 
 Medida | Absoluta |     Medida | Relativa
-- | - |-|-
+-|-|-|-
 cm |    centímetro |    em |    ao tamanho do M 
 mm |    milímetro |     ex |    ao tamanho do "x            "
 in |    polegada |  rem|      a fonte configurada no Body  
@@ -325,7 +337,6 @@ Comandos: CSS | Descrição
 <code>font-style: italic;</code> | Fonte Itálica
 <code>tex-decoration: underline;</code> | Fonte Sublinhado
 <code>ShortHand font</code> | Melhoria para o Código
-<hr>
 
 ```css
 /* Shorthand font
