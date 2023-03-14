@@ -246,26 +246,103 @@ CSS GRADIENTE .IO
 
 ___________
 
-## Fonte
+## Comandos: CSS
 
 Comandos: CSS | Descrição
 :-|:-
-<code>font-weight: bold;</code> | Fonte negrito
-<code>font-size: 12pt;</code> | Fonte tamanho
-
-
-
-<hr>
-
-Comandos: CSS | Descrição
-:-|:-
-<code>*</code> | Início do CSS
+<code>*</code> | Início do CSS (Configuração Global)
 <code>/* texto */</code> | Comentário
 <code>.nomeDaClasse</code> | Chamar uma classe (necessário o (.))
 <code>width</code> | largura
 <code>padding</code> | tamanho
 
 <hr>
+
+## Cores
+
+Comandos: CSS | Descrição
+:-|:-
+<code>#0000ff</code> | Cores
+<code>rgb(0, 0, 255)</code> | Red, Green, Blue
+<code>rgba(27, 78, 33, 0.205)</code> | Red, Green, Blue, Transparência
+<code>hsl(240, 100%, 50%)</code> | Hue, Sturation, Luminosity
+<code>background-image: linear-gradient();</code> | Imagem em Degradê (direção, cores)
+
+**Gradiente**
+
+```css
+  body {
+            background-image: linear-gradient(to right, #E5C3A1, #FFD8B1, #FDB1A7, #67BAB7);
+        }
+```
+Psicologia das Cores - [RockContent](https://rockcontent.com/br/blog/psicologia-das-cores/)
+
+![image](https://user-images.githubusercontent.com/108991648/224860321-a3c06dc2-eed4-4b22-93b0-7b0953201df7.png)
+
+<hr>
+
+## Fonte
+
+### História e Família - Fonte
+
+Comandos: CSS | Descrição
+:-|:-
+<code>font-family:Arial, Helvetica, sans-serif;</code> | Família das Fontes
+
+![image](https://user-images.githubusercontent.com/108991648/224875711-0aaf7fe8-4591-4bd4-b7a7-ed71c5fc40cf.png)
+
+![image](https://user-images.githubusercontent.com/108991648/224873716-50519e14-999c-49ca-9179-908bfa6ecacb.png)
+
+![image](https://user-images.githubusercontent.com/108991648/224873921-63625dc0-7251-4c40-81b5-b33aeb2f1168.png)
+
+![image](https://user-images.githubusercontent.com/108991648/224874771-32b4670b-689f-482d-90a6-db08ad6a6512.png)
+
+![image](https://user-images.githubusercontent.com/108991648/224875059-243da244-17f3-446c-be62-d9fb4fa1a688.png)
+
+### Tamanho - Fonte
+
+Comandos: CSS | Descrição
+:-|:-
+<code>font-size: 12pt;</code> | Fonte tamanho
+
+
+Medida | Absoluta |     Medida | Relativa
+- | - |-|-
+cm |    centímetro |    em |    ao tamanho do M 
+mm |    milímetro |     ex |    ao tamanho do "x            "
+in |    polegada |  rem|      a fonte configurada no Body  
+px |    pixel | vw|     largura da tamanho da tela
+pt |    ponto | vh| altura do tamanho da tela
+pc |    paica | % | porcentagem
+
+Recomendação W3C: **em** e **px**
+
+### Tamanho - Peso
+Comandos: CSS | Descrição
+:-|:-
+<code>font-weight: *** </code> | Peso da Fonte
+<code>font-weight: bold;</code> | Fonte negrito
+<code>font-style: italic;</code> | Fonte Itálica
+<code>tex-decoration: underline;</code> | Fonte Sublinhado
+<code>ShortHand font</code> | Melhoria para o Código
+<hr>
+
+```css
+/* Shorthand font
+- font-style -> font-weight -> font-size -> font-family
+
+font-family: 'Work Sans", sans-serif;
+font-weiht: bolder;
+font-size: 3em;
+font-style: italic;
+*/
+
+font: italic bolder 3em 'Work Sans', sans-serif;
+font: bold 2em 'Work Sans';
+```
+
+
+
 
 ## Listas
 
@@ -299,4 +376,6 @@ Comandos: CSS | Descrição
 Ferramentas para CSS | Link
 -|-
 Css Gradient | [Link](https://cssgradient.io/)
+Adobe Color | [Link](https://color.adobe.com/pt/create/color-wheel)
+Paletton | [Link](https://paletton.com/#uid=1000u0kllllaFw0g0qFqFg0w0aF) - ex: com site
 Responsive Viewer | Extensão Google
