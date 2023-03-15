@@ -283,23 +283,29 @@ Psicologia das Cores - [RockContent](https://rockcontent.com/br/blog/psicologia-
 
 ## Fonte
 
-### História e Família - Fonte
+### I. História e Família - Fonte
 
-- [x] História Fontes [Link](LINK**************)
+- [x] História Fontes [Link](https://github.com/PamelaRondina/html_css/tree/main/html_css_guanabara/modulo_02#hist%C3%B3ria-das-fontes)
 - [x] Google Fontes ([Step by Step](https://github.com/PamelaRondina/menu_digital#editando-as-fontes))
-- [x] Fontes Externas ([Step by Step](LINK*********)
+- [x] Fontes Externas ([Step by Step](https://github.com/PamelaRondina/html_css/tree/main/html_css_guanabara/modulo_02#fonte-externa)
 
 Comandos: CSS | Descrição
 :-|:-
 <code>font-family:Arial, Helvetica, sans-serif;</code> | Família das Fontes
 
+**Google Fonts**
+```css
+<style>
+        @import url('https://fonts.googleapis.com/css2?family=Satisfy&display=swap');
+        
+        h1 {
+            font-family: 'Satisfy', cursive;
+        }
+    
+</style>
+```
 
-### Tamanho - Fonte
-
-Comandos: CSS | Descrição
-:-|:-
-<code>font-size: 12pt;</code> | Fonte tamanho
-
+**Fontes Externas**
 ```css
 <style>
     @font-face {
@@ -317,6 +323,14 @@ body {
     </style>
 ```
 
+### II. Tamanho - Fonte
+
+Comandos: CSS | Descrição
+:-|:-
+<code>font-size: 12pt;</code> | Fonte tamanho
+
+
+
 
 Medida | Absoluta |     Medida | Relativa
 -|-|-|-
@@ -329,7 +343,7 @@ pc |    paica | % | porcentagem
 
 Recomendação W3C: **em** e **px**
 
-### Tamanho - Peso
+### III. Tipo e Peso - Fonte
 Comandos: CSS | Descrição
 :-|:-
 <code>font-weight: *** </code> | Peso da Fonte
@@ -352,8 +366,16 @@ font: italic bolder 3em 'Work Sans', sans-serif;
 font: bold 2em 'Work Sans';
 ```
 
+### IV. Alinhamento - Fonte
 
-
+Comandos: CSS | Descrição
+:-|:-
+<code>text-align: </code> | Alinhamento
+<code>text-align: left; </code> | Esquerda
+<code>text-align: right; </code> | Direita
+<code>text-align: center; </code> | Centro
+<code>text-align: justify; </code> | Justificado
+<code>text-indent: 30px; </code> | Parágrafo
 
 ## Listas
 
@@ -380,7 +402,14 @@ Comandos: CSS | Descrição
 :-|:-
 <code>text-decoration: none;</code> | Elimina link dos textos
 
+<hr>
 
+## ID e Class
+
+Comandos: CSS | Descrição
+:-|:-
+HTML - <code>&lt;h1 id="nome"&gt;</code> | CSS - <code> h1#nome<code>
+HTML - class="nome" | CSS = <strong><big>.</big></strong>nome
 
 <hr>
 
