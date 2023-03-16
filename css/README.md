@@ -43,43 +43,7 @@ body {
 
 <hr>
 
-**Cascata**
 
-Tendo 2 declarações, a última será o de maior relevância.
-
-```css
-body {
-    background: red;
-}
-
-body {
-    background: blue;
-}
-```
-> Neste exemplo, o body será de cor blue
-
-Porém, a cascata perde essa prioridade devido à especificidade, cada seletor terá um peso e sua soma trará a relevância de prioridade.
-
-```css
-#id {
-    /* peso 100*/
-}
-
-.class {
-    /* peso 10*/
-}
-
-element {
-    /* peso 1*/
-}
-```
-
-![image](https://user-images.githubusercontent.com/108991648/183656135-7636b011-67da-4123-90c9-d3ae5f2f2cfe.png)
-
-
-> Não inciar com numeral ou caracteres especiais os nomes de *id*, *class* e *element* ( _ é aceito)
-
-<hr>
 
 ## Item a item
 
@@ -349,17 +313,18 @@ Comandos: CSS | Descrição
 <code>font-weight: *** </code> | Peso da Fonte
 <code>font-weight: bold;</code> | Fonte negrito
 <code>font-style: italic;</code> | Fonte Itálica
-<code>tex-decoration: underline;</code> | Fonte Sublinhado
-<code>ShortHand font</code> | Melhoria para o Código
+<code>text-decoration: underline;</code> | Fonte Sublinhado
+ShortHand <code>font</code> | Melhoria para o Código
 
 ```css
 /* Shorthand font
 - font-style -> font-weight -> font-size -> font-family
 
-font-family: 'Work Sans", sans-serif;
-font-weiht: bolder;
-font-size: 3em;
 font-style: italic;
+font-variant: small-caps;
+font-weight: bolder;
+font-size: 3em;
+font-family: 'Work Sans", sans-serif;
 */
 
 font: italic bolder 3em 'Work Sans', sans-serif;
@@ -400,16 +365,217 @@ a {
 
 Comandos: CSS | Descrição
 :-|:-
-<code>text-decoration: none;</code> | Elimina link dos textos
+<code>text-decoration: none;</code> | Elimina link dos textos, elimina sublinhado
 
 <hr>
 
-## ID e Class
+## Seletores Personalizados
 
-Comandos: CSS | Descrição
-:-|:-
-HTML - <code>&lt;h1 id="nome"&gt;</code> | CSS - <code> h1#nome<code>
-HTML - class="nome" | CSS = <strong><big>.</big></strong>nome
+**Cascata**
+
+Tendo 2 declarações, a última será o de maior relevância.
+
+```css
+body {
+    background: red;
+}
+
+body {
+    background: blue;
+}
+```
+> Neste exemplo, o body será de cor blue
+
+Porém, a cascata perde essa prioridade devido à especificidade, cada seletor terá um peso e sua soma trará a relevância de prioridade.
+
+```css
+#id {
+    /* peso 100*/
+}
+
+.class {
+    /* peso 10*/
+}
+
+element {
+    /* peso 1*/
+}
+```
+
+![image](https://user-images.githubusercontent.com/108991648/183656135-7636b011-67da-4123-90c9-d3ae5f2f2cfe.png)
+
+> Não iniciar com numeral ou caracteres especiais os nomes de *id*, *class* e *element* ( _ é aceito)
+
+--->--->--->--->--->--->--->--->--->--->--->--->--->--->--->--->--->--->--->--->--->--->--->--->--->--->--->
+
+Comandos: CSS | Descrição | Utilização
+:-|:- | :-
+HTML - <code>&lt;h1 id="nome"&gt;</code> | CSS - <code> h1#nome<code> | Único
+HTML - class="nome" | CSS = <strong><big>.</big></strong>nome | Múltipos
+<code>nome:hover</code> <code>nome:visited</code> <code>nome:active</code> <code>nome:checked</code><code>nome:empty</code> <code>nome:focus</code> | pseudo| class
+<code>.nomeClass::after</code> <code>.nomeClass::before</code> | pseudo |element
+> | | children
+
+
+--->--->--->--->--->--->--->--->--->--->--->--->--->--->--->--->--->--->--->--->--->--->--->--->--->--->--->
+### Pseudo-Class
+
+Comandos: CSS | Descrição | 
+:-|:- |
+<code>nome:hover</code> | ação ocorre quando o mouse passa
+<code>nome:visited</code> | 
+<code>nome:active</code> | 
+<code>nome:checked</code> | 
+<code>nome:empty</code> | 
+<code>nome:focus</code> | 
+
+### Pseudo-Element
+
+> Formatação específica de um elemento
+
+Comandos: CSS | Descrição | 
+:-|:- |
+<code>nome::before</code> | depois do elemento
+<code>nome::after</code> | antes do elemento
+<code>nome::first-letter</code> | 
+<code>nome::first-line</code> | 
+
+
+```css
+div:hover {
+            background-color: rgba(255, 255, 0, 0.253);
+        }
+```
+
+<hr>
+
+## Display
+
+Comandos: CSS | Descrição | 
+:-|:- 
+<code>display: none;</code> | Não visualizar
+<code>display: block;</code> | Modo block - visualizar
+<code>display: inline-block;</code> | blocos na mesma linha 
+
+<hr>
+
+## Modelos de Caixa 
+
+Comandos: CSS | Descrição | 
+:-|:- 
+<code>width: 65px;</code> | largura
+<code>height: 10px;</code> | altura
+<code>border: 10px;</code> | borda - dentro do elemento
+<code>padding: 10px;</code> | preenchimento interno
+<code>margin: 10px;</code> | margem externa
+<code>outline: 1px;</code> | entre a margem e border (+ margem)
+
+### Tipos de Caixa
+
+![image](https://user-images.githubusercontent.com/108991648/225364777-2d522a03-55df-4b57-924b-cf772542d2a2.png)
+
+box-level | inline-level
+:-|:- 
+<code>&lt;div&gt;</code> | <code>&lt;span&gt;</code> |
+<code>&lt;h1 - h6&gt;</code> | <code>&lt;a&gt;</code> |
+<code>&lt;main&gt;</code> | <code>&lt;code&gt;</code> |
+ <code>&lt;header&gt;</code> | <code>&lt;small&gt;</code> | 
+ <code>&lt;nav&gt;</code> | <code>&lt;strong&gt;</code> |
+ <code>&lt;article&gt;</code> | <code>&lt;em&gt;</code> |
+ <code>&lt;aside&gt;</code> | <code>&lt;sup sub&gt;</code> |
+ <code>&lt;footer&gt;</code> | <code>&lt;label&gt;</code> |
+ <code>&lt;form&gt;</code> | <code>&lt;button&gt;</code> |
+ <code>&lt;video&gt;</code> | <code>&lt;select&gt;</code> |
+ <code>&lt;p&gt;</code> | <code>&lt;input&gt;</code> |
+
+### Margin
+
+Comandos: CSS | Descrição | 
+:-|:- 
+<code>margin-top: 10px;</code> | ↑
+<code>margin-right: 10px;</code> | →
+<code>margin-bottom: 10px;</code> | ↓
+<code>margin-left: 10px;</code> | ←
+<code>margin: auto;</code> | centralizado
+ShortHand <code>margin:</code> | Melhoria para o Código
+
+```css
+/* Shorthand margin
+- margin-top -> margin-right -> margin-bottom -> margin-left
+
+margin-top: 10px;
+margin-right: 10px;
+margin-bottom: 10px;
+margin-left: 10px;
+*/
+
+margin: 10px 10px 10px 10px;
+margin: 10px auto 10px auto;
+```
+
+
+#### Outline
+
+
+
+### Border
+
+Comandos: CSS | Descrição | 
+:-|:- 
+<code>border-style: solid;</code> | estilo de borda: sólida
+<code>border-width: 10px<;/code> | tamanho da borda
+<code>border-color: blue;</code> | cor da borda
+ShortHand <code>border:</code> | Melhoria para o Código
+
+```css
+/* Shorthand border
+- border-width -> border-style -> border-color
+
+border-width: 10px;
+border-style: solid;
+border-color: red;
+*/
+
+border: 10px solid red;
+```
+
+### Padding
+
+Comandos: CSS | Descrição | 
+:-|:-:
+<code>padding-top: 10px;</code> | ↑
+<code>padding-right: 10px;</code> | →
+<code>padding-bottom: 10px;</code> | ↓
+<code>padding-left: 10px;</code> | ←
+ShortHand <code>padding:</code> | Melhoria para o Código
+
+```css
+/* Shorthand padding
+- padding-top -> padding-right -> padding-bottom -> padding-left
+
+padding-top: 10px;
+padding-right: 10px;
+padding-bottom: 10px;
+padding-left: 10px;
+*/
+
+padding: 10px 10px 10px 10px;
+```
+<hr>
+
+## Grouping Tags
+
+Comandos: CSS | Descrição | 
+:-|:-:
+<code>&lt;header&gt;</code> | cabeçalho
+<code>&lt;nav&gt;</code> | Navegação
+<code>&lt;main&gt;</code> | cabeçalho principal
+<code>&lt;section&gt;</code> | 
+<code>&lt;article&gt;</code> | 
+<code>&lt;aside&gt;</code> | 
+<code>&lt;footer&gt;</code> | rodapé
+<code>&lt;&gt;</code> | 
+
 
 <hr>
 
