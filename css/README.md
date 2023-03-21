@@ -45,26 +45,6 @@ body {
 
 
 
-## Item a item
-
-
-## Total da Pagina
-
-**Margin**
-
-Espaçamento da tela com os elementos
-
-```css
-* {
-    margin: 0;
-}
-```
-![image](https://user-images.githubusercontent.com/108991648/213766860-1b052045-e927-431e-b1dc-389e9dfebc89.png)
-
-**Padding**
-
-INSERIR 
-
 ## Body
 
 ```css
@@ -125,16 +105,6 @@ _________________
 ```css
 background-color: transparent;
 ```
-____________________
-
-**Sombra**
-
-```css
-
-box-shadow: 3px 3px 1px 0px
-```
-(Sombra -> baixo <- cima)
-
 _________
 
 **Eliminar linhas das bordas**
@@ -292,6 +262,8 @@ body {
 Comandos: CSS | Descrição
 :-|:-
 <code>font-size: 12pt;</code> | Fonte tamanho
+<code>text-transform: uppercase;</code> | Maiúscula
+
 
 
 
@@ -461,6 +433,8 @@ Comandos: CSS | Descrição |
 
 ## Modelos de Caixa 
 
+![image](https://user-images.githubusercontent.com/108991648/225935450-64a4b146-3d92-4509-8315-64b3db864cff.png)
+
 Comandos: CSS | Descrição | 
 :-|:- 
 <code>width: 65px;</code> | largura
@@ -474,19 +448,23 @@ Comandos: CSS | Descrição |
 
 ![image](https://user-images.githubusercontent.com/108991648/225364777-2d522a03-55df-4b57-924b-cf772542d2a2.png)
 
-box-level | inline-level
-:-|:- 
-<code>&lt;div&gt;</code> | <code>&lt;span&gt;</code> |
-<code>&lt;h1 - h6&gt;</code> | <code>&lt;a&gt;</code> |
-<code>&lt;main&gt;</code> | <code>&lt;code&gt;</code> |
- <code>&lt;header&gt;</code> | <code>&lt;small&gt;</code> | 
- <code>&lt;nav&gt;</code> | <code>&lt;strong&gt;</code> |
- <code>&lt;article&gt;</code> | <code>&lt;em&gt;</code> |
- <code>&lt;aside&gt;</code> | <code>&lt;sup sub&gt;</code> |
- <code>&lt;footer&gt;</code> | <code>&lt;label&gt;</code> |
- <code>&lt;form&gt;</code> | <code>&lt;button&gt;</code> |
- <code>&lt;video&gt;</code> | <code>&lt;select&gt;</code> |
- <code>&lt;p&gt;</code> | <code>&lt;input&gt;</code> |
+box-level (block-level) | Nova Linha |  inline-level  | Mesma Linha
+:-|:- |-| -
+<code>&lt;h1 - h6&gt;</code> | <code>&lt;blockquote&gt;</code>| <code>&lt;abbr&gt;</code>   | <code>&lt;a&gt;</code> |
+<code>&lt;div&gt;</code>     | <code>&lt;address&gt;</code>   | <code>&lt;acronym&gt;</code>  |  <code>&lt;span&gt;</code> |
+<code>&lt;main&gt;</code>    | <code>&lt;canvas&gt;</code>    | <code>&lt;b&gt;</code>  | <code>&lt;code&gt;</code> |
+ <code>&lt;header&gt;</code> | <code>&lt;dd&gt;</code>        | <code>&lt;bdo&gt;</code>  | <code>&lt;small&gt;</code> | 
+ <code>&lt;nav&gt;</code>    | <code>&lt;dl&gt;</code>        | <code>&lt;br&gt;</code>  | <code>&lt;strong&gt;</code> |
+ <code>&lt;article&gt;</code>| <code>&lt;dt&gt;</code>        | <code>&lt;cite&gt;</code>  | <code>&lt;em&gt;</code> |
+ <code>&lt;aside&gt;</code>  | <code>&lt;dieldset&gt;</code>  | <code>&lt;dfn&gt;</code>  | <code>&lt;sup sub&gt;</code> |
+ <code>&lt;footer&gt;</code> | <code>&lt;figcaption&gt;</code>| <code>&lt;i&gt;</code>  | <code>&lt;label&gt;</code> |
+ <code>&lt;form&gt;</code>   | <code>&lt;figure&gt;</code>    | <code>&lt;img&gt;</code>  | <code>&lt;button&gt;</code> |
+ <code>&lt;video&gt;</code>  | <code>&lt;noscript&gt;</code>  | <code>&lt;kbd&gt;</code>  | <code>&lt;select&gt;</code> |
+ <code>&lt;p&gt;</code>      | <code>&lt;tfoot&gt;</code>     | <code>&lt;map&gt;</code>  | <code>&lt;input&gt;</code> |
+<code>&lt;ol&gt;</code>      | <code>&lt;table&gt;</code>     | <code>&lt;object&gt;</code>  | <code>&lt;output&gt;</code>
+<code>&lt;ul&gt;</code>      | -                              | <code>&lt;q&gt;</code>  |   <code>&lt;samp&gt;</code>
+-                            | -                              | <code>&lt;script&gt;</code> | <code>&lt;textarea&gt;</code> 
+-                            | -                              | <code>&lt;tt&gt;</code> | <code>&lt;var&gt;</code> 
 
 ### Margin
 
@@ -502,38 +480,52 @@ ShortHand <code>margin:</code> | Melhoria para o Código
 ```css
 /* Shorthand margin
 - margin-top -> margin-right -> margin-bottom -> margin-left
-
-margin-top: 10px;
-margin-right: 10px;
-margin-bottom: 10px;
-margin-left: 10px;
 */
 
 margin: 10px 10px 10px 10px;
 margin: 10px auto 10px auto;
 ```
 
+```css
+* {
+    margin: 0;
+}
+```
+![image](https://user-images.githubusercontent.com/108991648/213766860-1b052045-e927-431e-b1dc-389e9dfebc89.png)
 
-#### Outline
+### Outline
+
+> Entre a margem e border (+ margem)
+
+Comandos: CSS | Descrição | 
+:-|:- 
+<code>outline-width: 10px<;/code> | tamanho da borda
+<code>outline-style: solid;</code> | estilo de borda: sólida
+<code>outline-color: blue;</code> | cor da borda
+ShortHand <code>outline:</code> | Melhoria para o Código
+
+```css
+/* Shorthand outline
+- outline-width -> outline-style -> outline-color
+*/
+
+outline: 10px solid red;
+```
 
 
 
 ### Border
 
 Comandos: CSS | Descrição | 
-:-|:- 
+- | - 
+<code>border-width: 10px</code> | tamanho da borda
 <code>border-style: solid;</code> | estilo de borda: sólida
-<code>border-width: 10px<;/code> | tamanho da borda
 <code>border-color: blue;</code> | cor da borda
 ShortHand <code>border:</code> | Melhoria para o Código
 
 ```css
 /* Shorthand border
 - border-width -> border-style -> border-color
-
-border-width: 10px;
-border-style: solid;
-border-color: red;
 */
 
 border: 10px solid red;
@@ -542,7 +534,7 @@ border: 10px solid red;
 ### Padding
 
 Comandos: CSS | Descrição | 
-:-|:-:
+:-|:-
 <code>padding-top: 10px;</code> | ↑
 <code>padding-right: 10px;</code> | →
 <code>padding-bottom: 10px;</code> | ↓
@@ -552,30 +544,79 @@ ShortHand <code>padding:</code> | Melhoria para o Código
 ```css
 /* Shorthand padding
 - padding-top -> padding-right -> padding-bottom -> padding-left
-
-padding-top: 10px;
-padding-right: 10px;
-padding-bottom: 10px;
-padding-left: 10px;
 */
 
 padding: 10px 10px 10px 10px;
 ```
 <hr>
 
-## Grouping Tags
+## Caixas - |box-size|
+
+### Grouping Tags
 
 Comandos: CSS | Descrição | 
 :-|:-:
 <code>&lt;header&gt;</code> | cabeçalho
-<code>&lt;nav&gt;</code> | Navegação
-<code>&lt;main&gt;</code> | cabeçalho principal
-<code>&lt;section&gt;</code> | 
+<code>&lt;nav&gt;</code> | navegação - Links
+<code>&lt;main&gt;</code> | conteúdo principal
+<code>&lt;section&gt;</code> | sessão
 <code>&lt;article&gt;</code> | 
 <code>&lt;aside&gt;</code> | 
 <code>&lt;footer&gt;</code> | rodapé
-<code>&lt;&gt;</code> | 
 
+![image](https://user-images.githubusercontent.com/108991648/225978264-b0a9e760-e684-46e7-beb8-9e9538e7605f.png)
+
+<hr>
+
+### Sombras 
+
+#### Caixa - Sombra
+
+Comandos: CSS | Descrição | 
+:-|:-:
+<code>box-shadow: ***;</code> | caixa de sombra
+<code>box-shadow: 1px 1px 1px 1px black;</code> | **↮  - ↕  - esbaçamento - espalhamento - cor da sombra**
+
+#### Letra - Sombra
+
+Comandos: CSS | Descrição | 
+:-|:-:
+<code>text-shadow: ***;</code> | caixa de sombra
+<code>text-shadow: 1px 1px 1px 1px black;</code> | **↮  - ↕  - esbaçamento - espalhamento - cor da sombra**
+
+
+### Bordas
+
+Comandos: CSS | Descrição | 
+:-|:-:
+<code>border-radius: ***;</code> | bordas
+<code>border-top-left-radius: ***;</code> | borda cima esquerda
+<code>border-top-right-radius: ***;</code> | borda cima direita
+<code>border-bottom-right-radius: ***;</code> | borda baixo direita
+<code>border-bottom-left-radius: ***;</code> | borda baixo esquerda
+ShortHand <code>border-radius:</code> | Melhoria para o Código
+
+```css
+/* Shorthand padding
+- border-top-left-radius --> border-top-right-radius --> border-bottom-right-radius --> border-bottom-left-radius
+*/
+
+border-radius: 10px 50px 70px 5px;
+```
+
+**Círculo**
+
+```css
+   div#bola{
+            height: 100px;
+            width: 100px;
+            background-color: white;
+            margin: 10px;;
+            border-radius: 50px;
+        }
+```
+
+Borda por imagem: [Link](https://www.youtube.com/watch?v=n0rjAs_Im4w)
 
 <hr>
 
