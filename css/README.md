@@ -263,9 +263,8 @@ Comandos: CSS | Descrição
 :-|:-
 <code>font-size: 12pt;</code> | Fonte tamanho
 <code>text-transform: uppercase;</code> | Maiúscula
-
-
-
+<code>text-justify: auto;</code> | Texto justificado
+<code>line-height: 20px;</code> | Linha Espaçamento
 
 
 Medida | Absoluta |     Medida | Relativa
@@ -617,6 +616,22 @@ border-radius: 10px 50px 70px 5px;
 ```
 
 Borda por imagem: [Link](https://www.youtube.com/watch?v=n0rjAs_Im4w)
+
+<hr>
+
+### Imagem
+
+**Centralizar imagem**
+
+
+```css
+img {
+    width: 95%;
+    margin: auto;
+    display: block;
+    
+}
+```
 
 <hr>
 

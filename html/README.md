@@ -334,7 +334,7 @@ Dicas Html Cores de Fundo: [Aqui](https://pt.wikihow.com/Configurar-Cores-de-Fun
 **Conversor para vídeos** [HandBrake](https://handbrake.fr/)
 
 Navegador | Arquivos compatíveis
-- | -
+:-| :-
 Microsoft Edge | .mp4 .m4v
 Apple Safari | .mp4 .m4v
 Google Chrome | .mp4 .m4v .webm .gov
