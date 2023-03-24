@@ -260,7 +260,7 @@ F12 + Console | para localizar um problema no código
         <source media="(max-width: 750px)" srcset="imagens/foto-p.png" type="image/png">
         <source media="(max-width: 1050px)" srcset="imagens/foto-m.png" type="image/png">
         <img src="imagens/foto-g.png" alt="Imagem G">
-    </picture>
+</picture>
 ```
 
 **Inclusão de imagem**

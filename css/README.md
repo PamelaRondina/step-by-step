@@ -44,16 +44,6 @@ body {
 <hr>
 
 
-
-## Body
-
-```css
-
-```
-
-- Font-family = inserir a fonte
-
-
 ## Header
 
 ```css
@@ -199,7 +189,7 @@ Comandos: CSS | Descrição
 <code>#0000ff</code> | Cores
 <code>rgb(0, 0, 255)</code> | Red, Green, Blue
 <code>rgba(27, 78, 33, 0.205)</code> | Red, Green, Blue, Transparência
-<code>hsl(240, 100%, 50%)</code> | Hue, Sturation, Luminosity
+<code>hsl(240, 100%, 50%)</code> | Hue, Sturation, Luminosity (matiz, saturação e luminância)
 <code>background-image: linear-gradient();</code> | Imagem em Degradê (direção, cores)
 
 **Gradiente**
@@ -264,7 +254,7 @@ Comandos: CSS | Descrição
 <code>font-size: 12pt;</code> | Fonte tamanho
 <code>text-transform: uppercase;</code> | Maiúscula
 <code>text-justify: auto;</code> | Texto justificado
-<code>line-height: 20px;</code> | Linha Espaçamento
+<code>line-height: 20px;</code> | Linha Espaçamento | Altura da linha
 
 
 Medida | Absoluta |     Medida | Relativa
@@ -315,15 +305,19 @@ Comandos: CSS | Descrição
 
 ## Listas
 
-```css
-ul {
-
-}
-```
-
 Comandos: CSS | Descrição
 :-|:-
 <code>list-style: none;</code> | Elimina marcações
+<code>list-style-position: inside;</code> | Marcações para dentro
+<code>columns: 2;</code> | Colunas dentro de uma lista
+
+
+```css
+ul {
+    
+}
+```
+
 <hr>
 
 ## Links
@@ -429,14 +423,15 @@ Comandos: CSS | Descrição |
 <code>display: inline-block;</code> | blocos na mesma linha 
 
 <hr>
-
-## Modelos de Caixa 
+v## Modelos de Caixa 
 
 ![image](https://user-images.githubusercontent.com/108991648/225935450-64a4b146-3d92-4509-8315-64b3db864cff.png)
 
 Comandos: CSS | Descrição | 
 :-|:- 
 <code>width: 65px;</code> | largura
+<code>min-width: 300px;</code> | largura mínima
+<code>max-width: 1000px;</code> | largura máxima
 <code>height: 10px;</code> | altura
 <code>border: 10px;</code> | borda - dentro do elemento
 <code>padding: 10px;</code> | preenchimento interno
@@ -449,7 +444,7 @@ Comandos: CSS | Descrição |
 
 box-level (block-level) | Nova Linha |  inline-level  | Mesma Linha
 :-|:- |-| -
-<code>&lt;h1 - h6&gt;</code> | <code>&lt;blockquote&gt;</code>| <code>&lt;abbr&gt;</code>   | <code>&lt;a&gt;</code> |
+<code>&lt;h1 - h6&gt;</code> Todo h1 é bold | <code>&lt;blockquote&gt;</code>| <code>&lt;abbr&gt;</code>   | <code>&lt;a&gt;</code> |
 <code>&lt;div&gt;</code>     | <code>&lt;address&gt;</code>   | <code>&lt;acronym&gt;</code>  |  <code>&lt;span&gt;</code> |
 <code>&lt;main&gt;</code>    | <code>&lt;canvas&gt;</code>    | <code>&lt;b&gt;</code>  | <code>&lt;code&gt;</code> |
  <code>&lt;header&gt;</code> | <code>&lt;dd&gt;</code>        | <code>&lt;bdo&gt;</code>  | <code>&lt;small&gt;</code> | 
@@ -560,7 +555,7 @@ Comandos: CSS | Descrição |
 <code>&lt;main&gt;</code> | conteúdo principal
 <code>&lt;section&gt;</code> | sessão
 <code>&lt;article&gt;</code> | 
-<code>&lt;aside&gt;</code> | 
+<code>&lt;aside&gt;</code> | Conteúdo periférico
 <code>&lt;footer&gt;</code> | rodapé
 
 ![image](https://user-images.githubusercontent.com/108991648/225978264-b0a9e760-e684-46e7-beb8-9e9538e7605f.png)
@@ -635,6 +630,57 @@ img {
 
 <hr>
 
+### Variáveis
+
+Comandos: CSS | Descrição | 
+:-|:-:
+<code>:root: --nome-variavel;</code> | criar variável
+
+```css
+:root {
+    --cor0: #c5ebd6;
+    --cor1: #83e1ad;
+    --cor2: #3ddc84;
+    --cor3: #2fa866;
+    --cor4: #1a5c37;
+    --cor5: #063d1e;
+    
+    --fonte-padrao: Arial, Verdana, Helvetica, sans-serif;
+    --fonte-destaque: 'Bebas Neue', cursive;
+    --fonte-android: 'Android', cursive;
+}
+
+body {
+    background-color: var(--cor0);
+    font-family: var(--fonte-padrao);
+}
+```
+
+### Configuração Global
+
+Comandos: CSS | Descrição | 
+:-|:-:
+<code>* { };</code> | configuração que vale para todos os elementos
+
+```css
+* {
+    margin: 0;
+    padding: 0;;
+}
+```
+
+<hr>
+
+### Responsividade
+
+> Página acessível para diversas plataformas
+
+Comandos: CSS | Descrição | 
+:-|:-:
+<code>* { };</code> | configuração que vale para todos os elementos
+
+
+<hr>
 Ferramentas para CSS | Link
 -|-
 Css Gradient | [Link](https://cssgradient.io/)
