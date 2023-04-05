@@ -381,7 +381,6 @@ HTML - class="nome" | CSS = <strong><big>.</big></strong>nome | Múltipos
 <code>.nomeClass::after</code> <code>.nomeClass::before</code> | pseudo |element
 > | | children
 
-
 --->--->--->--->--->--->--->--->--->--->--->--->--->--->--->--->--->--->--->--->--->--->--->--->--->--->--->
 ### Pseudo-Class
 
@@ -394,6 +393,12 @@ Comandos: CSS | Descrição |
 <code>nome:empty</code> | 
 <code>nome:focus</code> | 
 
+```css
+div:hover {
+            background-color: rgba(255, 255, 0, 0.253);
+        }
+```
+
 ### Pseudo-Element
 
 > Formatação específica de um elemento
@@ -405,13 +410,6 @@ Comandos: CSS | Descrição |
 <code>nome::first-letter</code> | 
 <code>nome::first-line</code> | 
 
-
-```css
-div:hover {
-            background-color: rgba(255, 255, 0, 0.253);
-        }
-```
-
 <hr>
 
 ## Display
@@ -422,8 +420,25 @@ Comandos: CSS | Descrição |
 <code>display: block;</code> | Modo block - visualizar
 <code>display: inline-block;</code> | blocos na mesma linha 
 
+
+**Blocos na mesma linha**
+
+```css
+div.quadrado {
+            display: inline-block;
+            border: 2px solid black;
+            border-radius: 10px;
+            width: 300px;
+            height: 300px;            
+        }
+```
+
+![image](https://user-images.githubusercontent.com/108991648/228563543-f57d81f4-2743-4b8a-89f5-b07e24b94860.png)
+
+
 <hr>
-v## Modelos de Caixa 
+
+## Modelos de Caixa 
 
 ![image](https://user-images.githubusercontent.com/108991648/225935450-64a4b146-3d92-4509-8315-64b3db864cff.png)
 
@@ -456,9 +471,9 @@ box-level (block-level) | Nova Linha |  inline-level  | Mesma Linha
  <code>&lt;video&gt;</code>  | <code>&lt;noscript&gt;</code>  | <code>&lt;kbd&gt;</code>  | <code>&lt;select&gt;</code> |
  <code>&lt;p&gt;</code>      | <code>&lt;tfoot&gt;</code>     | <code>&lt;map&gt;</code>  | <code>&lt;input&gt;</code> |
 <code>&lt;ol&gt;</code>      | <code>&lt;table&gt;</code>     | <code>&lt;object&gt;</code>  | <code>&lt;output&gt;</code>
-<code>&lt;ul&gt;</code>      | -                              | <code>&lt;q&gt;</code>  |   <code>&lt;samp&gt;</code>
--                            | -                              | <code>&lt;script&gt;</code> | <code>&lt;textarea&gt;</code> 
--                            | -                              | <code>&lt;tt&gt;</code> | <code>&lt;var&gt;</code> 
+<code>&lt;ul&gt;</code>      | .-                              | <code>&lt;q&gt;</code>  |   <code>&lt;samp&gt;</code>
+.-                            | .-                              | <code>&lt;script&gt;</code> | <code>&lt;textarea&gt;</code> 
+.-                            | .-                              | <code>&lt;tt&gt;</code> | <code>&lt;var&gt;</code> 
 
 ### Margin
 
@@ -630,6 +645,45 @@ img {
 
 <hr>
 
+## Background
+
+Comandos: CSS | Descrição | 
+:-|:-:
+<code>background-image: url('link');</code> | imagem anexada de fundo (ocorre repetição da imagem)
+<code>background-repeat: ---;</code> | -
+<code>background-position: ---;</code> | -
+<code>background-size;</code> | tamanho da imagem
+
+**background-image: url('link');**
+
+```css
+ body {
+            background-image: url('images/wallpaper001.jpg');
+
+            background-image: url('https://avatars.githubusercontent.com/u/8683378?v=4');
+        }
+```
+
+**background-repeat: ---;**
+
+![image](https://user-images.githubusercontent.com/108991648/228570106-3cd3653f-1479-4242-8e3b-866a4ee3c8a2.png)
+
+**background-position: ---;**
+
+![image](https://user-images.githubusercontent.com/108991648/228622922-73510d93-c9d8-41c9-b79a-911c6bb53753.png)
+
+![image](https://user-images.githubusercontent.com/108991648/228623618-39e441bd-277f-417d-8ffb-19672c1de5d2.png)
+
+**background-image: url('link');**
+
+Propriedade | O que faz...
+-: | :- 
+<code>[length]px</code> <code>[length]%</code> | Redimensiona a largura da imagem e faz a altura se adaptar automaticamente. Podemos também informar as duas dimensões na sequência ou também usar valores percentuais.
+<code>cover</code> | Muda o tamanho da imagem para que ela seja sempre totalmente exibida na tela, sem nenhum corte.
+<code>contain</code> | Redimensiona a imagem para que ela cubra o contêiner, mesmo que para isso ocorram alguns eventuais cortes.
+
+<hr>
+
 ### Variáveis
 
 Comandos: CSS | Descrição | 
@@ -681,6 +735,7 @@ Comandos: CSS | Descrição |
 
 
 <hr>
+
 Ferramentas para CSS | Link
 -|-
 Css Gradient | [Link](https://cssgradient.io/)
