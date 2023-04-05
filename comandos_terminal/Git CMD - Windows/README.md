@@ -34,6 +34,20 @@ Vai verificar se o arquivo 'hello' existe, se não, criar um arquivo txt.
 <br>
 
 
+
+## Comandos GIT
+
+comando | Descrição
+:- | :-
+git clone | Clonar um Repositório do GitHub
+
+<br>
+
+__________
+<br><br><br><br><br><br><br><br><br><br>
+
+**AJUSTARRRR**
+
 ERASE + Nome | Deletar Diretório
 MD + Nome | Criar Diretório
 CODE + Nome | Cria arquivo e abre o VSCODE 
