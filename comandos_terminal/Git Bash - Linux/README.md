@@ -91,7 +91,6 @@ comando | Descrição
 <code>git status</code> | status dos arquivos
 <code>git restore --staged nomeArquivo</code> | retorna o arquivo para unstage
 <code>git commit -m "mensagem"</code> | -m = incluir mensagem 
-<code>git push origin main</code> | enviando os novos arquivos para a nuvem
 <code>git remote add origin linkGitHub</code> | trazer repositório do GitHub para local
 <code>git push origin main</code> | Push local para remoto
 
