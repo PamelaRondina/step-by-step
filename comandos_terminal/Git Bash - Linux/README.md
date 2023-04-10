@@ -8,30 +8,38 @@ Azul escuro |	Diretórios (pastas)
 Cianos	|	Atalho
 Branco	|	Arquivo
 
-**Comandos Linux**|**Descrição**
-:-:|:-
-<code>git --version</code> | Versão do Git CMD
-<code>clear</code> ou <code>CRTL + L</code> | Limpar o terminal
-<code>ls</code> | Lista arquivos e diretórios
-<code>ls -a</code> | Lista arquivos + ocultos
-<code>cd</code> | **change directory** Mudar de diretório/carpeta
-<code>cd -</code> <code>cd ..<cd/code>  | Retorna um diretório/carpeta
-<code>cd /</code> | Diretório 0 (raiz), para seguir: **cd /c**
-<code>TAB</code> | Autocomplete 
-<code>mkdir nomeDoDiretorio</code> | **make directory** Criar um diretório/carpeta
-<code>echo hello > hello.txt</code> | Verificar e criar arquivo
-<code>rm -rf *</code> | Elimina TODOS os arquivos dentro do diretório 
-<code>rm -rf nomeDoArquivo</code> | Elimina o arquivo específico dentro do diretório 
-<code>rmdir nomeDoDiretório/</code> | Só elimina diretórios vazios
-<code>cat</code> | Mostrar o conteúdo o arquivo
-<code>mv nomeAtual nomeNovo</code> | Renomear arquivos
-<code>mv nomeAtual ./nomeDiretorio</code> | Mover arquivos
-<br>
+**Comandos Linux**|**Descrição** | **Comandos Windows**
+:-:|:- | :-
+<code>clear</code> ou <code>CRTL + L</code> | Limpar o terminal | <code>cls</code>
+<code>ls</code> | Lista arquivos e diretórios | <code>dir</code>
+<code>ls -a</code> | Lista arquivos + ocultos | <code>dir</code>
+<code>cd</code> | **change directory** Mudar de diretório/carpeta | =
+<code>cd -</code> <code>cd ..</code>  | Retorna um diretório/carpeta | =
+<code>cd /</code> | Diretório 0 (raiz), para seguir: **cd /c** | =
+<code>TAB</code> | Autocomplete | =
+<code>mkdir nomeDoDiretorio</code> | **make directory** Criar um diretório/carpeta | =
+<code>echo hello > hello.txt</code> | Verificar e criar arquivo | =
+touch | Criar arquivo | type nul  > nomeArquivo.txt
+<code>rm -rf nomeDiretorio</code> | Elimina Diretório e seus arquivos | <code>rmdir /s/q nomeDiretorio</code>
+<code>rm -rf nomeArquivo</code> | Elimina Arquivo dentro do Diretório | <code>del nomeArquivo</code>
+<code>rmdir nomeDiretorio/</code> | Elimina apenas Diretórios vazios | <code>RD nomeDiretorio/</code> ou <code>rmdir nomeDiretorio/</code>
+<code>rm -rf *</code> | Elimina TODOS os arquivos dentro do Diretório | <code>del * /s/q</code>
+<code>mv nomeAtual nomeNovo</code> | Renomear arquivos | rename nomeAtual nome Novo
+<code>mv nomeArquivo ../</code> | Mover arquivos | move nomeArquivo ../
+
+pwd | mostra diretório atual | ???????
+<code>cat</code> | Mostrar o conteúdo o arquivo | ??????????
+
+<br> 
+
+_both_
 
 <code>echo hello > hello.txt</code> 
 Vai verificar se o arquivo 'hello' existe, se não, criar um arquivo txt.
 
 <br>
+
+_Bash_ 
 
 <code>rm -rf * nomeDoDiretorio</code>
 - rm: comando de deletar
@@ -84,6 +92,7 @@ ________________
 
 comando | Descrição
 :- | :-
+<code>git --version</code> | Versão do Git CMD 
 <code>git clone</code> | Clonar um Repositório do GitHub
 <code>git init</code>| Criar um repositório 
 <code>git add nomeArquivo</code> | add o arquivo para staged
@@ -93,6 +102,7 @@ comando | Descrição
 <code>git commit -m "mensagem"</code> | -m = incluir mensagem 
 <code>git remote add origin linkGitHub</code> | trazer repositório do GitHub para local
 <code>git push origin main</code> | Push local para remoto
+<code>git pull origin main</code> | Pull remoto para local
 
 
 

@@ -14,8 +14,9 @@ Branco	|	Arquivo
 **Comandos CMD**|**Descrição**
 :-:|:-
 <code>git --version</code> | Versão do Git Bash
-<code>cls</code> | Limpar o terminal
-<code>dir</code> | Lista arquivos e diretórios
+ | Limpar o terminal
+
+ | Lista arquivos e diretórios
 <code>????????????????</code> | Lista arquivos + ocultos
 <code>cd</code> | **change directory** Mudar de diretório/carpeta
 <code>cd ..</code> | Retornar um diretório/carpeta
@@ -23,8 +24,9 @@ Branco	|	Arquivo
 <code>TAB</code> | Autocomplete
 <code>mkdir nomeDoDiretorio</code> | **make directory** Criar um diretório/carpeta
 <code>echo hello > hello.txt</code> | Verificar e criar arquivo
-<code>del nomeDoDiretorio</code> | Elimina arquivos dentro do diretório
-<code>rmdir nomeDoDiretório / S /Q </code> | Elimina o diretório e seus arquivos
+ | Elimina arquivos dentro do diretório
+
+ 
 
 <br>
 
