@@ -1,11 +1,11 @@
 # O que estou aprendendo...
 
-### 1. [angular](*******)
-### 2. [asp.net_MVC](https://github.com/PamelaRondina/step-by-step/tree/main/asp.net_MVC)
-### 3. [c#](https://github.com/PamelaRondina/step-by-step/tree/main/c%23)
-### 4. Comandos Terminal
-  - [Git Bash - Linux](https://github.com/PamelaRondina/step-by-step/tree/main/comandos_terminal/Git%20Bash%20-%20Linux)
-  - [Git CMD - Windows](https://github.com/PamelaRondina/step-by-step/tree/main/comandos_terminal/Git%20CMD%20-%20Windows)
+### 1. [Angular](*******)
+### 2. [Asp.net_MVC](https://github.com/PamelaRondina/step-by-step/tree/main/asp.net_MVC)
+### 3. [C#](https://github.com/PamelaRondina/step-by-step/tree/main/c%23)
+### 4. GIT
+  - [Git Comandos Terminal - Bash e CMD](https://github.com/PamelaRondina/step-by-step/tree/main/comandos_terminal/Git%20Bash%20-%20Linux#comandos-git-bash-e-git-cmd)
+  - [Git Comandos](https://github.com/PamelaRondina/step-by-step/tree/main/comandos_terminal/Git%20Bash%20-%20Linux#comandos-git)
 
 ### 5. [CSS](https://github.com/PamelaRondina/step-by-step/tree/main/css)
 ### 6. [GitHub](https://github.com/PamelaRondina/step-by-step/tree/main/github)
