@@ -1,12 +1,6 @@
 # GIT
 
-## Comandos: Git Bash - Unix Linux
-
-**Cores** | **Descrição**
-:-:|:-
-Azul escuro |	Diretórios (pastas)
-Cianos	|	Atalho
-Branco	|	Arquivo
+## Comandos: Git Bash e GIT CMD
 
 **Comandos Linux**|**Descrição** | **Comandos Windows**
 :-:|:- | :-
@@ -26,9 +20,14 @@ touch | Criar arquivo | type nul  > nomeArquivo.txt
 <code>rm -rf *</code> | Elimina TODOS os arquivos dentro do Diretório | <code>del * /s/q</code>
 <code>mv nomeAtual nomeNovo</code> | Renomear arquivos | rename nomeAtual nome Novo
 <code>mv nomeArquivo ../</code> | Mover arquivos | move nomeArquivo ../
-
 pwd | mostra diretório atual | ???????
 <code>cat</code> | Mostrar o conteúdo o arquivo | ??????????
+
+**Cores** | **Descrição**
+:-:|:-
+Azul escuro |	Diretórios (pastas)
+Cianos	|	Atalho
+Branco	|	Arquivo
 
 <br> 
 
@@ -72,21 +71,6 @@ _Bash_
 
 __________________
 
-## Clonar Repositório
-
-Após criar o repositório, copiar o código
-![image](https://user-images.githubusercontent.com/108991648/230122644-2f3fffdb-5177-47f8-b219-ca7dc4275bcf.png)
-
-No Terminal incluir: "<code>git clone</code> + Link copiado"
-
-<br>
-
-![image](https://user-images.githubusercontent.com/108991648/230180095-ceefd075-3b30-4451-8a96-5b4bc37abcce.png)
-
-
-
-
-________________
 
 ## Comandos GIT
 
@@ -103,11 +87,24 @@ comando | Descrição
 <code>git remote add origin linkGitHub</code> | trazer repositório do GitHub para local
 <code>git push origin main</code> | Push local para remoto
 <code>git pull origin main</code> | Pull remoto para local
-
-
-
-
 __________
+
+
+## Clonar Repositório
+
+Após criar o repositório, copiar o código
+![image](https://user-images.githubusercontent.com/108991648/230122644-2f3fffdb-5177-47f8-b219-ca7dc4275bcf.png)
+
+No Terminal incluir: "<code>git clone</code> + Link copiado"
+
+<br>
+
+![image](https://user-images.githubusercontent.com/108991648/230180095-ceefd075-3b30-4451-8a96-5b4bc37abcce.png)
+
+
+
+
+________________
 <br><br><br><br><br><br><br><br><br><br>
 **AJUSTARRRR**
 touch nomeDoArquivo| Criar arquivo/archivo
