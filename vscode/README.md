@@ -8,3 +8,4 @@ Shift + TAB | Retorna (retorno de TAB)
 ALT | Seleciona mais de um campo
 Ctrl + K + V | Preview README
 Ctrl + Shift + ' | Abrir terminal
+Shift + Alt + A | Comentário em Bloco

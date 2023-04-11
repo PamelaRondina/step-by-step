@@ -2,6 +2,7 @@
 
 > ************
 
+
 FOR:
 
 ```javascript
@@ -161,27 +162,40 @@ senha.addEventListener('keyup', () => {
 <hr>
 
 **Comandos: JavaScript** | **Descrição**
-:-|:-
-// | Comentário
-= | Recebe
-== | Igual
+:-: |:-
+// | Comentário linha
+/* texto */ | Comentário bloco
+= | Recebe 
+=== | Igual
 != | Diferente
 && | E
 { } | Bloco
 < script > | Iniciar linguagem JavaScript
 var | variável
-**Funções**| ---------
-alert("texto") | Cria um *pop up* de alerta
-prompt("texto") | Pop up para o usuário inserir um resultado, retorna o resultado como string
-parseInt("texto")| Converte uma string para número
-parseFloat("Texto")| Converte uma string em casas decimais
-if("texto") { "texto" } | Se 
+if ( ) { } | Se 
+else if | Se não se (para continuar uma análise)
 else | Se não
 while | Enquanto / repetição
 for | Laço de Repetição
 ++ | variável + 1
 break | Quebra um looping (while)
 array | conjusta da lista
+% | Resto da Divisão
+
+_________________
+
+**Funções** | Descrição
+- | -
+`console.log()` | Imprime algo
+`let nomeVariavel = 10;` | declarar variável (valor pode ser alterado)
+`const pi = 3.14;` | declarar variável (valor NÃO pode ser alterado) 
+`console.log(resultado).toFixed(2));` | **toFixed** converte o valor para texto e imprime com dois algorítimos após a casa decimal
+`const isNumeroPar = (numero % 2) === 0` | (isNomeVariavel) utilizado para declarar variáveis booleanas 
+
+alert("texto") | Cria um *pop up* de alerta
+prompt("texto") | Pop up para o usuário inserir um resultado, retorna o resultado como string
+parseInt("texto")| Converte uma string para número
+parseFloat("Texto")| Converte uma string em casas decimais
 **nomedaarray**.length|retorna a quantidade de elementos que uma array possui
 **nomedaarray**.push(**itemnono**)|Para empurrar um novo item para uma array já criada
 document.write()| imprime na tela 
@@ -191,6 +205,13 @@ input.focus();| O cursor do mouse foca na lacuna criada pelo input/
 button.onclick()| compara ao clicar no botão criado
 Math.round() | arredondar o resultado
 Math.random() | Número aleatório
-console.log() | Resultado aparece no console do Browser
+_____________
+
+Biblioteca | Descrição
+- | -
+`Math.pow(altura,2)` | Calcular ao quadrado (ou ao cubo3, e assim vai...)
+____________________
+
 **Erros**| ----------
+- | -
 NaN | Não é um número
