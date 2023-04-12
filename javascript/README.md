@@ -186,6 +186,7 @@ _________________
 
 **Funções** | Descrição
 - | -
+`function teste () { }` | Chamar função
 `console.log()` | Imprime algo
 `let nomeVariavel = 10;` | declarar variável (valor pode ser alterado)
 `const pi = 3.14;` | declarar variável (valor NÃO pode ser alterado) 

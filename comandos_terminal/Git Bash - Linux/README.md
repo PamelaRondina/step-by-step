@@ -1,25 +1,35 @@
 # GIT
 
+## O que é GIT?
+
+
+
 ## Comandos: Git Bash e GIT CMD
+
+Software que permite que desenvolvedores trabalhem no mesmo projeto, sendo possível o rastreio das versões realizadas.
+
+Criado pelo engenheiro de software Linus Torvalds
+
 
 **Comandos Linux**|**Descrição** | **Comandos Windows**
 :-:|:- | :-
-<code>clear</code> ou <code>CRTL + L</code> | Limpar o terminal | <code>cls</code>
-<code>ls</code> | Lista arquivos e diretórios | <code>dir</code>
-<code>ls -a</code> | Lista arquivos + ocultos | <code>dir</code>
-<code>cd</code> | **change directory** Mudar de diretório/carpeta | =
-<code>cd -</code> <code>cd ..</code>  | Retorna um diretório/carpeta | =
-<code>cd /</code> | Diretório 0 (raiz), para seguir: **cd /c** | =
-<code>TAB</code> | Autocomplete | =
-<code>mkdir nomeDoDiretorio</code> | **make directory** Criar um diretório/carpeta | =
-<code>echo hello > hello.txt</code> | Verificar e criar arquivo | =
-touch | Criar arquivo | type nul  > nomeArquivo.txt
-<code>rm -rf nomeDiretorio</code> | Elimina Diretório e seus arquivos | <code>rmdir /s/q nomeDiretorio</code>
-<code>rm -rf nomeArquivo</code> | Elimina Arquivo dentro do Diretório | <code>del nomeArquivo</code>
-<code>rmdir nomeDiretorio/</code> | Elimina apenas Diretórios vazios | <code>RD nomeDiretorio/</code> ou <code>rmdir nomeDiretorio/</code>
-<code>rm -rf *</code> | Elimina TODOS os arquivos dentro do Diretório | <code>del * /s/q</code>
-<code>mv nomeAtual nomeNovo</code> | Renomear arquivos | rename nomeAtual nome Novo
-<code>mv nomeArquivo ../</code> | Mover arquivos | move nomeArquivo ../
+`clear` ou `CRTL + L`  | Limpar o terminal | `cls`
+`ls` | Lista arquivos e diretórios | `dir`
+`ls -a` | Lista arquivos + ocultos | `dir`
+`cd` | **change directory** Mudar de diretório/carpeta | =
+`cd -` - `cd ..`  | Retorna um diretório/carpeta | =
+`cd /` | Diretório 0 (raiz), para seguir: **cd /c** | =
+`TAB` | Autocomplete | =
+`mkdir nomeDoDiretorio` | **make directory** Criar um diretório/carpeta | =
+`echo hello > hello.txt` | Verificar e criar arquivo | =
+`touch nomeArquivo` | Criar arquivo | `type nul  > nomeArquivo.txt`
+`rm -rf nomeDiretorio` | Eliminar Diretório e seus arquivos | `rmdir /s/q nomeDiretorio`
+`rm -rf nomeArquivo` | Eliminar Arquivo dentro do Diretório | `del nomeArquivo`
+`rmdir nomeDiretorio` | Eliminar apenas Diretórios vazios | `RD nomeDiretorio` ou `rmdir nomeDiretorio/`
+`rm -rf *` | Eliminar TODOS os arquivos dentro do Diretório | `del * /s/q`
+`mv nomeAtual nomeNovo` | Renomear arquivos | `rename nomeAtual nomeNovo`
+`mv nomeArquivo ../` | Mover arquivos | `move nomeArquivo ../`
+
 pwd | mostra diretório atual | ???????
 <code>cat</code> | Mostrar o conteúdo o arquivo | ??????????
 
