@@ -2,14 +2,11 @@
 
 ## O que é GIT?
 
-
-
-## Comandos: Git Bash e GIT CMD
-
-Software que permite que desenvolvedores trabalhem no mesmo projeto, sendo possível o rastreio das versões realizadas.
+Software que permite que desenvolvedores trabalhem no mesmo projeto, sendo possível o rastreio das versões realizadas. 
 
 Criado pelo engenheiro de software Linus Torvalds
 
+## Comandos: Git Bash e GIT CMD
 
 **Comandos Linux**|**Descrição** | **Comandos Windows**
 :-:|:- | :-
@@ -97,6 +94,7 @@ comando | Descrição
 <code>git remote add origin linkGitHub</code> | trazer repositório do GitHub para local
 <code>git push origin main</code> | Push local para remoto
 <code>git pull origin main</code> | Pull remoto para local
+`git checkou nomeBranch`  | Altera a branch
 __________
 
 
