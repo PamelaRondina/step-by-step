@@ -129,7 +129,7 @@ _________________
 **Pointer - cursor do mouse**
 
 ```css
-pointer-event: none;
+pointer-events: none;
 cursor: pointer;
 ```
 
@@ -405,10 +405,10 @@ div:hover {
 
 Comandos: CSS | Descrição | 
 :-|:- |
-<code>nome::before</code> | depois do elemento
-<code>nome::after</code> | antes do elemento
-<code>nome::first-letter</code> | 
-<code>nome::first-line</code> | 
+`nome::before` | depois do elemento
+`nome::after` | antes do elemento
+`nome::first-letter` | 
+`nome::first-line` | 
 
 <hr>
 
@@ -416,9 +416,10 @@ Comandos: CSS | Descrição |
 
 Comandos: CSS | Descrição | 
 :-|:- 
-<code>display: none;</code> | Não visualizar
-<code>display: block;</code> | Modo block - visualizar
-<code>display: inline-block;</code> | blocos na mesma linha 
+`display: none;` | Não visualizar
+`display: block;` | Modo block - visualizar
+`display: inline-block; `| blocos na mesma linha 
+`display: grid;` | Tabela
 
 
 **Blocos na mesma linha**
@@ -432,9 +433,16 @@ div.quadrado {
             height: 300px;            
         }
 ```
-
 ![image](https://user-images.githubusercontent.com/108991648/228563543-f57d81f4-2743-4b8a-89f5-b07e24b94860.png)
 
+**display: grid;**
+
+```css
+ display: grid; 
+ grid-template-columns: 1fr 1fr;`
+```
+
+![image](https://user-images.githubusercontent.com/108991648/233472010-e3639261-c29c-4b89-b70d-3ed0f246cdbf.png)
 
 <hr>
 
@@ -459,8 +467,8 @@ Comandos: CSS | Descrição |
 
 box-level (block-level) | Nova Linha |  inline-level  | Mesma Linha
 :-|:- |-| -
-<code>&lt;h1 - h6&gt;</code> Todo h1 é bold | <code>&lt;blockquote&gt;</code>| <code>&lt;abbr&gt;</code>   | <code>&lt;a&gt;</code> |
-<code>&lt;div&gt;</code>     | <code>&lt;address&gt;</code>   | <code>&lt;acronym&gt;</code>  |  <code>&lt;span&gt;</code> |
+`<h1 - h6>` Todo h1 é bold | <code>&lt;blockquote&gt;</code>| <code>&`abbr`   | <code>&lt;a&gt;</code> |
+`div`  | `acronym`  |  <code>&lt;span&gt;</code> |
 <code>&lt;main&gt;</code>    | <code>&lt;canvas&gt;</code>    | <code>&lt;b&gt;</code>  | <code>&lt;code&gt;</code> |
  <code>&lt;header&gt;</code> | <code>&lt;dd&gt;</code>        | <code>&lt;bdo&gt;</code>  | <code>&lt;small&gt;</code> | 
  <code>&lt;nav&gt;</code>    | <code>&lt;dl&gt;</code>        | <code>&lt;br&gt;</code>  | <code>&lt;strong&gt;</code> |

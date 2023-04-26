@@ -63,7 +63,7 @@ Uma linguagem de programação.
 São listas
 
 ```javascript
-var segredos = [´1, 3, 4, 7, 9];
+var segredos = [1, 3, 4, 7, 9];
 ```
 <hr>
 
@@ -191,14 +191,17 @@ _________________
 `let nomeVariavel = 10;` | declarar variável (valor pode ser alterado)
 `const pi = 3.14;` | declarar variável (valor NÃO pode ser alterado) 
 `console.log(resultado).toFixed(2));` | **toFixed** converte o valor para texto e imprime com dois algorítimos após a casa decimal
-`const isNumeroPar = (numero % 2) === 0` | (isNomeVariavel) utilizado para declarar variáveis booleanas 
+`const isNumeroPar = (numero % 2) === 0` | (isNomeVariavel) utilizado para declarar variáveis booleanas
+`nomeArray.push('itemNovo');`|Para empurrar um novo item para uma array já criada
+`nomeArray[posição4] = 'NovoNome'` | Adicionar item na Array pela posição
+`nomeArray.pop()` | Vai eliminar  o ultimo item de uma Array
+`nomeArray.shift()` | Eliminar  o primeiro item de uma Array
+`nomedaArray.length`| Retorna a quantidade de elementos que uma Array possui
 
 alert("texto") | Cria um *pop up* de alerta
 prompt("texto") | Pop up para o usuário inserir um resultado, retorna o resultado como string
 parseInt("texto")| Converte uma string para número
 parseFloat("Texto")| Converte uma string em casas decimais
-**nomedaarray**.length|retorna a quantidade de elementos que uma array possui
-**nomedaarray**.push(**itemnono**)|Para empurrar um novo item para uma array já criada
 document.write()| imprime na tela 
 document.querySelector| puxa as informações do HTML, necessário incluir nos **(" ")**
 input.value | compara com a lacuna criada
