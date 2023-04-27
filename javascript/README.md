@@ -181,6 +181,7 @@ for | Laço de Repetição
 break | Quebra um looping (while)
 array | conjusta da lista
 % | Resto da Divisão
++- | concatenar
 
 _________________
 
