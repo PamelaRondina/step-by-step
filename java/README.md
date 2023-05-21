@@ -1,6 +1,11 @@
 
 [Documentação Java](https://docs.oracle.com/javase/tutorial/java/nutsandbolts/datatypes.html)
 
+# Iniciar um arquivo
+
+- [x] class nomeClass
+- [x] `psvm` chamar o `   public static void main`
+
 **Ordem de prioridade em java**
 
 - 1º tipo da variável;
@@ -83,12 +88,9 @@ class MeuPrimeiroProgramaJava
 ```
 _________________________________________________________________
 
-
-
 Comandos: JAVA | Descrição
 :-|:-
 ; | Ao final de cada linha OBRIGATÒRIO ( ; )
-System.out.println("texto"); | print
 // | Comentário de linha
 /* */ | Comentário de texto
 && | e (and)
@@ -107,7 +109,14 @@ System.out.println(); | Saída de Resultado + Pular Linha
 System.out.println(nomeDaVariavel.toUpperCase()); | Maiúsculas
 System.out.println(nomeDaVariavel.toLowerCase()); | Minúsculas
 System.out.println(nomeDaVariavel.length()); | Contagem caracteres
+` Integer.parseInt(entrada[0]);` | Os dados inclusos em java são em String, este comando passa para **Int**
+________________________________________________________________
+
 **IMPORTS**| -
+-|-
 import java.util.Scanner; | Dado informado pelo usuário
+
+_____________________________________________________________________
 **ATALHOS**|-
+-|-
 fori | `for (int i = 0; j < args.length; j++) {}`
