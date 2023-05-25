@@ -73,11 +73,11 @@ class MeuPrimeiroProgramaJava
 - [x] No Prompt de Comando: localizar caminho de onde o arquivo está salvo:
 
 - [x] Na pasta rodar:
-    - `path "C:\Program Files\Java\jdk-18.0.1.1\bin"`;
+    - [x] `path "C:\Program Files\Java\jdk-18.0.1.1\bin"`;
     - `dir *.java`;
-    - `javac nomeArquivo`;
+    - [x] `javac nomeArquivo.java`;
     - `dir *.class`;
-    - `java nomeArquivo`.
+    - [x] `java nomeArquivo.java`.
 
 ```
 > path "C:\Program Files\Java\jdk-18.0.1.1\bin"
@@ -93,10 +93,13 @@ Comandos: JAVA | Descrição
 ; | Ao final de cada linha OBRIGATÒRIO ( ; )
 // | Comentário de linha
 /* */ | Comentário de texto
-&& | e (and)
+`&&` | e (and)
 `||` | ou (or)
 `=` | Pertence
 `==` | Comparação
+`%` | Resto da divisão
+`/` | Quociente da divisão (feito com inteiros)
+`"\n"`| Pular linha
 ? | if/se (operador ternário)
 : | else/se não (operador ternário)
  Operador cast: `(float)`| Utilizar em decimal
@@ -109,14 +112,28 @@ System.out.println(); | Saída de Resultado + Pular Linha
 System.out.println(nomeDaVariavel.toUpperCase()); | Maiúsculas
 System.out.println(nomeDaVariavel.toLowerCase()); | Minúsculas
 System.out.println(nomeDaVariavel.length()); | Contagem caracteres
-` Integer.parseInt(entrada[0]);` | Os dados inclusos em java são em String, este comando passa para **Int**
+
+________________________________________________________________
+
+**MÉTODOS**| -
+-|-
+`Integer.parseInt(entrada[0]);` | Os dados inclusos em java são em String, este método passa para **Inteiro**
+`Double.parseDouble(entrada[1]);` | Os dados inclusos em java são em String, este método passa para **Real**
+`Caracter = (entrada[2]).charAt(0);` | Os dados inclusos em java são em String, este método passa para **Caracter**
+`Math.sqrt(x);` | Raiz Quadrada
+`Math.pow(x, y);` | Potência
+
 ________________________________________________________________
 
 **IMPORTS**| -
 -|-
-import java.util.Scanner; | Dado informado pelo usuário
+`import java.util.Scanner;` | Dado informado pelo usuário
+**`import javax.swing.*;`** | -
+`import javax.swing.*; JOptionPane.showInputDialog("Digite aqui")` | Usuário inclui o dado
+`import javax.swing.*;JOptionPane.showMessageDialog(null, msg);` | Dado que o usuário incluiu será visualizado
 
 _____________________________________________________________________
 **ATALHOS**|-
 -|-
 fori | `for (int i = 0; j < args.length; j++) {}`
+psvm | `public static void main`
