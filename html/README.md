@@ -70,7 +70,12 @@ Vamos abrir um `novo_arquivo.html` e `! + enter`, o próprio editor incluirá a 
   </body>
 </html>
 ```
+<hr>
 
+**HTML Semântico**
+Além de organizar de forma orgânica e rankear a página em mecanismos de buscar, auxilia para ajuda de leitores com deficiência visual.
+
+![image](https://github.com/PamelaRondina/PamelaRondina/assets/108991648/24ef4f6e-b5f5-40ec-945c-f9fbe22095d9)
 
 <hr>
 
@@ -118,6 +123,20 @@ Incluir no espaço head acima do Tittle
 - [x] Em head, incluir link de ícones
 `    <!--para a visualização dos ícones-->
         <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'> `
+
+<hr>
+
+## Meta Tags
+
+Meta Tags | Descrição
+:-|:-
+`<meta name="keywords" content="sites, web, desenvolvimento, html, desing">` | Palavra chave (o que o site está querendo trazer para o usuário)
+`<meta name="description" content=" Meta Tags - O que são e como utilizá-las">`| Texto que contem a descrição do site
+`meta http-equiv="content-language" content="pt-br">` | Linguagem da página
+`meta name="author" content="Pamela Rondina">` | Inserir autor da página
+`meta http-equiv="refresh" content="5;url=site">` | tempo (5), link do site que será carregado
+`meta name= content="">` | 
+
 
 <hr>
 
@@ -176,8 +195,8 @@ F12 + Console | para localizar um problema no código
 
 **TAGS < / >** | **POSSUI fechamento**
 :-|:-
-&lt;h1&gt;  | título, de 1 até 6
-&lt;header&gt;  | cabeçalho
+`<h1>`  | título, de 1 até 6
+`<header>`  | cabeçalho
 &lt;section&gt; | seções
 &lt;p&gt; | parágrafo
 &lt;ins&gt;  | texto sublinhado
@@ -194,9 +213,10 @@ F12 + Console | para localizar um problema no código
 &lt;blockquote cite="site"&gt; | citação completa 
 &lt;abbr title="text"&gt; | abreviações 
 &lt;<bdo dir="rtl">Texto</bdo> | texto invertido
-&lt;span&gt;  | tag genérica, não faz quebra de linha
-&lt;div&gt;  | tag genérica, executa quebra de linha
-&lt;button&gt;| cria uma botão, texto entre as tags não precisa de **" "**
+`<span>`  | tag genérica, não faz quebra de linha
+`<div>`  | tag genérica, executa quebra de linha
+`<button>`| cria uma botão, texto entre as tags não precisa de 
+`<table>`| Tabe
 `&#x1F604;` | inserir emoji
 
 <hr>
@@ -208,7 +228,7 @@ F12 + Console | para localizar um problema no código
 <code>&lt;ol type="opções" start="4"&gt;  | lista ordenada <code>(1  A  a  I  i)</code>
 <code>&lt;ul type="opções" start="4"&gt;  | lista NÃO ordenada <code>(bolinhas - disc   circle   square)</code>
 &lt;li&gt;  | Elementos (não precisa fechar a TAG)
-&lt;dl&gt;  | Definition List
+&lt;dl&gt;  | Definition List - Lista tipo Sumário
 &lt;dt&gt;  | Termo
 &lt;dd&gt;  | Definição
 
@@ -341,7 +361,7 @@ Google Chrome | .mp4 .m4v .webm .gov
 Mozilla Firefox | .webm .ogv
 Opera | .webm .ogv
 
-<hr>
+
 
 **HTML Entities** | **Símbolos**
 :-|:-
@@ -354,6 +374,35 @@ W3School | [Link](https://www.w3schools.com/charsets/ref_utf_symbols.asp)
 
 <hr>
 
+## Tabelas
+
+Lista de dados em duas dimensões, compostas por linhas e colunas.
+
+Tabelas | Descrição
+:-|:-
+`<table border="1">` | Início da tabela - border (tamanho de borda)
+`<thead>`   | Cabeçalho da Tabela
+`<tbody>` | Corpo da Tabela (conteúdo)
+`<tfoot>` | Rodapé da Tabela
+`<tr>` | Linha da Tabela
+`<th>` | Coluna da Tabela - local do Cabeçalho
+`<td>` | Coluna da Tabela - local do Corpo e Cabeçalho
+`<td colspan="3">Texto</td>` | Mesclar (3 = quantidade de colunas para mesclar)
+
+<hr>
+
+## Formulários
+
+Formulários | Descrição
+:-|:-
+`<form action="" method="post">` | Início Formulário
+`<div>` | *
+`<label>` + `<input>`| 
+`<label>` + `<msg>`| 
+
+
+<hr>
+
 Sites para Imagens | Acesso
 :-|:-
 Pexels|https://www.pexels.com/pt-br/procurar/cachorro/
@@ -363,8 +412,11 @@ Rawpixel|https://www.rawpixel.com/
 Pixabay|https://pixabay.com/pt/
 LibreShot|https://libreshot.com/
 
-<hr>
 
+
+Descreve o que o conteúdo do site oferece
+
+<hr>
 ## Software GIMP
 
 - [x] Software Gimp (programa gratuito para edição de imagens)
@@ -389,3 +441,9 @@ Largura | Altura | Resolução x | Resolução y | Específico
 
 <hr>
 
+## Sugestões de Sites
+
+Site | Link
+-|-
+w3schools | [Link](https://www.w3schools.com/)
+developer mozzila | [Link](https://developer.mozilla.org/pt-BR/docs/Web/Html)

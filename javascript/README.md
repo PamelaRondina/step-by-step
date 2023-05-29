@@ -1,15 +1,86 @@
 # O que é JavaScript?
 
-> ************
+> Linguagem de Programação, auxilia com as interações nas páginas web tornando-as mais dinâmicas.
 
+Em uma página estática, incluir elementos como mapas, formulários, operações numéricas, animações, infográficos interativos e muito mais.
 
-FOR:
+<hr>
 
-```javascript
-for( var i = 0; i < 10; i++ ) {
-    alert( "O resultado é " + (2 * i) );
+## Variáveis
+Espaços que se reserva na memória para arquivar valores:
+
+Para nomear uma variável:
+  - Deve começar com uma letra ou com underline (_);
+    - Para o seu início não são aceitos números ou caracteres especiais;
+  - Caracteres subsequentes podem ser letras;
+  - JavaScript é case-sensitive, diferencias letras maiúsculas e minúsculas
+
+  **Tipos de Variáveis**
+
+  ```js
+var nome = 'Pamela' //menos utilizada
+let idade = 31; // pode alterar o valor
+const aprovado = true; //não pode alterar diretamente o seu valor
+  ```
+
+<hr>
+## Estruturas Condicionais Básicas
+
+**if** | **else**
+
+```js
+const idade = 31;
+
+if (idade > 18) {
+  console.log("Maior que 18");
+} else {
+  console.log("Menor que 18")
 }
 ```
+
+```js
+const nota = 7;
+
+if (nota < 5) {
+  console.log("Abaixo da média");
+} else if (nota > 5 && nota <= 7) {
+  console.log("Na média");
+} else {
+  console.log("Acima média")
+}
+```
+
+**switch**
+```js
+const nota = 7;
+
+switch (nota) {
+  case nota < 5:
+    console.log("Abaixo da média");
+    break;
+  case nota > 5 && nota <= 7:
+    console.log("Na média");
+    break;
+   default:
+    console.log("Acima média");
+}
+```
+
+**ternario** 
+- if reduzido
+
+```js
+const nota = 7;
+
+nota > 5 ? console.log("aprovado") : console.log("reprovado");
+```
+
+<hr>
+
+## Laço de Repetição
+
+**for**
+Vai se repetir até uma determinada condição:
 
 ```javascript
 for(início; quantidade de repetição; informações) {
@@ -17,33 +88,33 @@ for(início; quantidade de repetição; informações) {
     mostra(7 * multiplicador);
 }
 ```
+-->-->-->-->-->-->-->-->-->-->-->-->-->-->-->-->-->-->-->-->-->-->-->-->-->-->-->-->
 
 ```javascript
-for(var valor = 1; valor <= 10; valor++) {
-
-    mostra(7 * multiplicador);
+for( let i = 0; i < 10; i++ ) {
+    alert( "O resultado é " + (2 * i) );
+}
+```
+```javascript
+for(let i = 1; i <= 10; i++ ) {
+    console.log(`${i} x 5 = ${i * 5}`);
 }
 ```
 
+**while**
+
 ```javascript
-for(var multiplicador = 1; multiplicador <= 10; multiplicador++) {
-
-    mostra(7 * multiplicador);
-
+let x = 1;
+while (x < 10) {
+  console.log(`${x} x 5 = ${x * 5}`);
+  x++;
 }
-
-mostra("FIM");
 ```
-
-WHILE:
-
 ```javascript
-var multiplicador = 1;
-
-while(multiplicador <= 10) {
-
-    mostra(7 * multiplicador);
-    multiplicador = multiplicador + 1
+var multi = 1;
+while(multi <= 10) {
+    mostra(7 * multi);
+    multi = multi + 1
 }
 
 mostra("FIM");
@@ -55,19 +126,110 @@ while( i < 10) {
     alert( "O resultado é " + (2 * i) );
     i++;    
 }
-Uma linguagem de programação.
 ```
+**forEach**
+
+```js
+const.valores = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+valores.forEach((value)) => {
+  console.log(`${value} x 5 = ${value * 5}`);
+}
+```
+
+**map**
+Resultado em uma array, utilizada para manipular cálculos, fazer validação e retornar o valor par auma nova variável.
+
+```js
+const valores2 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+const result = valores.map((value)) => {
+  return value * 5;
+}
+```
+<hr>
+
+## Function
+
+Recebeca parâmetros, faça uma tratativa e retorne para quem chamou a função.
+
+```js
+function Soma(num1 + num2) {
+  return num1+num2
+}
+```
+
+## Arrow Function
+
+Foi criada em 2015, sintaxe que lembra uma flecha `() =>`
+
+```js
+const soma = (num1 + num2) => num1 + num2
+```
+
+<hr>
 
 **Array**
 
-São listas
+São listas de objetos.
 
 ```javascript
 var segredos = [1, 3, 4, 7, 9];
 ```
+- `nomeArray.push('itemNovo');` -> Empurrar um novo item para uma array já criada
+- `nomeArray[posição4] = 'NovoNome'` -> Adicionar item na Array pela posição
+- `nomeArray.pop()` -> Vai eliminar  o ultimo item de uma Array
+- `nomeArray.shift()` -> Eliminar  o primeiro item de uma Array
+- `nomedaArray.length`-> Retorna a quantidade de elementos que uma Array possui
+
+<hr>
+## Funcionalidades do ES6+ 
+
+**filter**
+Filtrar determinado valor 
+
+``` js
+const alunosFiltrados = alunos.filter((aluno) => aluno.idade >= 18);
+console.table(alunosFiltrados);
+```
+
+**find** 
+Buscar algo específico, retorna o primeiro item solicitado (mesmo que tenham outros iguais)
+
+``` js
+const alunoRoberto = alunos.find((aluno) => aluno.nome === Roberto);
+console.log(alunoRoberto);
+```
+**findIndex**
+Retorna em qual posição da array o objeto está
+
+```js
+const alunoRobertoIndex = alunos.findIndex((aluno) => aluno.nome === Roberto);
+console.log(alunoRobertoIndex);
+```
+
+**reduce**
+Com os itens da array fazer um cálculo
+
+```js
+const idades= alunos.reduce((acc, alun) => {
+  return acc + aluno.idade;
+}, 0);
+console.log(idades);
+```
+**some** e **every**
+Utilizados para validação:
+- some: retorna true se alguma condição for verdadeira;
+- every: retorna true se todas as condições forem verdadeiras.
+
+```js
+const acimaDeNove = alunos.some(alunos => alunos.idade < 10);
+const menorQueNoventa = alunos.every(alunos => alunos.idade < 90);
+console.log(acimaDeNove);
+console.log(menorQueNoventa);
+```
+
 <hr>
 
-**Método toggle**
+## Método toggle
 
 - Abrir e fechar uma modal com um trailer
 
@@ -163,25 +325,31 @@ senha.addEventListener('keyup', () => {
 
 **Comandos: JavaScript** | **Descrição**
 :-: |:-
-// | Comentário linha
-/* texto */ | Comentário bloco
-= | Recebe 
-=== | Igual
-!= | Diferente
-&& | E
-{ } | Bloco
-< script > | Iniciar linguagem JavaScript
-var | variável
-if ( ) { } | Se 
-else if | Se não se (para continuar uma análise)
-else | Se não
-while | Enquanto / repetição
-for | Laço de Repetição
-++ | variável + 1
-break | Quebra um looping (while)
-array | conjusta da lista
-% | Resto da Divisão
-+- | concatenar
+`&&` | AND (e)
+`||` | OR (ou)
+`=` | Recebe 
+`==` | Igual
+`===` | Exatamente Igual
+`!=`  | Diferente
+`!===` | Exatamente Diferente
+`>` `<` | Maior e Menor que
+`?` | Então
+`:` | Se não
+`//` | Comentário linha
+`/* texto */` | Comentário bloco
+`{ }` | Bloco
+`< script >` | Iniciar linguagem JavaScript
+`var` | variável
+`if ( ) { }` | Se 
+`else if` | Se não se (para continuar uma análise)
+`else` | Se não
+`while` | Enquanto / repetição
+`for` | Laço de Repetição
+`++` | variável + 1
+`break` | Quebra um looping (while)
+`array` | conjusta da lista
+`%` | Resto da Divisão
+`+-` | concatenar
 
 _________________
 
@@ -189,6 +357,7 @@ _________________
 - | -
 `function teste () { }` | Chamar função
 `console.log()` | Imprime algo
+`console.table` | Imprime dados em uma tabela
 `let nomeVariavel = 10;` | declarar variável (valor pode ser alterado)
 `const pi = 3.14;` | declarar variável (valor NÃO pode ser alterado) 
 `console.log(resultado).toFixed(2));` | **toFixed** converte o valor para texto e imprime com dois algorítimos após a casa decimal

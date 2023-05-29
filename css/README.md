@@ -8,23 +8,6 @@ Tecnologia que serve para apresentar o visual para o cliente, dando estilos para
 
 **Configurações CSS** 
 
-As configurações para CSS são feitas através de seletores:
-
- - `p` = seletor
- - `font-family: Arial` = declaração
- - `color:` = propriedade. Sempre deve ter o seu valor e separado por ( **:** )
- - `blue` = valor
-```css
-    p {
-        font-family: Arial;
-        font-size: 12pt;
-        color: blue;    }
-```
-
-> Note que ao final de cada linha finalizamos com ( **;** ).
-    
-<hr>
-
 **Declaration - Declaração**
 
 Quais são as propriedades e valores que serão aplicadas no elemento:
@@ -174,11 +157,11 @@ ___________
 
 Comandos: CSS | Descrição
 :-|:-
-<code>*</code> | Início do CSS (Configuração Global)
-<code>/* texto */</code> | Comentário
-<code>.nomeDaClasse</code> | Chamar uma classe (necessário o (.))
-<code>width</code> | largura
-<code>padding</code> | tamanho
+`<*>` | Início do CSS (Configuração Global)
+`</* texto */>` | Comentário
+`<.nomeDaClasse>` | Chamar uma classe (necessário o (.))
+`<width>` | largura
+`<padding>` | espaçamento interno
 
 <hr>
 
@@ -186,11 +169,11 @@ Comandos: CSS | Descrição
 
 Comandos: CSS | Descrição
 :-|:-
-<code>#0000ff</code> | Cores
-<code>rgb(0, 0, 255)</code> | Red, Green, Blue
-<code>rgba(27, 78, 33, 0.205)</code> | Red, Green, Blue, Transparência
-<code>hsl(240, 100%, 50%)</code> | Hue, Sturation, Luminosity (matiz, saturação e luminância)
-<code>background-image: linear-gradient();</code> | Imagem em Degradê (direção, cores)
+`<#0000ff>` | Cores
+`<rgb(0, 0, 255)>` | Red, Green, Blue
+`<rgba(27, 78, 33, 0.205)>` | Red, Green, Blue, Transparência
+`<hsl(240, 100%, 50%)>` | Hue, Sturation, Luminosity (matiz, saturação e luminância)
+`<background-image: linear-gradient();>` | Imagem em Degradê (direção, cores)
 
 **Gradiente**
 
@@ -211,11 +194,11 @@ Psicologia das Cores - [RockContent](https://rockcontent.com/br/blog/psicologia-
 
 - [x] História Fontes [Link](https://github.com/PamelaRondina/html_css/tree/main/html_css_guanabara/modulo_02#hist%C3%B3ria-das-fontes)
 - [x] Google Fontes ([Step by Step](https://github.com/PamelaRondina/menu_digital#editando-as-fontes))
-- [x] Fontes Externas ([Step by Step](https://github.com/PamelaRondina/html_css/tree/main/html_css_guanabara/modulo_02#fonte-externa)
+- [x] Fontes Externas ([Step by Step](https://github.com/PamelaRondina/html_css/tree/main/html_css_guanabara/modulo_02#fonte-externa))
 
 Comandos: CSS | Descrição
 :-|:-
-<code>font-family:Arial, Helvetica, sans-serif;</code> | Família das Fontes
+`<font-family:Arial, Helvetica, sans-serif;>` | Família das Fontes
 
 **Google Fonts**
 ```css
@@ -251,10 +234,10 @@ body {
 
 Comandos: CSS | Descrição
 :-|:-
-<code>font-size: 12pt;</code> | Fonte tamanho
-<code>text-transform: uppercase;</code> | Maiúscula
-<code>text-justify: auto;</code> | Texto justificado
-<code>line-height: 20px;</code> | Linha Espaçamento | Altura da linha
+font-size: 12pt;>` | Fonte tamanho
+text-transform: uppercase;>` | Maiúscula
+text-justify: auto;>` | Texto justificado
+line-height: 20px;>` | Linha Espaçamento | Altura da linha
 
 
 Medida | Absoluta |     Medida | Relativa
@@ -271,11 +254,11 @@ Recomendação W3C: **em** e **px**
 ### III. Tipo e Peso - Fonte
 Comandos: CSS | Descrição
 :-|:-
-<code>font-weight: *** </code> | Peso da Fonte
-<code>font-weight: bold;</code> | Fonte negrito
-<code>font-style: italic;</code> | Fonte Itálica
-<code>text-decoration: underline;</code> | Fonte Sublinhado
-ShortHand <code>font</code> | Melhoria para o Código
+`<font-weight: *** >` | Peso da Fonte
+`<font-weight: bold;>` | Fonte negrito
+`<font-style: italic;>` | Fonte Itálica
+`<text-decoration: underline;>` | Fonte Sublinhado
+`<ShortHand font>` | Melhoria para o Código
 
 ```css
 /* Shorthand font
@@ -296,20 +279,20 @@ font: bold 2em 'Work Sans';
 
 Comandos: CSS | Descrição
 :-|:-
-<code>text-align: </code> | Alinhamento
-<code>text-align: left; </code> | Esquerda
-<code>text-align: right; </code> | Direita
-<code>text-align: center; </code> | Centro
-<code>text-align: justify; </code> | Justificado
-<code>text-indent: 30px; </code> | Parágrafo
+`<text-align:>` | Alinhamento
+`<text-align: left;>` | Esquerda
+`<text-align: right;>` | Direita
+`<text-align: center;>` | Centro
+`<text-align: justify;>` | Justificado
+`<text-indent: 30px;>` | Parágrafo
 
 ## Listas
 
 Comandos: CSS | Descrição
 :-|:-
-<code>list-style: none;</code> | Elimina marcações
-<code>list-style-position: inside;</code> | Marcações para dentro
-<code>columns: 2;</code> | Colunas dentro de uma lista
+`<list-style: none;>` | Elimina marcações
+`<list-style-position: inside;>` | Marcações para dentro
+`<columns: 2;>` | Colunas dentro de uma lista
 
 
 ```css
@@ -330,7 +313,7 @@ a {
 
 Comandos: CSS | Descrição
 :-|:-
-<code>text-decoration: none;</code> | Elimina link dos textos, elimina sublinhado
+`<text-decoration: none;>` | Elimina link dos textos, elimina sublinhado
 
 <hr>
 
@@ -386,17 +369,26 @@ HTML - class="nome" | CSS = <strong><big>.</big></strong>nome | Múltipos
 
 Comandos: CSS | Descrição | 
 :-|:- |
-<code>nome:hover</code> | ação ocorre quando o mouse passa
-<code>nome:visited</code> | 
-<code>nome:active</code> | 
-<code>nome:checked</code> | 
-<code>nome:empty</code> | 
-<code>nome:focus</code> | 
+`<nome:hover>` | ação ocorre quando o mouse passa
+`<nome:visited>` | 
+`<nome:active>` | 
+`<nome:checked>` | 
+`<nome:empty>` | 
+`<nome:focus>` | quando clica altera para a cor, ex.
 
 ```css
 div:hover {
             background-color: rgba(255, 255, 0, 0.253);
         }
+
+.item:nth-child(1):hover{
+    background-color:#ff0000;
+}
+
+.item:first-child:hover,
+.item:last-child:hover {
+    background-color:#124a12;
+}
 ```
 
 ### Pseudo-Element
@@ -452,14 +444,14 @@ div.quadrado {
 
 Comandos: CSS | Descrição | 
 :-|:- 
-<code>width: 65px;</code> | largura
-<code>min-width: 300px;</code> | largura mínima
-<code>max-width: 1000px;</code> | largura máxima
-<code>height: 10px;</code> | altura
-<code>border: 10px;</code> | borda - dentro do elemento
-<code>padding: 10px;</code> | preenchimento interno
-<code>margin: 10px;</code> | margem externa
-<code>outline: 1px;</code> | entre a margem e border (+ margem)
+`<width: 65px;>` | largura
+`<min-width: 300px;>` | largura mínima
+`<max-width: 1000px;>` | largura máxima
+`<height: 10px;>` | altura
+`<border: 10px;>` | borda - dentro do elemento
+`<padding: 10px;>` | preenchimento interno
+`<margin: 10px;>` | margem externa
+`<outline: 1px;>` | entre a margem e border (+ margem)
 
 ### Tipos de Caixa
 
@@ -483,7 +475,7 @@ box-level (block-level) | Nova Linha |  inline-level  | Mesma Linha
 .-                            | .-                              | <code>&lt;script&gt;</code> | <code>&lt;textarea&gt;</code> 
 .-                            | .-                              | <code>&lt;tt&gt;</code> | <code>&lt;var&gt;</code> 
 
-### Margin
+### Margin - Preenchimento Externo
 
 Comandos: CSS | Descrição | 
 :-|:- 
@@ -548,7 +540,7 @@ ShortHand <code>border:</code> | Melhoria para o Código
 border: 10px solid red;
 ```
 
-### Padding
+### Padding - Preenchimento Interno
 
 Comandos: CSS | Descrição | 
 :-|:-
@@ -569,21 +561,29 @@ padding: 10px 10px 10px 10px;
 
 ## Caixas - |box-size|
 
+Cada box possui 4 edges:
+- margin edge;
+- border edge;
+- padding edge;
+- content edge.
+
 ### Grouping Tags
 
 Comandos: CSS | Descrição | 
 :-|:-:
-<code>&lt;header&gt;</code> | cabeçalho
-<code>&lt;nav&gt;</code> | navegação - Links
-<code>&lt;main&gt;</code> | conteúdo principal
-<code>&lt;section&gt;</code> | sessão
-<code>&lt;article&gt;</code> | 
-<code>&lt;aside&gt;</code> | Conteúdo periférico
-<code>&lt;footer&gt;</code> | rodapé
+`<header>`| cabeçalho
+`<nav>` | navegação - Links
+`<main>` | conteúdo principal
+`<section>` | sessão
+`<article>` | 
+`<aside>` | Conteúdo periférico
+`<footer>` | rodapé
 
 ![image](https://user-images.githubusercontent.com/108991648/225978264-b0a9e760-e684-46e7-beb8-9e9538e7605f.png)
 
-<hr>
+![image](https://github.com/PamelaRondina/PamelaRondina/assets/108991648/4c6e9157-107c-4ba0-966a-073e3a168250)
+
+-->-->-->-->-->-->-->-->-->-->-->-->-->-->-->-->-->-->-->-->-->-->-->-->-->-->-->-->-->-->-->-->-->-->-->-->-->-->-->-->
 
 ### Sombras 
 
@@ -591,27 +591,27 @@ Comandos: CSS | Descrição |
 
 Comandos: CSS | Descrição | 
 :-|:-:
-<code>box-shadow: ***;</code> | caixa de sombra
-<code>box-shadow: 1px 1px 1px 1px black;</code> | **↮  - ↕  - esbaçamento - espalhamento - cor da sombra**
+`<box-shadow: ***;` | caixa de sombra
+`<box-shadow: 1px 1px 1px 1px black;` | **↮  - ↕  - esbaçamento - espalhamento - cor da sombra**
 
 #### Letra - Sombra
 
 Comandos: CSS | Descrição | 
 :-|:-:
-<code>text-shadow: ***;</code> | caixa de sombra
-<code>text-shadow: 1px 1px 1px 1px black;</code> | **↮  - ↕  - esbaçamento - espalhamento - cor da sombra**
+`<text-shadow: ***;>` | caixa de sombra
+`<text-shadow: 1px 1px 1px 1px black;>` | **↮  - ↕  - esbaçamento - espalhamento - cor da sombra**
 
 
 ### Bordas
 
 Comandos: CSS | Descrição | 
 :-|:-:
-<code>border-radius: ***;</code> | bordas
-<code>border-top-left-radius: ***;</code> | borda cima esquerda
-<code>border-top-right-radius: ***;</code> | borda cima direita
-<code>border-bottom-right-radius: ***;</code> | borda baixo direita
-<code>border-bottom-left-radius: ***;</code> | borda baixo esquerda
-ShortHand <code>border-radius:</code> | Melhoria para o Código
+`<border-radius: ***;>` | bordas
+`<border-top-left-radius: ***;>` | borda cima esquerda
+`<border-top-right-radius: ***;>` | borda cima direita
+`<border-bottom-right-radius: ***;>` | borda baixo direita
+`<border-bottom-left-radius: ***;>` | borda baixo esquerda
+`<ShortHand <>border-radius:>` | Melhoria para o Código
 
 ```css
 /* Shorthand padding
@@ -634,6 +634,20 @@ border-radius: 10px 50px 70px 5px;
 ```
 
 Borda por imagem: [Link](https://www.youtube.com/watch?v=n0rjAs_Im4w)
+
+<hr>
+
+## Flexbox
+
+Organizar os elementos na interface, por meio de dois eixos: principal `flex-direction` e transversal 
+
+![image](https://github.com/PamelaRondina/PamelaRondina/assets/108991648/3d4f0317-5d7b-466d-b8b7-b772e96c09d8)
+![image](https://github.com/PamelaRondina/PamelaRondina/assets/108991648/8b20a1e3-a53d-42e7-85cd-a4e4e5b646d0)
+
+
+
+
+
 
 <hr>
 
@@ -722,7 +736,7 @@ body {
 
 Comandos: CSS | Descrição | 
 :-|:-:
-<code>* { };</code> | configuração que vale para todos os elementos
+`* { };` | configuração que vale para todos os elementos
 
 ```css
 * {
@@ -733,13 +747,21 @@ Comandos: CSS | Descrição |
 
 <hr>
 
-### Responsividade
+### Responsividade - Midia Query
 
 > Página acessível para diversas plataformas
 
 Comandos: CSS | Descrição | 
 :-|:-:
-<code>* { };</code> | configuração que vale para todos os elementos
+`@media` | configuração que vale para todos os elementos
+ - Incluir no final do arquivo de CSS ou;
+ - criar um novo arquivo apenas para a `@media`
+
+```css
+@media (max-width: 450px) {
+    /* incluir dados para serem alterados conforme a página seja menor */
+}
+```
 
 
 <hr>
