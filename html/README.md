@@ -400,8 +400,9 @@ Formulários | Descrição
 `<label>` + `<input>`| 
 `<label>` + `<msg>`| 
 
-
 <hr>
+
+
 
 Sites para Imagens | Acesso
 :-|:-
@@ -425,7 +426,7 @@ Descreve o que o conteúdo do site oferece
 * Diminuir a largura do arquivo: imagem > Redimensionar 
 <br>
 
-## Criar arquivo
+**Criar arquivo**
 
 - [x] Arquivo + Novo
 - [x] Alterar largura x altura 

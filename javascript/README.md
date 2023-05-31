@@ -101,6 +101,17 @@ for(let i = 1; i <= 10; i++ ) {
 }
 ```
 
+~~~js
+const numeros = [2, 3, 4, 5, 6, 7, 8, 9, 10, 15, 22, 34, 50];
+
+   
+    for (let i = 0; i <= numeros.length; i++) {  
+        const numero = numeros[i];
+        if (numero % 2 === 0) {
+        console.log(numero);}
+    }
+~~~
+
 **while**
 
 ```javascript
@@ -228,6 +239,140 @@ console.log(menorQueNoventa);
 ```
 
 <hr>
+## Dom (Document Object Model)
+Representação de dados dos objetos que compõem a estrutura e o conteúdo de uma documento na Web, uma interface de programação para os documentos HTML e XML. Representa a página de forma que os programas possam alterar a estrutura do documento, alterar o estilo e conteúdo.
+
+> O DOM representa o documento com cós e objetos
+
+![image](https://github.com/PamelaRondina/PamelaRondina/assets/108991648/72a72080-6d8b-46ff-957a-9cad749f1e87)
+
+
+Comandos DOM | Descrição
+:-: |:-
+`getElementsByTagName` | 
+`getElementsByClassName` | 
+`getElementById` | 
+`querySelector` | 
+
+**Na janela do navegador**
+
+```bash
+window.document.getElementById('nomeId')
+<h1 id="nomeId">Flexbox</h1>
+```
+
+- Remover pela linha de comando
+```bash
+window.document.getElementById('nomeId').remove()
+```
+
+```bash
+window.document.getElementsByTagname('div')
+```
+
+```bash
+window.document.getElementsByTagname('div').remove()
+```
+
+- Busca a 1ª `div`
+```bash
+window.document.querySelector('div')
+```
+
+- Busca todas as `div`
+```bash
+window.document.querySelectorAll('div')
+```
+
+<hr>
+
+## Split()
+
+- A Entrada será separa em uma array;
+
+~~~js
+//TODO: Complete os espaços em branco
+let line = gets().split(" ");
+let pimentoes_amarelos = parseInt(line[0]); 
+let pimentoes_vermelhos = parseInt(line[1]); 
+//TODO: Faça a soma do número de pimentões e imprima o resultado
+
+let total = pimentoes_vermelhos + pimentoes_amarelos;
+
+print("X = " + total);
+//console.log("X = " + total);
+~~~
+<hr>
+
+**Comandos: JavaScript** | **Descrição**
+:-: |:-
+`&&` | AND (e)
+`||` | OR (ou)
+`=` | Recebe 
+`==` | Igual
+`===` | Exatamente Igual
+`!=`  | Diferente
+`!===` | Exatamente Diferente
+`>` `<` | Maior e Menor que
+`?` | Então
+`:` | Se não
+`//` | Comentário linha
+`/* texto */` | Comentário bloco
+`{ }` | Bloco
+`< script >` | Iniciar linguagem JavaScript
+`var` | variável
+`if ( ) { }` | Se 
+`else if` | Se não se (para continuar uma análise)
+`else` | Se não
+`while` | Enquanto / repetição
+`for` | Laço de Repetição
+`++` | variável + 1
+`break` | Quebra um looping (while)
+`array` | conjusta da lista
+`%` | Resto da Divisão
+`+-` | concatenar
+
+_________________
+
+**Funções** | Descrição
+- | -
+`function teste () { }` | Chamar função
+`console.log()` | Imprime algo
+`console.table` | Imprime dados em uma tabela
+`let nomeVariavel = 10;` | declarar variável (valor pode ser alterado)
+`const pi = 3.14;` | declarar variável (valor NÃO pode ser alterado) 
+`console.log(resultado).toFixed(2));` | **toFixed** converte o valor para texto e imprime com dois algorítimos após a casa decimal
+`const isNumeroPar = (numero % 2) === 0` | (isNomeVariavel) utilizado para declarar variáveis booleanas
+`nomeArray.push('itemNovo');`|Para empurrar um novo item para uma array já criada
+`nomeArray[posição4] = 'NovoNome'` | Adicionar item na Array pela posição
+`nomeArray.pop()` | Vai eliminar  o ultimo item de uma Array
+`nomeArray.shift()` | Eliminar  o primeiro item de uma Array
+`nomedaArray.length`| Retorna a quantidade de elementos que uma Array possui
+
+alert("texto") | Cria um *pop up* de alerta
+prompt("texto") | Pop up para o usuário inserir um resultado, retorna o resultado como string
+parseInt("texto")| Converte uma string para número
+parseFloat("Texto")| Converte uma string em casas decimais
+document.write()| imprime na tela 
+document.querySelector| puxa as informações do HTML, necessário incluir nos **(" ")**
+input.value | compara com a lacuna criada
+input.focus();| O cursor do mouse foca na lacuna criada pelo input/
+button.onclick()| compara ao clicar no botão criado
+Math.round() | arredondar o resultado
+Math.random() | Número aleatório
+_____________
+
+Biblioteca | Descrição
+- | -
+`Math.pow(altura,2)` | Calcular ao quadrado (ou ao cubo3, e assim vai...)
+____________________
+
+**Erros**| ----------
+- | -
+NaN | Não é um número
+
+<hr>
+
 
 ## Método toggle
 
@@ -320,72 +465,3 @@ senha.addEventListener('keyup', () => {
 ```
 
 
-
-<hr>
-
-**Comandos: JavaScript** | **Descrição**
-:-: |:-
-`&&` | AND (e)
-`||` | OR (ou)
-`=` | Recebe 
-`==` | Igual
-`===` | Exatamente Igual
-`!=`  | Diferente
-`!===` | Exatamente Diferente
-`>` `<` | Maior e Menor que
-`?` | Então
-`:` | Se não
-`//` | Comentário linha
-`/* texto */` | Comentário bloco
-`{ }` | Bloco
-`< script >` | Iniciar linguagem JavaScript
-`var` | variável
-`if ( ) { }` | Se 
-`else if` | Se não se (para continuar uma análise)
-`else` | Se não
-`while` | Enquanto / repetição
-`for` | Laço de Repetição
-`++` | variável + 1
-`break` | Quebra um looping (while)
-`array` | conjusta da lista
-`%` | Resto da Divisão
-`+-` | concatenar
-
-_________________
-
-**Funções** | Descrição
-- | -
-`function teste () { }` | Chamar função
-`console.log()` | Imprime algo
-`console.table` | Imprime dados em uma tabela
-`let nomeVariavel = 10;` | declarar variável (valor pode ser alterado)
-`const pi = 3.14;` | declarar variável (valor NÃO pode ser alterado) 
-`console.log(resultado).toFixed(2));` | **toFixed** converte o valor para texto e imprime com dois algorítimos após a casa decimal
-`const isNumeroPar = (numero % 2) === 0` | (isNomeVariavel) utilizado para declarar variáveis booleanas
-`nomeArray.push('itemNovo');`|Para empurrar um novo item para uma array já criada
-`nomeArray[posição4] = 'NovoNome'` | Adicionar item na Array pela posição
-`nomeArray.pop()` | Vai eliminar  o ultimo item de uma Array
-`nomeArray.shift()` | Eliminar  o primeiro item de uma Array
-`nomedaArray.length`| Retorna a quantidade de elementos que uma Array possui
-
-alert("texto") | Cria um *pop up* de alerta
-prompt("texto") | Pop up para o usuário inserir um resultado, retorna o resultado como string
-parseInt("texto")| Converte uma string para número
-parseFloat("Texto")| Converte uma string em casas decimais
-document.write()| imprime na tela 
-document.querySelector| puxa as informações do HTML, necessário incluir nos **(" ")**
-input.value | compara com a lacuna criada
-input.focus();| O cursor do mouse foca na lacuna criada pelo input/
-button.onclick()| compara ao clicar no botão criado
-Math.round() | arredondar o resultado
-Math.random() | Número aleatório
-_____________
-
-Biblioteca | Descrição
-- | -
-`Math.pow(altura,2)` | Calcular ao quadrado (ou ao cubo3, e assim vai...)
-____________________
-
-**Erros**| ----------
-- | -
-NaN | Não é um número
