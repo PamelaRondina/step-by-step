@@ -4,7 +4,27 @@
 
 Software que permite que desenvolvedores trabalhem no mesmo projeto, sendo possível o rastreio das versões realizadas. 
 
-Criado pelo engenheiro de software Linus Torvalds
+Criado pelo engenheiro de software Linus Torvalds.
+
+## Comandos GIT
+
+comando | Descrição
+:- | :-
+<code>Crtls + S</code> | SALVAR ARQUIVOS
+<code>git --version</code> | Versão do Git CMD 
+<code>git clone</code> | Clonar um Repositório do GitHub
+<code>git init</code>| Criar um repositório 
+<code>git add nomeArquivo</code> | add o arquivo para staged
+<code>git add *</code> | add tudo o que foi modificado para o staged
+<code>git status</code> | status dos arquivos
+<code>git restore --staged nomeArquivo</code> | retorna o arquivo para unstage
+<code>git commit -m "mensagem"</code> | -m = incluir mensagem 
+<code>git remote add origin linkGitHub</code> | trazer repositório do GitHub para local
+<code>git push origin main</code> | Push local para remoto
+<code>git pull origin main</code> | Pull remoto para local
+`git checkou nomeBranch`  | Altera a branch
+
+__________
 
 ## Comandos: Git Bash e GIT CMD
 
@@ -26,7 +46,6 @@ Criado pelo engenheiro de software Linus Torvalds
 `rm -rf *` | Eliminar TODOS os arquivos dentro do Diretório | `del * /s/q`
 `mv nomeAtual nomeNovo` | Renomear arquivos | `rename nomeAtual nomeNovo`
 `mv nomeArquivo ../` | Mover arquivos | `move nomeArquivo ../`
-
 pwd | mostra diretório atual | ???????
 <code>cat</code> | Mostrar o conteúdo o arquivo | ??????????
 
@@ -54,8 +73,10 @@ _Bash_
 - *: todos os arquivos dentro do diretório
 <br>
 
+
 <hr>
 
+VERIFICAR
 <img src="https://user-images.githubusercontent.com/108991648/229250256-ab7bb919-c632-4c86-a03e-59f10a78e599.png" width="400" height="300"/>
 
 
@@ -79,23 +100,6 @@ _Bash_
 __________________
 
 
-## Comandos GIT
-
-comando | Descrição
-:- | :-
-<code>git --version</code> | Versão do Git CMD 
-<code>git clone</code> | Clonar um Repositório do GitHub
-<code>git init</code>| Criar um repositório 
-<code>git add nomeArquivo</code> | add o arquivo para staged
-<code>git add *</code> | add tudo o que foi modificado para o staged
-<code>git status</code> | status dos arquivos
-<code>git restore --staged nomeArquivo</code> | retorna o arquivo para unstage
-<code>git commit -m "mensagem"</code> | -m = incluir mensagem 
-<code>git remote add origin linkGitHub</code> | trazer repositório do GitHub para local
-<code>git push origin main</code> | Push local para remoto
-<code>git pull origin main</code> | Pull remoto para local
-`git checkou nomeBranch`  | Altera a branch
-__________
 
 
 ## Clonar Repositório
