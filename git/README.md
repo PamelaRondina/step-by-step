@@ -11,8 +11,8 @@ Criado pelo engenheiro de software Linus Torvalds
 **Comandos Linux**|**Descrição** | **Comandos Windows**
 :-:|:- | :-
 `clear` ou `CRTL + L`  | Limpar o terminal | `cls`
-`ls` | Lista arquivos e diretórios | `dir`
-`ls -a` | Lista arquivos + ocultos | `dir`
+`ls` | Listar arquivos e diretórios | `dir`
+`ls -a` | Listar arquivos + ocultos | `dir`
 `cd` | **change directory** Mudar de diretório/carpeta | =
 `cd -` - `cd ..`  | Retorna um diretório/carpeta | =
 `cd /` | Diretório 0 (raiz), para seguir: **cd /c** | =
