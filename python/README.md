@@ -1,4 +1,4 @@
-### Python
+# Python
 
 >A identação em python é de suma importância.
 
@@ -13,6 +13,7 @@ Incorreto, `print` não segue identado, o código terá erro.
 if 5 > 3:
 print('5 es mayor a 3')
 ```
+
 **Variáveis**
 
 Podemos nomear as variáveis em python.
@@ -65,7 +66,7 @@ complexo = 1j
 
 **Listas**
 
-Coleção da dados agrupados em uma lisa
+Coleção da dados agrupados em uma lista:
 
 ```python
 lista = [1, 2, 3]
@@ -78,7 +79,7 @@ lista.append(4) #adicionar item
 print(lista, lista2)
 ```
 
-**Função: .count and print(len()) **
+**Função: .count and print(len())**
 
 ```python
 lista = [1, 2, 3]
@@ -104,8 +105,9 @@ Terminal
 _______
 Comandos | Python
 :-|-
+`print("Hola Mundo")` | imprimir texto
 .# | Comentário de linha
-' ' ' | Comentário de textos
+' ' ' | Comentário de textos (docstring)
 **Listas**|
 variavel = [1, 2, 3] | São criadas dentro dos [ ]
 .copy() | Copia
