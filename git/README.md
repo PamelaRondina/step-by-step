@@ -12,8 +12,8 @@ comando | Descrição
 :- | :-
 <code>Crtls + S</code> | SALVAR ARQUIVOS
 <code>git --version</code> | Versão do Git CMD 
-<code>git clone</code> | Clonar um Repositório do GitHub
 <code>git init</code>| Criar um repositório 
+<code>git clone</code> | Clonar um Repositório do GitHub
 <code>git add nomeArquivo</code> | add o arquivo para staged
 <code>git add *</code> | add tudo o que foi modificado para o staged
 <code>git status</code> | status dos arquivos
@@ -26,9 +26,18 @@ comando | Descrição
 
 __________
 
+## Clonar Repositório
+
+Após criar o repositório, copiar o código
+![image](https://user-images.githubusercontent.com/108991648/230122644-2f3fffdb-5177-47f8-b219-ca7dc4275bcf.png)
+
+No Terminal incluir: "<code>git clone</code> + Link copiado"
+
+------
+
 ## Comandos: Git Bash e GIT CMD
 
-**Comandos Linux**|**Descrição** | **Comandos Windows**
+**Comandos Linux (bash)** |**Descrição** | **Comandos Windows (powershell)**
 :-:|:- | :-
 `clear` ou `CRTL + L`  | Limpar o terminal | `cls`
 `ls` | Listar arquivos e diretórios | `dir`
@@ -56,6 +65,8 @@ Cianos	|	Atalho
 Branco	|	Arquivo
 
 <br> 
+
+
 
 _both_
 
@@ -102,12 +113,6 @@ __________________
 
 
 
-## Clonar Repositório
-
-Após criar o repositório, copiar o código
-![image](https://user-images.githubusercontent.com/108991648/230122644-2f3fffdb-5177-47f8-b219-ca7dc4275bcf.png)
-
-No Terminal incluir: "<code>git clone</code> + Link copiado"
 
 <br>
 
