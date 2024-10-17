@@ -9,4 +9,4 @@ ALT | Seleciona mais de um campo
 Ctrl + K + V | Preview README
 Ctrl + Shift + ' | Abrir terminal
 Shift + Alt + A | Comentário em Bloco
-ctrl-shift-v | Abre Leitura do README
+Ctrl + Shift + V | Abre Leitura do README
