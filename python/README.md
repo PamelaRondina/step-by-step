@@ -56,9 +56,19 @@ print(inicio2,final)
 Hola  mundo #possui 2 espaços, a (,) = 1 de espaço
 ```
 
-**Tipos de variáveis**
+### Tipos de Dados
+
+Sigla | Tipo | |Exemplo 
+-|-|-|-
+int   | Inteiro | Números Inteiros | 10
+float | Decimal | Numeros Decimais | 20.2
+str | String | Texto | Qualquer Texto
 
 ```python
+print(2 + 2) # 4
+print("hola " + "mundo") # hola mundo
+print("2" + "2") # 22
+
 inteiro = 10
 conDecimal = 20.2 #float
 complexo = 1j
@@ -108,12 +118,20 @@ Comandos | Python
 `print("Hola Mundo")` | imprimir texto
 .# | Comentário de linha
 ' ' ' | Comentário de textos (docstring)
+**Operador de Comparação** | 
+== | igualdade (2 == 2)
+`>` | maior (3 > 2)
+`<` | menor (2 < 3)
+`>=` | maior ou igual a (3 >= 3) 
+`<=` | menor ou igual a (3 <= 3)
+!= | compara dois valores e nos diz se são diferentes (1 != 2)
 **Listas**|
 variavel = [1, 2, 3] | São criadas dentro dos [ ]
 .copy() | Copia
 .append() | Adiciona item
 .clear() | Apaga lista
 **Funções** |
+def | funções
 .count(X) | Quantos elementos específicos possuem a lista
 print(len(variavel) | Quantos elementos possuem a lista
 
