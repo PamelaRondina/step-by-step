@@ -88,7 +88,15 @@ lista.append(4) #adicionar item
 
 print(lista, lista2)
 ```
+## Funções
 
+> Chamar uma função. Podemos utilizar a palavra chave: `def`:
+
+~~~python
+def saludar():
+  print("Hola Mundo"); 
+~~~
+****
 **Função: .count and print(len())**
 
 ```python
