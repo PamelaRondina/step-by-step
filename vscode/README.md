@@ -10,3 +10,8 @@ Ctrl + K + V | Preview README
 Ctrl + Shift + ' | Abrir terminal
 Shift + Alt + A | Comentário em Bloco
 Ctrl + Shift + V | Abre Leitura do README
+
+
+| Extensões | Objetivo | Link
+|-----------|----| -
+|learn-markdown | Markdown: tabelas organizadas | [Link](https://marketplace.visualstudio.com/items?itemName=docsmsft.docs-markdown)
