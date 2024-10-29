@@ -157,7 +157,14 @@ d56b0ad HEAD@{9}: commit: atualização 13.out
 c97d892 HEAD@{10}: commit: atualização out.13
 3d76ae7 HEAD@{11}: clone: from https://github.com/PamelaRondina/step-by-step.git
 ```
+</details>
 
+<details>
+<summary><code>git tag</code> | Incluir etiquetas</summary>
+
+- Nome para tags
+- [x] minúsculas
+- [x] guiones baixos 'aula_01' 
 </details>
 
 ______
