@@ -28,30 +28,43 @@ Criado pelo engenheiro de software Linus Torvalds.
 |`git branch -m`                                | Altera o nome da Branch                     | 
 | `git log`                                     | Informações commit: número ID, autor, date, descrição|
 | `git log graph`                               | Informações commit: ramificações
-|`git log --graph --pretty=oneline`              | Informações commit: ID em 01 linha e descrição         |
-|`git log --graph --decorate --all --oneline`    | Informações commit: ID menor em 01 linha  |
+|`git log --graph --pretty=oneline`             | Informações commit: ID em 01 linha e descrição         |
+|`git log --graph --decorate --all --oneline`   | Informações commit: ID menor em 01 linha  |
 | `git config --global alias.tree "log --graph --decorate --all --oneline"`| i) alias.tree (apelido chamado tree); Em seguida, chamamos apenas `tree` 
-| `git diff` [^1]                                   | Analisa alterações antes de executar o `git add`
+| `git diff` [^1]                               | Analisa alterações do último commit com o arquivo atual, antes de executar o `git add`
+`git reset --hard 02150216`                     | retorna para um commit específico
+`git reflog`                                    | Detalhes commit (log completo)
+`git tag`                                       | Etiquetar commits 
 
 
-## Clonar Repositório
+____________________
 
+<details>
+
+<summary> <code>git clone</code> | Clonar Repositório </summary>
+<br>
 Após criar o repositório, copiar o código
+
 ![image](https://user-images.githubusercontent.com/108991648/230122644-2f3fffdb-5177-47f8-b219-ca7dc4275bcf.png)
 
 No Terminal incluir: "<code>git clone</code> + Link copiado"
 
-<br>
+</details>
 
-## Git Ignore
+<details>
+<summary> <code>git ignore</code> | Ignorar Arquivos </summary>
 
 > Arquivo para adicionarmos informações que nao queremos utilizar no dia a dia
 
 - [X] Criar pasta `.gitignore`;
 - [X] Dentro do arquivo: `**/.nomeArquivo`
 
+</details>
 
-## Git Diff
+<details>
+  <summary><code>git diff</code> | Analisar alterações do último Commit com o arquivo atual
+   </summary>
+
 [^1]: `Git Diff` 
 
 ```bash
@@ -70,7 +83,7 @@ index b2391f6..c1164d6 100644
 > **`diff --git a/python/README.md b/python/README.md`**
 
   - A diferença está sendo exibida entre duas versões do arquivo `README.md` no diretório `python`;
-  - O prefixo `a/` refere-se à versão antiga, enviada via `push`, e `b/` refere-se à versão nova do arquivo, que será adicionada via `git add`
+  - O prefixo `a/` refere-se à versão antiga, e `b/` refere-se à versão nova do arquivo.
   
 
 > **`index b2391f6..c1164d6`**:
@@ -84,7 +97,7 @@ index b2391f6..c1164d6 100644
 > **`--- a/python/README.md`**
 > **`+++ b/python/README.md`**
 
-  - Indicam as versões do arquivo antes e depois da mudança, com `a/` representando a versão anterior `git push` e `b/` a versão nova `git add`.
+  - Indicam as versões do arquivo antes e depois da mudança, com `a/` representando a versão anterior e `b/` a versão nova. (ultimo coomit e o save atual)
 
 
 > **`@@ -88,7 +88,15 @@`**
@@ -118,8 +131,36 @@ E agora o conteúdo a partir dessa linha foi expandido para incluir mais linhas 
 3. Na linha 88, o conteúdo foi expandido, de 7 linhas na versão antiga para 15 linhas na nova.
 4. Uma seção com o título `## Funções` foi adicionada.
 
-__________
+</details>
 
+<details>
+<summary><code>git reset -hard</code> | Retorna para commit específico</summary>
+
+![alt text](image.png)
+
+</details>
+
+<details>
+<summary><code>git reflog</code> | Detalhes Commit (Log Completo) </summary>
+
+```bash
+08f5adb (HEAD -> main, origin/main, origin/HEAD) HEAD@{0}: commit: add explicação 'git diff'
+8e2974f HEAD@{1}: commit: add extensão: learn markdown
+a03b07f HEAD@{2}: commit: add 'chamar função def'
+3ac66ca HEAD@{3}: commit: adicionado: cabeçalho, expandir e recolher texto
+b29b561 HEAD@{4}: commit: add operador de comparação
+09c34f6 HEAD@{5}: commit: link markdown (diagrama)
+e4a5e3f HEAD@{6}: commit: adicionado comando leitura readme
+2416bbd HEAD@{7}: commit: novos comandos python
+c42b61a HEAD@{8}: commit: novos comandos git
+d56b0ad HEAD@{9}: commit: atualização 13.out
+c97d892 HEAD@{10}: commit: atualização out.13
+3d76ae7 HEAD@{11}: clone: from https://github.com/PamelaRondina/step-by-step.git
+```
+
+</details>
+
+______
 
 ## Comandos: Git Bash e GIT CMD
 
