@@ -44,6 +44,7 @@ Texto
 Tips | Markdown
 -|-
 `- [X]` | Caixa para ticar  
+`<!--> texto <-->` | Adicionar comentário
 
 --------------
 
@@ -55,4 +56,3 @@ Diagranas | [Diagramas](https://support.typora.io/Draw-Diagrams-With-Markdown/)
 Mermaid | [Mermaid](https://mermaid.js.org/syntax/flowchart.html)
 
 <!-->
-
