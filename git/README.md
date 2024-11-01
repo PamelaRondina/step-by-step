@@ -243,12 +243,13 @@ _________________
 
 | **Comandos Linux**       | **Descrição**                                   | **Comandos Windows**                         |
 |:------------------------:|:------------------------------------------------|:---------------------------------------------|
+| `cd /`                   | Diretório 0 (raiz), para seguir: **cd /c**      | =                                            |
+| `cd C:/`                 | Disco Local C:/                                 | =                                            |
 | `clear` ou `CRTL + L`    | Limpar o terminal                               | `cls`                                        |
 | `ls`                     | Listar arquivos e diretórios                    | `dir`                                        |
 | `ls -a`                  | Listar arquivos + ocultos                       | `dir`                                        |
 | `cd`                     | **change directory** Mudar de diretório/carpeta | =                                            |
 | `cd -` - `cd ..`         | Retorna um diretório/carpeta                    | =                                            |
-| `cd /`                   | Diretório 0 (raiz), para seguir: **cd /c**      | =                                            |
 | `TAB`                    | Autocomplete                                    | =                                            |
 | `mkdir nomeDoDiretorio`  | **make directory** Criar um diretório/carpeta   | =                                            |
 | `echo hello > hello.txt` | Verificar e criar arquivo                       | =                                            |
