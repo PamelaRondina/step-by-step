@@ -40,8 +40,13 @@ Criado pelo engenheiro de software Linus Torvalds.
 | `git checkout -b nome-branch` ou `git switch -c nome-branch`              | Criar e trocar para a nova branch                                                      |
 | `git checkout main`ou `git merge nome-branch`                             | Unir Branches                                                                          |
 | `git branch -d nome-branch`                                               | Deletar branch                                                                         |  
-
-
+`git stash`[^4] | commit temporário
+`git stash list` | visualizar todos os stashes criados, listando-os com identificadores, como `stash@{0}`, `stash@{1}`
+`git stash apply`| mudanças do último stash no diretório de trabalho, mas o stash ainda permanece na pilha.
+`git stash pop` | mudanças do último stash e remove esse stash da pilha (ou seja, ele é "descartado" da lista após ser aplicado)
+`git stash drop stash@{0}` | Excluir stash específico
+`git stash clear` | remove todos os stashes da pilha.
+`git branch -d nome_branch`| Eliminar rama de branch
 ____________________
 
 <details>
@@ -200,8 +205,6 @@ Uma linha de desenvolvimento separada que permite trabalhar em novas funcionalid
 - Organização: Branches permitem organizar e gerenciar o desenvolvimento de novas funcionalidades, 
 </details>
 
-</details>
-
 <details>
   <summary><code>git switch</code> X <code>git checkout</code> | Sobre Branches
    </summary>
@@ -234,6 +237,34 @@ Uma linha de desenvolvimento separada que permite trabalhar em novas funcionalid
 - Isolamento: Cada branch é isolada, então mudanças em uma branch não afetam as outras;
 - Colaboração: Vários desenvolvedores podem trabalhar em diferentes branches sem interferir uns nos outros;
 - Organização: Branches permitem organizar e gerenciar o desenvolvimento de novas funcionalidades, 
+</details>
+
+<details>
+<summary><code>git stash</code> | Guardar temporariamente</summary>
+
+[^4]: `git stash`
+ 
+Extremamente útil quando se está trabalhando em algo, ou em uma branch, e é necessário retornar a main. É um commit temporário. 
+
+| Comando                                                            | Descrição                                   |
+|--------------------------------------------------------------------|---------------------------------------------|
+`git stash` | commit temporário
+`git stash list` | visualizar todos os stashes criados, listando-os com identificadores, como `stash@{0}`, `stash@{1}`
+`git stash apply`| mudanças do último stash no diretório de trabalho, mas o stash ainda permanece na pilha.
+`git stash pop` | mudanças do último stash e remove esse stash da pilha (ou seja, ele é "descartado" da lista após ser aplicado)
+`git stash drop stash@{0}` | Excluir stash específico
+`git stash clear` | remove todos os stashes da pilha.
+
+**Situações em que git stash é Útil**
+- [X] Trocar rapidamente de branch: estar no meio de um desenvolvimento e precisar mudar para outra branch sem querer fazer um commit das mudanças atuais.
+- [X] Experimentos temporários: testar algo sem fazer commit, mas ainda assim desejar manter suas alterações temporariamente.
+- [X] Limpar o diretório de trabalho para um build: ter um diretório limpo para executar testes ou compilações, e git stash é ideal para isso.
+
+**Observações Importantes**
+- [x] Stash apenas guarda arquivos rastreados e que foram modificados ou adicionados. Arquivos que não foram `git add` ou estão não rastreados podem ser incluídos usando `git stash -u`.
+- [X] Stash não afeta commits: Ele apenas guarda mudanças no diretório de trabalho e no índice.
+- [X] Usar `git stash apply` e ocorrer um conflito, será necessário resolvê-lo como faria com um merge ou rebase.
+- 
 </details>
 
 _________________
