@@ -125,7 +125,7 @@ Comandos | Python
 :-|-
 `print("Hola Mundo")` | imprimir texto
 .# | Comentário de linha
-' ' ' | Comentário de textos (docstring)
+' ' ' ou " " " | Comentário de textos (docstring)
 **Operador de Comparação** | 
 == | igualdade (2 == 2)
 `>` | maior (3 > 2)
