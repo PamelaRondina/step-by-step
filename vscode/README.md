@@ -10,6 +10,7 @@ Ctrl + K + V | Preview README
 Ctrl + Shift + ' | Abrir terminal
 Shift + Alt + A | Comentário em Bloco
 Ctrl + Shift + V | Abre Leitura do README
+Ctrl + B | Fecha aba Explorer
 
 
 | Extensões | Objetivo | Link
