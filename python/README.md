@@ -1,20 +1,30 @@
 # Python
 
+## Tipos de Dados
+
+Sigla | Algoritmo | |Exemplo 
+-|-|-|-
+`int`   | Inteiro | Números Inteiros | 10
+`float` | Real | Números Decimais | 20.2
+`str` | String | Caracter | Qualquer Texto
+`bool` | Lógico | Lógico | True and False
+
 >A identação em python é de suma importância.
 
-Correto, `print` está identado.
+Correto: aqui o `print` está identado!
+
 ```python
 if 5 > 3:
     print('5 es mayor a 3')
 ```
 
-Incorreto, `print` não segue identado, o código terá erro.
+Incorreto: aqui o `print` não segue identado, o código terá erro.
 ```python
 if 5 > 3:
 print('5 es mayor a 3')
 ```
 
-**Variáveis**
+## Variáveis
 
 Podemos nomear as variáveis em python.
 
@@ -36,7 +46,7 @@ a, b, c = 'Uno', 'Dos', 'Tres'
     print(a, b, c)
 ```
 
-**Concatenação**
+## Concatenação
 
 ```python
 inicio = 'Hola' #não possui espaço
@@ -56,23 +66,26 @@ print(inicio2,final)
 Hola  mundo #possui 2 espaços, a (,) = 1 de espaço
 ```
 
-### Tipos de Dados
-
-Sigla | Tipo | |Exemplo 
--|-|-|-
-int   | Inteiro | Números Inteiros | 10
-float | Decimal | Numeros Decimais | 20.2
-str | String | Texto | Qualquer Texto
+## Entrada de Dados
 
 ```python
-print(2 + 2) # 4
-print("hola " + "mundo") # hola mundo
-print("2" + "2") # 22
+print ("Você pesa {} quilos".format(P))
 
-inteiro = 10
-conDecimal = 20.2 #float
-complexo = 1j
+print (f"Você pesa {P}: quilos")
 ```
+
+Em python, a função `input` sempre devolve o dado lido do usuário como tipo `str`, para os demais vemos incluir o `input`
+
+```python
+XPTO = input("Informe o Valor de XPTO: ") #string
+
+X = int(input("Informe p valor de X: ")) #int
+Y = float(input("Informe o valor de Y: ")) #float
+```
+
+
+
+
 
 **Listas**
 
@@ -124,14 +137,28 @@ _______
 Comandos | Python
 :-|-
 `print("Hola Mundo")` | imprimir texto
-.# | Comentário de linha
-' ' ' ou " " " | Comentário de textos (docstring)
-**Operador de Comparação** | 
+.# | comentário de linha
+' ' ' ou " " " | comentário de textos (docstring)
+`,` | cria espaçamento
+**Operadores Aritméticos** |
+`+` | adição
+`-` | subtração
+`*` | multiplicação
+`/` |  divisão
+`x**y` | potencialização
+`x**0.5` | raiz quadrada
+`%` | resto da divisão
+`//` | quociente da divisão
+**Operadores Relacionais e Lógicos** |  
 == | igualdade (2 == 2)
 `>` | maior (3 > 2)
 `<` | menor (2 < 3)
 `>=` | maior ou igual a (3 >= 3) 
 `<=` | menor ou igual a (3 <= 3)
+`!=` | diferente de
+`not` | negação (não)
+`and` | conjunção (e)
+`or` | disjunção (ou)
 != | compara dois valores e nos diz se são diferentes (1 != 2)
 **Listas**|
 variavel = [1, 2, 3] | São criadas dentro dos [ ]
