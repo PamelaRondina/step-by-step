@@ -6,76 +6,170 @@ Software que permite que desenvolvedores trabalhem no mesmo projeto, sendo poss�
 
 Criado pelo engenheiro de software Linus Torvalds.
 
-## Comandos GIT
+## GIT
 
-| comando                                                                   | Descrição                                                                              |
-|:--------------------------------------------------------------------------|:---------------------------------------------------------------------------------------|
-| <code>Crtls + S</code>                                                    | SALVAR ARQUIVO                                                                         |
-| <code>git --version</code>                                                | Versão do Git CMD                                                                      |
-| <code>git clone</code>                                                    | Clonar um Repositório do GitHub                                                        |
-| <code>git init</code>                                                     | Criar um repositório                                                                   |
-| <code>git add nomeArquivo</code>                                          | add o arquivo para staged                                                              |
-| <code>git add .</code>                                                    | add tudo o que foi modificado para o staged                                            |
-| <code>git status</code>                                                   | status dos arquivos                                                                    |
-| <code>git restore --staged nomeArquivo</code>                             | retorna o arquivo para unstage                                                         |
-| <code>git commit -m "mensagem"</code>                                     | -m = incluir mensagem                                                                  |
-| <code>git remote add origin linkGitHub</code>                             | trazer repositório do GitHub para local                                                |
-| <code>git push origin main</code>                                         | Push local para remoto                                                                 |
-| <code>git pull origin main</code>                                         | Pull remoto para local                                                                 |
-| `git checkout nomeBranch`                                                 | Altera a branch                                                                        |
-| `git config --global user.name`                                           | Altera o nome do usuário do GitHub                                                     |
-| `git config --global user.email`                                          | Altera o e-mail do usuário do GitHub                                                   |
-| `git branch -m`                                                           | Altera o nome da Branch                                                                |
-| `git log`                                                                 | Informações commit: número ID, autor, date, descrição                                  |
-| `git log graph`                                                           | Informações commit: ramificações                                                       |
-| `git log --graph --pretty=oneline`                                        | Informações commit: ID em 01 linha e descrição                                         |
-| `git log --graph --decorate --all --oneline`                              | Informações commit: ID menor em 01 linha                                               |
-| `git config --global alias.tree "log --graph --decorate --all --oneline"` | i) alias.tree (apelido chamado tree); Em seguida, chamamos apenas `tree`               |
-| `git diff` [^1]                                                           | Analisa alterações do último commit com o arquivo atual, antes de executar o `git add` |
-| `git reset --hard 02150216`                                               | retorna para um commit específico                                                      |
-| `git reflog`                                                              | Detalhes commit (log completo)                                                         |
-| `git tag`                                                                 | Etiquetar commits                                                                      |
-| `git branch nome-branch`                                                  | Cria a branch, mas não muda o branch atual. [^2]                                       |
-| `git branch`                                                              | Listar Branches                                                                        |
-| `git checkout -b nome-branch` ou `git switch -c nome-branch`              | Criar e trocar para a nova branch                                                      |
-| `git checkout main`ou `git merge nome-branch`                             | Unir Branches                                                                          |
-| `git branch -d nome-branch`                                               | Deletar branch                                                                         |  
-`git stash`[^4] | commit temporário
-`git stash list` | visualizar todos os stashes criados, listando-os com identificadores, como `stash@{0}`, `stash@{1}`
-`git stash apply`| mudanças do último stash no diretório de trabalho, mas o stash ainda permanece na pilha.
-`git stash pop` | mudanças do último stash e remove esse stash da pilha (ou seja, ele é "descartado" da lista após ser aplicado)
-`git stash drop stash@{0}` | Excluir stash específico
-`git stash clear` | remove todos os stashes da pilha.
-`git branch -d nome_branch`| Eliminar rama de branch
-____________________
+### Comando e Descrição
+
+| comando                                                      | Descrição                                                                              |
+|:-------------------------------------------------------------|:---------------------------------------------------------------------------------------|
+| `Crtls + S`                                                  | SALVAR ARQUIVO                                                                         |
+| `git --version`                                              | Versão do Git CMD                                                                      |
+| `git add .`                                                  | add tudo o que foi modificado para o staged                                            |
+| `git add nomeArquivo`                                        | add o arquivo para staged                                                              |
+| `git branch`[^1]                                             | Listar Branches                                                                        |
+| `git checkout -b nome-branch` ou `git switch -c nome-branch` | Criar e trocar para a nova branch                                                      |
+| `git checkout main`ou `git merge nome-branch`                | Unir Branches                                                                          |
+| `git checkout nomeBranch`                                    | Altera a branch                                                                        |
+| `git clone`                                                  | Clonar um Repositório do GitHub                                                        |
+| `git commit`[^6]                                              | alterações no commit                                                                   |
+| `git config`[^2]                                             | alterações como senha usuario email                                                    |
+| `git diff` [^3]                                              | Analisa alterações do arquivo e do último commit com o arquivo atual, antes de executar o `git add` |
+| `git init`                                                   | Criar um repositório                                                                   |
+| `git log`[^4]                                                | Informações commit: número ID, autor, date, descrição                                  |
+| `git pull origin main`                                       | Pull remoto para local                                                                 |
+| `git push origin main`                                       | Push local para remoto                                                                 |
+| `git reflog`                                                 | Detalhes commit (log completo)                                                         |
+| `git remote add origin linkGitHub`                           | trazer repositório do GitHub para local                                                |
+| `git reset --`[^7]                                           | retorna para um commit específico                                                      |
+| `git restore --staged nomeArquivo`                           | retorna o arquivo para unstage                                                         |
+| `git stash`[^5]                                              | commit temporário                                                                      |
+| `git status`                                                 | status dos arquivos                                                                    |
+| `git tag`                                                    | Etiquetar commits                                                                      |
+
+__________________
+
+
+### `git branch`      
 
 <details>
 
-<summary> <code>git clone</code> | Clonar Repositório </summary>
+  <summary>Alterar a Ramificação
+   </summary>
 <br>
-Após criar o repositório, copiar o código
+
+[^1]: `git branch`
+
+Uma linha de desenvolvimento separada que permite trabalhar em novas funcionalidades, correções de bugs, ou experimentações sem alterar diretamente a linha principal do código (geralmente a branch main ou master). Com branches, desenvolvemos novas partes do projeto isoladamente e depois integramos ao código principal quando estiverem prontas.
+
+
+| Comando                                                            | Descrição                                   |
+|--------------------------------------------------------------------|---------------------------------------------|
+| `git branch nome-da-branch`                                        | Cria a branch, mas não muda o branch atual. |
+| `git branch`                                                       | Listar Branches                             |
+| `git checkout -b nome-da-branch` ou `git switch -c nome-da-branch` | Criar e trocar para a nova branch           |
+| `git checkout main`ou `git merge nome-da-branch`                   | Unir Branches                               |
+| `git clone URL --branch nomeBranch --single-branch`                | clonar apenas uma branch                    |  |
+| `git branch -d nome_branch`                                        | Deletar branch                              |
+| `git branch -m`                                                    | Altera o nome da Branch                     |
+| `git branch nome_branch`                                           | Cria a branch, mas não muda o branch atual. |
+| `git merge nomeBranch`                                             | Mesclar branch   
+
+
+**Benefícios de Trabalhar com Branches**
+- Isolamento: Cada branch é isolada, então mudanças em uma branch não afetam as outras;
+- Colaboração: Vários desenvolvedores podem trabalhar em diferentes branches sem interferir uns nos outros;
+
+
+
+**`git switch` X `git checkout` | Sobre Branches**
+
+<br>
+
+**git checkout** é um comando mais antigo e possuem diversas funcionalidades.
+- [x] Trocar de branch `git checkout nome-da-branch`
+- [x] Restaurar arquivos ou commits específicos no repositório `git checkout nome-do-arquivo` ou `git checkout hash-do-commit`
+- [x] Criar e trocar para uma nova branch com o flag -b `git checkout -b nova-branch`
+
+**git switch** veio para simplificar a mudança de branches, tendo como função principal *trocar de branch*, permite apenas:
+- [X] Mudar de branch `git switch nome-da-branch`
+- [X] Criar e trocar para uma nova branch com o flag -c `git switch -c nova-branch`
+- [X] Com sua utilização há menos risco de alterar arquivos ou commits por engano.
+
+**Quando usar cada um?**
+- `git switch` para mudar de branch ou criar uma nova branch e já trocar para ela;
+- `git checkout` se precisar restaurar arquivos ou commits específicos, pois git switch não cobre essas funcionalidades.
+
+| Comando                                                            | Descrição                                   |
+|--------------------------------------------------------------------|---------------------------------------------|
+| `git branch nome-da-branch`                                        | Cria a branch, mas não muda o branch atual. |
+| `git branch`                                                       | Listar Branches                             |
+| `git checkout -b nome-da-branch` ou `git switch -c nome-da-branch` | Criar e trocar para a nova branch           |
+| `git checkout main`ou `git merge nome-da-branch`                   | Unir Branches                               |
+| `git branch -d nome-da-branch`                                     | Deletar branch                              |
+
+
+**Benefícios de Trabalhar com Branches**
+- Isolamento: Cada branch é isolada, então mudanças em uma branch não afetam as outras;
+- Colaboração: Vários desenvolvedores podem trabalhar em diferentes branches sem interferir uns nos outros;
+- Organização: Branches permitem organizar e gerenciar o desenvolvimento de novas funcionalidades, 
+</details>
+
+### `git clone` 
+<details>
+
+<summary> Clonar e Criar um novo Repositório </summary>
+<br>
+
+**Repositório Remoto** 
+
+Após criar o repositório remoto (GitHub), copiar o código
 
 ![image](https://user-images.githubusercontent.com/108991648/230122644-2f3fffdb-5177-47f8-b219-ca7dc4275bcf.png)
 
-No Terminal incluir: "<code>git clone</code> + Link copiado"
+No Terminal incluir: "`git clone` + Link copiado"
+
+---------
+
+**Repositório Local**
+
+Ainda assim criar um repositório do Git com o mesmo nome, a partir daí teremos uma URL
+
+```bash
+git remote add origin + URL
+git branch -M main (se for a branch com o nome de "master")
+git push -u origin main
+
+git pull (atualiza do remoto[GitHub] para o local[Máquina])
+```
+
 
 </details>
 
+### `git config`
+
 <details>
-<summary> <code>git ignore</code> | Ignorar Arquivos </summary>
+<summary> Configuração do Git</summary>
 
-> Arquivo para adicionarmos informações que nao queremos utilizar no dia a dia
+[^2]: `git config` 
 
-- [X] Criar pasta `.gitignore`;
-- [X] Dentro do arquivo: `**/.nomeArquivo`
+| Comando                                                                   | Descrição                                                                |
+|---------------------------------------------------------------------------|--------------------------------------------------------------------------|
+| `git config --global alias.tree "log --graph --decorate --all --oneline"` | i) alias.tree (apelido chamado tree); Em seguida, chamamos apenas `tree` |
+| `git config --global user.email`                                          | Altera o e-mail do usuário do GitHub                                     |
+| `git config --global user.name`                                           | Altera o nome do usuário do GitHub                                       |    
 
 </details>
 
-<details>
-  <summary><code>git diff</code> | Analisar alterações do último Commit com o arquivo atual
-   </summary>
+### `git commit`
 
-[^1]: `git diff` 
+<details>
+<summary>Alterações no commit</summary>
+
+[^6]: `git commit`
+
+| Comandos                           | Descrição                                  |
+|------------------------------------|--------------------------------------------|
+| `git commit -m "mensagem"`         | salvar mensagem de commit                  |
+| `git commit --amend -m "mensagem"` | alterar mensagem do ultimo commit da stage |
+ 
+</details>
+
+### `git diff`
+
+<details>
+  <summary>Analisar alterações do último Commit com o arquivo atual</summary>
+
+[^3]: `git diff` 
 
 ```bash
 $ git diff
@@ -143,15 +237,35 @@ E agora o conteúdo a partir dessa linha foi expandido para incluir mais linhas 
 
 </details>
 
-<details>
-<summary><code>git reset -hard</code> | Retorna para commit específico</summary>
 
-![alt text](image.png)
+### `git ignore`
+
+<details>
+<summary> Ignorar Arquivos </summary>
+
+> Arquivo para adicionarmos informações que nao queremos utilizar no dia a dia
+
+- [X] Criar pasta `.gitignore`;
+- [X] Dentro do arquivo: `**/.nomeArquivo`
 
 </details>
 
+
+
+### `git log`
+
 <details>
-<summary><code>git reflog</code> | Detalhes Commit (Log Completo) </summary>
+
+<summary> Informações Commit</summary>
+
+[^4]: `git log`
+
+| Comandos                                     | Descrição                                       |
+|----------------------------------------------|-------------------------------------------------|
+| `git log graph`                              | Informações commit: ramificações                |
+| `git log --graph --pretty=oneline`           | Informações commit: ID em 01 linha e descrição  |
+| `git log --graph --decorate --all --oneline` | Informações commit: ID menor em 01 linha        |
+| `git reflog`                                 | Detalhes Commit (Log Completo, conforme abaixo) |
 
 ```bash
 08f5adb (HEAD -> main, origin/main, origin/HEAD) HEAD@{0}: commit: add explicação 'git diff'
@@ -166,11 +280,30 @@ c42b61a HEAD@{8}: commit: novos comandos git
 d56b0ad HEAD@{9}: commit: atualização 13.out
 c97d892 HEAD@{10}: commit: atualização out.13
 3d76ae7 HEAD@{11}: clone: from https://github.com/PamelaRondina/step-by-step.git
-```
+```  
 </details>
 
+### `git reset`
+
+[^7]: `git reset`
+
 <details>
-<summary><code>git tag</code> | Incluir etiquetas</summary>
+<summary>Retorna para commit específico</summary>
+
+| Comando             | Descrição                                                                                                                            |
+|---------------------|--------------------------------------------------------------------------------------------------------------------------------------|
+| `git reset --soft`  | mova apenas o ponteiro da branch, mantendo as mudanças no stage e no diretório de trabablho                                          |
+| `git reset --mixed` | move o ponteiro da branch e limpa o stage, mas mantém as mudanças no diretório de trabalho (fazer git add)                           |
+| `git reset --hard`  | move o ponteiro da branch, lima o stage e descarta todas as mudanças no diretório de trabalho, restaurando tudo ao commit específico |
+
+![alt text](image.png)
+
+</details>
+
+### `git tag`
+
+<details>
+<summary>Incluir etiquetas</summary>
 
 - Nome para tags
 - [x] minúsculas
@@ -178,71 +311,12 @@ c97d892 HEAD@{10}: commit: atualização out.13
 </details>
 
 
-</details>
+### `git stash`
 
 <details>
-  <summary><code>git branch</code> | Alterar a Ramificação
-   </summary>
-<br>
+<summary> Guardar temporariamente </summary>
 
-[^2]: `git branch`
-
-Uma linha de desenvolvimento separada que permite trabalhar em novas funcionalidades, correções de bugs, ou experimentações sem alterar diretamente a linha principal do código (geralmente a branch main ou master). Com branches, desenvolvemos novas partes do projeto isoladamente e depois integramos ao código principal quando estiverem prontas.
-
-
-| Comando                                                            | Descrição                                   |
-|--------------------------------------------------------------------|---------------------------------------------|
-| `git branch nome-da-branch`                                        | Cria a branch, mas não muda o branch atual. |
-| `git branch`                                                       | Listar Branches                             |
-| `git checkout -b nome-da-branch` ou `git switch -c nome-da-branch` | Criar e trocar para a nova branch           |
-| `git checkout main`ou `git merge nome-da-branch`                   | Unir Branches                               |
-| `git branch -d nome-da-branch`                                     | Deletar branch                              |
-
-
-**Benefícios de Trabalhar com Branches**
-- Isolamento: Cada branch é isolada, então mudanças em uma branch não afetam as outras;
-- Colaboração: Vários desenvolvedores podem trabalhar em diferentes branches sem interferir uns nos outros;
-- Organização: Branches permitem organizar e gerenciar o desenvolvimento de novas funcionalidades, 
-</details>
-
-<details>
-  <summary><code>git switch</code> X <code>git checkout</code> | Sobre Branches
-   </summary>
-<br>
-
-**git checkout** é um comando mais antigo e possuem diversas funcionalidades.
-- [x] Trocar de branch `git checkout nome-da-branch`
-- [x] Restaurar arquivos ou commits específicos no repositório `git checkout nome-do-arquivo` ou `git checkout hash-do-commit`
-- [x] Criar e trocar para uma nova branch com o flag -b `git checkout -b nova-branch`
-
-**git switch** veio para simplificar a mudança de branches, tendo como função principal *trocar de branch*, permite apenas:
-- [X] Mudar de branch `git switch nome-da-branch`
-- [X] Criar e trocar para uma nova branch com o flag -c `git switch -c nova-branch`
-- [X] Com sua utilização há menos risco de alterar arquivos ou commits por engano.
-
-**Quando usar cada um?**
-- `git switch` para mudar de branch ou criar uma nova branch e já trocar para ela;
-- `git checkout` se precisar restaurar arquivos ou commits específicos, pois git switch não cobre essas funcionalidades.
-
-| Comando                                                            | Descrição                                   |
-|--------------------------------------------------------------------|---------------------------------------------|
-| `git branch nome-da-branch`                                        | Cria a branch, mas não muda o branch atual. |
-| `git branch`                                                       | Listar Branches                             |
-| `git checkout -b nome-da-branch` ou `git switch -c nome-da-branch` | Criar e trocar para a nova branch           |
-| `git checkout main`ou `git merge nome-da-branch`                   | Unir Branches                               |
-| `git branch -d nome-da-branch`                                     | Deletar branch                              |
-
-
-**Benefícios de Trabalhar com Branches**
-- Isolamento: Cada branch é isolada, então mudanças em uma branch não afetam as outras;
-- Colaboração: Vários desenvolvedores podem trabalhar em diferentes branches sem interferir uns nos outros;
-- Organização: Branches permitem organizar e gerenciar o desenvolvimento de novas funcionalidades, 
-</details>
-
-<details>
-<summary><code>git stash</code> | Guardar temporariamente</summary>
-
-[^4]: `git stash`
+[^5]: `git stash`
  
 Extremamente útil quando se está trabalhando em algo, ou em uma branch, e é necessário retornar a main. É um commit temporário. 
 
@@ -292,10 +366,12 @@ _________________
 | `mv nomeAtual nomeNovo`  | Renomear arquivos                               | `rename nomeAtual nomeNovo`                  |
 | `mv nomeArquivo ../`     | Mover arquivos                                  | `move nomeArquivo ../`                       |
 | `pwd`                    | mostra diretório atual                          | ???????                                      |
-| <code>cat</code>         | Mostrar o conteúdo o arquivo                    | ??????????                                   |
+| `cat`         | Mostrar o conteúdo o arquivo                    | ??????????                                   |
 | `Code .`                 | abrir VSCode                                    | *****                                        |
 | `Ctrl + Insert`          | Copiar do Terminal                              | **********                                   |
-| `Shift + Insert`         | Colar do Terminal                               | **********                                   |
+| `Shift + Insert`         | Colar do Terminal                               | **********
+`>`                  | `>` **deleta** o qe já contém no arquivo e add a nova informação | ****
+`>>`                 | `>>` **mantém** o que já está no arquivo e add a nova informação | ****
 
 
 **Git Bash: cores diretórios e arquivos**
@@ -305,8 +381,6 @@ _________________
 | Azul escuro | Diretórios (pastas) |
 | Cianos      | Atalho              |
 | Branco      | Arquivo             |
-
-
 
 **Git Bash `rm -rf *`**
 
