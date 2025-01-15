@@ -81,7 +81,7 @@ XPTO = input("Informe o Valor de XPTO: ") #string
 
 X = int(input("Informe p valor de X: ")) #int
 Y = float(input("Informe o valor de Y: ")) #float
-```
+``Some status bar options in CMake Tools have now moved to the Project Status View in the CMake Tools sidebar. You can customize your view with the 'cmake.options' property in settings.`
 
 
 
