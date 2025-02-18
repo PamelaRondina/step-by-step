@@ -36,6 +36,11 @@ Criado pelo engenheiro de software Linus Torvalds.
 | `git status`                                                 | status dos arquivos                                                                    |
 | `git tag`                                                    | Etiquetar commits                                                                      |
 
+
+**Criar chave SSH**
+- ssh-keygen -t ed25519 -C "e-mail@gmail.com (comentario)"
+- Buscar chave PUB e adicionar no GitHub.
+
 __________________
 
 
@@ -142,11 +147,15 @@ git pull (atualiza do remoto[GitHub] para o local[Máquina])
 
 [^2]: `git config` 
 
-| Comando                                                                   | Descrição                                                                |
-|---------------------------------------------------------------------------|--------------------------------------------------------------------------|
-| `git config --global alias.tree "log --graph --decorate --all --oneline"` | i) alias.tree (apelido chamado tree); Em seguida, chamamos apenas `tree` |
-| `git config --global user.email`                                          | Altera o e-mail do usuário do GitHub                                     |
-| `git config --global user.name`                                           | Altera o nome do usuário do GitHub                                       |    
+| Comando                                                                   | Descrição                                                                     |
+|---------------------------------------------------------------------------|--------------------------------------------------------------------------     |
+| `git config --global alias.tree "log --graph --decorate --all --oneline"` | i) alias.tree (apelido chamado tree); Em seguida, chamamos apenas `tree`      |
+| `git config --global user.email "email"`                                  | Altera o e-mail do usuário do GitHub                                          |
+| `git config --global user.name "nomeUsuario"`                             | Altera o nome do usuário do GitHub                                            |    
+| `git config --global credential.helper cache`                             | Privado: armazenar credenciais do Git por 15 minutos (HTTPS)                  |
+| `git config --global credential.helper store`                             | Privado: armazenar credenciais do Git PERMANENTEMENTE (HTTPS)                 |
+| `git config --global --get credential.helper`                             | Privado: verifica se a configuracao da senha foi realizada (retorno: store)   |
+| `cat ~/.git-credentials`    
 
 </details>
 
