@@ -35,5 +35,7 @@ Comandos | DGB
 `print` `p`| imprimir + Nome_variavel
 **list** | 
 `list` `l main` | mostra 10 linhas
-`show`
+`show listsize` | mostra a quantidade de linhas que o sistema possui, por padrao sao 10 linhas
+`set listsize 5` | para alterar a quantidade de linhas que serao exibidas
+**.**
 `quit` | sair do programa GDB
