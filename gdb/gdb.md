@@ -29,6 +29,7 @@ Comandos | DGB
 `disable 2` | desabilitar breakpoint, o número do break e nao da linha
 `enable 2` | habilitar breakpoint, o número do break e não da linha
 **.** |
+`set variavel = 10` | Incluir um novo valor a variavel 
 `step` `s` | acessa a função
 `start` | Incluir um breakpoint temporário na main
 `next` `n` | próximo passo

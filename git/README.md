@@ -22,7 +22,7 @@ Criado pelo engenheiro de software Linus Torvalds.
 | `git checkout nomeBranch`                                    | Altera a branch                                                                        |
 | `git clone`                                                  | Clonar um Repositório do GitHub                                                        |
 | `git commit`[^6]                                              | alterações no commit                                                                   |
-| `git config`[^2]                                             | alterações como senha usuario email                                                    |
+| `git config`[^2]                                             | alterações como senha, usuario e email                                                    |
 | `git diff` [^3]                                              | Analisa alterações do arquivo e do último commit com o arquivo atual, antes de executar o `git add` |
 | `git init`                                                   | Criar um repositório                                                                   |
 | `git log`[^4]                                                | Informações commit: número ID, autor, date, descrição                                  |
@@ -150,12 +150,14 @@ git pull (atualiza do remoto[GitHub] para o local[Máquina])
 | Comando                                                                   | Descrição                                                                     |
 |---------------------------------------------------------------------------|--------------------------------------------------------------------------     |
 | `git config --global alias.tree "log --graph --decorate --all --oneline"` | i) alias.tree (apelido chamado tree); Em seguida, chamamos apenas `tree`      |
-| `git config --global user.email "email"`                                  | Altera o e-mail do usuário do GitHub                                          |
+| `git config --global user.email "email"`                                  | Altera o e-mail do usuário do GitHub
+| `git config --global user.email` | Verificar o e-mail cadastrado                                          |
 | `git config --global user.name "nomeUsuario"`                             | Altera o nome do usuário do GitHub                                            |    
 | `git config --global credential.helper cache`                             | Privado: armazenar credenciais do Git por 15 minutos (HTTPS)                  |
 | `git config --global credential.helper store`                             | Privado: armazenar credenciais do Git PERMANENTEMENTE (HTTPS)                 |
 | `git config --global --get credential.helper`                             | Privado: verifica se a configuracao da senha foi realizada (retorno: store)   |
-| `cat ~/.git-credentials`    
+| `cat ~/.git-credentials`
+  
 
 </details>
 
