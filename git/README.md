@@ -352,6 +352,14 @@ Extremamente útil quando se está trabalhando em algo, ou em uma branch, e é n
 - 
 </details>
 
+
+**Problemas com o git push**
+
+Para forcar o que esta na m'aquina para o Github
+
+> CUIDADO COM ESTE COMANDO!
+
+`git pull origin main --force`
 _________________
 
 
