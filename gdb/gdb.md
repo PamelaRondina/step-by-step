@@ -18,7 +18,7 @@ No terminal:
 
 Comandos | DGB
 -|- 
-`gcc -g nome_programa` | -g: cria um arquivo que compila que executa no GDB
+`gcc -g nome_programa.c` | -g: cria um arquivo que compila que executa no GDB
 `gdb arquivo_compilado` | inicia o programa GDB
 `lay src` `layout src`| Abre a tela para visualizar o codigo dentro do programa
 `run` | inicia o programa 
@@ -28,7 +28,9 @@ Comandos | DGB
 `clear main` | deleta breakpoint na variavel setada
 `disable 2` | desabilitar breakpoint, o número do break e nao da linha
 `enable 2` | habilitar breakpoint, o número do break e não da linha
-**.** |
+**visualizar variaveis** |
+watch nome_variável | mostra o valor da variavél a cada turno
+**.** | 
 `set variavel = 10` | Incluir um novo valor a variavel 
 `step` `s` | acessa a função
 `start` | Incluir um breakpoint temporário na main
