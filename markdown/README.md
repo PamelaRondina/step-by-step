@@ -41,11 +41,14 @@ Texto
 </details>
 ```
 
-| Tips               | Markdown             |
-|--------------------|----------------------|
-| `- [X]`            | Caixa para ticar     |
-| `<!--> texto <-->` | Adicionar comentário |
-| `[^1]` e `[^1]: assunto`            | Criar notas: seguir a numeração. 1
+| Tips                      | Markdown                            |
+|---------------------------|-------------------------------------|
+| `- [X]`                   | Caixa para ticar                    |
+| `<!-- texto -->`        | Adicionar comentário escondido      |
+| `[^1]` e `[^1]: assunto`  | Criar notas: seguir a numeração. 1  |
+| ** ou __                  | bold                                |
+| 
+
 
 --------------
 
