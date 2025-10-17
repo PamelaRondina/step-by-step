@@ -27,22 +27,20 @@ Criado pelo engenheiro de software Linus Torvalds.
 | `git init`                                                   | Criar um repositório                                                                   |
 | `git log`[^4]                                                | Informações commit: número ID, autor, date, descrição                                  |
 | `git pull origin main`                                       | Pull remoto para local                                                                 |
-| `git push origin main`                                       | Push local para remoto                                                                 |
+| `git push origin main`[^8]                                       | Push local para remoto                                                                 |
 | `git reflog`                                                 | Detalhes commit (log completo)                                                         |
 | `git remote add origin linkGitHub`                           | trazer repositório do GitHub para local                                                |
 | `git reset --`[^7]                                           | retorna para um commit específico                                                      |
 | `git restore --staged nomeArquivo`                           | retorna o arquivo para unstage                                                         |
 | `git stash`[^5]                                              | commit temporário                                                                      |
 | `git status`                                                 | status dos arquivos                                                                    |
-| `git tag`                                                    | Etiquetar commits                                                                      |
+| `git tag` [^9]                                               | Etiquetar commits                                                                      |
 
 
 **Criar chave SSH**
 - ssh-keygen -t ed25519 -C "e-mail@gmail.com (comentario)"
 - Buscar chave PUB e adicionar no GitHub.
-
 __________________
-
 
 ### `git branch`      
 
@@ -304,23 +302,19 @@ c97d892 HEAD@{10}: commit: atualização out.13
 | Comando             | Descrição                                                                                                                            |
 |---------------------|--------------------------------------------------------------------------------------------------------------------------------------|
 | `git reset --soft`  | mova apenas o ponteiro da branch, mantendo as mudanças no stage e no diretório de trabablho                                          |
-| `git reset --mixed` | move o ponteiro da branch e limpa o stage, mas mantém as mudanças no diretório de trabalho (fazer git add)                           |
-| `git reset --hard`  | move o ponteiro da branch, lima o stage e descarta todas as mudanças no diretório de trabalho, restaurando tudo ao commit específico |
-
-![alt text](image.png)
-
-</details>
+| `git reset --mixed` | move o ponteiro da branch e limpa o stage, mas mantém as mudanças no diretório de trabalho (fazer git add)               
 
 ### `git tag`
 
 <details>
 <summary>Incluir etiquetas</summary>
 
+[^9]: `git stash`
+
 - Nome para tags
 - [x] minúsculas
 - [x] guiones baixos 'aula_01' 
 </details>
-
 
 ### `git stash`
 
@@ -353,15 +347,68 @@ Extremamente útil quando se está trabalhando em algo, ou em uma branch, e é n
 </details>
 
 
-**Problemas com o git push**
+### `git push`
 
-Para forcar o que esta na m'aquina para o Github
+<details>
+<summary>*Subir* os dados do servidor para a nuvem</summary>
 
-> CUIDADO COM ESTE COMANDO!
+[^8]: `git push`
 
-`git pull origin main --force`
+| Comando                      | Descrição                                                                   |
+|------------------- ----------|-----------------------------------------------------------------------------|
+`git pull origin main --force` | Para forçar o que está na máquina para o GitHub (CUIDADO COM ESSE COMANDO)
 
-**Git Push | Acesso Negado**
+**Erros no 'git push'**
+
+### Verificar se HTTPS ou SSH
+
+```bash
+remote: Invalid username or token. Password authentication is not supported for Git operations.
+fatal: Authentication failed for 'https://github.com/Pamela*****/step-by-step.git/'
+```
+
+- O repositótio está apontando para a HTTPS, e não para SSH. Para confirmar, rodar o comando:
+
+```bash
+  git remote -v
+  origin  https://github.com/PamelaRondina/step-by-step.git (fetch)
+  origin  https://github.com/PamelaRondina/step-by-step.git (push)
+
+```
+
+> Informa se o repositório local está utlizando HTTPS ou SSH
+
+| Comando                                            | Descrição                              |
+|----------------------------------------------------|--------------------------------------- |
+| origin                                             | repositório remoto (ou origin)                         |
+| https://github.com/PamelaRondina/step-by-step.git  | URL usada                              |
+| (fetch)                                            | URL usada pra baixar (pull) itens do GitHub |
+| (push)                                             | URL usada pra enviar (push) itens pro GitHub |
+
+### Alterar para SSH
+
+- Rodar comando:
+
+```bash
+git remote set-url origin git@github.com:PamelaRondina/step-by-step.git
+```
+
+| Comando                                            | Descrição                              |
+|----------------------------------------------------|--------------------------------------- |
+| remote                                             | repositório remoto (ou origin)         |
+| set-url                                            | definir ou alterar o endereço do origin|
+| origin git@github.com:......\                      | passa de HTTPS para SSH                |
+
+- Verificar se deu certo (git@github)
+
+```bash
+git remote -v
+origin  git@github.com:PamelaRondina/step-by-step.git (fetch)
+origin  git@github.com:PamelaRondina/step-by-step.git (push)
+```
+
+Deve ser alterado para `git@github`. E, por fim, rodar o `git push`
+</details>
 _________________
 
 
