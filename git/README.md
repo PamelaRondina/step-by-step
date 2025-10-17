@@ -358,7 +358,7 @@ Extremamente útil quando se está trabalhando em algo, ou em uma branch, e é n
 [^8]: `git push`
 
 | Comando                      | Descrição                                                                   |
-|------------------- ----------|-----------------------------------------------------------------------------|
+|------------------------------|-----------------------------------------------------------------------------|
 `git pull origin main --force` | Para forçar o que está na máquina para o GitHub (CUIDADO COM ESSE COMANDO)
 
 **Erros no 'git push'**
