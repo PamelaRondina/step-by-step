@@ -297,12 +297,15 @@ c97d892 HEAD@{10}: commit: atualização out.13
 [^7]: `git reset`
 
 <details>
+
 <summary>Retorna para commit específico</summary>
 
 | Comando             | Descrição                                                                                                                            |
 |---------------------|--------------------------------------------------------------------------------------------------------------------------------------|
 | `git reset --soft`  | mova apenas o ponteiro da branch, mantendo as mudanças no stage e no diretório de trabablho                                          |
-| `git reset --mixed` | move o ponteiro da branch e limpa o stage, mas mantém as mudanças no diretório de trabalho (fazer git add)               
+| `git reset --mixed` | move o ponteiro da branch e limpa o stage, mas mantém as mudanças no diretório de trabalho (fazer git add)  
+
+</details>
 
 ### `git tag`
 
