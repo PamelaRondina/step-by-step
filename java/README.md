@@ -1,6 +1,54 @@
 
 [Documentação Java](https://docs.oracle.com/javase/tutorial/java/nutsandbolts/datatypes.html)
 
+#                         Instalar Java - Via SDKMAN.
+
+| Comando                      | Descrição                                                                   |
+|------------------------------|-----------------------------------------------------------------------------|
+`java -version` | Verificar versão Java na máquina
+1 `curl -s "https://get.sdkman.io" \| bash` | Baixa o instalador do SDKMAN da Internet e roda ele com o Bash
+2 `source "$HOME/.sdkman/bin/sdkman-init.sh"`| Executa o conteúdo desse arquivo dentro do terminal atual, e não em um terminal separado.
+
+| Comando                      | Descrição                                                                   |
+|------------------------------|-----------------------------------------------------------------------------|
+`curl` | baixar itens da internet
+`-s` | silent, sem mostrar o progesso da barra de download
+`(pipe) bash` | envia o conteúdo baixado direto pro bash, que excuta o script
+`source` | fonte, vai executar a partir daqui
+
+| Comando                      | Descrição                                                                   |
+|------------------------------|-----------------------------------------------------------------------------|
+3 `sdk version` | Buscar a versão mais atualizada (ou a que será necessário utilizar)
+4 `sdk install java 25-amzn` | versão instalada
+5 `source "$HOME/.sdkman/bin/sdkman-init.sh"` | Executa dentro do terminal atual
+6 `sdk current java` | Visualizar qual versão estou utilizando
+`Using java vertsion 25-amzn` | Exemplo de versão utilizada
+
+ ```zhs
+ java -version
+ openjdk version "25" 2025-09-16 LTS
+OpenJDK Runtime Environment Corretto-25.0.0.36.2 (build 25+36-LTS)
+OpenJDK 64-Bit Server VM Corretto-25.0.0.36.2 (build 25+36-LTS, mixed mode, sharing)
+```
+
+## Alterar terminal entre versões JAVA
+
+| Comando                      | Descrição                                                                   |
+|------------------------------|-----------------------------------------------------------------------------|
+`sdk current java` | Visualizar qual versão estou utilizando
+`sdk list java` | Tabela de versões do Java
+`sdk install java *******` | escolher versão
+`sdk use java ******` | incluir versão que deseja utilizar
+`sdk default java *****` | Atualizar versão como padrão 
+
+Antes de Baixar uma nova versão:
+![alt text](image.png)
+
+Depois de baixar uma nova versão:
+![alt text](image-1.png)
+
+
+<!--
 # Iniciar um arquivo
 
 - [x] class nomeClass
@@ -137,3 +185,4 @@ _____________________________________________________________________
 -|-
 fori | `for (int i = 0; j < args.length; j++) {}`
 psvm | `public static void main`
+-->
