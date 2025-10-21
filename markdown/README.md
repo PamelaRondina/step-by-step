@@ -4,7 +4,7 @@
 ## Cabeçalho
 
 | Texto    | Descrição |
-|----------|-----------|
+| -------- | --------- |
 | `#`      | Level 01  |
 | `##`     | Level 02  |
 | `###`    | Level 03  |
@@ -41,22 +41,25 @@ Texto
 </details>
 ```
 
-| Tips                      | Markdown                            |
-|---------------------------|-------------------------------------|
-| `- [X]`                   | Caixa para ticar                    |
-| `<!-- texto -->`        | Adicionar comentário escondido      |
-| `[^1]` e `[^1]: assunto`  | Criar notas: seguir a numeração. 1  |
-| ** ou __                  | bold                                |
-| 
+| Tips                     | Markdown                                               |
+| ------------------------ | ------------------------------------------------------ |
+| `- [X]`                  | Caixa para ticar                                       |
+| `<!-- texto -->`         | Adicionar comentário escondido                         |
+| `[^1]` e `[^1]: assunto` | Criar notas: seguir a numeração. 1                     |
+| ** ou __                 | bold                                                   |
+| `CTRL + +`               | zoom in                                                |
+| `CTRL + 0`               | zoom base                                              |
+| `ALT + SHIFT + F`        | organiza a tabela (com a extensão Markdown All in One) |
+
 
 
 --------------
 
-Referências | Link
--|-
-Extensão VSCode: Organizar Tabela|[Link](https://learn.microsoft.com/pt-pt/contribute/content/docs-authoring/reformat-table)
-Guia Markdown| [Markdown Guide](https://www.markdownguide.org/basic-syntax/)
-Diagranas | [Diagramas](https://support.typora.io/Draw-Diagrams-With-Markdown/)
-Mermaid | [Mermaid](https://mermaid.js.org/syntax/flowchart.html)
+| Referências                       | Link                                                                                       |
+| --------------------------------- | ------------------------------------------------------------------------------------------ |
+| Extensão VSCode: Organizar Tabela | [Link](https://learn.microsoft.com/pt-pt/contribute/content/docs-authoring/reformat-table) |
+| Guia Markdown                     | [Markdown Guide](https://www.markdownguide.org/basic-syntax/)                              |
+| Diagranas                         | [Diagramas](https://support.typora.io/Draw-Diagrams-With-Markdown/)                        |
+| Mermaid                           | [Mermaid](https://mermaid.js.org/syntax/flowchart.html)                                    |
 
 <!-->
