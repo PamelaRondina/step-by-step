@@ -91,23 +91,133 @@ double preço = 1.99;
 double pi = 3.14159;
 ```
 
-## String
+## Textos ou Caractere
 
 `char` e `String`
 
 - [x] `char`: armazena um único caractere.
+- [x] Delimitado por aspas simples `'A'`
+- [x] Tipo Primitivo 
 
 ```java
 char numero = 4;
-char letra = A;
+char letra = 'A';
 ```
 
 - [x] `String`: armazena uma sequência de caracteres, multiplos chars.
+- [x] Delimitado por aspas duplas `"Assim"`
+- [x] Tipo Objeto
 
 ```java
 String s1 = "Continue a Nadar...";
 String s2 = "Java é legal!";
 ```
+## Verdadeiro ou Falso
+
+`boolean` -> 
+
+- [x] `boolean`: armazena apenas 2 valores: `true or false`
+
+```java
+boolean variable_true = true;
+boolean variable_false = false;
+```
+
+## Constantes
+
+- [x] `final`: (palavra-chave) Tipo especial de variável que **não pode** ser alterada depois de ser inicializada.
+
+```java
+final int MAX_VALUE = 100;
+MAX_VALUE = 200; // Isso causará um erro: "Tempo de Conciliação"
+```
+
+## Nomenclatura de Variáveis e Constantes
+
+**Nomes de Variáveis**
+- [x] `camelCase`: `saoFeitasDessaForma`
+- [X] Utilizar nomes descritivos que indiquem o propósito da variável -> `userAge` em vez de `ua`
+
+
+**Nomes de Contantes**
+- [x] `UPPER_SNAKE_CASE`: `MA_VALUE` `PI_VALUE`
+- [X] Utilizada para valores que não se alteram ao decorrer do programa
+
+**Regra Geral**
+- [x] Os nomes podem conter letras, dígitos, sublinhados e cifrões.
+- [x] Os nomes devem começar com uma letra, um sublinhado _ ou um cifrão $.
+- [x] NÃO inicializar com Números -> 0123456789
+- [x] NÃO inicializar com Caracteres especiais -> @£§€{[]}
+- [x] Os nomes diferenciam maiúsculas de minúsculas (myVariable é diferente de myvariable).
+- [x] Evite usar palavras-chave reservadas do Java (como int, class, public, etc.).
+
+## Conversão de Tipo
+
+- [x] Processo de converter um valor de um tipo de dado para outro.
+- [X] 2 tipos de conversão:
+  - **implícita**: automática;
+  - **explicita**: manual.
+
+`Integer to double` **implícita (automática**)
+
+```java
+int number = 5;
+double decimal = number; // automatically becomes 5.0
+
+// with calculation
+int x = 7;
+double result = x / 2.0; // result is 3.5
+```
+
+`Double to Integer` **explícita (manual) casting**
+```java
+double decimal = 9.7;
+int number = (int) decimal;  // becomes 9 (decimal part is truncated)
+
+// with calculation
+double price = 19.99;
+int roundedPrice = (int) price;  // becomes 19
+```
+`Integer and Boolean to String` (e vice-versa)
+
+> Para converter um valor para string, utilizar a função `String.valueOf():`
+
+```java
+int number1 = 789;
+double number2 = 789;
+boolean isValid = true;
+String text1 = String.valueOf(number1); // becomes "789"
+String text2 = String.valueOf(number2); // becomes "789.0"
+String text3 = String.valueOf(isValid); // becomes "true"
+```
+
+`String to Integer`
+
+> Para converter uma string em número inteiro, utilizar a função `Integer.parseInt(variavelString);`
+> 
+```java
+String numberText = "123";
+int number = Integer.parseInt(numberText);    // becomes 123
+```
+
+`String to Double`
+
+> Para converter uma string em número decimal, utilizar a função `Double.parseDouble(variavelString);`
+> 
+```java
+String decimalText = "45.67";
+double decimal = Double.parseDouble(decimalText);    // becomes 45.67
+```
+
+`String to Booleano`
+
+> Para converter uma string em boleano, utilizar a função `Boolean.parseBoolean(variavelString);`
+
+```java
+String boolText = "true";
+boolean bool = Boolean.parseBoolean(boolText); // becomes true
+```
+> parseBoolean converterá qualquer string que tenha o valor “true”, ignorando maiúsculas e minúsculas. Por exemplo, True, tRue, TRUE todas se tornarão true
 
 ______________________
 
@@ -121,9 +231,8 @@ ______________________
 - No terminal, `java nome` (apenas o nome do arquivo sem a extensão (.java ou .class)
 - Voalá!
 
+________________________________
 
-
-_________________________________
 
 
 
@@ -169,81 +278,11 @@ _________________________________
 ```java
 String nome = "Pamela";
 ```
-
-**Run e Terminal**
-
-Incluir no código para iniciarmos o Run:
-```java
-public static void main (String[] args){}
-```
-
-Para visualizarmos o resultado no terminal:
-```java
-System.out.println(soma);
-```
-
-**nomesDeVariaveis**
-
-Para uma melhor visualização dos nomes das variáveis `saoFeitasDessaForma`. 
-- Não é recomendado iniciar com números ou caracteres especiais.
-
+________________________________________________________________
 **Usuário inclui informação**
 `import java.util.Scanner;`
 `Scanner nomeDaVariavel1 = new Scanner(System.in);`
 `int nomeDaVariavel2 = nomeDaVariavel1.nextInt();`
-
-_______________________________________________________________
-
-# Compilar Arquivo Java no Prompt de Comando
-
-- [x] Criar e Salvar Arquivo: nomeArquivo.java
-
-```java
-//Meu Primeiro Programa
-
-//nome da classe
-class MeuPrimeiroProgramaJava
-{
-    //módulo principal com a entrada pela linha de comando
-    public static void main(String entrada[]) 
-    {
-        //declaração de variáveis
-        int inteiro = 31;
-        char caracter = 'F';
-        double real  = 1.70;
-        String frase = "Pamela Rondina";
-        boolean VF=true;
-
-        if (VF == true)
-        {
-            System.out.println("Eu sou a " + frase + ", tenho " + inteiro + " anos e " + real + "m de altura");
-        }
-
-        System.exit(0);
-
-    }
-}
-```
-
-- [x] No Prompt de Comando: localizar caminho de onde o arquivo está salvo:
-
-- [x] Na pasta rodar:
-    - [x] `path "C:\Program Files\Java\jdk-18.0.1.1\bin"`;
-    - `dir *.java`;
-    - [x] `javac nomeArquivo.java`;
-    - `dir *.class`;
-    - [x] `java nomeArquivo.java`.
-
-```
-> path "C:\Program Files\Java\jdk-18.0.1.1\bin"
-> dir *.java
-> javac Faculdade_aula_java_01.java
-> dir *.class
-> java Faculdade_aula_java_01.java
-```
-_________________________________________________________________
-
-________________________________________________________________
 
 | **MÉTODOS**                          | -                                                                            |
 | ------------------------------------ | ---------------------------------------------------------------------------- |
